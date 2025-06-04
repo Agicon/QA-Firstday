@@ -178,6 +178,7 @@ class CustomerAccountPage extends BasePage {
     await browser.keys(["Control", "a"]);
     await browser.keys(["Delete"]);
     await this.mobileNumberField.setValue(Data);
+    await browser.pause(2000);
   }
 
   async fillWebsiteField(Data) {
@@ -197,6 +198,7 @@ class CustomerAccountPage extends BasePage {
   async fillzipCodeField(Data) {
     await this.zipCodeField.waitForDisplayed({ timeout: 20000 });
     await this.zipCodeField.setValue(Data);
+    await browser.pause(2000);
   }
 
   async fillOfficeInformationField(Data) {

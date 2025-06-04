@@ -190,7 +190,7 @@ class ManagingProviderAccountPage extends BasePage {
   async selectDays(text) {
     await this.daysField.waitForDisplayed({ timeout: 15000 });
     await this.daysField.click();
-    await $("(//option[contains(text(),'" + text + "')])[8]").click();
+    await $("(//option[contains(text(),'" + text + "')])[7]").click();
   }
 
   async selectTreatmentLocationOnActivePatient(text) {

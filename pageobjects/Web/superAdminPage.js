@@ -442,7 +442,7 @@ class SuperAdminPage extends BasePage {
     var actMessage=await this.validationMessage.getText();
     console.log("actual message is >>"+actMessage)
     await expect(actMessage).toEqual(text);
-   
+   await this.validationMessage.waitForDisplayed({ reverse: true, timeout: 20000 });
    
   }
   async clickOnBackButton() {
@@ -475,7 +475,6 @@ class SuperAdminPage extends BasePage {
     const linkText = await $("//a[contains(text(),'" + text + "')]");
     if ((await linkText.isDisplayed()) === true) {
       await linkText.click();
-      await this.clickOnButtonWithText("Yes");
     } else {
       throw new Error("link is not displaying: " + text);
     }

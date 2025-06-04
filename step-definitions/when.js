@@ -274,7 +274,7 @@ When(/^I hover on the "Dashboard-All Patient" tab$/, async () => {
   await managingProviderAccountPage.hoverOnDashboard_AllPatientsButton();
 });
 
-When(/^I click on the (.*) option$/, async (option) => {
+When(/^I click the (.*) option$/, async (option) => {
   await managingProviderAccountPage.clickOnAddANewPatientOption(option);
 });
 
