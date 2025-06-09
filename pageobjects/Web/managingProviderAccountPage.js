@@ -108,6 +108,10 @@ class ManagingProviderAccountPage extends BasePage {
     return $("#relationship");
   }
 
+  get specialtyField() {
+    return $("#provider_specialty");
+  }
+
   async settigsButtonIsDisplayed() {
     await this.settingsButton.waitForDisplayed({ timeout: 20000 });
     return await this.settingsButton.isDisplayed();
@@ -348,22 +352,22 @@ class ManagingProviderAccountPage extends BasePage {
     await $("//label[contains(text(),'" + text + "')]").click();
   }
 
-  async verifyPatientStatus(text) {
+  async verifyUserStatus(text) {
     if ((await $("//a[contains(text(),'" + text + "')]").isDisplayed()) === true) {
-      throw new Error("❌ Patient is still displayed in the list");
+      throw new Error("❌ " + text + " is still displayed in the list");
     } else {
-      console.log("✅ Patient is not displayed in the list");
+      console.log("✅ " + text + " is not displayed in the list");
     }
   }
 
-  async verifyPatientDetails(value1, value2) {
-    const detail1 = await $("//a[contains(text(),'" + value1 + "')]");
-    await detail1.waitForDisplayed({ timeout: 10000 });
-    const detail2 = await $("//a[contains(text(),'" + value2 + "')]|//button[contains(text(),'" + value2 + "')]");
-    if ((await detail1.isDisplayed()) === true && (await detail2.isDisplayed()) === true) {
-      console.log(" Patient details are matching");
+  async verifyInactiveDetails(value1, value2) {
+    const name = await $("//a[contains(text(),'" + value1 + "')]|//td[contains(text(),'" + value1 + "')]");
+    await name.waitForDisplayed({ timeout: 10000 });
+    const status = await $("//a[contains(text(),'" + value2 + "')]|//button[contains(text(),'" + value2 + "')]");
+    if ((await name.isDisplayed()) === true && (await status.isDisplayed()) === true) {
+      console.log("✅ Details are matching");
     } else {
-      throw new Error("Patient details are not matching " + value1 + value2);
+      throw new Error("❌ Details are not matching " + value1 + value2);
     }
   }
 
@@ -451,6 +455,41 @@ class ManagingProviderAccountPage extends BasePage {
     await customerAccountPage.fillEmailField(actEmail);
     await customerAccountPage.fillMoblieNumberField(mobile);
     await $("//button[contains(text(),'Create')]").click();
+  }
+
+  async clickOnLinkText(text) {
+    const linkText = await $("//a[contains(text(),'" + text + "')]");
+    if ((await linkText.isDisplayed()) === true) {
+      await linkText.click();
+    } else {
+      throw new Error("link is not displaying: " + text);
+    }
+  }
+
+  async verifyCreatedOtherProvider(specialty, name, status) {
+    await $("(//tr[@class='odd']//td)[2]").waitForDisplayed({ timeout: 15000 });
+    const actSpecialty = await $("(//tr[@class='odd']//td)[2]").getText();
+    const actName = await $("(//tr[@class='odd']//td)[3]").getText();
+    const actStatus = await $("(//tr[@class='odd']//td)[6]").getText();
+    try {
+      expect(actSpecialty).toEqual(specialty);
+    } catch (error) {}
+    expect(actName).toEqual(name);
+    expect(actStatus).toEqual(status);
+  }
+
+  async fillAlreadyRegisteredEmailForOtherProvider(name) {
+    const actEmail = await $("(//tr[@class='odd']//td)[4]").getText();
+    await $("//button[contains(text(),'New Other Provider')]").click();
+    await await customerAccountPage.fillNameField(name);
+    await customerAccountPage.fillEmailField(actEmail);
+    await $("//button[contains(text(),'Create')]").click();
+  }
+
+  async fillSpecialtyField(data) {
+    await this.specialtyField.click;
+    await this.specialtyField.clearValue();
+    await this.specialtyField.setValue(data);
   }
 }
 module.exports = new ManagingProviderAccountPage();

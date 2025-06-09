@@ -65,12 +65,7 @@ exports.config = {
     {
       browserName: "chrome",
       "goog:chromeOptions": {
-        args: [
-          // '--headless',
-          "--disable-gpu",
-          "--no-sandbox",
-          "--disable-dev-shm-usage",
-        ],
+        args: ["--headless", "--disable-gpu", "--no-sandbox", "--disable-dev-shm-usage"],
         prefs: {
           "download.default_directory": downloadDir,
           "download.prompt_for_download": false,
@@ -300,6 +295,13 @@ exports.config = {
    * @param {number}             result.duration  duration of scenario in milliseconds
    * @param {object}             context          Cucumber World object
    */
+
+  afterStep: async function ({ uri, feature, step }, context, { error, result, duration, passed, retries }) {
+    if (error) {
+      await browser.takeScreenshot();
+    }
+  },
+
   // afterStep: function (step, scenario, result, context) {
   // },
   /**

@@ -99,7 +99,7 @@ class SuperAdminPage extends BasePage {
     return $("//td[@class='dataTables_empty']");
   }
 
-    get validationMessage() {
+  get validationMessage() {
     return $("//div[@class='toast-message']");
   }
   /**
@@ -148,13 +148,7 @@ class SuperAdminPage extends BasePage {
     }
   }
   async verifyValidationMessage(text) {
-    const messageText = await $(
-      "//span[contains(text(),'" +
-        text +
-        "')]|//strong[contains(text(),'" +
-        text +
-        "')]"
-    );
+    const messageText = await $("//span[contains(text(),'" + text + "')]|//strong[contains(text(),'" + text + "')]");
     await messageText.waitForDisplayed({ timeout: 20000 });
     if ((await messageText.isDisplayed()) === true) {
       console.log("validation message displaying successfully");
@@ -357,11 +351,9 @@ class SuperAdminPage extends BasePage {
     try {
       await $("(//tr[@class='odd']//td)[1]").click();
       for (let i = 0; i < 4; i++) {
-        await $("//td[contains(text(),'" + clinicName + "')]").waitForDisplayed(
-          {
-            timeout: 5000,
-          }
-        );
+        await $("//td[contains(text(),'" + clinicName + "')]").waitForDisplayed({
+          timeout: 5000,
+        });
         await this.deleteButton.click();
         await this.clickOnButtonWithText("Yes");
         await this.deleteMessage.waitForDisplayed({ timeout: 20000 });
@@ -374,13 +366,7 @@ class SuperAdminPage extends BasePage {
   }
 
   async verifyValidationMessage(text) {
-    const messageText = await $(
-      "//span[contains(text(),'" +
-        text +
-        "')]|//strong[contains(text(),'" +
-        text +
-        "')]"
-    );
+    const messageText = await $("//span[contains(text(),'" + text + "')]|//strong[contains(text(),'" + text + "')]");
     await messageText.waitForDisplayed({ timeout: 20000 });
     if ((await messageText.isDisplayed()) === true) {
       console.log("validation message displaying successfully");
@@ -397,9 +383,7 @@ class SuperAdminPage extends BasePage {
     if ((await this.newCustomerForm.isDisplayed()) === false) {
       console.log("cuctomer form successfully close");
     } else {
-      throw new Error(
-        "Failed to close customer form after clicking on close button"
-      );
+      throw new Error("Failed to close customer form after clicking on close button");
     }
   }
 
@@ -420,10 +404,10 @@ class SuperAdminPage extends BasePage {
   }
 
   async clickOnDeleteIcon() {
-      await this.validationMessage.waitForDisplayed({
-          reverse: true,
-          timeout: 20000,
-        });
+    await this.validationMessage.waitForDisplayed({
+      reverse: true,
+      timeout: 20000,
+    });
     await this.deleteButton.click();
     await this.clickOnButtonWithText("Yes");
     await this.deleteMessage.waitForDisplayed({ timeout: 20000 });
@@ -438,12 +422,11 @@ class SuperAdminPage extends BasePage {
   }
 
   async verifySuccessMessage(text) {
-     await this.validationMessage.waitForDisplayed({ timeout: 20000 });
-    var actMessage=await this.validationMessage.getText();
-    console.log("actual message is >>"+actMessage)
+    await this.validationMessage.waitForDisplayed({ timeout: 20000 });
+    var actMessage = await this.validationMessage.getText();
+    console.log("actual message is >>" + actMessage);
     await expect(actMessage).toEqual(text);
-   await this.validationMessage.waitForDisplayed({ reverse: true, timeout: 20000 });
-   
+    await this.validationMessage.waitForDisplayed({ reverse: true, timeout: 20000 });
   }
   async clickOnBackButton() {
     await this.backButton.click();
@@ -472,20 +455,21 @@ class SuperAdminPage extends BasePage {
   }
 
   async clickOnLinkText(text) {
+    await $("//a[contains(text(),'" + text + "')]").moveTo();
     const linkText = await $("//a[contains(text(),'" + text + "')]");
     if ((await linkText.isDisplayed()) === true) {
       await linkText.click();
+      await this.clickOnButtonWithText("Yes");
     } else {
       throw new Error("link is not displaying: " + text);
     }
   }
 
-    async verifyPageUrl(text) {
-      const currentUrl = await browser.getUrl();
-      console.log("Current URL:", currentUrl);
-      expect(currentUrl).toContain(text);
-    }
-  
+  async verifyPageUrl(text) {
+    const currentUrl = await browser.getUrl();
+    console.log("Current URL:", currentUrl);
+    expect(currentUrl).toContain(text);
+  }
 }
 
 module.exports = new SuperAdminPage();
