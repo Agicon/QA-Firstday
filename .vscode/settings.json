@@ -1,6 +1,6 @@
 {
     
-        "prettier.printWidth": 600,
+        "prettier.printWidth": 800,
         "editor.formatOnSave": true
       
 }

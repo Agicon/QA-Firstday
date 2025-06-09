@@ -65,7 +65,8 @@ exports.config = {
     {
       browserName: "chrome",
       "goog:chromeOptions": {
-        args: ["--headless", "--disable-gpu", "--no-sandbox", "--disable-dev-shm-usage"],
+        // args: ["--headless", "--disable-gpu", "--no-sandbox", "--disable-dev-shm-usage"],
+
         prefs: {
           "download.default_directory": downloadDir,
           "download.prompt_for_download": false,

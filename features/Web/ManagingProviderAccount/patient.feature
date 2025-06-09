@@ -328,8 +328,25 @@ Feature: Test cases for the 'Patient' page
     Then validation message Please enter at least 2 characters. appears
     When User add <invalidEmail> in email field
     Then validation message Please enter valid email. appears
+    When User add <textInMobileNumber> in mobile number field
+    When I click on the button with text Create
+    Then validation message Please enter only numbers appears
+    When User add <invalidMobileNumber> in mobile number field
+    Then validation message Please enter at least 10 digits. appears
+    When User add <invalidEmail> in website field
+    When I click on the button with text Create
+    Then validation message Please enter a valid website URL appears
+    When User add <textInMobileNumber> in office number field
+    When I click on the button with text Create
+    When User add <invalidMobileNumber> in office number field
+    When User add <invalidData> in zipcode field
+    When I click on the button with text Create
+    Then validation message Please enter valid zipcode appears
+    When I click on the button with text Close
+    When I click on the second index button Other Providers
+    Then It redirects on the Other Providers screen
+    When I click on the button with text New Other Provider
     When User add <validOtherProviderName> in name field
-    When User add <invalidEmail> in email field
     When I fill valid and unique data in email
     When I click on the button with text Create
     Then Success message Other Provider Added Succesfully. Credentials will be sent to an email ! appears
@@ -339,8 +356,8 @@ Feature: Test cases for the 'Patient' page
     Then validation message Please Enter Unique email. This email is already register with system. appears
     When I click on the button with text Close
     Examples:
-      | validOtherProviderName   | invalidData | invalidEmail   | status |
-      | Auto_Test_Other_Provider | 1           | #####gmail.com | Active |
+      | validOtherProviderName   | invalidData | invalidEmail   | status | textInMobileNumber | invalidMobileNumber |
+      | Auto_Test_Other_Provider | 1           | #####gmail.com | Active | abcdef             | 12354               |
 
   Scenario Outline: Verify the "Managing Provider" is able to create "Other Provider" when all the fields are populated with valid data
     When I click on the second index button Other Providers
@@ -367,3 +384,31 @@ Feature: Test cases for the 'Patient' page
     Examples:
       | validOtherProviderName   | specialty     | validMobile | validWebsite         | validOfficeInfo | validState | validCity   | validAddress            | validZipcode | status |
       | Auto_Test_Other_Provider | pediatricians | 2026839019  | https://webdriver.io | IT Office       | Bridgeland | Silverstone | Westwood Park, TX 24680 | 10001        | Active |
+
+  Scenario Outline: Verify "Managing Provider" is not able to update the "Other Provider" with invalid details and 	Verify "Managing Provider" is not able to update the "Other Provider" and validation displays if any mandatory field is not populated while updating the customer and Verify "Managing Provider" is able to update the "Other Provider's" details
+    Then Search and delete duplicate data <updatedName>
+    When User search the created provider <validOtherProviderName>
+    When User click on the "View or Update" option under "Action" section
+    Then User should navigate to the "Update Managing Provider Details" page
+    When User update the "Managing Provider form" but does not populate one of the mandatory field
+    Then User click on the "Update" button
+    Then validation message Please enter name appears
+    When User add <invalidData> in name field
+    Then validation message Please enter at least 2 characters. appears
+    When User add <updatedName> in name field
+    When User click on the "Back" button on "Update Managing Provider Details" page
+    When User click on the "View or Update" option under "Action" section
+    Then User should navigate to the "Update Managing Provider Details" page
+    When User add <updatedName> in name field
+    When User add <updatedSpecialty> in specialty field
+    Then User click on the "Update" button
+    Then Success message Other Provider Updated Succesfully ! appears
+    When I populate data <updatedName> in the "Search" field
+    Then A "Other Provider" gets created and it displays on the "Other Providers" list with <specialty> and <updatedName> and <status>
+    When I populate data <updatedName> in the "Search" field
+    When I click On "Delete" icon
+    Then Success message Other Provider Deleted !! appears
+    Then Deleted record should not be visible in the list
+    Examples:
+      | validOtherProviderName   | updatedName                      | updatedSpecialty | invalidData | status |
+      | Auto_Test_Other_Provider | Updated_Auto_Test_Other_Provider | Skin             | 1           | Active |
