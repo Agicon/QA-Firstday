@@ -2,12 +2,11 @@ const { When } = require("@wdio/cucumber-framework");
 const { expect, $, browser } = require("@wdio/globals");
 const LoginWebPage = require("../pageobjects/Web/loginPage");
 const androidPage = require("../pageobjects/Android/androidPage");
-// import superAdminPage from "../pageobjects/Web/superAdminPage";
+import TestUtils from "../pageobjects/testUtils";
 const superAdminPage = require("../pageobjects/Web/superAdminPage");
 
 const customerAccountPage = require("../pageobjects/Web/customerAccountPage");
 const managingProviderAccountPage = require("../pageobjects/Web/managingProviderAccountPage");
-
 
 const pages = {};
 
@@ -16,7 +15,6 @@ const pages = {};
 When(/^Web app login using (.*)$/, async (userName) => {
   await LoginWebPage.login(userName);
 });
-
 
 When(/^I click on the "Customers" tab$/, async () => {
   await superAdminPage.clickOnCustomerLink();
@@ -89,15 +87,12 @@ When(/^I fill (.*) data in city field$/, async (text) => {
   await superAdminPage.fillCityField(text);
 });
 
-When(
-  /^I populate fields but I populate "Email field" with already registered email$/,
-  async () => {
-    var actEmail = await $("(//tr[@class='odd']//td)[5]").getText();
-    await superAdminPage.clickOnNewCustomerButton();
-    await superAdminPage.newCustomerFormIsDisplayed();
-    await superAdminPage.fillEmailField(actEmail);
-  }
-);
+When(/^I populate fields but I populate "Email field" with already registered email$/, async () => {
+  var actEmail = await $("(//tr[@class='odd']//td)[5]").getText();
+  await superAdminPage.clickOnNewCustomerButton();
+  await superAdminPage.newCustomerFormIsDisplayed();
+  await superAdminPage.fillEmailField(actEmail);
+});
 
 When(/^I click on the "View" icon under "Action" column$/, async () => {
   await superAdminPage.clickOnViewIcon();
@@ -111,20 +106,14 @@ When(/^I click On "Delete" icon$/, async () => {
   await superAdminPage.clickOnDeleteIcon();
 });
 
-When(
-  /^User click on the "Back" button on "update customer" page$/,
-  async () => {
-    await superAdminPage.clickOnBackButton();
-  }
-);
+When(/^User click on the "Back" button on "update customer" page$/, async () => {
+  await superAdminPage.clickOnBackButton();
+});
 
-When(
-  /^I update the "Customer form" but does not populate one of the mandatory field and click on the (.*) button$/,
-  async (button) => {
-    await superAdminPage.clearClinicNameField();
-    await superAdminPage.clickOnButtonWithText(button);
-  }
-);
+When(/^I update the "Customer form" but does not populate one of the mandatory field and click on the (.*) button$/, async (button) => {
+  await superAdminPage.clearClinicNameField();
+  await superAdminPage.clickOnButtonWithText(button);
+});
 
 When(/^I click on link text (.*)$/, async (text) => {
   await superAdminPage.clickOnLinkText(text);
@@ -189,43 +178,31 @@ When(/^User search the created provider (.*)$/, async (name) => {
 When(/^User fill unique data in email field$/, async () => {
   await customerAccountPage.fillEmailFieldWithUniqueEmail();
 });
-When(
-  /^User use already registered (.*) and email to create new providing manager and click on (.*) button$/,
-  async (name, button) => {
-    var actEmail = await $("(//tr[@class='odd']//td)[3]").getText();
-    await customerAccountPage.clickOnNewManagingProviderButton();
-    await customerAccountPage.nameFieldIsDisplayed();
-    await customerAccountPage.fillNameField(name);
-    await customerAccountPage.fillEmailField(actEmail);
-    await superAdminPage.clickOnButtonWithText(button);
-  }
-);
-When(
-  /^I use already registered (.*) and email to create new other providing manager and click on (.*) button$/,
-  async (name, button) => {
-    var actEmail = await $("(//tr[@class='odd']//td)[4]").getText();
-    await customerAccountPage.clickOnNewOtherProviderButton();
-    await customerAccountPage.nameFieldIsDisplayed();
-    await customerAccountPage.fillNameField(name);
-    await customerAccountPage.fillEmailField(actEmail);
-    await superAdminPage.clickOnButtonWithText(button);
-  }
-);
+When(/^User use already registered (.*) and email to create new providing manager and click on (.*) button$/, async (name, button) => {
+  var actEmail = await $("(//tr[@class='odd']//td)[3]").getText();
+  await customerAccountPage.clickOnNewManagingProviderButton();
+  await customerAccountPage.nameFieldIsDisplayed();
+  await customerAccountPage.fillNameField(name);
+  await customerAccountPage.fillEmailField(actEmail);
+  await superAdminPage.clickOnButtonWithText(button);
+});
+When(/^I use already registered (.*) and email to create new other providing manager and click on (.*) button$/, async (name, button) => {
+  var actEmail = await $("(//tr[@class='odd']//td)[4]").getText();
+  await customerAccountPage.clickOnNewOtherProviderButton();
+  await customerAccountPage.nameFieldIsDisplayed();
+  await customerAccountPage.fillNameField(name);
+  await customerAccountPage.fillEmailField(actEmail);
+  await superAdminPage.clickOnButtonWithText(button);
+});
 
-When(
-  /^User use already registered (.*) and email to create new providing manager and click on (.*) button$/,
-  async (name, button) => {
-    var actEmail = await $("(//tr[@class='odd']//td)[3]").getText();
-    await customerAccountPage.clickOnNewManagingProviderButton();
-    await customerAccountPage.nameFieldIsDisplayed();
-    await customerAccountPage.fillNameField(name);
-    await customerAccountPage.fillEmailField(actEmail);
-    await superAdminPage.clickOnButtonWithText(button);
-  }
-);
-
-
-
+When(/^User use already registered (.*) and email to create new providing manager and click on (.*) button$/, async (name, button) => {
+  var actEmail = await $("(//tr[@class='odd']//td)[3]").getText();
+  await customerAccountPage.clickOnNewManagingProviderButton();
+  await customerAccountPage.nameFieldIsDisplayed();
+  await customerAccountPage.fillNameField(name);
+  await customerAccountPage.fillEmailField(actEmail);
+  await superAdminPage.clickOnButtonWithText(button);
+});
 
 When(/^User click on the "View or Update" option under "Action" section$/, async () => {
   await customerAccountPage.clickOnViewOrUpdateButton();
@@ -253,7 +230,6 @@ When(/^User click on "Other Provider" tab$/, async () => {
 When(/^User click on the "New Other Provider" button$/, async () => {
   await customerAccountPage.clickOnNewOtherProviderButton();
 });
-
 
 //=============================Web-ManagingProviderAccount======================//
 
@@ -342,7 +318,7 @@ When(/^I fill (.*) data in hospital Location field$/, async (data) => {
   await managingProviderAccountPage.fillHospitalLocationField(data);
 });
 
-When(/^I populate (.*) in the "Search" field$/, async (text) => {
+When(/^I populate data (.*) in the "Search" field$/, async (text) => {
   await managingProviderAccountPage.fillSearchField(text);
 });
 
@@ -394,17 +370,102 @@ When(/^I update the "Caregiver" but does not populate one of the mandatory field
   await managingProviderAccountPage.clearNameField();
 });
 
-When(/^I populate fields (.*) and (.*) and (.*) but I populate "Email field" with already registered email$/, async (name, lastName, mobile) => {
+When(/^I fill fields with (.*) and (.*) and (.*) but I populate "Email field" with already registered email$/, async (name, lastName, mobile) => {
   await managingProviderAccountPage.fillAlreadyRegisteredEmail(name, lastName, mobile);
 });
 
+When(/^I click on the link text (.*)$/, async (text) => {
+  await managingProviderAccountPage.clickOnLinkText(text);
+});
 
+When(/^I populate fields (.*) but I populate "Email field" with already registered email$/, async (text) => {
+  await managingProviderAccountPage.fillAlreadyRegisteredEmailForOtherProvider(text);
+});
 
+When(/^User add (.*) in specialty field$/, async (text) => {
+  await managingProviderAccountPage.fillSpecialtyField(text);
+});
 
-//-------------Android-Cases----------//
+// =================================Android======================================//
 
 When(/^login to app using (.*)$/, async (username) => {
   await androidPage.login(username);
 });
 
+When(/^Verfiy all modules of Firstday-HC app on homepage$/, async () => {
+  await androidPage.patientVitalSigns();
+  await androidPage.patientsMedicalRecord();
+  await androidPage.patientsProviders();
+  await androidPage.needHelp();
+  await androidPage.patientsVideoCamera();
+  await androidPage.settings();
+});
+
+When(/^User clicks on vital signs module$/, async () => {
+  await androidPage.clickOnPatientsVitalSigns();
+});
+
+When(/^User clicks on medical report module$/, async () => {
+  await androidPage.clickOnMedicalReport();
+});
+
+When(/^User clicks on providers module on homepage$/, async () => {
+  await androidPage.clickOnProvider();
+});
+
+When(/^User clicks on settings module on homepage$/, async () => {
+  await androidPage.clickOnSettingsModule();
+});
+
+When(/^User leave the "Email  field" empty And populate the (.*) "Password field" And click on "Login" button$/, async (password) => {
+  await androidPage.fillPasswordField(password);
+  await androidPage.signInButton.click();
+});
+
+When(/^User leave the "Password field" empty And populate the (.*) "Email field" And click on "Login" button$/, async (email) => {
+  await androidPage.paswordField.click();
+  await androidPage.paswordField.clearValue();
+  await androidPage.fillEmailField(email);
+  await androidPage.signInButton.click();
+});
+
+When(/^User enter invalid (.*) and (.*) in their respective fields And click on "Login" button$/, async (email, password) => {
+  await androidPage.fillEmailField(email);
+  await androidPage.fillPasswordField(password);
+  await androidPage.signInButton.click();
+});
+
+When(/^User enter valid (.*) and (.*) in their respective fields And click on "Login" button$/, async (userName, invalidPassword) => {
+  var data = TestUtils.getUserCredetials(userName);
+  await browser.pause(2000);
+  var username = data[0];
+  await androidPage.fillEmailField(username);
+  await androidPage.fillPasswordField(invalidPassword);
+  await androidPage.signInButton.click();
+});
+
+When(/^User navigate to the "Settings" tab$/, async () => {
+  await androidPage.clickOnSettingsTAb();
+});
+
+When(/^User click on the "Logout" option$/, async () => {
+  await androidPage.clickOnLogoutOption();
+});
+
+When(/^User click on the button with text (.*)$/, async (Button) => {
+  await androidPage.clickOnButtonWithText(Button);
+});
+
+When(/^User click on "Hamburger" icon displaying in the top left corner$/, async () => {
+  await androidPage.clickOnFHDCHamburgerButton();
+});
+
+When(/^I click on (.*) option$/, async (text) => {
+  await androidPage.clickOnOption(text);
+});
+
+When(/^I click on "Edit" icon from "Profile Picture" section$/, async () => {
+  await androidPage.clickOnEditProfileIcon();
+  await androidPage.clickOnOkButton();
+});
 
