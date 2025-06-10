@@ -55,9 +55,10 @@ Feature: Test cases for the 'Patient' page
     Then Success message Caregiver Added Succesfully ! appears
     When I populate data <caregiverName> in the "Search" field
     Then Created caregiver should be visible in the list with <caregiverName> and <validMobile> and <validRelationshipName> and <children> and <status>
+
     Examples:
       | url      | userA                     | validName           | validLastName | validMobile | validRelationshipName | validState | validCity | validAddress     | validZipcode | status | caregiverName               | invalidData | invalidEmail   | specialCharactors |
-      | loginUrl | providerLoginCrendentails | Auto_Test_Caregiver | Autonix       | 3652900000  | Doctor                | Texas      | Fairview  | 880 Red Oak Lane | 10001        | Active | Auto_Test_Caregiver Autonix | 1           | #####gmail.com | !@#$%%$#@!        |
+      | loginUrl | providerLoginCrendentails | Auto_Test_Caregiver | Autonix       |  3652900000 | Doctor                | Texas      | Fairview  | 880 Red Oak Lane |        10001 | Active | Auto_Test_Caregiver Autonix |           1 | #####gmail.com | !@#$%%$#@!        |
 
   Scenario Outline: Verify "Caregiver "Active/Inactive" status
     When I click on the second index button Caregivers
@@ -81,10 +82,10 @@ Feature: Test cases for the 'Patient' page
     Then It redirects on the Active Caregivers screen
     When I populate data <validName> in the "Search" field
     Then Verify <validName> is displayed with <status>
+
     Examples:
       | validName           | status | inactiveStatus |
       | Auto_Test_Caregiver | active | Inactive       |
-
 
   Scenario Outline: Verify "Managing Provider" is not able to update the "Caregiver" and validation displays if any mandatory field is not populated while updating the Caregiver And Verify "Managing Provider" is not able to update the "Caregiver" with invalid details And Verify "Managing Provider" is able to update the "Caregiver" details
     When I click on the second index button Caregivers
@@ -123,11 +124,10 @@ Feature: Test cases for the 'Patient' page
     Then Success message Caregiver details updated ! appears
     When I populate data <caregiverName> in the "Search" field
     Then Created caregiver should be visible in the list with <updatedCaregiver> and <updatedMobile> and <updatedRelationshipName> and <children> and <status>
+
     Examples:
       | caregiverName               | invalidData | invalidEmail   | specialCharactors | updatedCaregiverName        | updatedLastName | updatedMobile | updatedRelationshipName | updatedState | updatedCity | updatedAddress       | updatedZipcode | status | updatedCaregiver                    |
-      | Auto_Test_Caregiver Autonix | 1 | #####gmail.com | !@#$%%$#@! ^&^&^& | Updated_Auto_Test_Caregiver | Autonix | 2026859019 | Parents | Florida | Miami | 8900 Canyon Trail Rd | 00123 | Active | Updated_Auto_Test_Caregiver Autonix |
-
-
+      | Auto_Test_Caregiver Autonix |           1 | #####gmail.com | !@#$%%$#@! ^&^&^& | Updated_Auto_Test_Caregiver | Autonix         |    2026859019 | Parents                 | Florida      | Miami       | 8900 Canyon Trail Rd |          00123 | Active | Updated_Auto_Test_Caregiver Autonix |
 
   Scenario Outline: User logged in as Provider And Verify the "Managing Provider" is not able to create "New Patient" and validation displays when mandatory field is not populated And Verify the "Managing Provider" is able to create "New Patient " when all the fields are populated with valid data
     Given Open web url <url>
@@ -181,7 +181,7 @@ Feature: Test cases for the 'Patient' page
 
     Examples:
       | url      | invalidEmail       | invalidPassword | validEmail                   | userA                     | validFirstName    | validLastName | birthTime | defaultNumber | gender | hospital | caregiver                                                          | week | days | treatmentLocation | location | startServiceDate | hospitalLocation | dashboard-AddPatientOption | dashboard-ManagePatientsOption | services        | treatment | status |
-      | loginUrl | provider@gmail.com | 261561          | testprovider2may@yopmail.com | providerLoginCrendentails | Auto_Test_Patient | Auto_Johan    | 5:00 Am   | 12356478      | Male   | Default  | testcaregiver 2may (testcaregiver2may@yopmail.com) (+1 1987654356) | 40   | 6    | Hospital / Clinic | Hospital | 21/05/2025       | Greenville       | Add A New Patient          | Manage Patients                | RPM,TELEMED,EMR | Discharge | Active |
+      | loginUrl | provider@gmail.com |          261561 | testprovider2may@yopmail.com | providerLoginCrendentails | Auto_Test_Patient | Auto_Johan    |   5:00 Am |      12356478 | Male   | Default  | testcaregiver 2may (testcaregiver2may@yopmail.com) (+1 1987654356) |   40 |    6 | Hospital / Clinic | Hospital |       21/05/2025 | Greenville       | Add A New Patient          | Manage Patients                | RPM,TELEMED,EMR | Discharge | Active |
 
   Scenario Outline: Verify the "Managing Provider" is able to create "New patient" when only the mandatory fields are populated with valid data And Verify "Managing Provider" is able to update the "Patient" details And Verify Filters, search features on Active Patient screen And Verify the "Managing Provider" is able to create "New Patient " with "Treatment Location" set as "Home"
     Given Open web url <url>
@@ -238,9 +238,10 @@ Feature: Test cases for the 'Patient' page
     When I click on the button with text Update
     Then Success message Patient Updated Succesfully ! appears
     Then A "New Patient" gets created And it is displayed on the "My Patient list" with <updatedFirstName> and <updatedLastName> and <services> and <treatmentLocation> and <updatedHospitalLocation> and <status>
+
     Examples:
       | url      | userA                     | dashboard-ManagePatientsOption | secondPatientName | invalidData | updatedFirstName   | updatedLastName | updatedHospitalLocation | services    | treatment | status | servicesCheckbox          | inactiveStatus | treatmentLocation | validFirstName    | dashboard-PatientListOption | primaryProvider  | homeLocation | dashboard-AddPatientOption | validLastName | gender | hospital | formServices    | treatmentHomeLocation | randomText | location |
-      | loginUrl | providerLoginCrendentails | Manage Patients                | QA_Patient        | 1           | Updated_QA_Patient | Testman         | Lakewood                | TELEMED,EMR | Discharge | Active | Remote patient monitoring | Inactive       | Readmit           | Auto_Test_Patient | My Patient List             | testprovider2may | Home         | Add A New Patient          | Testman       | Female | Default  | RPM,TELEMED,EMR | Readmit               | @@@@@@     | Hospital |
+      | loginUrl | providerLoginCrendentails | Manage Patients                | QA_Patient        |           1 | Updated_QA_Patient | Testman         | Lakewood                | TELEMED,EMR | Discharge | Active | Remote patient monitoring | Inactive       | Readmit           | Auto_Test_Patient | My Patient List             | testprovider2may | Home         | Add A New Patient          | Testman       | Female | Default  | RPM,TELEMED,EMR | Readmit               | @@@@@@     | Hospital |
 
   Scenario Outline: Verify managing provider is able change "Patient's status to "Active/Inactive" status And Verify the "Managing Provider" is able to "Discharge" Patient Successfully And Verify "Managing Provider" is able to "Delete" the "Patient" when clicked on "Delete" icon And "Managing Provider" is able to assign "Primary provider" to the patient
     When I populate data <updatedFirstName> in the "Search" field
@@ -289,9 +290,10 @@ Feature: Test cases for the 'Patient' page
     When I click on the button with text Assign
     When I populate data <validFirstName> in the "Search" field
     Then The <primaryProvider> gets assigned to the patient and provider displays in the dedicated slot on the list
+
     Examples:
       | url      | userA                     | dashboard-ManagePatientsOption | secondPatientName | invalidData | updatedFirstName   | updatedLastName | updatedHospitalLocation | services    | treatment | status | servicesCheckbox          | inactiveStatus | treatmentLocation | validFirstName    | dashboard-PatientListOption | providerOptionCheckbox | primaryProvider  |
-      | loginUrl | providerLoginCrendentails | Manage Patients                | QA_Patient        | 1           | Updated_QA_Patient | Testman         | Lakewood                | TELEMED,EMR | Discharge | Active | Remote patient monitoring | Inactive       | Readmit           | Auto_Test_Patient | My Patient List             | Primary Provider       | testprovider2may |
+      | loginUrl | providerLoginCrendentails | Manage Patients                | QA_Patient        |           1 | Updated_QA_Patient | Testman         | Lakewood                | TELEMED,EMR | Discharge | Active | Remote patient monitoring | Inactive       | Readmit           | Auto_Test_Patient | My Patient List             | Primary Provider       | testprovider2may |
 
   Scenario Outline: Create a static patient and verify this patient in mobile caregiver app
     When I hover on the "Dashboard-All Patient" tab
@@ -311,6 +313,7 @@ Feature: Test cases for the 'Patient' page
     When I click on the button with text Save
     Then Success message Patient Added Succesfully! appears
     Then A "New Patient" gets created And it is displayed on the "My Patient list" with <validName> and <validLastName> and <formServices> and <treatment> and <hospitalLocation> and <status>
+
     Examples:
       | validName         | validLastName | gender | hospital | caregiver                                                          | formServices    | treatmentLocation | status | dashboard-ManagePatientsOption | dashboard-AddPatientOption | treatment |
       | Patient_Auto_Test | Ben           | Male   | Default  | testcaregiver 2may (testcaregiver2may@yopmail.com) (+1 1987654356) | RPM,TELEMED,EMR | Hospital / Clinic | Active | Manage Patients                | Add A New Patient          | Discharge |
@@ -355,9 +358,10 @@ Feature: Test cases for the 'Patient' page
     When I populate fields <validOtherProviderName> but I populate "Email field" with already registered email
     Then validation message Please Enter Unique email. This email is already register with system. appears
     When I click on the button with text Close
+
     Examples:
       | validOtherProviderName   | invalidData | invalidEmail   | status | textInMobileNumber | invalidMobileNumber |
-      | Auto_Test_Other_Provider | 1           | #####gmail.com | Active | abcdef             | 12354               |
+      | Auto_Test_Other_Provider |           1 | #####gmail.com | Active | abcdef             |               12354 |
 
   Scenario Outline: Verify the "Managing Provider" is able to create "Other Provider" when all the fields are populated with valid data
     When I click on the second index button Other Providers
@@ -381,9 +385,10 @@ Feature: Test cases for the 'Patient' page
     Then Success message Other Provider Added Succesfully. Credentials will be sent to an email ! appears
     When I populate data <validOtherProviderName> in the "Search" field
     Then A "Other Provider" gets created and it displays on the "Other Providers" list with <specialty> and <validOtherProviderName> and <status>
+
     Examples:
       | validOtherProviderName   | specialty     | validMobile | validWebsite         | validOfficeInfo | validState | validCity   | validAddress            | validZipcode | status |
-      | Auto_Test_Other_Provider | pediatricians | 2026839019  | https://webdriver.io | IT Office       | Bridgeland | Silverstone | Westwood Park, TX 24680 | 10001        | Active |
+      | Auto_Test_Other_Provider | pediatricians |  2026839019 | https://webdriver.io | IT Office       | Bridgeland | Silverstone | Westwood Park, TX 24680 |        10001 | Active |
 
   Scenario Outline: Verify "Managing Provider" is not able to update the "Other Provider" with invalid details and 	Verify "Managing Provider" is not able to update the "Other Provider" and validation displays if any mandatory field is not populated while updating the customer and Verify "Managing Provider" is able to update the "Other Provider's" details
     Then Search and delete duplicate data <updatedName>
@@ -409,6 +414,39 @@ Feature: Test cases for the 'Patient' page
     When I click On "Delete" icon
     Then Success message Other Provider Deleted !! appears
     Then Deleted record should not be visible in the list
+
     Examples:
       | validOtherProviderName   | updatedName                      | updatedSpecialty | invalidData | status |
-      | Auto_Test_Other_Provider | Updated_Auto_Test_Other_Provider | Skin             | 1           | Active |
+      | Auto_Test_Other_Provider | Updated_Auto_Test_Other_Provider | Skin             |           1 | Active |
+
+  Scenario Outline: Verify "Customer" is able to change the status of Other Provider to "Inactive" and Verify "Customer" is able to change the status of Managing Provider to "Active" and Verify a "Managing Provider" with "Inactive" status is not allowed to login on portal
+    When User click on "Other Provider" tab
+    Then Search and active if provider <validName> is already inactive under Inactive Other Providers section
+    When I click on the button with text Active Other Providers
+    When User search the created provider <validName>
+    When User click on the link Active and yes button
+    Then Success message Other Provider Inactive Successfully !! appears
+    Then Verify provider <validName> has removed from list
+    When I click on the button with text Inactive Other Providers
+    Then The "Managing Provider" now displayed there in list <validName>
+    When Open web url <url>
+    When Web app login using <provider>
+    Then validation message You are not allow to login. Please contact support team. appears
+    When Web app login using <userA>
+    Then providers/dashboard page displays
+    When I click on the second index button Other Providers
+    Then It redirects on the Other Providers screen
+    When I click on the button with text Inactive Other Providers
+    Then The "Managing Provider" now displayed there in list <validName>
+    When User click on the link Inactive and yes button
+    Then Success message Other Provider Active Successfully appears
+    Then Verify provider <validName> has removed from list
+    When I click on the button with text Active Other Providers
+    Then The "Managing Provider" now displayed there in list <validName>
+    When Open web url <url>
+    When Web app login using <provider>
+    Then provider/dashboard page displays
+
+    Examples:
+      | validName                             | url      | provider                            | userA                     |
+      | Test_Auto_Other_Provider_For_Provider | loginUrl | otherProviderForProviderStatusCheck | providerLoginCrendentails |

@@ -218,9 +218,7 @@ When(/^User update the "Managing Provider form" but does not populate one of the
   await customerAccountPage.nameField.clearValue();
 });
 
-When(/^User click on the link (.*)$/, async (link) => {
-  await customerAccountPage.clickOnLink(link);
-});
+
 //------------------------------Other-Provider-----------------------//
 
 When(/^User click on "Other Provider" tab$/, async () => {
@@ -231,6 +229,9 @@ When(/^User click on the "New Other Provider" button$/, async () => {
   await customerAccountPage.clickOnNewOtherProviderButton();
 });
 
+When(/^User click on the link (.*) and yes button$/, async (link) => {
+  await customerAccountPage.clickOnLinkAndYesButton(link);
+});
 //=============================Web-ManagingProviderAccount======================//
 
 // When(/^Open web url (.*)$/, async (url) => {

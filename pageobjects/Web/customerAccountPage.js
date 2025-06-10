@@ -242,7 +242,7 @@ class CustomerAccountPage extends BasePage {
     await messageText.waitForDisplayed({ reverse: true, timeout: 20000 });
   }
 
-  async clickOnLink(text) {
+  async clickOnLinkAndYesButton(text) {
     await $("//a[contains(text(),'" + text + "')]").waitForDisplayed({
       timeout: 25000,
     });
@@ -336,7 +336,7 @@ async otherProviderIsDisplayed() {
       await this.searchField.setValue(name);
       await browser.pause(3000);
       try {
-        await this.clickOnLink("Inactive");
+        await this.clickOnLinkAndYesButton("Inactive");
       } catch (error) {}
     }
 }
