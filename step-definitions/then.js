@@ -153,8 +153,8 @@ Then(/^list of diagnosis should appear according to added character$/, async () 
   await customerAccountPage.verifyDiagnosisList()
 });
 
-Then(/^A "New Diagnosis type" gets created and it displays on the "Diagnosis type" list with (.*) and (.*)$/, async (type, moreInfo) => {
-  await customerAccountPage.verifyCreatedDiagnosis(type, moreInfo)
+Then(/^A "New Diagnosis type" gets created and it displays on the "Diagnosis type" list with (.*) and (.*) and (.*)$/, async (type, code, moreInfo) => {
+  await customerAccountPage.verifyCreatedDiagnosis(type, code, moreInfo);
 });
 
 

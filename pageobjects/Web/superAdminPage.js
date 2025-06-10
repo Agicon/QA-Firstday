@@ -404,10 +404,7 @@ class SuperAdminPage extends BasePage {
   }
 
   async clickOnDeleteIcon() {
-    await this.validationMessage.waitForDisplayed({
-      reverse: true,
-      timeout: 20000,
-    });
+    await this.validationMessage.waitForDisplayed({ reverse: true, timeout: 20000 });
     await this.deleteButton.click();
     await this.clickOnButtonWithText("Yes");
     await this.deleteMessage.waitForDisplayed({ timeout: 20000 });

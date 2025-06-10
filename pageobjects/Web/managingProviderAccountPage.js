@@ -292,13 +292,13 @@ class ManagingProviderAccountPage extends BasePage {
 
   async verifyText(data) {
     const Text = await $("//td[contains(text(),'" + data + "')]|//div[contains(text(),'" + data + "')]");
-    await Text.click();
-    await Text.waitForDisplayed({ timeout: 20000 });
-    if ((await Text.isDisplayed()) === true) {
-      console.log("Text " + data + "is displayed");
-    } else {
-      throw new Error("Text " + data + "is not displayed");
-    }
+      await Text.click();
+      await Text.waitForDisplayed({ timeout: 20000 });
+      if ((await Text.isDisplayed()) === true) {
+        console.log(" ✅ Text ==> " + data + " is displayed");
+      } else {
+        throw new Error("❌ Text ==> " + data + " is not displayed");
+      }
   }
 
   async defaultValuesDisplayed(expHospital, expLocation) {

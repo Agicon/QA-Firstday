@@ -89,7 +89,7 @@ class CustomerAccountPage extends BasePage {
   }
 
   get viewOrUpdateButton() {
-    return $("(//a[@title='View / Update'])[1]");
+    return $("(//a[@title='View / Update'])[1]|//a[@title='Edit']");
   }
 
   get updateProviderPage() {
@@ -99,6 +99,8 @@ class CustomerAccountPage extends BasePage {
   get updatedButton() {
     return $("#updateBtn:nth-child(2)");
   }
+
+  // ===============================Patient-Master_Menu=============================
 
   get diagnosisTypeField() {
     return $("#type:nth-of-type(1)");
@@ -346,6 +348,8 @@ class CustomerAccountPage extends BasePage {
     } catch (error) {}
   }
 
+  // ===============================Patient-Master_Menu=============================
+
   async verifyClosedPopup(text) {
     const popupTitle = await $("//h2[contains(text(),'" + text + "')]");
     await popupTitle.waitForDisplayed({ reverse: true, timeout: 5000 });
@@ -361,7 +365,7 @@ class CustomerAccountPage extends BasePage {
     await this.diagnosisTypeField.clearValue();
     await this.diagnosisTypeField.setValue(data);
     await browser.keys("Backspace");
-    await browser.pause(2000);
+    await browser.pause(1000);
     await this.diagnosisTypeField.setValue(data);
   }
 
@@ -386,16 +390,19 @@ class CustomerAccountPage extends BasePage {
 
   async fillMoreInformationField(data) {
     await this.moreInformationField.waitForDisplayed({ timeout: 20000 });
+    await this.moreInformationField.click();
     await this.moreInformationField.clearValue();
     await this.moreInformationField.setValue(data);
   }
 
-  async verifyCreatedDiagnosis(type, moreInfo) {
+  async verifyCreatedDiagnosis(type, code, moreInfo) {
     const typename = await $("(//tr[@class='odd']//td)[1]");
     await typename.waitForDisplayed({ timeout: 15000 });
     const actDiagnosis = await typename.getText();
+    const actdiagnosisCode = await (await $("(//tr[@class='odd']//td)[2]")).getText();
     const actMoreInfo = await (await $("//a[@title='More Information']")).getAttribute("href");
     await expect(actDiagnosis).toEqual(type);
+    await expect(actdiagnosisCode).toEqual(code);
     await expect(actMoreInfo).toEqual(moreInfo);
   }
 }
