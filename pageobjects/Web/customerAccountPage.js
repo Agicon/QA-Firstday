@@ -79,27 +79,37 @@ class CustomerAccountPage extends BasePage {
   get backButton() {
     return $("#cancelBtn:nth-child(1)");
   }
-//--------------other-provider--------//
-    get otherProviderLink() {
+  //--------------other-provider--------//
+  get otherProviderLink() {
     return $("(//a[contains(text(),'Other Providers')])[2]");
   }
 
-
-    get newOtherProviderButton() {
+  get newOtherProviderButton() {
     return $("//div//button[contains(text(),'New Other Provider')]");
   }
 
-    get viewOrUpdateButton() {
+  get viewOrUpdateButton() {
     return $("(//a[@title='View / Update'])[1]");
   }
 
-  
   get updateProviderPage() {
     return $("//section[@class='content-header text-center']//h1");
   }
 
   get updatedButton() {
     return $("#updateBtn:nth-child(2)");
+  }
+
+  get diagnosisTypeField() {
+    return $("#type:nth-of-type(1)");
+  }
+
+  get diagnosisList() {
+    return $("#ui-id-1");
+  }
+
+  get moreInformationField() {
+    return $("#website");
   }
 
   async managingProviderIsDisplayed() {
@@ -137,9 +147,7 @@ class CustomerAccountPage extends BasePage {
     if ((await this.closeButtonIsDisplayed()) === true) {
       await this.closeButton.click();
     } else {
-      throw new Error(
-        "Close button is not displayed on managing provider form"
-      );
+      throw new Error("Close button is not displayed on managing provider form");
     }
   }
 
@@ -148,9 +156,7 @@ class CustomerAccountPage extends BasePage {
     if ((await this.nameField.isDisplayed()) === false) {
       console.log("New Managing Provider form has successfully closed");
     } else {
-      throw new Error(
-        "Managing provider form is still displayed after clicked on the close button"
-      );
+      throw new Error("Managing provider form is still displayed after clicked on the close button");
     }
   }
 
@@ -225,9 +231,9 @@ class CustomerAccountPage extends BasePage {
     await this.searchField.clearValue();
     await this.searchField.setValue(name);
     await browser.pause(3000);
-    await $("//td[contains(text(),'"+name+"')]").click();
-    await $("//td[contains(text(),'"+name+"')]").waitForDisplayed({ timeout: 25000 });
-    var actualName = await $("//td[contains(text(),'"+name+"')]").getText();
+    await $("//td[contains(text(),'" + name + "')]").click();
+    await $("//td[contains(text(),'" + name + "')]").waitForDisplayed({ timeout: 25000 });
+    var actualName = await $("//td[contains(text(),'" + name + "')]").getText();
     await expect(actualName).toEqual(name);
   }
 
@@ -272,7 +278,6 @@ class CustomerAccountPage extends BasePage {
     }
   }
 
-  
   async clickOnViewOrUpdateButton() {
     await this.viewOrUpdateButton.waitForExist({ timeout: 25000 });
     await browser.pause(1000);
@@ -297,15 +302,16 @@ class CustomerAccountPage extends BasePage {
     await this.updatedButton.waitForDisplayed({ timeout: 20000 });
     await this.updatedButton.click();
   }
-//-------------------other-provider---------------//
+  //-------------------other-provider---------------//
 
-   async clickOnOtherProviderTab() {
+  async clickOnOtherProviderTab() {
     if ((await this.otherProviderIsDisplayed()) === true) {
       await this.otherProviderLink.click();
     } else {
       throw new Error("Managing provider is not displayed on homepage");
-    }}
-async otherProviderIsDisplayed() {
+    }
+  }
+  async otherProviderIsDisplayed() {
     await this.otherProviderLink.waitForDisplayed({ timeut: 25000 });
     return await this.otherProviderLink.isDisplayed();
   }
@@ -322,7 +328,7 @@ async otherProviderIsDisplayed() {
     }
   }
 
-    async verifyUpdatedStatusProvider(text) {
+  async verifyUpdatedStatusProvider(text) {
     if ((await $("//td[contains(text(),'" + text + "')]").isDisplayed()) === true) {
       throw new Error("❌ Provider is still visible in the list");
     } else {
@@ -330,14 +336,67 @@ async otherProviderIsDisplayed() {
     }
   }
 
-   async searchAndActive(name, button) {
-      superAdminPage.clickOnButtonWithText(button);
-      await this.searchField.clearValue();
-      await this.searchField.setValue(name);
-      await browser.pause(3000);
-      try {
-        await this.clickOnLink("Inactive");
-      } catch (error) {}
+  async searchAndActive(name, button) {
+    superAdminPage.clickOnButtonWithText(button);
+    await this.searchField.clearValue();
+    await this.searchField.setValue(name);
+    await browser.pause(3000);
+    try {
+      await this.clickOnLink("Inactive");
+    } catch (error) {}
+  }
+
+  async verifyClosedPopup(text) {
+    const popupTitle = await $("//h2[contains(text(),'" + text + "')]");
+    await popupTitle.waitForDisplayed({ reverse: true, timeout: 5000 });
+    if ((await popupTitle.isDisplayed()) === true) {
+      throw new Error("❌ " + text + " popup is not closed");
+    } else {
+      console.log("✅ " + text + " popup is closed successfully");
     }
+  }
+
+  async fillDiagnosisTypeField(data) {
+    await this.diagnosisTypeField.waitForDisplayed({ timeout: 20000 });
+    await this.diagnosisTypeField.clearValue();
+    await this.diagnosisTypeField.setValue(data);
+    await browser.keys("Backspace");
+    await browser.pause(2000);
+    await this.diagnosisTypeField.setValue(data);
+  }
+
+  async verifyDiagnosisList() {
+    await (await this.diagnosisList).waitForDisplayed({ timeout: 15000 });
+    if ((await this.diagnosisList.isDisplayed()) === true) {
+      console.log("✅  Diagnosis List is displayed");
+    } else {
+      throw new Error("❌ Diagnosis list is not displayed");
+    }
+  }
+
+  async selectSuggestedDiagnosisType(text) {
+    const suggestedDiagnosis = await $("//div[contains(text(),'" + text + "')]");
+    await suggestedDiagnosis.waitForDisplayed({ timeout: 15000 });
+    if ((await suggestedDiagnosis.isDisplayed()) === true) {
+      await suggestedDiagnosis.click();
+    } else {
+      throw new Error("❌ " + text + " type is not displayed");
+    }
+  }
+
+  async fillMoreInformationField(data) {
+    await this.moreInformationField.waitForDisplayed({ timeout: 20000 });
+    await this.moreInformationField.clearValue();
+    await this.moreInformationField.setValue(data);
+  }
+
+  async verifyCreatedDiagnosis(type, moreInfo) {
+    const typename = await $("(//tr[@class='odd']//td)[1]");
+    await typename.waitForDisplayed({ timeout: 15000 });
+    const actDiagnosis = await typename.getText();
+    const actMoreInfo = await (await $("//a[@title='More Information']")).getAttribute("href");
+    await expect(actDiagnosis).toEqual(type);
+    await expect(actMoreInfo).toEqual(moreInfo);
+  }
 }
 module.exports = new CustomerAccountPage();

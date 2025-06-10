@@ -35,6 +35,7 @@ exports.config = {
     downloadAppsPage: ["./features/Android/downloadApp.feature"],
     webProviderPage: ["./features/Web/CustomerAccount/provider.feature"],
     newPatientPage: ["./features/Web/ManagingProviderAccount/patient.feature"],
+    masterMenuPage: ["./features/Web/CustomerAccount/masterMenu.feature"],
   },
   exclude: [
     // 'path/to/excluded/files'

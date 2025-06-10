@@ -13,7 +13,8 @@
     "newCustomerPage": "wdio run ./wdio.confWeb.js --suite customerPage",
     "webProviderPage": "wdio run ./wdio.confWeb.js --suite webProviderPage",
     "webPatientPage": "npm run remove-allure && wdio run ./wdio.confWeb.js --suite newPatientPage",
-    "runBothSuites": "npm run remove-allure && npm run newCustomerPage && npm run webProviderPage"
+    "runBothSuites": "npm run remove-allure && npm run newCustomerPage && npm run webProviderPage",
+    "webMasterMenuPage": "wdio run ./wdio.confWeb.js --suite masterMenuPage"
   },
   "keywords": [],
   "author": "",

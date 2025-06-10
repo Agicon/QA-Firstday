@@ -57,7 +57,7 @@ Then(/^I Search data (.*)$/, async (data) => {
   await superAdminPage.searchData(data);
 });
 
-// ======================================Web-CoustomerAccount=============================================//
+// ======================================Web-CustomerAccount=============================================//
 
 Then(/^Verify that user successfully redirected on homepage$/, async () => {
   if ((await customerAccountPage.managingProviderIsDisplayed()) === true) {
@@ -142,6 +142,23 @@ Then(/^(.*) page displays$/, async (text) => {
 Then(/^Search and active if provider (.*) is already inactive under (.*) section$/, async (providerName, button) => {
   await customerAccountPage.searchAndActive(providerName, button);
 });
+
+// ===============================Patient-Master_Menu=============================
+
+Then(/^(.*) popup should be closed successfully$/, async (text) => {
+  await customerAccountPage.verifyClosedPopup(text)
+});
+
+Then(/^list of diagnosis should appear according to added character$/, async () => {
+  await customerAccountPage.verifyDiagnosisList()
+});
+
+Then(/^A "New Diagnosis type" gets created and it displays on the "Diagnosis type" list with (.*) and (.*)$/, async (type, moreInfo) => {
+  await customerAccountPage.verifyCreatedDiagnosis(type, moreInfo)
+});
+
+
+
 
 // ===============================Web-ManagingProviderAccount======================//
 
