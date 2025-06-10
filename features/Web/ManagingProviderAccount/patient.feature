@@ -412,3 +412,4 @@ Feature: Test cases for the 'Patient' page
     Examples:
       | validOtherProviderName   | updatedName                      | updatedSpecialty | invalidData | status |
       | Auto_Test_Other_Provider | Updated_Auto_Test_Other_Provider | Skin             | 1           | Active |
+
