@@ -218,6 +218,22 @@ When(/^User update the "Managing Provider form" but does not populate one of the
   await customerAccountPage.nameField.clearValue();
 });
 
+When(/^User click on the link (.*)$/, async (link) => {
+  await customerAccountPage.clickOnLink(link);
+});
+//===============================Patient-Master_Menu=============================
+
+When(/^I add first 4 character (.*) in "Diagnosis Type" fields on the form$/, async (type) => {
+  await customerAccountPage.fillDiagnosisTypeField(type)
+});
+
+When(/^I select any "Diagnosis Type" (.*) from the list$/, async (type) => {
+  await customerAccountPage.selectSuggestedDiagnosisType(type)
+});
+
+When(/^I fill (.*) data in more information field$/, async (data) => {
+  await customerAccountPage.fillMoreInformationField(data)
+});
 
 //------------------------------Other-Provider-----------------------//
 

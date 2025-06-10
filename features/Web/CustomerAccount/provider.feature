@@ -92,7 +92,7 @@ Feature: Test cases for "Managing Provider" page
     When I click On "Delete" icon
     Then Success message Other Provider Deleted !! appears
     Examples:
-      | validName | validMobile | validWebsite | validOfficeNumber | validOfficeInfo | validState | validCity | validAddress | validZipcode | updatedName | invalidName | url | inactiveEmail | RegisteredAutoProvider |
+      | validName               | validMobile | validWebsite                             | validOfficeNumber | validOfficeInfo | validState | validCity  | validAddress | validZipcode | updatedName                | invalidName | url      | inactiveEmail         | RegisteredAutoProvider          |
       | Auto_Test_OtherProvider | 1234567890  | https://portal.test.firstdayhc.com/login | 1111122222        | IT office       | Punjab     | Chandigarh | Abc 12345    | 00123        | Updated_Aut0_OtherProvider | 1           | loginUrl | automationWebProvider | automationProvider(Dont delete) |
 
   Scenario Outline: Verify "Customer" is able to change the status of Other Provider to "Inactive" and Verify "Customer" is able to change the status of Managing Provider to "Active" and Verify a "Managing Provider" with "Inactive" status is not allowed to login on portal
@@ -125,3 +125,6 @@ Feature: Test cases for "Managing Provider" page
     Examples:
       | validName           | url      | provider                    | userA                     |
       | other_auto_provider | loginUrl | otherProviderForStatusCheck | customerLoginCrendentails |
+
+
+
