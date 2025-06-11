@@ -157,6 +157,9 @@ Then(/^A "New Diagnosis type" gets created and it displays on the "Diagnosis typ
   await customerAccountPage.verifyCreatedDiagnosis(type, code, moreInfo);
 });
 
+Then(/^New Hospital note (.*) should display under list$/, async (note) => {
+
+});
 
 
 

@@ -429,5 +429,12 @@ class CustomerAccountPage extends BasePage {
     });
     await $("//button[contains(text(),'" + text + "')]").click();
   }
+
+  async verifyCreatedHospitalNote(name) {
+    await $("(//tr[@role='row'])[2]//td[1]").click();
+    await $("(//tr[@role='row'])[2]//td[1]").waitForDisplayed({ timeout: 25000 });
+    var actualName = await $("(//tr[@role='row'])[2]//td[1]").getText();
+    await expect(actualName).toEqual(name);
+  }
 }
 module.exports = new CustomerAccountPage();

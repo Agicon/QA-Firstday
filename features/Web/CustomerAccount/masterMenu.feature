@@ -42,7 +42,8 @@ Feature: Test cases for "Master Menu" page
     When I fill <note> in hospital note field
     When I click on the button with text Create
     Then Success message Hospital Note Added Succesfully! appears
-    When I populate data <validOtherProviderName> in the "Search" field
+    When I populate data <note> in the "Search" field
+    Then New Hospital note <note> should display under list
     When I click On "Delete" icon
     Then Success message Hospital Note Deleted !! appears
 
