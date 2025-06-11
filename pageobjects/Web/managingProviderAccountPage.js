@@ -419,7 +419,7 @@ class ManagingProviderAccountPage extends BasePage {
     await this.relationshipField.setValue(Data);
   }
 
-  async clickOnButtonText(text) {
+  async clickOnSecondIndexLinkText(text) {
     const linkText = await $("(//a[contains(text(),'" + text + "')])[2]");
     await linkText.waitForClickable({ timeout: 10000 });
     if ((await linkText.isDisplayed()) === true) {

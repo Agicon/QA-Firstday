@@ -248,6 +248,20 @@ When(/^User click on the "New Other Provider" button$/, async () => {
 When(/^User click on the link (.*) and yes button$/, async (link) => {
   await customerAccountPage.clickOnLinkAndYesButton(link);
 });
+
+
+When(/^I fill (.*) in hospital note field$/, async (note) => {
+  await customerAccountPage.fillHospitalNoteField(note);
+});
+
+When(/^User click on the button text (.*)$/, async (text) => {
+  await customerAccountPage.clickOnButtonWithText(text);
+});
+
+When(/^User click on the link having text (.*)$/, async (link) => {
+  await customerAccountPage.clickOnLink(link);
+});
+
 //=============================Web-ManagingProviderAccount======================//
 
 // When(/^Open web url (.*)$/, async (url) => {
@@ -379,8 +393,8 @@ When(/^User add (.*) in relationship field$/, async (data) => {
   await managingProviderAccountPage.fillRelationshipField(data);
 });
 
-When(/^I click on the second index button (.*)$/, async (data) => {
-  await managingProviderAccountPage.clickOnButtonText(data);
+When(/^I click on the second index link (.*)$/, async (data) => {
+  await managingProviderAccountPage.clickOnSecondIndexLinkText(data);
 });
 
 When(/^I update the "Caregiver" but does not populate one of the mandatory field$/, async () => {
@@ -402,6 +416,7 @@ When(/^I populate fields (.*) but I populate "Email field" with already register
 When(/^User add (.*) in specialty field$/, async (text) => {
   await managingProviderAccountPage.fillSpecialtyField(text);
 });
+
 
 // =================================Android======================================//
 

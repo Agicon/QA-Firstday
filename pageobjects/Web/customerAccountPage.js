@@ -112,6 +112,10 @@ class CustomerAccountPage extends BasePage {
     return $("#website");
   }
 
+    get hospitalNoteField() {
+    return $("#type");
+  }
+
   async managingProviderIsDisplayed() {
     await this.managingProviderLink.waitForDisplayed({ timeut: 25000 });
     return await this.managingProviderLink.isDisplayed();
@@ -397,6 +401,26 @@ class CustomerAccountPage extends BasePage {
     const actMoreInfo = await (await $("//a[@title='More Information']")).getAttribute("href");
     await expect(actDiagnosis).toEqual(type);
     await expect(actMoreInfo).toEqual(moreInfo);
+  }
+
+  async fillHospitalNoteField(data) {
+    await this.hospitalNoteField.waitForDisplayed({ timeout: 20000 });
+    await this.hospitalNoteField.clearValue();
+    await this.hospitalNoteField.setValue(data);
+  }
+  
+    async clickOnLink(text) {
+    await (await $("//a[contains(text(),'" + text + "')]")).waitForClickable({
+      timeout: 25000,
+    });
+    await $("//a[contains(text(),'" + text + "')]").click();
+  }
+
+     async clickOnButtonWithText(text) {
+    await $("//button[contains(text(),'" + text + "')]").waitForDisplayed({
+      timeout: 25000,
+    });
+    await $("//button[contains(text(),'" + text + "')]").click();
   }
 }
 module.exports = new CustomerAccountPage();
