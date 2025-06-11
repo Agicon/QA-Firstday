@@ -221,7 +221,7 @@ When(/^User update the "Managing Provider form" but does not populate one of the
 When(/^User click on the link (.*)$/, async (link) => {
   await customerAccountPage.clickOnLink(link);
 });
-//===============================Patient-Master_Menu=============================
+//===============================Master_Menu=============================
 
 When(/^I add first 4 character (.*) in "Diagnosis Type" fields on the form$/, async (type) => {
   await customerAccountPage.fillDiagnosisTypeField(type)
@@ -233,6 +233,51 @@ When(/^I select any "Diagnosis Type" (.*) from the list$/, async (type) => {
 
 When(/^I fill (.*) data in more information field$/, async (data) => {
   await customerAccountPage.fillMoreInformationField(data)
+});
+
+
+When(/^I fill (.*) data in cvx code field$/, async (data) => {
+  await customerAccountPage.fillCVXCodeField(data)
+});
+
+When(/^I fill (.*) data in vaccine Name field$/, async (data) => {
+  await customerAccountPage.fillVaccineNameField(data)
+});
+
+When(/^I fill (.*) data in brand Name field$/, async (data) => {
+  await customerAccountPage.fillBrandNameField(data)
+});
+
+When(/^I fill (.*) data in description field$/, async (data) => {
+  await customerAccountPage.fillDescriptionField(data)
+});
+
+When(/^I fill (.*) data in note field$/, async (data) => {
+  await customerAccountPage.fillNoteField(data)
+});
+
+When(/^I fill (.*) data in status field$/, async (data) => {
+  await customerAccountPage.fillStatusField(data)
+});
+
+When(/^I fill (.*) data in internal ID field$/, async (data) => {
+  await customerAccountPage.fillInternalIDField(data)
+});
+
+When(/^I fill (.*) data in non vaccine field$/, async (data) => {
+  await customerAccountPage.fillNonVaccineField(data)
+});
+
+When(/^I fill (.*) data in update date field$/, async (data) => {
+  await customerAccountPage.fillUpdateDateField(data)
+});
+
+When(/^I fill (.*) data in favourite field$/, async (data) => {
+  await customerAccountPage.fillFavouriteField(data)
+});
+
+When(/^I directly clicking on the "Create" button without filling in any value in the vaccine name and status field$/, async () => {
+  await customerAccountPage.removefilledFields();
 });
 
 //------------------------------Other-Provider-----------------------//

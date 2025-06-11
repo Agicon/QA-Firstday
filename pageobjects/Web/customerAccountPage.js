@@ -100,7 +100,7 @@ class CustomerAccountPage extends BasePage {
     return $("#updateBtn:nth-child(2)");
   }
 
-  // ===============================Patient-Master_Menu=============================
+  // ===============================Master_Menu=============================
 
   get diagnosisTypeField() {
     return $("#type:nth-of-type(1)");
@@ -114,8 +114,48 @@ class CustomerAccountPage extends BasePage {
     return $("#website");
   }
 
-    get hospitalNoteField() {
+  get hospitalNoteField() {
     return $("#type");
+  }
+
+  get cvxCodeField() {
+    return $("#cvx_code");
+  }
+
+  get vaccineNameField() {
+    return $("#vaccine_name");
+  }
+
+  get brandNameField() {
+    return $("#brand");
+  }
+
+  get descriptionField() {
+    return $("#description");
+  }
+
+  get noteField() {
+    return $("#note");
+  }
+
+  get statusField() {
+    return $("#status");
+  }
+
+  get internalIDField() {
+    return $("#internal_id");
+  }
+
+  get nonVaccineField() {
+    return $("#non_vaccine");
+  }
+
+  get updateDateField() {
+    return $("#update_date:nth-of-type(1)");
+  }
+
+  get favouriteField() {
+    return $("#used");
   }
 
   async managingProviderIsDisplayed() {
@@ -352,11 +392,11 @@ class CustomerAccountPage extends BasePage {
     } catch (error) {}
   }
 
-  // ===============================Patient-Master_Menu=============================
+  // ===============================Master_Menu=============================
 
   async verifyClosedPopup(text) {
     const popupTitle = await $("//h2[contains(text(),'" + text + "')]");
-    await popupTitle.waitForDisplayed({ reverse: true, timeout: 5000 });
+    await popupTitle.waitForDisplayed({ reverse: true, timeout: 8000 });
     if ((await popupTitle.isDisplayed()) === true) {
       throw new Error("❌ " + text + " popup is not closed");
     } else {
@@ -384,7 +424,7 @@ class CustomerAccountPage extends BasePage {
 
   async selectSuggestedDiagnosisType(text) {
     const suggestedDiagnosis = await $("//div[contains(text(),'" + text + "')]");
-    await suggestedDiagnosis.waitForDisplayed({ timeout: 15000 });
+    await suggestedDiagnosis.waitForClickable({ timeout: 15000 });
     if ((await suggestedDiagnosis.isDisplayed()) === true) {
       await suggestedDiagnosis.click();
     } else {
@@ -415,19 +455,103 @@ class CustomerAccountPage extends BasePage {
     await this.hospitalNoteField.clearValue();
     await this.hospitalNoteField.setValue(data);
   }
-  
-    async clickOnLink(text) {
-    await (await $("//a[contains(text(),'" + text + "')]")).waitForClickable({
+
+  async clickOnLink(text) {
+    await (
+      await $("//a[contains(text(),'" + text + "')]")
+    ).waitForClickable({
       timeout: 25000,
     });
     await $("//a[contains(text(),'" + text + "')]").click();
   }
 
-     async clickOnButtonWithText(text) {
+  async clickOnButtonWithText(text) {
     await $("//button[contains(text(),'" + text + "')]").waitForDisplayed({
       timeout: 25000,
     });
     await $("//button[contains(text(),'" + text + "')]").click();
+  }
+
+  async fillCVXCodeField(value) {
+    await this.cvxCodeField.waitForDisplayed({ timeout: 15000 });
+    await this.cvxCodeField.clearValue();
+    await this.cvxCodeField.setValue(value);
+  }
+
+  async fillVaccineNameField(value) {
+    await this.vaccineNameField.clearValue();
+    await this.vaccineNameField.setValue(value);
+  }
+
+  async fillBrandNameField(value) {
+    await this.brandNameField.clearValue();
+    await this.brandNameField.setValue(value);
+  }
+
+  async fillDescriptionField(value) {
+    await this.descriptionField.clearValue();
+    await this.descriptionField.setValue(value);
+  }
+
+  async fillNoteField(value) {
+    await this.noteField.clearValue();
+    await this.noteField.setValue(value);
+  }
+
+  async fillStatusField(value) {
+    await this.statusField.click();
+    await $("//option[contains(text(),'" + value + "')]").click();
+  }
+
+  async fillInternalIDField(value) {
+    await this.internalIDField.clearValue();
+    await this.internalIDField.setValue(value);
+  }
+
+  async fillNonVaccineField(text) {
+    await this.nonVaccineField.selectByVisibleText(text);
+    // await $("//option[contains(text(),'" + text + "')]").click();
+  }
+
+  async fillUpdateDateField() {
+    await this.updateDateField.click();
+    await browser.keys("Enter");
+  }
+
+  async fillFavouriteField(value) {
+    await this.favouriteField.waitForDisplayed({ timeout: 15000 });
+    await this.favouriteField.selectByVisibleText(value);
+  }
+
+  async verifyCreatedVaccine(cvxCode, brandName, vaccineName, description, note, status, internalID, nonVaccine, favourite, date) {
+    const CVXCode = await $("(//tr[@class='odd']//td)[2]");
+    await CVXCode.waitForDisplayed({ timeout: 15000 });
+    const actcvxCode = await CVXCode.getText();
+    const actBrandName = await $("(//tr[@class='odd']//td)[3]").getText();
+    const actVaccineName = await $("(//tr[@class='odd']//td)[4]").getText();
+    const actDescription = await $("(//tr[@class='odd']//td)[5]").getText();
+    const actNote = await $("(//tr[@class='odd']//td)[6]").getText();
+    const actdStatus = await $("(//tr[@class='odd']//td)[7]").getText();
+    const actInternalID = await $("(//tr[@class='odd']//td)[8]").getText();
+    const actNonVaccine = await $("(//tr[@class='odd']//td)[9]").getText();
+    const actFavourite = await $("(//tr[@class='odd']//td)[10]").getText();
+    const actDate = await $("(//tr[@class='odd']//td)[11]").getText();
+
+    await expect(actcvxCode).toEqual(cvxCode);
+    await expect(actBrandName).toEqual(brandName);
+    await expect(actVaccineName).toEqual(vaccineName);
+    await expect(actDescription).toEqual(description);
+    await expect(actNote).toEqual(note);
+    await expect(actdStatus).toEqual(status);
+    await expect(actInternalID).toEqual(internalID);
+    await expect(actNonVaccine).toEqual(nonVaccine);
+    await expect(actFavourite).toEqual(favourite);
+  }
+
+  async removefilledFields() {
+    await this.cvxCodeField.clearValue();
+    await this.vaccineNameField.clearValue();
+    await $("//button[contains(text(),'Update')]").click();
   }
 }
 module.exports = new CustomerAccountPage();
