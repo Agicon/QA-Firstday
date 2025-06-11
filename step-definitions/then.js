@@ -143,7 +143,7 @@ Then(/^Search and active if provider (.*) is already inactive under (.*) section
   await customerAccountPage.searchAndActive(providerName, button);
 });
 
-// ===============================Patient-Master_Menu=============================
+// ===============================Master_Menu=============================
 
 Then(/^(.*) popup should be closed successfully$/, async (text) => {
   await customerAccountPage.verifyClosedPopup(text)
@@ -158,8 +158,13 @@ Then(/^A "New Diagnosis type" gets created and it displays on the "Diagnosis typ
 });
 
 Then(/^New Hospital note (.*) should display under list$/, async (note) => {
-
+ await customerAccountPage.verifyCreatedHospitalNote(note);
 });
+Then(/^"Vaccine type" details should be visible in the list with (.*) and (.*) and (.*) and (.*) and (.*) and (.*) and (.*) and (.*) and (.*) and (.*)$/, async (cvxCode,brandName,vaccineName,description,note,status,internalID,nonVaccine,favourite,date) => {
+  await customerAccountPage.verifyCreatedVaccine(cvxCode,brandName,vaccineName,description,note,status,internalID,nonVaccine,favourite,date);
+});
+
+
 
 
 
