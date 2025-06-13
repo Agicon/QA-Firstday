@@ -179,6 +179,79 @@ Feature: Test cases for "Master Menu" page
             | cvxCode | vaccineName       | brandName  | description                                                             | note                                          | status | nonVaccine | favourite | internalID |
             | 12300   | Auto_Test_Vaccine | Healthcare | The Auto_Test_Vaccine vaccine is designed to protect us from the virus. | Consult the doctor before using this vaccine. | Active | True       | Yes       | Test@123   |
 
+    Scenario Outline: Verify "Customer" is navigated back to the "All Patient Alert " page when clicked on "Back button" displaying on the "Update all patient Alert" page and 	Verify that "Customer" is not able to update "Alerts" details with invalid data
+        When Open web url <url>
+        When Web app login using <userA>
+        Then Verify that user successfully redirected on homepage
+        When I click on the second index link Master
+        When I click on the second index link All Patients Alert
+        Then allAlert page displays
+        When User click on the button text Edit Alert
+        Then It redirects on the Update All Patient Alert screen
+        When I click on the button with text Back
+        Then Update All Patient Alert popup should be closed successfully
+        When User click on the button text Edit Alert
+        Then It redirects on the Update All Patient Alert screen
+        When I fill <invalidData> data in heart less than field
+        When User click on the button text Update
+        Then validation message Please enter only numbers appears
+        When I fill <invalidData> data in heart greater than field
+        When User click on the button text Update
+        Then validation message Please enter only numbers appears
+        When I fill <invalidData> data in respiratory less than field
+        When User click on the button text Update
+        Then validation message Please enter only numbers appears
+        When I fill <invalidData> data in respiratory greater than field
+        When User click on the button text Update
+        Then validation message Please enter only numbers appears
+        When I fill <invalidData> data in saturation less than field
+        When User click on the button text Update
+        Then validation message Please enter only numbers appears
+        When I fill <invalidData> data in saturation greater than field
+        When User click on the button text Update
+        Then validation message Please enter only numbers appears
+        When I fill <invalidData> data in pulse rate less than field
+        When User click on the button text Update
+        Then validation message Please enter only numbers appears
+        When I fill <invalidData> data in pulse rate greater than field
+        When User click on the button text Update
+        Then validation message Please enter only numbers appears
+        When I fill <temperatureType> data in temperature type field
+        When I fill <invalidData> data in temperature less than field
+        When User click on the button text Update
+        Then validation message Please enter only numbers appears
+        When I fill <invalidData> data in temperature greater than field
+        When User click on the button text Update
+        Then validation message Please enter only numbers appears
+        When User click on the button text Back
+
+        Examples:
+            | url      | userA                     | invalidData | temperatureType |
+            | loginUrl | customerLoginCrendentails | Text        | Celsius         |
+
+    Scenario Outline: Verify that "Customer" is able to update "Alerts" details with valid data
+        When I click on the second index link Master
+        When I click on the second index link All Patients Alert
+        Then allAlert page displays
+        When User click on the button text Edit Alert
+        Then It redirects on the Update All Patient Alert screen
+        When I fill <lessThan> data in heart less than field
+        When I fill <greaterThan> data in heart greater than field
+        When I fill <lessThan> data in respiratory less than field
+        When I fill <greaterThan> data in respiratory greater than field
+        When I fill <lessThan> data in saturation less than field
+        When I fill <greaterThan> data in saturation greater than field
+        When I fill <lessThan> data in pulse rate less than field
+        When I fill <greaterThan> data in pulse rate greater than field
+        When I fill <temperatureType> data in temperature type field
+        When I fill <lessThan> data in temperature less than field
+        When I fill <greaterThan> data in temperature greater than field
+        When User click on the button text Update
+        Then Success message All Alert Updated Succesfully! appears
+        Then Alert values should be visible in the list with heart rate <lessThan> and heart rate <greaterThan> and respiratory <lessThan> and respiratory <greaterThan> and saturation <lessThan> and saturation <greaterThan> and pulse rate <lessThan> and pulse rate <greaterThan> and temperature type <temperatureType> and temperature <lessThan> and temperature <greaterThan>
+        Examples:
+            | lessThan | greaterThan | temperatureType |
+            | 50       | 150         | Celsius         |
 
 
     Scenario Outline: Verify the create "New hospital note" functionality using both valid and invalid data also verify search and delete functionality
@@ -193,7 +266,7 @@ Feature: Test cases for "Master Menu" page
         When I click on the button with text Create
         Then Success message Hospital Note Added Succesfully! appears
         When I populate data <note> in the "Search" field
-          Then New Hospital note <note> should display under list
+        Then New Hospital note <note> should display under list
         When I click On "Delete" icon
         Then Success message Hospital Note Deleted !! appears
 

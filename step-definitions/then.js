@@ -160,13 +160,14 @@ Then(/^A "New Diagnosis type" gets created and it displays on the "Diagnosis typ
 Then(/^New Hospital note (.*) should display under list$/, async (note) => {
  await customerAccountPage.verifyCreatedHospitalNote(note);
 });
+
 Then(/^"Vaccine type" details should be visible in the list with (.*) and (.*) and (.*) and (.*) and (.*) and (.*) and (.*) and (.*) and (.*) and (.*)$/, async (cvxCode,brandName,vaccineName,description,note,status,internalID,nonVaccine,favourite,date) => {
   await customerAccountPage.verifyCreatedVaccine(cvxCode,brandName,vaccineName,description,note,status,internalID,nonVaccine,favourite,date);
 });
 
-
-
-
+Then(/^Alert values should be visible in the list with heart rate (.*) and heart rate (.*) and respiratory (.*) and respiratory (.*) and saturation (.*) and saturation (.*) and pulse rate (.*) and pulse rate (.*) and temperature type (.*) and temperature (.*) and temperature (.*)$/, async (heartLessThan, heartGreaterthan, respiratorylessThan, respiratoryGreaterthan, saturationlessThan, saturationGreaterthan, pulselessThan, pulseGreaterthan, tempType, temperaturelessThan, temperatureGreaterthan) => {
+  await customerAccountPage.verifyAlertValues(heartLessThan, heartGreaterthan, respiratorylessThan, respiratoryGreaterthan, saturationlessThan, saturationGreaterthan, pulselessThan, pulseGreaterthan, tempType, temperaturelessThan, temperatureGreaterthan);
+});
 
 // ===============================Web-ManagingProviderAccount======================//
 
@@ -241,6 +242,10 @@ Then(/^Deleted record should not be visible in the list$/, async () => {
 
 Then(/^A "Other Provider" gets created and it displays on the "Other Providers" list with (.*) and (.*) and (.*)$/, async (specialty, name, status) => {
   await managingProviderAccountPage.verifyCreatedOtherProvider(specialty, name, status);
+});
+
+Then(/^Medication details should be visible in the list with (.*) and (.*) and (.*) and (.*) and (.*) and (.*)$/, async (medicationName, currentDose, measurement, frequency, interval, status) => {
+  await managingProviderAccountPage.verifyCreatedMedication(medicationName, currentDose, measurement, frequency, interval, status);
 });
 
 //---------------------------------Android-Cases------------------------------------//
@@ -362,3 +367,14 @@ Then(/^The selected image (.*) should get updated and displays on "Caregiver's" 
   await androidPage.uploadFileImage(pic);
 });
 
+Then(/^Select child (.*) from the child list$/, async (data) => {
+  await androidPage.selectChildOption(data);
+});
+
+Then(/^User click on the medication tab$/, async () => {
+  await androidPage.clickOnMedicationTab();
+});
+
+Then(/^Details of medication should be visible in the list with (.*) and (.*) and (.*) and (.*)$/, async (medicationName, currentDose_And_measurement, frequency, interval) => {
+  await androidPage.verifyMobileMedicationDetails(medicationName, currentDose_And_measurement, frequency, interval);
+});

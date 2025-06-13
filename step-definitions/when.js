@@ -280,6 +280,50 @@ When(/^I directly clicking on the "Create" button without filling in any value i
   await customerAccountPage.removefilledFields();
 });
 
+When(/^I fill (.*) data in heart less than field$/, async (data) => {
+  await customerAccountPage.fillHeartLessThanField(data);
+});
+
+When(/^I fill (.*) data in heart greater than field$/, async (data) => {
+  await customerAccountPage.fillHeartGreaterThanField(data);
+});
+
+When(/^I fill (.*) data in respiratory less than field$/, async (data) => {
+  await customerAccountPage.fillRespiratoryLessThanField(data);
+});
+
+When(/^I fill (.*) data in respiratory greater than field$/, async (data) => {
+  await customerAccountPage.fillRespiratoryGreaterThanField(data);
+});
+
+When(/^I fill (.*) data in saturation less than field$/, async (data) => {
+  await customerAccountPage.fillSaturationLessthanField(data);
+});
+
+When(/^I fill (.*) data in saturation greater than field$/, async (data) => {
+  await customerAccountPage.fillSaturationGreaterthanField(data);
+});
+
+When(/^I fill (.*) data in pulse rate less than field$/, async (data) => {
+  await customerAccountPage.fillPulseRateLessthanField(data);
+});
+
+When(/^I fill (.*) data in pulse rate greater than field$/, async (data) => {
+  await customerAccountPage.fillPulseRateGreaterthanField(data);
+});
+
+When(/^I fill (.*) data in temperature type field$/, async (data) => {
+  await customerAccountPage.fillTemperatureTypeField(data);
+});
+
+When(/^I fill (.*) data in temperature less than field$/, async (data) => {
+  await customerAccountPage.fillTemperatureLessthanField(data);
+});
+
+When(/^I fill (.*) data in temperature greater than field$/, async (data) => {
+  await customerAccountPage.fillTemperatureGreaterthanField(data);
+});
+
 //------------------------------Other-Provider-----------------------//
 
 When(/^User click on "Other Provider" tab$/, async () => {
@@ -293,7 +337,6 @@ When(/^User click on the "New Other Provider" button$/, async () => {
 When(/^User click on the link (.*) and yes button$/, async (link) => {
   await customerAccountPage.clickOnLinkAndYesButton(link);
 });
-
 
 When(/^I fill (.*) in hospital note field$/, async (note) => {
   await customerAccountPage.fillHospitalNoteField(note);
@@ -460,6 +503,34 @@ When(/^I populate fields (.*) but I populate "Email field" with already register
 
 When(/^User add (.*) in specialty field$/, async (text) => {
   await managingProviderAccountPage.fillSpecialtyField(text);
+});
+
+When(/^I fill (.*) data in medication field$/, async (text) => {
+  await managingProviderAccountPage.fillMedicationField(text);
+});
+
+When(/^I fill (.*) data in current dose field$/, async (text) => {
+  await managingProviderAccountPage.fillCurrentDoseField(text);
+});
+
+When(/^I fill (.*) data in measurement field$/, async (text) => {
+  await managingProviderAccountPage.fillMeasurementField(text);
+});
+
+When(/^I fill (.*) data in frequency field$/, async (text) => {
+  await managingProviderAccountPage.fillFrequencyField(text);
+});
+
+When(/^I fill (.*) data in interval field$/, async (text) => {
+  await managingProviderAccountPage.fillIntervalField(text);
+});
+
+When(/^I fill (.*) data in additional information field$/, async (text) => {
+  await managingProviderAccountPage.fillAdditionalInformationField(text);
+});
+
+When(/^I select date in start Date field$/, async () => {
+  await managingProviderAccountPage.fillStartDateField();
 });
 
 

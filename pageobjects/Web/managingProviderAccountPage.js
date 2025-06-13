@@ -112,6 +112,33 @@ class ManagingProviderAccountPage extends BasePage {
     return $("#provider_specialty");
   }
 
+  get medicationField() {
+    return $("#medication_on:nth-of-type(1)");
+  }
+
+  get currentDoseField() {
+    return $("#dose");
+  }
+
+  get measurementField() {
+    return $("#measurement");
+  }
+
+  get frequencyField() {
+    return $("#frequency:nth-of-type(1)");
+  }
+
+  get intervalField() {
+    return $("#interval");
+  }
+
+  get additionalInformationField() {
+    return $("#additional_information");
+  }
+
+  get startDateField() {
+    return $("#start_date:nth-of-type(1)");
+  }
   async settigsButtonIsDisplayed() {
     await this.settingsButton.waitForDisplayed({ timeout: 20000 });
     return await this.settingsButton.isDisplayed();
@@ -292,13 +319,13 @@ class ManagingProviderAccountPage extends BasePage {
 
   async verifyText(data) {
     const Text = await $("//td[contains(text(),'" + data + "')]|//div[contains(text(),'" + data + "')]");
-      await Text.click();
-      await Text.waitForDisplayed({ timeout: 20000 });
-      if ((await Text.isDisplayed()) === true) {
-        console.log(" ✅ Text ==> " + data + " is displayed");
-      } else {
-        throw new Error("❌ Text ==> " + data + " is not displayed");
-      }
+    await Text.click();
+    await Text.waitForDisplayed({ timeout: 20000 });
+    if ((await Text.isDisplayed()) === true) {
+      console.log(" ✅ Text ==> " + data + " is displayed");
+    } else {
+      throw new Error("❌ Text ==> " + data + " is not displayed");
+    }
   }
 
   async defaultValuesDisplayed(expHospital, expLocation) {
@@ -459,6 +486,7 @@ class ManagingProviderAccountPage extends BasePage {
 
   async clickOnLinkText(text) {
     const linkText = await $("//a[contains(text(),'" + text + "')]");
+    await linkText.waitForDisplayed({ timeout: 15000 });
     if ((await linkText.isDisplayed()) === true) {
       await linkText.click();
     } else {
@@ -490,6 +518,56 @@ class ManagingProviderAccountPage extends BasePage {
     await this.specialtyField.click;
     await this.specialtyField.clearValue();
     await this.specialtyField.setValue(data);
+  }
+
+  async fillMedicationField(value) {
+    await this.medicationField.waitForDisplayed({ timeout: 15000 });
+    await this.medicationField.clearValue();
+    await this.medicationField.setValue(value);
+  }
+
+  async fillCurrentDoseField(value) {
+    await this.currentDoseField.clearValue();
+    await this.currentDoseField.setValue(value);
+  }
+
+  async fillMeasurementField(value) {
+    await this.measurementField.selectByVisibleText(value);
+  }
+
+  async fillFrequencyField(value) {
+    await this.frequencyField.selectByVisibleText(value);
+  }
+
+  async fillIntervalField(value) {
+    await this.intervalField.click();
+  }
+
+  async fillAdditionalInformationField(value) {
+    await this.additionalInformationField.clearValue();
+    await this.additionalInformationField.setValue(value);
+  }
+
+  async fillStartDateField() {
+    await this.startDateField.click();
+    await browser.keys("Enter");
+  }
+
+  async verifyCreatedMedication(medicationName, currentDose, measurement, frequency, interval, status) {
+    await $("(//tr[@class='odd']//td)[2]").waitForDisplayed({ timeout: 15000 });
+    const actMedication = await $("(//tr[@class='odd']//td)[2]").getText();
+    const actDose = await $("(//tr[@class='odd']//td)[3]").getText();
+    const actMeasurement = await $("(//tr[@class='odd']//td)[4]").getText();
+    const actFrequency = await $("(//tr[@class='odd']//td)[5]").getText();
+    const actInterval = await $("(//tr[@class='odd']//td)[6]").getText();
+    const actStatus = await $("(//tr[@class='odd']//td)[10]").getText();
+
+    expect(actMedication).toEqual(medicationName);
+    expect(actDose).toEqual(currentDose);
+    expect(actMeasurement).toEqual(measurement);
+    expect(actFrequency).toEqual(frequency);
+    expect(actInterval).toEqual(interval);
+    expect(actStatus).toEqual(status);
   }
 }
 module.exports = new ManagingProviderAccountPage();
