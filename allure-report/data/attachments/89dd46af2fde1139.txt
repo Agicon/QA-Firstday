@@ -1,3 +1,0 @@
-{
-  "text": "Consult the doctor before using this vaccine."
-}

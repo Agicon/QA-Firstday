@@ -1,12 +1,12 @@
 const path = require("path");
 const fs = require("fs");
 const downloadDir = path.resolve(__dirname, "./downloadApps");
-if (!fs.existsSync(downloadDir)) {
-  fs.mkdirSync(downloadDir, { recursive: true });
-  console.log(`Created folder: ${downloadDir}`);
-} else {
-  console.log(`Folder already exists: ${downloadDir}`);
-}
+// if (!fs.existsSync(downloadDir)) {
+//   fs.mkdirSync(downloadDir, { recursive: true });
+//   console.log(`Created folder: ${downloadDir}`);
+// } else {
+//   console.log(`Folder already exists: ${downloadDir}`);
+// }
 exports.config = {
   //
   // ====================

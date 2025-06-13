@@ -42,7 +42,9 @@ class LoginPage extends BasePage {
     await this.paswordField.click();
     await this.paswordField.setValue(password);
     await this.signInButton.click();
-   
+    try {
+      await this.signInButton.waitForDisplayed({ reverse: true, timeout: 10000 });
+    } catch (error) {}
   }
 
 async open(url) {

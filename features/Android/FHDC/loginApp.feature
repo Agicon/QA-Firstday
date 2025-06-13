@@ -1,6 +1,7 @@
 Feature: Test cases for login page
 
   Scenario Outline: Verify that login is not allowed with "empty email" field and "empty password" field and "invalid email and password" and "valid email and invalid password" but user is able to login on "Caregiver" app with valid credentials and Verify the user is not logged out from the "Caregiver" account if selects 'No" option on the "Logout confirmation" popup and Verify the user is able to logout from "Caregiver" account
+    Given I open the Android app
     When User leave the "Email  field" empty And populate the <invalidPassword> "Password field" And click on "Login" button
     Then User is not able to login
     When User leave the "Password field" empty And populate the <invalidEmail> "Email field" And click on "Login" button
@@ -12,6 +13,7 @@ Feature: Test cases for login page
     Then Validation message appears Email or Password is incorrect
     Then User is not able to login
     When login to app using <validLoginEmail>
+    Then Select child <firstChild> from the child list
     Then Verify that user is on homepage
     When Verfiy all modules of Firstday-HC app on homepage
     When User clicks on vital signs module
@@ -19,6 +21,8 @@ Feature: Test cases for login page
     Then I click on the back button
     When User clicks on medical report module
     Then Verify all the features inside medical report
+    Then User click on the medication tab
+    Then Details of medication should be visible in the list with <medicationName> and <currentDose_And_measurement> and <frequency> and <interval>
     Then I click on the back button
     When User clicks on providers module on homepage
     Then Verify all the tabs inside providers module
@@ -37,8 +41,8 @@ Feature: Test cases for login page
     When User click on the button with text YES
     Then User get logged out from my account and gets navigated to login page
     Examples:
-      | validLoginEmail | invalidPassword | invalidEmail       |
-      | FHDCMobileLogin | 123450000       | testuser@gmail.com |
+      | validLoginEmail | invalidPassword | invalidEmail       | firstChild | medicationName  | currentDose_And_measurement | frequency | additionalInformation                         | interval | status |
+      | FHDCMobileLogin | 123450000       | testuser@gmail.com | Baby 21    | Auto_Medication | 1 (Teaspoon)                | Twice     | Consult the doctor before using this medicine | Day      | Active |
 
   Scenario Outline: Verify the "Caregiver" is able to view "My account" and verify "Caregiver" is able to to view "Baby's Information" and Verify the "Caregiver" can "View and update" the information from "My Contact Information" screen and verify "Caregiver" is able to change "Profile picture"
     When login to app using <validLoginEmail>
