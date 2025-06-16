@@ -1,3 +1,0 @@
-{
-  "text": "Updated_QA_Patient"
-}

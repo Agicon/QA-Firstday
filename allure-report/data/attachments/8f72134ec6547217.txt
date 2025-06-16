@@ -1,3 +1,0 @@
-{
-  "text": "Test_Auto_Other_Provider_For_Provider"
-}
