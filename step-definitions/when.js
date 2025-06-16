@@ -350,6 +350,18 @@ When(/^User click on the link having text (.*)$/, async (link) => {
   await customerAccountPage.clickOnLink(link);
 });
 
+When(/^Click on select patient dropdown$/, async () => {
+  await customerAccountPage.clickOnSelectPatientDropdown();
+});
+
+
+When(/^Click on select primary provider dropdown$/, async () => {
+  await customerAccountPage.clickOnPrimaryProviderDropdownDropdown();
+});
+
+When(/^Click on select secondary provider dropdown$/, async () => {
+  await customerAccountPage.clickOnSecondaryProviderDropdown();
+});
 //=============================Web-ManagingProviderAccount======================//
 
 // When(/^Open web url (.*)$/, async (url) => {
@@ -533,6 +545,9 @@ When(/^I select date in start Date field$/, async () => {
   await managingProviderAccountPage.fillStartDateField();
 });
 
+When(/^I click on the second index button (.*)$/, async (data) => {
+  await managingProviderAccountPage.clickOnButtonText(data);
+});
 
 // =================================Android======================================//
 

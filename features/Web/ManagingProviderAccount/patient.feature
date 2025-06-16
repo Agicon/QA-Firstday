@@ -316,7 +316,7 @@ Feature: Test cases for the 'Patient' page
 
     Examples:
       | validName         | validLastName | gender | hospital | caregiver                                                          | formServices    | treatmentLocation | status | dashboard-ManagePatientsOption | dashboard-AddPatientOption | treatment |
-      | Patient_Auto_Test | Ben           | Male   | Default  | testcaregiver 2may (testcaregiver2may@yopmail.com) (+1 1987654356) | RPM,TELEMED,EMR | Hospital / Clinic | Active | Manage Patients                | Add A New Patient          | Discharge |
+      | Patient_Auto_Test | Ben           | Male   | Default  | Auto_Test_Caregiver Autonix (Auto_test1749802897805@auto.com) (+1 3652900000) | RPM,TELEMED,EMR | Hospital / Clinic | Active | Manage Patients                | Add A New Patient          | Discharge |
 
   Scenario Outline: Verify the "Managing Provider" is not able to create "New Other Provider" and validation displays if any mandatory field is not populated and if invalid data is added in mandatory field and 	Verify the "Managing Provider" is able to create "Other Provider" when only the mandatory fields are populated with valid data and 	Verify the "Customer" is not able to create "New Other Provider" with already registered email
     Given Open web url <url>

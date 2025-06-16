@@ -169,6 +169,13 @@ Then(/^Alert values should be visible in the list with heart rate (.*) and heart
   await customerAccountPage.verifyAlertValues(heartLessThan, heartGreaterthan, respiratorylessThan, respiratoryGreaterthan, saturationlessThan, saturationGreaterthan, pulselessThan, pulseGreaterthan, tempType, temperaturelessThan, temperatureGreaterthan);
 });
 
+Then(/^Select list option (.*) form from list$/, async (option) => {
+ await customerAccountPage.clickOnSelectListOption(option);
+});
+
+
+
+
 // ===============================Web-ManagingProviderAccount======================//
 
 Then(/^I get logged out from my account$/, async () => {
