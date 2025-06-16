@@ -1,3 +1,0 @@
-{
-  "text": "Auto_Test_Vaccine"
-}

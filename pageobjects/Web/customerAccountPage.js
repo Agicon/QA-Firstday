@@ -158,6 +158,50 @@ class CustomerAccountPage extends BasePage {
     return $("#used");
   }
 
+  get heartLessthanField() {
+    return $("#heart_lessthan");
+  }
+
+  get heartGreaterthanField() {
+    return $("#heart_greaterthan");
+  }
+
+  get respiratoryLessthanField() {
+    return $("#respiratory_lessthan");
+  }
+
+  get respiratoryGreaterthanField() {
+    return $("#respiratory_greaterthan");
+  }
+
+  get saturationLessthanField() {
+    return $("#saturation_lessthan");
+  }
+
+  get saturationGreaterthanField() {
+    return $("#saturation_greaterthan");
+  }
+
+  get pulseRateLessthanField() {
+    return $("#pulserate_lessthan");
+  }
+
+  get pulseRateGreaterthanField() {
+    return $("#pulserate_greaterthan");
+  }
+
+  get temperatureTypeField() {
+    return $("#temperature_type");
+  }
+
+  get temperatureLessthanField() {
+    return $("#temperature_lessthan");
+  }
+
+  get temperatureGreaterthanField() {
+    return $("#temperature_greaterthan");
+  }
+  
     get selectPatientDropdown() {
     return $("#select2-patient_id-container");
   }
@@ -490,7 +534,7 @@ class CustomerAccountPage extends BasePage {
     var actualName = await $("(//tr[@role='row'])[2]//td[1]").getText();
     await expect(actualName).toEqual(name);
   }
-  
+
   async fillCVXCodeField(value) {
     await this.cvxCodeField.waitForDisplayed({ timeout: 15000 });
     await this.cvxCodeField.clearValue();
@@ -529,7 +573,6 @@ class CustomerAccountPage extends BasePage {
 
   async fillNonVaccineField(text) {
     await this.nonVaccineField.selectByVisibleText(text);
-    // await $("//option[contains(text(),'" + text + "')]").click();
   }
 
   async fillUpdateDateField() {
@@ -573,6 +616,87 @@ class CustomerAccountPage extends BasePage {
     await $("//button[contains(text(),'Update')]").click();
   }
 
+  async fillHeartLessThanField(value) {
+    await this.heartLessthanField.waitForDisplayed({ timeout: 15000 });
+    await this.heartLessthanField.clearValue();
+    await this.heartLessthanField.setValue(value);
+  }
+
+  async fillHeartGreaterThanField(value) {
+    await this.heartGreaterthanField.clearValue();
+    await this.heartGreaterthanField.setValue(value);
+  }
+
+  async fillRespiratoryLessThanField(value) {
+    await this.respiratoryLessthanField.clearValue();
+    await this.respiratoryLessthanField.setValue(value);
+  }
+
+  async fillRespiratoryGreaterThanField(value) {
+    await this.respiratoryGreaterthanField.clearValue();
+    await this.respiratoryGreaterthanField.setValue(value);
+  }
+
+  async fillSaturationLessthanField(value) {
+    await this.saturationLessthanField.clearValue();
+    await this.saturationLessthanField.setValue(value);
+  }
+
+  async fillSaturationGreaterthanField(value) {
+    await this.saturationGreaterthanField.clearValue();
+    await this.saturationGreaterthanField.setValue(value);
+  }
+
+  async fillPulseRateLessthanField(value) {
+    await this.pulseRateLessthanField.clearValue();
+    await this.pulseRateLessthanField.setValue(value);
+  }
+
+  async fillPulseRateGreaterthanField(value) {
+    await this.pulseRateGreaterthanField.clearValue();
+    await this.pulseRateGreaterthanField.setValue(value);
+  }
+
+  async fillTemperatureTypeField(value) {
+    await this.temperatureTypeField.selectByVisibleText(value);
+  }
+
+  async fillTemperatureLessthanField(value) {
+    await this.temperatureLessthanField.clearValue();
+    await this.temperatureLessthanField.setValue(value);
+  }
+
+  async fillTemperatureGreaterthanField(value) {
+    await this.temperatureGreaterthanField.clearValue();
+    await this.temperatureGreaterthanField.setValue(value);
+  }
+
+  async verifyAlertValues(heartLessThan, heartGreaterthan, respiratorylessThan, respiratoryGreaterthan, saturationlessThan, saturationGreaterthan, pulselessThan, pulseGreaterthan, tempType, temperaturelessThan, temperatureGreaterthan) {
+    await $("(//tr[@class='odd']//td)[1]").waitForDisplayed({ timeout: 15000 });
+    const actHeartRateLessThan = await $("(//tr[@class='odd']//td)[1]").getText();
+    const actHeartRateGreaterThan = await $("(//tr[@class='odd']//td)[2]").getText();
+    const actRespiratoryLessThan = await $("(//tr[@class='odd']//td)[3]").getText();
+    const actRespiratoryGreaterThan = await $("(//tr[@class='odd']//td)[4]").getText();
+    const actsaturationLessThan = await $("(//tr[@class='odd']//td)[5]").getText();
+    const actsaturationGreaterThan = await $("(//tr[@class='odd']//td)[6]").getText();
+    const actPulseLessThan = await $("(//tr[@class='odd']//td)[7]").getText();
+    const actPulseGreaterThan = await $("(//tr[@class='odd']//td)[8]").getText();
+    const actTemperatureType = await $("(//tr[@class='odd']//td)[9]").getText();
+    const actTemperatureLessThan = await $("(//tr[@class='odd']//td)[10]").getText();
+    const actTemperatureGreaterThan = await $("(//tr[@class='odd']//td)[11]").getText();
+
+    await expect(actHeartRateLessThan).toEqual(heartLessThan);
+    await expect(actHeartRateGreaterThan).toEqual(heartGreaterthan);
+    await expect(actRespiratoryLessThan).toEqual(respiratorylessThan);
+    await expect(actRespiratoryGreaterThan).toEqual(respiratoryGreaterthan);
+    await expect(actsaturationLessThan).toEqual(saturationlessThan);
+    await expect(actsaturationGreaterThan).toEqual(saturationGreaterthan);
+    await expect(actPulseLessThan).toEqual(pulselessThan);
+    await expect(actPulseGreaterThan).toEqual(pulseGreaterthan);
+    await expect(actTemperatureType).toEqual(tempType);
+    await expect(actTemperatureLessThan).toEqual(temperaturelessThan);
+    await expect(actTemperatureGreaterThan).toEqual(temperatureGreaterthan);
+  }
     async clickOnSelectPatientDropdown() {
     await this.selectPatientDropdown.waitForDisplayed({ timeout: 15000 });
     await this.selectPatientDropdown.click();

@@ -690,7 +690,7 @@ class AndroidPage extends BasePage {
   }
 
   async downloadApp() {
-    const downloadDir = path.resolve(__dirname, "../../downloadApps");
+        const downloadDir = path.resolve(__dirname, "../../downloadApps");
 if (!fs.existsSync(downloadDir)) {
   fs.mkdirSync(downloadDir, { recursive: true });
   console.log(`Created folder: ${downloadDir}`);
@@ -726,6 +726,32 @@ if (!fs.existsSync(downloadDir)) {
     } catch (err) {
       console.error("Error renaming files:", err);
     }
+  }
+
+  async selectChildOption(option) {
+    await $("//android.widget.TextView[contains(@text,'" + option + "')]").waitForDisplayed({ timeout: 15000 });
+    (await $("//android.widget.TextView[contains(@text,'" + option + "')]")).click();
+  }
+
+  async clickOnMedicationTab() {
+    if ((await this.medicationIsDisplayed()) === true) {
+      await this.medication.click();
+    } else {
+      throw new Error("Medication tab is not displayed");
+    }
+  }
+
+  async verifyMobileMedicationDetails(medicationName, currentDose_And_measurement, frequency, interval) {
+    await $('//android.widget.TextView[@resource-id="com.app.neonatal.staging:id/tv_diagnosis_title"]').waitForDisplayed({ timeout: 15000 });
+    const actMedication = await $('//android.widget.TextView[@resource-id="com.app.neonatal.staging:id/tv_diagnosis_title"]').getText();
+    const actDose = await $("(//android.widget.TextView)[4]").getText();
+    const actFrequency = await $("(//android.widget.TextView)[6]").getText();
+    const actInterval = await $("(//android.widget.TextView)[8]").getText();
+
+    expect(actMedication).toEqual(medicationName);
+    expect(actDose).toEqual(currentDose_And_measurement);
+    expect(actFrequency).toEqual(frequency);
+    expect(actInterval).toEqual(interval);
   }
 }
 module.exports = new AndroidPage();

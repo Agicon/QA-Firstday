@@ -14,7 +14,8 @@
     "webProviderPage": "wdio run ./wdio.confWeb.js --suite webProviderPage",
     "webPatientPage": "npm run remove-allure && wdio run ./wdio.confWeb.js --suite newPatientPage",
     "runBothSuites": "npm run remove-allure && npm run newCustomerPage && npm run webProviderPage",
-    "webMasterMenuPage": "wdio run ./wdio.confWeb.js --suite masterMenuPage"
+    "webMasterMenuPage": "wdio run ./wdio.confWeb.js --suite masterMenuPage",
+    "runBothSuites_Web_And_Android": "npm run remove-allure && npm run webPatientPage && npm run androidLoginPage-FHDC"
   },
   "keywords": [],
   "author": "",
