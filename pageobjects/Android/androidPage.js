@@ -690,10 +690,17 @@ class AndroidPage extends BasePage {
   }
 
   async downloadApp() {
+    const downloadDir = path.resolve(__dirname, "../../downloadApps");
+if (!fs.existsSync(downloadDir)) {
+  fs.mkdirSync(downloadDir, { recursive: true });
+  console.log(`Created folder: ${downloadDir}`);
+} else {
+  console.log(`Folder already exists: ${downloadDir}`);
+}
     await this.downloadAnywayButton.waitForDisplayed({ timeout: 35000 });
     await this.downloadAnywayButton.click();
     await browser.pause(60000);
-    const downloadDir = path.resolve(__dirname, "../../downloadApps");
+    // const downloadDir = path.resolve(__dirname, "../../downloadApps");
     const apkFile = fs.readdirSync(downloadDir).find((file) => file.endsWith(".apk"));
 
     try {

@@ -429,6 +429,16 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
+   async clickOnButtonText(text) {
+    const linkText = await $("(//a[contains(text(),'" + text + "')])[2]");
+    await linkText.waitForClickable({ timeout: 10000 });
+    if ((await linkText.isDisplayed()) === true) {
+      await linkText.click();
+    } else {
+      throw new Error("link is not displaying: " + text);
+    }
+  }
+
   async verifyCreatedCaregiver(name, mobile, relationship, children, status) {
     const actualName = await $("(//tr[@class='odd']//td)[2]").getText();
     const actualMobile = await $("(//tr[@class='odd']//td)[4]").getText();

@@ -165,6 +165,10 @@ Then(/^"Vaccine type" details should be visible in the list with (.*) and (.*) a
 });
 
 
+Then(/^Select list option (.*) form from list$/, async (option) => {
+ await customerAccountPage.clickOnSelectListOption(option);
+});
+
 
 
 

@@ -158,6 +158,18 @@ class CustomerAccountPage extends BasePage {
     return $("#used");
   }
 
+    get selectPatientDropdown() {
+    return $("#select2-patient_id-container");
+  }
+
+    get selectPrimaryProviderDropdown() {
+    return $("(//span[@class='select2-selection select2-selection--multiple'])[1]");
+  }
+
+      get selectSecondaryProviderDropdown() {
+    return $("(//span[@class='select2-selection select2-selection--multiple'])[1]");
+  }
+
   async managingProviderIsDisplayed() {
     await this.managingProviderLink.waitForDisplayed({ timeut: 25000 });
     return await this.managingProviderLink.isDisplayed();
@@ -560,5 +572,32 @@ class CustomerAccountPage extends BasePage {
     await this.vaccineNameField.clearValue();
     await $("//button[contains(text(),'Update')]").click();
   }
+
+    async clickOnSelectPatientDropdown() {
+    await this.selectPatientDropdown.waitForDisplayed({ timeout: 15000 });
+    await this.selectPatientDropdown.click();
+  
+  }
+
+      async clickOnSecondaryProviderDropdown() {
+    await this.selectSecondaryProviderDropdown.waitForDisplayed({ timeout: 15000 });
+    await this.selectSecondaryProviderDropdown.click();
+  
+  }
+
+      async clickOnPrimaryProviderDropdownDropdown() {
+    await this.selectPrimaryProviderDropdown.waitForDisplayed({ timeout: 15000 });
+    await this.selectPrimaryProviderDropdown.click();
+  
+  }
+  
+    async clickOnSelectListOption(option) {
+      const listOption=await $("//li[contains(text(),'"+option+"')]");
+    await listOption.waitForDisplayed({ timeout: 15000 });
+    await listOption.click();
+  
+  }
+
+  select
 }
 module.exports = new CustomerAccountPage();

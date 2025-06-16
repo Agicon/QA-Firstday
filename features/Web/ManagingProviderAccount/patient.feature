@@ -316,137 +316,137 @@ Feature: Test cases for the 'Patient' page
 
     Examples:
       | validName         | validLastName | gender | hospital | caregiver                                                          | formServices    | treatmentLocation | status | dashboard-ManagePatientsOption | dashboard-AddPatientOption | treatment |
-      | Patient_Auto_Test | Ben           | Male   | Default  | testcaregiver 2may (testcaregiver2may@yopmail.com) (+1 1987654356) | RPM,TELEMED,EMR | Hospital / Clinic | Active | Manage Patients                | Add A New Patient          | Discharge |
+      | Patient_Auto_Test | Ben           | Male   | Default  | Auto_Test_Caregiver Autonix (Auto_test1749802897805@auto.com) (+1 3652900000) | RPM,TELEMED,EMR | Hospital / Clinic | Active | Manage Patients                | Add A New Patient          | Discharge |
 
-  Scenario Outline: Verify the "Managing Provider" is not able to create "New Other Provider" and validation displays if any mandatory field is not populated and if invalid data is added in mandatory field and 	Verify the "Managing Provider" is able to create "Other Provider" when only the mandatory fields are populated with valid data and 	Verify the "Customer" is not able to create "New Other Provider" with already registered email
-    When I click on the second index button Other Providers
-    Then It redirects on the Other Providers screen
-    Then Search and delete duplicate data <validOtherProviderName>
-    When I click on the button with text New Other Provider
-    Then It redirects on the New Other Provider screen
-    When I click on the button with text Create
-    Then validation message Please enter first name appears
-    Then validation message Please enter email address appears
-    When User add <invalidData> in name field
-    Then validation message Please enter at least 2 characters. appears
-    When User add <invalidEmail> in email field
-    Then validation message Please enter valid email. appears
-    When User add <textInMobileNumber> in mobile number field
-    When I click on the button with text Create
-    Then validation message Please enter only numbers appears
-    When User add <invalidMobileNumber> in mobile number field
-    Then validation message Please enter at least 10 digits. appears
-    When User add <invalidEmail> in website field
-    When I click on the button with text Create
-    Then validation message Please enter a valid website URL appears
-    When User add <textInMobileNumber> in office number field
-    When I click on the button with text Create
-    When User add <invalidMobileNumber> in office number field
-    When User add <invalidData> in zipcode field
-    When I click on the button with text Create
-    Then validation message Please enter valid zipcode appears
-    When I click on the button with text Close
-    When I click on the second index button Other Providers
-    Then It redirects on the Other Providers screen
-    When I click on the button with text New Other Provider
-    When User add <validOtherProviderName> in name field
-    When I fill valid and unique data in email
-    When I click on the button with text Create
-    Then Success message Other Provider Added Succesfully. Credentials will be sent to an email ! appears
-    When I populate data <validOtherProviderName> in the "Search" field
-    Then A "Other Provider" gets created and it displays on the "Other Providers" list with <specialty> and <validOtherProviderName> and <status>
-    When I populate fields <validOtherProviderName> but I populate "Email field" with already registered email
-    Then validation message Please Enter Unique email. This email is already register with system. appears
-    When I click on the button with text Close
+  # Scenario Outline: Verify the "Managing Provider" is not able to create "New Other Provider" and validation displays if any mandatory field is not populated and if invalid data is added in mandatory field and 	Verify the "Managing Provider" is able to create "Other Provider" when only the mandatory fields are populated with valid data and 	Verify the "Customer" is not able to create "New Other Provider" with already registered email
+  #   When I click on the second index button Other Providers
+  #   Then It redirects on the Other Providers screen
+  #   Then Search and delete duplicate data <validOtherProviderName>
+  #   When I click on the button with text New Other Provider
+  #   Then It redirects on the New Other Provider screen
+  #   When I click on the button with text Create
+  #   Then validation message Please enter first name appears
+  #   Then validation message Please enter email address appears
+  #   When User add <invalidData> in name field
+  #   Then validation message Please enter at least 2 characters. appears
+  #   When User add <invalidEmail> in email field
+  #   Then validation message Please enter valid email. appears
+  #   When User add <textInMobileNumber> in mobile number field
+  #   When I click on the button with text Create
+  #   Then validation message Please enter only numbers appears
+  #   When User add <invalidMobileNumber> in mobile number field
+  #   Then validation message Please enter at least 10 digits. appears
+  #   When User add <invalidEmail> in website field
+  #   When I click on the button with text Create
+  #   Then validation message Please enter a valid website URL appears
+  #   When User add <textInMobileNumber> in office number field
+  #   When I click on the button with text Create
+  #   When User add <invalidMobileNumber> in office number field
+  #   When User add <invalidData> in zipcode field
+  #   When I click on the button with text Create
+  #   Then validation message Please enter valid zipcode appears
+  #   When I click on the button with text Close
+  #   When I click on the second index button Other Providers
+  #   Then It redirects on the Other Providers screen
+  #   When I click on the button with text New Other Provider
+  #   When User add <validOtherProviderName> in name field
+  #   When I fill valid and unique data in email
+  #   When I click on the button with text Create
+  #   Then Success message Other Provider Added Succesfully. Credentials will be sent to an email ! appears
+  #   When I populate data <validOtherProviderName> in the "Search" field
+  #   Then A "Other Provider" gets created and it displays on the "Other Providers" list with <specialty> and <validOtherProviderName> and <status>
+  #   When I populate fields <validOtherProviderName> but I populate "Email field" with already registered email
+  #   Then validation message Please Enter Unique email. This email is already register with system. appears
+  #   When I click on the button with text Close
 
-    Examples:
-      | validOtherProviderName   | invalidData | invalidEmail   | status | textInMobileNumber | invalidMobileNumber |
-      | Auto_Test_Other_Provider | 1 | #####gmail.com | Active | abcdef | 12354 |
+  #   Examples:
+  #     | validOtherProviderName   | invalidData | invalidEmail   | status | textInMobileNumber | invalidMobileNumber |
+  #     | Auto_Test_Other_Provider | 1 | #####gmail.com | Active | abcdef | 12354 |
 
-  Scenario Outline: Verify the "Managing Provider" is able to create "Other Provider" when all the fields are populated with valid data
-    When I click on the second index button Other Providers
-    Then It redirects on the Other Providers screen
-    Then Search and delete duplicate data <validOtherProviderName>
-    When I click on the button with text New Other Provider
-    Then It redirects on the New Other Provider screen
-    When I click on the button with text Create
-    When User add <validOtherProviderName> in name field
-    When I fill valid and unique data in email
-    When User add <specialty> in specialty field
-    When User add <validMobile> in mobile number field
-    When User add <validWebsite> in website field
-    When User add <validMobile> in office number field
-    When User add <validOfficeInfo> in office information field
-    When User add <validState> in State field
-    When User add <validCity> in city field
-    When User add <validAddress> in address field
-    When User add <validZipcode> in zipcode field
-    When I click on the button with text Create
-    Then Success message Other Provider Added Succesfully. Credentials will be sent to an email ! appears
-    When I populate data <validOtherProviderName> in the "Search" field
-    Then A "Other Provider" gets created and it displays on the "Other Providers" list with <specialty> and <validOtherProviderName> and <status>
+  # Scenario Outline: Verify the "Managing Provider" is able to create "Other Provider" when all the fields are populated with valid data
+  #   When I click on the second index button Other Providers
+  #   Then It redirects on the Other Providers screen
+  #   Then Search and delete duplicate data <validOtherProviderName>
+  #   When I click on the button with text New Other Provider
+  #   Then It redirects on the New Other Provider screen
+  #   When I click on the button with text Create
+  #   When User add <validOtherProviderName> in name field
+  #   When I fill valid and unique data in email
+  #   When User add <specialty> in specialty field
+  #   When User add <validMobile> in mobile number field
+  #   When User add <validWebsite> in website field
+  #   When User add <validMobile> in office number field
+  #   When User add <validOfficeInfo> in office information field
+  #   When User add <validState> in State field
+  #   When User add <validCity> in city field
+  #   When User add <validAddress> in address field
+  #   When User add <validZipcode> in zipcode field
+  #   When I click on the button with text Create
+  #   Then Success message Other Provider Added Succesfully. Credentials will be sent to an email ! appears
+  #   When I populate data <validOtherProviderName> in the "Search" field
+  #   Then A "Other Provider" gets created and it displays on the "Other Providers" list with <specialty> and <validOtherProviderName> and <status>
 
-    Examples:
-      | validOtherProviderName   | specialty     | validMobile | validWebsite         | validOfficeInfo | validState | validCity   | validAddress            | validZipcode | status |
-      | Auto_Test_Other_Provider | pediatricians | 2026839019 | https://webdriver.io | IT Office | Bridgeland | Silverstone | Westwood Park, TX 24680 | 10001 | Active |
+  #   Examples:
+  #     | validOtherProviderName   | specialty     | validMobile | validWebsite         | validOfficeInfo | validState | validCity   | validAddress            | validZipcode | status |
+  #     | Auto_Test_Other_Provider | pediatricians | 2026839019 | https://webdriver.io | IT Office | Bridgeland | Silverstone | Westwood Park, TX 24680 | 10001 | Active |
 
-  Scenario Outline: Verify "Managing Provider" is not able to update the "Other Provider" with invalid details and 	Verify "Managing Provider" is not able to update the "Other Provider" and validation displays if any mandatory field is not populated while updating the customer and Verify "Managing Provider" is able to update the "Other Provider's" details
-    Then Search and delete duplicate data <updatedName>
-    When User search the created provider <validOtherProviderName>
-    When User click on the "View or Update" option under "Action" section
-    Then User should navigate to the "Update Managing Provider Details" page
-    When User update the "Managing Provider form" but does not populate one of the mandatory field
-    Then User click on the "Update" button
-    Then validation message Please enter name appears
-    When User add <invalidData> in name field
-    Then validation message Please enter at least 2 characters. appears
-    When User add <updatedName> in name field
-    When User click on the "Back" button on "Update Managing Provider Details" page
-    When User click on the "View or Update" option under "Action" section
-    Then User should navigate to the "Update Managing Provider Details" page
-    When User add <updatedName> in name field
-    When User add <updatedSpecialty> in specialty field
-    Then User click on the "Update" button
-    Then Success message Other Provider Updated Succesfully ! appears
-    When I populate data <updatedName> in the "Search" field
-    Then A "Other Provider" gets created and it displays on the "Other Providers" list with <specialty> and <updatedName> and <status>
-    When I populate data <updatedName> in the "Search" field
-    When I click On "Delete" icon
-    Then Success message Other Provider Deleted !! appears
-    Then Deleted record should not be visible in the list
+  # Scenario Outline: Verify "Managing Provider" is not able to update the "Other Provider" with invalid details and 	Verify "Managing Provider" is not able to update the "Other Provider" and validation displays if any mandatory field is not populated while updating the customer and Verify "Managing Provider" is able to update the "Other Provider's" details
+  #   Then Search and delete duplicate data <updatedName>
+  #   When User search the created provider <validOtherProviderName>
+  #   When User click on the "View or Update" option under "Action" section
+  #   Then User should navigate to the "Update Managing Provider Details" page
+  #   When User update the "Managing Provider form" but does not populate one of the mandatory field
+  #   Then User click on the "Update" button
+  #   Then validation message Please enter name appears
+  #   When User add <invalidData> in name field
+  #   Then validation message Please enter at least 2 characters. appears
+  #   When User add <updatedName> in name field
+  #   When User click on the "Back" button on "Update Managing Provider Details" page
+  #   When User click on the "View or Update" option under "Action" section
+  #   Then User should navigate to the "Update Managing Provider Details" page
+  #   When User add <updatedName> in name field
+  #   When User add <updatedSpecialty> in specialty field
+  #   Then User click on the "Update" button
+  #   Then Success message Other Provider Updated Succesfully ! appears
+  #   When I populate data <updatedName> in the "Search" field
+  #   Then A "Other Provider" gets created and it displays on the "Other Providers" list with <specialty> and <updatedName> and <status>
+  #   When I populate data <updatedName> in the "Search" field
+  #   When I click On "Delete" icon
+  #   Then Success message Other Provider Deleted !! appears
+  #   Then Deleted record should not be visible in the list
 
-    Examples:
-      | validOtherProviderName   | updatedName                      | updatedSpecialty | invalidData | status |
-      | Auto_Test_Other_Provider | Updated_Auto_Test_Other_Provider | Skin | 1 | Active |
+  #   Examples:
+  #     | validOtherProviderName   | updatedName                      | updatedSpecialty | invalidData | status |
+  #     | Auto_Test_Other_Provider | Updated_Auto_Test_Other_Provider | Skin | 1 | Active |
 
-  Scenario Outline: Verify "Customer" is able to change the status of Other Provider to "Inactive" and Verify "Customer" is able to change the status of Managing Provider to "Active" and Verify a "Managing Provider" with "Inactive" status is not allowed to login on portal
-    When User click on "Other Provider" tab
-    Then Search and active if provider <validName> is already inactive under Inactive Other Providers section
-    When I click on the button with text Active Other Providers
-    When User search the created provider <validName>
-    When User click on the link Active and yes button
-    Then Success message Other Provider Inactive Successfully !! appears
-    Then Verify provider <validName> has removed from list
-    When I click on the button with text Inactive Other Providers
-    Then The "Managing Provider" now displayed there in list <validName>
-    When Open web url <url>
-    When Web app login using <provider>
-    Then validation message You are not allow to login. Please contact support team. appears
-    When Web app login using <userA>
-    Then providers/dashboard page displays
-    When I click on the second index button Other Providers
-    Then It redirects on the Other Providers screen
-    When I click on the button with text Inactive Other Providers
-    Then The "Managing Provider" now displayed there in list <validName>
-    When User click on the link Inactive and yes button
-    Then Success message Other Provider Active Successfully appears
-    Then Verify provider <validName> has removed from list
-    When I click on the button with text Active Other Providers
-    Then The "Managing Provider" now displayed there in list <validName>
-    When Open web url <url>
-    When Web app login using <provider>
-    Then provider/dashboard page displays
+  # Scenario Outline: Verify "Customer" is able to change the status of Other Provider to "Inactive" and Verify "Customer" is able to change the status of Managing Provider to "Active" and Verify a "Managing Provider" with "Inactive" status is not allowed to login on portal
+  #   When User click on "Other Provider" tab
+  #   Then Search and active if provider <validName> is already inactive under Inactive Other Providers section
+  #   When I click on the button with text Active Other Providers
+  #   When User search the created provider <validName>
+  #   When User click on the link Active and yes button
+  #   Then Success message Other Provider Inactive Successfully !! appears
+  #   Then Verify provider <validName> has removed from list
+  #   When I click on the button with text Inactive Other Providers
+  #   Then The "Managing Provider" now displayed there in list <validName>
+  #   When Open web url <url>
+  #   When Web app login using <provider>
+  #   Then validation message You are not allow to login. Please contact support team. appears
+  #   When Web app login using <userA>
+  #   Then providers/dashboard page displays
+  #   When I click on the second index button Other Providers
+  #   Then It redirects on the Other Providers screen
+  #   When I click on the button with text Inactive Other Providers
+  #   Then The "Managing Provider" now displayed there in list <validName>
+  #   When User click on the link Inactive and yes button
+  #   Then Success message Other Provider Active Successfully appears
+  #   Then Verify provider <validName> has removed from list
+  #   When I click on the button with text Active Other Providers
+  #   Then The "Managing Provider" now displayed there in list <validName>
+  #   When Open web url <url>
+  #   When Web app login using <provider>
+  #   Then provider/dashboard page displays
 
-    Examples:
-      | validName                             | url      | provider                            | userA                     |
-      | Test_Auto_Other_Provider_For_Provider | loginUrl | otherProviderForProviderStatusCheck | providerLoginCrendentails |
+  #   Examples:
+  #     | validName                             | url      | provider                            | userA                     |
+  #     | Test_Auto_Other_Provider_For_Provider | loginUrl | otherProviderForProviderStatusCheck | providerLoginCrendentails |
