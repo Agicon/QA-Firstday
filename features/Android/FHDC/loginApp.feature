@@ -41,8 +41,8 @@ Feature: Test cases for login page
     When User click on the button with text YES
     Then User get logged out from my account and gets navigated to login page
     Examples:
-      | validLoginEmail | invalidPassword | invalidEmail       | firstChild | medicationName  | currentDose_And_measurement | frequency | additionalInformation                         | interval | status |
-      | FHDCMobileLogin | 123450000       | testuser@gmail.com | Baby 21    | Auto_Medication | 1 (Teaspoon)                | Twice     | Consult the doctor before using this medicine | Day      | Active |
+      | validLoginEmail | invalidPassword | invalidEmail       | firstChild        | medicationName  | currentDose_And_measurement | frequency | additionalInformation                         | interval | status |
+      | FHDCMobileLogin | 123450000       | testuser@gmail.com | Patient_Auto_Test | Auto_Medication | 1 (Teaspoon)                | Twice     | Consult the doctor before using this medicine | Day      | Active |
 
   Scenario Outline: Verify the "Caregiver" is able to view "My account" and verify "Caregiver" is able to to view "Baby's Information" and Verify the "Caregiver" can "View and update" the information from "My Contact Information" screen and verify "Caregiver" is able to change "Profile picture"
     When login to app using <validLoginEmail>

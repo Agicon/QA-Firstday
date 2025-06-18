@@ -1,4 +1,5 @@
 Feature: Test cases for "Managing Provider" page
+
   Scenario Outline: Verify the "Customer" is not able to create "New Other Provider" and validation displays if any mandatory field is not populated and verify that "Close" button is working on "New Other Provider" form and verify the validation if user add invalid data in "Other Providing" form.
     When Open web url <url>
     When Web app login using <userA>
@@ -32,6 +33,7 @@ Feature: Test cases for "Managing Provider" page
     Examples:
       | url      | userA                     | invalidName | invalidEmail  | textInMobileNumber | textInMobileNumberField | invalidMobileNumber | invaliWebsite      |
       | loginUrl | customerLoginCrendentails | 1 | @@@@gmail.com | auto | abcdef | 12453 | https://www.@@.com |
+
   Scenario Outline: Verify the "Customer" is able to create "New Other Provider" when only the mandatory fields are populated with valid data and also check "Customer" is not able to create "New Managing Provider" with already registered email
     When User click on "Other Provider" tab
     Then Search and delete duplicate data <validName>
@@ -49,6 +51,7 @@ Feature: Test cases for "Managing Provider" page
     Examples:
       | validName               |
       | Auto_Test_OtherProvider |
+
   Scenario Outline: Verify the "Customer" is able to create "New Managing Provider" when all the fields are populated with valid data and also Verify "Customer" is not able to update the "Managing Provider" and validation displays if any mandatory field is not populated while updating the customer and 	Verify "Customer" is navigated back to the "Managing Provider " page when clicked on "Back button" displaying on the "Update Managing Provider Details" page and Verify "Customer" is not able to update the "Managing Provider" with invalid details and Verify "Customer" is able to update the "Managing Provider" details
     When User click on "Other Provider" tab
     Then Search and delete duplicate data <validName>
@@ -90,6 +93,7 @@ Feature: Test cases for "Managing Provider" page
     Examples:
       | validName               | validMobile | validWebsite                             | validOfficeNumber | validOfficeInfo | validState | validCity  | validAddress | validZipcode | updatedName                | invalidName | url      | inactiveEmail         | RegisteredAutoProvider          |
       | Auto_Test_OtherProvider | 1234567890  | https://portal.test.firstdayhc.com/login | 1111122222        | IT office       | Punjab     | Chandigarh | Abc 12345    | 00123        | Updated_Aut0_OtherProvider | 1           | loginUrl | automationWebProvider | automationProvider(Dont delete) |
+
   Scenario Outline: Verify "Customer" is able to change the status of Other Provider to "Inactive" and Verify "Customer" is able to change the status of Managing Provider to "Active" and Verify a "Managing Provider" with "Inactive" status is not allowed to login on portal
     When User click on "Other Provider" tab
     Then Search and active if provider <validName> is already inactive under Inactive Other Providers section
@@ -119,6 +123,7 @@ Feature: Test cases for "Managing Provider" page
     Examples:
       | validName           | url      | provider                    | userA                     |
       | other_auto_provider | loginUrl | otherProviderForStatusCheck | customerLoginCrendentails |
+
 # //------------------Assign-Provider----------------//
 
   Scenario Outline: Verify the assign provider finctionality
