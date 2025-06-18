@@ -259,6 +259,10 @@ Then(/^Vaccine details should be visible in the list with vaccine name (.*) and 
   await managingProviderAccountPage.verifyVaccineDetails(createdVaccineName, brandName, lotNumber, comments);
 });
 
+Then(/^File details should be visible with (.*) and (.*) and (.*)$/, async (image, fileType, description) => {
+  await managingProviderAccountPage.verifyFileDetails(image, fileType, description);
+});
+
 
 //---------------------------------Android-Cases------------------------------------//
 

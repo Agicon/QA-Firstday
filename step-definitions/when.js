@@ -576,6 +576,13 @@ When(/^User fill (.*) data in description field$/, async (data) => {
   await managingProviderAccountPage.fillDescriptionField(data);
 });
 
+When(/^User should be able to upload file (.*)$/, async (data) => {
+  await managingProviderAccountPage.uploadFiles(data);
+});
+
+When(/^I click on added (.*) from the list$/, async (data) => {
+  await managingProviderAccountPage.uploadFiles(data);
+});
 
 
 // =================================Android======================================//

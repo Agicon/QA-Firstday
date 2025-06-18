@@ -673,5 +673,26 @@ class ManagingProviderAccountPage extends BasePage {
     await browser.pause(5000);
     await browser.switchToFrame(null);
   }
+
+  async uploadFiles(image) {
+    const path = require("path");
+    const fileName = image.endsWith(".jpg") ? image : image + ".jpg";
+    const filePath = path.join(__dirname, "..", "testData", "Images", fileName);
+    await $("#single_file").setValue(filePath);
+  }
+
+  async verifyFileDetails(image, fileType, description) {
+    const file = await $("//tr[@class='odd']//td[2]");
+    await file.waitForDisplayed({ timeout: 15000 });
+
+    const files = await file.getText();
+    const actFileName = await files.replace(".jpg", "");
+    const actFileType = await $("//tr[@class='odd']//td[3]").getText();
+    const actDescription = await $("//tr[@class='odd']//td[4]//span").getText();
+
+    await expect(actFileName).toEqual(image);
+    await expect(actFileType).toEqual(fileType);
+    await expect(actDescription).toEqual(description);
+  }
 }
 module.exports = new ManagingProviderAccountPage();

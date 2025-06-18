@@ -131,7 +131,7 @@ class CustomerAccountPage extends BasePage {
   }
 
   get descriptionField() {
-    return $("#description");
+    return $("(//*[@name='description'])[1]");
   }
 
   get noteField() {

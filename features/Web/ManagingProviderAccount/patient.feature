@@ -605,3 +605,29 @@ Feature: Test cases for the 'Patient' page
     Examples:
       | diagnosisType | description                                   |
       | Skin rash     | Consult the doctor before using this vaccine. |
+
+  Scenario Outline: Verify the "Managing Provider" is not able to add "Media" and validation displays if any mandatory field is not populated and Verify the "Managing Provider" is able to add "Media" for patient's medical record and 	Verify the "Managing provider" is able to search the "Media"
+    When I click on the link text Medical Record
+    When I click on the link text Media
+    Then It redirects on the Patient_Auto_Test Ben's Media screen
+    Then Search and delete duplicate data <image>
+    When I click on the button with text New Media
+    Then It redirects on the New Media screen
+    When I click on the button with text Create
+    Then validation message The files field is required when single file is not present. appears
+    Then validation message The single file field is required when files is not present. appears
+    Then validation message The date field is required. appears
+    When User should be able to upload file <image>
+    When I select date in start Date field
+    When I fill <description> data in description field
+    When I click on the button with text Create
+    Then Success message Media Added Succesfully ! appears
+    When I populate data <image> in the "Search" field
+    Then File details should be visible with <image> and <fileType> and <description>
+    When I populate data <specialCharactors> in the "Search" field
+    Then No matching records found should be displayed
+    When I populate data <image> in the "Search" field
+    When I click on added <image> from the list
+    Examples:
+      | image      | fileType | description           | specialCharactors |
+      | Picture(2) | jpg      | Auto Test description | !@#$%%$#@!        |
