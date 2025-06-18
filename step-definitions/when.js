@@ -249,31 +249,31 @@ When(/^I fill (.*) data in brand Name field$/, async (data) => {
 });
 
 When(/^I fill (.*) data in description field$/, async (data) => {
-  await customerAccountPage.fillDescriptionField(data)
+  await customerAccountPage.fillDescriptionField(data);
 });
 
 When(/^I fill (.*) data in note field$/, async (data) => {
-  await customerAccountPage.fillNoteField(data)
+  await customerAccountPage.fillNoteField(data);
 });
 
 When(/^I fill (.*) data in status field$/, async (data) => {
-  await customerAccountPage.fillStatusField(data)
+  await customerAccountPage.fillStatusField(data);
 });
 
 When(/^I fill (.*) data in internal ID field$/, async (data) => {
-  await customerAccountPage.fillInternalIDField(data)
+  await customerAccountPage.fillInternalIDField(data);
 });
 
 When(/^I fill (.*) data in non vaccine field$/, async (data) => {
-  await customerAccountPage.fillNonVaccineField(data)
+  await customerAccountPage.fillNonVaccineField(data);
 });
 
 When(/^I fill (.*) data in update date field$/, async (data) => {
-  await customerAccountPage.fillUpdateDateField(data)
+  await customerAccountPage.fillUpdateDateField(data);
 });
 
 When(/^I fill (.*) data in favourite field$/, async (data) => {
-  await customerAccountPage.fillFavouriteField(data)
+  await customerAccountPage.fillFavouriteField(data);
 });
 
 When(/^I directly clicking on the "Create" button without filling in any value in the vaccine name and status field$/, async () => {
@@ -354,7 +354,6 @@ When(/^Click on select patient dropdown$/, async () => {
   await customerAccountPage.clickOnSelectPatientDropdown();
 });
 
-
 When(/^Click on select primary provider dropdown$/, async () => {
   await customerAccountPage.clickOnPrimaryProviderDropdownDropdown();
 });
@@ -362,12 +361,8 @@ When(/^Click on select primary provider dropdown$/, async () => {
 When(/^Click on select secondary provider dropdown$/, async () => {
   await customerAccountPage.clickOnSecondaryProviderDropdown();
 });
-//=============================Web-ManagingProviderAccount======================//
 
-// When(/^Open web url (.*)$/, async (url) => {
-//   await browser.maximizeWindow();
-//   await LoginWebPage.open(url);
-// });
+//=============================Web-ManagingProviderAccount======================//
 
 When(/^I login on web portal using invalid credentials (.*) and (.*)$/, async (invalidName, invalidPassword) => {
   await LoginWebPage.loginWithInvalidData(invalidName, invalidPassword);
@@ -557,6 +552,47 @@ When(/^Click on select provider dropdown$/, async () => {
 When(/^User click on the button (.*) under baby dashboard screen$/, async (button) => {
   await managingProviderAccountPage.clickOnButtonUnderBabyDashboard(button);
 });
+
+When(/^I update the "Medication" but does not populate one of the mandatory field$/, async () => {
+  await managingProviderAccountPage.removeDataFromFields();
+});
+
+When(/^I select date in Last adjusted date field$/, async () => {
+  await managingProviderAccountPage.clickOnLastAdjustedField();
+});
+
+When(/^User select the value from the dropdown (.*)$/, async (data) => {
+  await managingProviderAccountPage.selectDropdownValue(data);
+});
+
+When(/^I fill (.*) data in lot number field$/, async (data) => {
+  await managingProviderAccountPage.fillLotNumberField(data);
+});
+
+When(/^I fill (.*) data in comments field$/, async (data) => {
+  await managingProviderAccountPage.fillCommentsField(data);
+});
+
+When(/^I fill (.*) data in vaccine field$/, async (data) => {
+  await managingProviderAccountPage.fillVaccineField(data);
+});
+
+When(/^I fill (.*) data in diagnosis field$/, async (data) => {
+  await managingProviderAccountPage.fillDiagnsisField(data);
+});
+
+When(/^User fill (.*) data in description field$/, async (data) => {
+  await managingProviderAccountPage.fillDescriptionField(data);
+});
+
+When(/^User should be able to upload file (.*)$/, async (data) => {
+  await managingProviderAccountPage.uploadFiles(data);
+});
+
+When(/^I click on added (.*) from the list$/, async (data) => {
+  await managingProviderAccountPage.uploadFiles(data);
+});
+
 
 // =================================Android======================================//
 

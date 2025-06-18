@@ -137,11 +137,39 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   get startDateField() {
-    return $("#start_date:nth-of-type(1)");
+    return $("#start_date:nth-of-type(1),#date");
   }
 
   get selectProviderDropdown() {
     return $("#provider_id");
+  }
+
+  get lastAdjustedDateField() {
+    return $("#last_adjusted:nth-of-type(1)");
+  }
+
+  get dropdownField() {
+    return $("#medication_status:nth-of-type(1)");
+  }
+
+  get lotNumberField() {
+    return $("#lot_number");
+  }
+
+  get commentsField() {
+    return $("#comments");
+  }
+
+  get vaccineField() {
+    return $("#vaccinetype_text:nth-of-type(1)");
+  }
+
+  get diagnosisField() {
+    return $("//select[@class='form-control selectpicker text-red']");
+  }
+
+  get descriptionField() {
+    return $("//body[@contenteditable='true']//p");
   }
 
   async settigsButtonIsDisplayed() {
@@ -308,8 +336,8 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   async screenIsDisplayed(text) {
-    await (await $("//h1[contains(text(),'" + text + "')]|//h2[contains(text(),'" + text + "')]")).waitForDisplayed({ timeout: 10000 });
-    if ((await $("//h1[contains(text(),'" + text + "')]|//h2[contains(text(),'" + text + "')]").isDisplayed()) === true) {
+    await (await $('//h1[contains(text(), "' + text + '")]|//h2[contains(text(),"' + text + '")]')).waitForDisplayed({ timeout: 10000 });
+    if ((await $('//h1[contains(text(), "' + text + '")]|//h2[contains(text(),"' + text + '")]').isDisplayed()) === true) {
       console.log("✅ " + text + " Screen is displayed");
     } else {
       throw new Error("❌" + text + " Screen is not displayed");
@@ -555,7 +583,7 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   async fillIntervalField(value) {
-    await this.intervalField.click();
+    await this.intervalField.selectByVisibleText(value);
   }
 
   async fillAdditionalInformationField(value) {
@@ -605,6 +633,90 @@ class ManagingProviderAccountPage extends BasePage {
   async verifyAddedRecord(record) {
     var actualRecord = await $("(//tr[@class='odd']//td)[2]").getText();
     await expect(actualRecord).toEqual(record);
+  async removeDataFromFields() {
+    await this.medicationField.clearValue();
+    await this.currentDoseField.clearValue();
+  }
+
+  async clickOnLastAdjustedField() {
+    await this.lastAdjustedDateField.click();
+  }
+
+  async selectDropdownValue(option) {
+    await this.dropdownField.waitForDisplayed({ timeout: 15000 });
+    await this.dropdownField.click();
+    await $("//option[contains(text(),'" + option + "')]").click();
+  }
+
+  async fillLotNumberField(value) {
+    await this.lotNumberField.clearValue();
+    await this.lotNumberField.setValue(value);
+  }
+
+  async fillCommentsField(value) {
+    await this.commentsField.clearValue();
+    await this.commentsField.setValue(value);
+  }
+
+  async fillVaccineField(value) {
+    await this.vaccineField.clearValue();
+    await this.vaccineField.setValue(value);
+    for (let i = 0; i <= 12; i++) {
+      await this.vaccineField.click();
+      await browser.keys("Backspace");
+    }
+    await $("//div[contains(text(),'" + value + "')]").waitForDisplayed({ timeout: 10000 });
+    await $("//div[contains(text(),'" + value + "')]").click();
+  }
+
+  async verifyVaccineDetails(createdVaccineName, brandName, lotNumber, comments) {
+    await $("(//table[@id='example']//td//b)[1]").waitForDisplayed({ timeout: 15000 });
+    const actVaccineName = await $("(//table[@id='example']//td//b)[1]").getText();
+    const actBrandName = await $("(//table[@id='example']//td)[2]").getText();
+    const actLotNumber = await $("//table[@id='example']//td[3]").getText();
+    const actComments = await $("//table[@id='example']//td[3]").getText();
+    await expect(actVaccineName).toEqual(createdVaccineName);
+    await expect(actBrandName).toEqual(brandName);
+    if (actLotNumber.includes(lotNumber) && actComments.includes(comments)) {
+      console.log("✅ Details are matching");
+    } else {
+      throw new Error("❌ Details are not matching");
+    }
+  }
+  }
+  async fillDiagnsisField(value) {
+    await this.diagnosisField.selectByVisibleText(value);
+  }
+
+  async fillDescriptionField(value) {
+    await browser.pause(5000);
+    const iframe = await $("//iframe[@title='Rich Text Editor, description']");
+    await browser.switchToFrame(iframe);
+    await this.descriptionField.waitForDisplayed({ timeout: 15000 });
+    await this.descriptionField.setValue(value);
+    await browser.pause(5000);
+    await browser.switchToFrame(null);
+  }
+
+  async uploadFiles(image) {
+    const path = require("path");
+    const fileName = image.endsWith(".jpg") ? image : image + ".jpg";
+    const filePath = path.join(__dirname, "..", "testData", "Images", fileName);
+    await $("#single_file").setValue(filePath);
+  }
+
+  async verifyFileDetails(image, fileType, description) {
+    const file = await $("//tr[@class='odd']//td[2]");
+    await file.waitForDisplayed({ timeout: 15000 });
+
+    const files = await file.getText();
+    const actFileName = await files.replace(".jpg", "");
+    const actFileType = await $("//tr[@class='odd']//td[3]").getText();
+    const actDescription = await $("//tr[@class='odd']//td[4]//span").getText();
+
+    await expect(actFileName).toEqual(image);
+    await expect(actFileType).toEqual(fileType);
+    await expect(actDescription).toEqual(description);
   }
 }
 module.exports = new ManagingProviderAccountPage();
