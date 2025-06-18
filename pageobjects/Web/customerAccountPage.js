@@ -201,16 +201,16 @@ class CustomerAccountPage extends BasePage {
   get temperatureGreaterthanField() {
     return $("#temperature_greaterthan");
   }
-  
-    get selectPatientDropdown() {
+
+  get selectPatientDropdown() {
     return $("#select2-patient_id-container");
   }
 
-    get selectPrimaryProviderDropdown() {
+  get selectPrimaryProviderDropdown() {
     return $("(//span[@class='select2-selection select2-selection--multiple'])[1]");
   }
 
-      get selectSecondaryProviderDropdown() {
+  get selectSecondaryProviderDropdown() {
     return $("(//span[@class='select2-selection select2-selection--multiple'])[1]");
   }
 
@@ -697,31 +697,26 @@ class CustomerAccountPage extends BasePage {
     await expect(actTemperatureLessThan).toEqual(temperaturelessThan);
     await expect(actTemperatureGreaterThan).toEqual(temperatureGreaterthan);
   }
-    async clickOnSelectPatientDropdown() {
+
+  async clickOnSelectPatientDropdown() {
     await this.selectPatientDropdown.waitForDisplayed({ timeout: 15000 });
     await this.selectPatientDropdown.click();
-  
   }
 
-      async clickOnSecondaryProviderDropdown() {
+  async clickOnSecondaryProviderDropdown() {
     await this.selectSecondaryProviderDropdown.waitForDisplayed({ timeout: 15000 });
     await this.selectSecondaryProviderDropdown.click();
-  
   }
 
-      async clickOnPrimaryProviderDropdownDropdown() {
+  async clickOnPrimaryProviderDropdownDropdown() {
     await this.selectPrimaryProviderDropdown.waitForDisplayed({ timeout: 15000 });
     await this.selectPrimaryProviderDropdown.click();
-  
-  }
-  
-    async clickOnSelectListOption(option) {
-      const listOption=await $("//li[contains(text(),'"+option+"')]");
-    await listOption.waitForDisplayed({ timeout: 15000 });
-    await listOption.click();
-  
   }
 
-  select
+  async clickOnSelectListOption(option) {
+    const listOption = await $("//li[contains(text(),'" + option + "')]");
+    await listOption.waitForDisplayed({ timeout: 15000 });
+    await listOption.click();
+  }
 }
 module.exports = new CustomerAccountPage();

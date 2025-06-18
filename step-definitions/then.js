@@ -255,6 +255,11 @@ Then(/^Medication details should be visible in the list with (.*) and (.*) and (
   await managingProviderAccountPage.verifyCreatedMedication(medicationName, currentDose, measurement, frequency, interval, status);
 });
 
+Then(/^Vaccine details should be visible in the list with vaccine name (.*) and brand (.*) and lot number (.*) and comments (.*)$/, async (createdVaccineName, brandName, lotNumber, comments) => {
+  await managingProviderAccountPage.verifyVaccineDetails(createdVaccineName, brandName, lotNumber, comments);
+});
+
+
 //---------------------------------Android-Cases------------------------------------//
 
 Then(/^I should see a flash message saying (.*)$/, async (message) => {

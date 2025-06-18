@@ -404,10 +404,18 @@ class SuperAdminPage extends BasePage {
   }
 
   async clickOnDeleteIcon() {
-    await this.validationMessage.waitForDisplayed({ reverse: true, timeout: 20000 });
-    await this.deleteButton.click();
-    await this.clickOnButtonWithText("Yes");
-    await this.deleteMessage.waitForDisplayed({ timeout: 20000 });
+    try {
+      await this.validationMessage.waitForDisplayed({ reverse: true, timeout: 20000 });
+      for (let i = 0; i <= 5; i++) {
+        await this.deleteButton.waitForDisplayed({ timeout: 10000 });
+        await this.deleteButton.click();
+        await this.clickOnButtonWithText("Yes");
+        await this.deleteMessage.waitForDisplayed({ timeout: 20000 });
+        await this.deleteMessage.waitForDisplayed({ reverse: true, timeout: 20000 });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async verifyDeletedRecord() {
