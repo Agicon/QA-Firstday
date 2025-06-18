@@ -549,6 +549,15 @@ When(/^I click on the second index button (.*)$/, async (data) => {
   await managingProviderAccountPage.clickOnButtonText(data);
 });
 
+When(/^Click on select provider dropdown$/, async () => {
+  await managingProviderAccountPage.clickOnSelectProviderDropdown();
+});
+
+
+When(/^User click on the button (.*) under baby dashboard screen$/, async (button) => {
+  await managingProviderAccountPage.clickOnButtonUnderBabyDashboard(button);
+});
+
 // =================================Android======================================//
 
 When(/^login to app using (.*)$/, async (username) => {

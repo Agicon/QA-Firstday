@@ -139,6 +139,11 @@ class ManagingProviderAccountPage extends BasePage {
   get startDateField() {
     return $("#start_date:nth-of-type(1)");
   }
+
+  get selectProviderDropdown() {
+    return $("#provider_id");
+  }
+
   async settigsButtonIsDisplayed() {
     await this.settingsButton.waitForDisplayed({ timeout: 20000 });
     return await this.settingsButton.isDisplayed();
@@ -456,7 +461,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-   async clickOnButtonText(text) {
+  async clickOnButtonText(text) {
     const linkText = await $("(//a[contains(text(),'" + text + "')])[2]");
     await linkText.waitForClickable({ timeout: 10000 });
     if ((await linkText.isDisplayed()) === true) {
@@ -578,6 +583,28 @@ class ManagingProviderAccountPage extends BasePage {
     expect(actFrequency).toEqual(frequency);
     expect(actInterval).toEqual(interval);
     expect(actStatus).toEqual(status);
+  }
+
+  async clickOnSelectProviderDropdown() {
+    await this.selectProviderDropdown.waitForDisplayed({ timeout: 20000 });
+    await this.selectProviderDropdown.click();
+  }
+
+  async clickOnListOption(option) {
+    const listOption = await $("//option[contains(text(),'" + option + "')]");
+    await listOption.waitForDisplayed({ timeout: 15000 });
+    await listOption.click();
+  }
+
+  async clickOnButtonUnderBabyDashboard(option) {
+    const listOption = await $("//ul[@class='nav navbar-nav']//a[contains(text(),'" + option + "')]");
+    await listOption.waitForDisplayed({ timeout: 15000 });
+    await listOption.click();
+  }
+
+  async verifyAddedRecord(record) {
+    var actualRecord = await $("(//tr[@class='odd']//td)[2]").getText();
+    await expect(actualRecord).toEqual(record);
   }
 }
 module.exports = new ManagingProviderAccountPage();

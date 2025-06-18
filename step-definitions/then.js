@@ -169,10 +169,10 @@ Then(/^Alert values should be visible in the list with heart rate (.*) and heart
   await customerAccountPage.verifyAlertValues(heartLessThan, heartGreaterthan, respiratorylessThan, respiratoryGreaterthan, saturationlessThan, saturationGreaterthan, pulselessThan, pulseGreaterthan, tempType, temperaturelessThan, temperatureGreaterthan);
 });
 
+
 Then(/^Select list option (.*) form from list$/, async (option) => {
  await customerAccountPage.clickOnSelectListOption(option);
 });
-
 
 
 
@@ -253,6 +253,15 @@ Then(/^A "Other Provider" gets created and it displays on the "Other Providers" 
 
 Then(/^Medication details should be visible in the list with (.*) and (.*) and (.*) and (.*) and (.*) and (.*)$/, async (medicationName, currentDose, measurement, frequency, interval, status) => {
   await managingProviderAccountPage.verifyCreatedMedication(medicationName, currentDose, measurement, frequency, interval, status);
+});
+
+
+Then(/^Click on option (.*) from list$/, async (option) => {
+ await managingProviderAccountPage.clickOnListOption(option);
+});
+
+Then(/^Added record (.*) is displaying in list$/, async (record) => {
+ await managingProviderAccountPage.verifyAddedRecord(record);
 });
 
 //---------------------------------Android-Cases------------------------------------//
