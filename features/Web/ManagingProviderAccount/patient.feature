@@ -462,7 +462,7 @@ Feature: Test cases for the 'Patient' page
     Examples:
       | url      | userA                     | dashboard-ManagePatientsOption | patientName | medicationName  | currentDose | measurement | frequency | additionalInformation                         | interval | status |
       | loginUrl | providerLoginCrendentails | Manage Patients                | Baby 21     | Auto_Medication |           1 | Teaspoon    | Twice     | Consult the doctor before using this medicine | Day      | Active |
-//----------------assign other provider----------------------//
+# //----------------assign other provider----------------------//
 
   Scenario Outline: Verify the "Managing Provider" is able to add "Medication" for patient's Medical Record
     Given Open web url <url>
