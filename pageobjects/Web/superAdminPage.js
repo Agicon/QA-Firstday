@@ -351,16 +351,11 @@ class SuperAdminPage extends BasePage {
     try {
       await $("(//tr[@class='odd']//td)[1]").click();
       for (let i = 0; i < 4; i++) {
-        await $("//td[contains(text(),'" + clinicName + "')]").waitForDisplayed({
-          timeout: 5000,
-        });
+        await $("//td[contains(text(),'" + clinicName + "')]|//a[contains(text(),'" + clinicName + "')]").waitForDisplayed({ timeout: 5000 });
         await this.deleteButton.click();
         await this.clickOnButtonWithText("Yes");
         await this.deleteMessage.waitForDisplayed({ timeout: 20000 });
-        await this.deleteMessage.waitForDisplayed({
-          reverse: true,
-          timeout: 20000,
-        });
+        await this.deleteMessage.waitForDisplayed({ reverse: true, timeout: 20000 });
       }
     } catch (error) {}
   }
