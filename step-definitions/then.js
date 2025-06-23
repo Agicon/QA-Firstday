@@ -284,6 +284,9 @@ Then(/^Diagnosis details should be visible in the list with (.*) and (.*) and (.
   await managingProviderAccountPage.verifyDiagnosisDetails(diagnosisType, description, status);
 });
 
+Then(/^Record status should be displayed as (.*)$/, async (data) => {
+  await managingProviderAccountPage.verifyRecordStatus(data);
+});
 
 
 

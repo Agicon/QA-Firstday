@@ -141,7 +141,7 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   get selectProviderDropdown() {
-    return $("#provider_id");
+    return $("//select[@id='provider_id']");
   }
 
   get lastAdjustedDateField() {
@@ -165,7 +165,7 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   get diagnosisField() {
-    return $("//select[@class='form-control selectpicker text-red']");
+    return $("//select[@name='diagnosis_type_id']");
   }
 
   get fileData() {
@@ -274,7 +274,7 @@ class ManagingProviderAccountPage extends BasePage {
   async selectCaregiver(text) {
     await this.caregiverField.waitForDisplayed({ timeout: 15000 });
     await this.caregiverField.click();
-    await $("//li[contains(text(),'" + text + "')]").waitForDisplayed({ timeout: 5000 });
+    await $("//li[contains(text(),'" + text + "')]").waitForDisplayed({ timeout: 15000 });
     await $("//li[contains(text(),'" + text + "')]").click();
   }
 
@@ -329,7 +329,7 @@ class ManagingProviderAccountPage extends BasePage {
   async fillTemperature_MAC_AddressField(text) {
     await this.temperature_MAC_AddressField.waitForDisplayed({ timeout: 15000 });
     await this.temperature_MAC_AddressField.setValue(text);
-    await browser.pause(1000);
+    await browser.pause(1500);
   }
 
   async clickOnGenerateMedicalReportNumberButton() {
@@ -454,7 +454,7 @@ class ManagingProviderAccountPage extends BasePage {
 
   async verifyInactiveDetails(value1, value2) {
     const name = await $("//a[contains(text(),'" + value1 + "')]|//td[contains(text(),'" + value1 + "')]");
-    await name.waitForDisplayed({ timeout: 10000 });
+    await name.waitForDisplayed({ timeout: 20000 });
     const status = await $("//a[contains(text(),'" + value2 + "')]|//button[contains(text(),'" + value2 + "')]");
     if ((await name.isDisplayed()) === true && (await status.isDisplayed()) === true) {
       console.log("✅ Details are matching");
@@ -564,6 +564,7 @@ class ManagingProviderAccountPage extends BasePage {
     await linkText.waitForDisplayed({ timeout: 15000 });
     if ((await linkText.isDisplayed()) === true) {
       await linkText.click();
+      console.log("Clicked");
     } else {
       throw new Error("link is not displaying: " + text);
     }
@@ -833,7 +834,7 @@ class ManagingProviderAccountPage extends BasePage {
     expect(actDiagnosisType).toEqual(diagnosisType);
     expect(actDescription).toEqual(description);
     expect(actStatus).toEqual(status);
-    const media = await $("(//tr[@class='odd'])[2]//td[3]");
+    const media = await $("//a[@class='media_files']");
     await media.waitForDisplayed({ timeout: 15000 });
     if ((await media.isDisplayed()) === true) {
       console.log("✅ Media is displayed");
@@ -850,6 +851,12 @@ class ManagingProviderAccountPage extends BasePage {
   async fillSearchFieldUnderPatientForm(value) {
     await this.searchFieldUnderPatientForm.waitForDisplayed({ timeout: 15000 });
     await this.searchFieldUnderPatientForm.setValue(value);
+  }
+
+  async verifyRecordStatus(status) {
+    await $("//a[contains(text(),'" + status + "')]").waitForDisplayed({ timeout: 15000 });
+    var actStatus = await $("(//tr[@class='odd']//td)[12]").getText();
+    await expect(actStatus).toEqual(status);
   }
 }
 module.exports = new ManagingProviderAccountPage();
