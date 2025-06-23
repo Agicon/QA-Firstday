@@ -272,6 +272,20 @@ Then(/^File details should be visible with (.*) and (.*) and (.*)$/, async (imag
   await managingProviderAccountPage.verifyFileDetails(image, fileType, description);
 });
 
+Then(/^The file should get displayed$/, async () => {
+  await managingProviderAccountPage.verifyFileIsDisplayed();
+});
+
+Then(/^Hospital record should be visible in the list with (.*) and (.*) and (.*)$/, async (hospital, hospitalNote, description) => {
+  await managingProviderAccountPage.verifyHospitalReocrdsDetails(hospital, hospitalNote, description);
+});
+
+Then(/^Diagnosis details should be visible in the list with (.*) and (.*) and (.*)$/, async (diagnosisType, description, status) => {
+  await managingProviderAccountPage.verifyDiagnosisDetails(diagnosisType, description, status);
+});
+
+
+
 
 //---------------------------------Android-Cases------------------------------------//
 

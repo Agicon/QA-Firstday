@@ -115,7 +115,7 @@ class CustomerAccountPage extends BasePage {
   }
 
   get hospitalNoteField() {
-    return $("#type");
+    return $("#type,#hospital_note");
   }
 
   get cvxCodeField() {
