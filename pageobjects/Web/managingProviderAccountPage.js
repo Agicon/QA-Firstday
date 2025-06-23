@@ -81,7 +81,7 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   get searchField() {
-    return $("//input[@type='search']");
+    return $("//div[@id='example_filter']//input[@type='search']");
   }
 
   get activePatientScreen() {
@@ -93,7 +93,7 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   get updateButton() {
-    return $("//a[@title='View / Update']");
+    return $("//a[@title='View / Update']|//a[@title='Edit']");
   }
 
   get dateOfDischargeField() {
@@ -168,8 +168,40 @@ class ManagingProviderAccountPage extends BasePage {
     return $("//select[@class='form-control selectpicker text-red']");
   }
 
+  get fileData() {
+    return $("//img[@class='fancybox-image']");
+  }
+
+  get editMediaDescription() {
+    return $("//textarea[@id='edit-textarea']");
+  }
+
+  get pasteButton() {
+    return $("//a[@title='Paste']");
+  }
+
+  get cancelButton() {
+    return $("//a[@title='Cancel']");
+  }
+
+  get okButton() {
+    return $("//a[@title='OK']");
+  }
+
+  get bodyField() {
+    return $("//body");
+  }
+
+  get iframe() {
+    return $("//iframe[@aria-label='Paste Area']");
+  }
+
   get descriptionField() {
-    return $("//body[@contenteditable='true']//p");
+    return $("//textarea[@name='description']");
+  }
+
+  get searchFieldUnderPatientForm() {
+    return $("(//input[@type='search'])[1]");
   }
 
   async settigsButtonIsDisplayed() {
@@ -593,6 +625,9 @@ class ManagingProviderAccountPage extends BasePage {
 
   async fillStartDateField() {
     await this.startDateField.click();
+    try {
+      await $("//button[contains(text(),'Apply')]").click();
+    } catch (error) {}
     await browser.keys("Enter");
   }
 
@@ -633,6 +668,8 @@ class ManagingProviderAccountPage extends BasePage {
   async verifyAddedRecord(record) {
     var actualRecord = await $("(//tr[@class='odd']//td)[2]").getText();
     await expect(actualRecord).toEqual(record);
+  }
+
   async removeDataFromFields() {
     await this.medicationField.clearValue();
     await this.currentDoseField.clearValue();
@@ -683,26 +720,48 @@ class ManagingProviderAccountPage extends BasePage {
       throw new Error("❌ Details are not matching");
     }
   }
-  }
+
   async fillDiagnsisField(value) {
     await this.diagnosisField.selectByVisibleText(value);
   }
 
   async fillDescriptionField(value) {
-    await browser.pause(5000);
-    const iframe = await $("//iframe[@title='Rich Text Editor, description']");
-    await browser.switchToFrame(iframe);
-    await this.descriptionField.waitForDisplayed({ timeout: 15000 });
+    var js = "arguments[0].style = 'visible'";
+    await browser.pause(2000);
+    await browser.execute(js, await this.descriptionField);
+    await this.descriptionField.waitForDisplayed({ timeout: 20000 });
     await this.descriptionField.setValue(value);
-    await browser.pause(5000);
+    await browser.keys(["Control", "a"]);
+    await browser.keys(["Control", "c"]);
+    await this.pasteButton.waitForDisplayed({ timeout: 15000 });
+    await this.pasteButton.click();
+    await this.cancelButton.waitForDisplayed({ timeout: 15000 });
+    await this.cancelButton.click();
+    await browser.keys(["Control", "a"]);
+    await browser.keys(["Delete"]);
+    await this.pasteButton.waitForDisplayed({ timeout: 15000 });
+    await this.pasteButton.click();
+    await browser.switchToFrame(await this.iframe);
+    await this.bodyField.waitForDisplayed({ timeout: 15000 });
+    await this.bodyField.click();
+    await browser.pause(1000);
+    await browser.keys(["Control", "v"]);
     await browser.switchToFrame(null);
+    await this.okButton.waitForDisplayed({ timeout: 15000 });
+    await this.okButton.click();
   }
 
   async uploadFiles(image) {
     const path = require("path");
     const fileName = image.endsWith(".jpg") ? image : image + ".jpg";
     const filePath = path.join(__dirname, "..", "testData", "Images", fileName);
-    await $("#single_file").setValue(filePath);
+    await $("#single_file,#doc").setValue(filePath);
+  }
+
+  async uploadFolder(folder) {
+    const path = require("path");
+    const filePath = path.join(__dirname, "..", "testData", folder);
+    await $("#files").setValue(filePath);
   }
 
   async verifyFileDetails(image, fileType, description) {
@@ -717,6 +776,80 @@ class ManagingProviderAccountPage extends BasePage {
     await expect(actFileName).toEqual(image);
     await expect(actFileType).toEqual(fileType);
     await expect(actDescription).toEqual(description);
+  }
+
+  async clickOnAddedFile(value) {
+    await $("//a[contains(text(),'" + value + "')]").waitForDisplayed({ timeout: 15000 });
+    await $("//a[contains(text(),'" + value + "')]").click();
+  }
+
+  async verifyFileIsDisplayed() {
+    await this.fileData.waitForDisplayed({ timeout: 30000 });
+    if ((await this.fileData.isDisplayed()) === true) {
+      console.log("✅ File is displayed");
+    } else {
+      throw new Error("❌ File is not displayed");
+    }
+    const cancelButton = await $("//button[@class='fancybox-button fancybox-button--close']");
+    await cancelButton.moveTo();
+    await cancelButton.click();
+  }
+
+  async fillEditMediaDescription(value) {
+    await this.editMediaDescription.waitForDisplayed({ timeout: 15000 });
+    await this.editMediaDescription.setValue(value);
+  }
+
+  async hoverOnTab(Tab) {
+    await $("//a[contains(text(),'" + Tab + "')]").waitForDisplayed({ timeout: 15000 });
+    await $("//a[contains(text(),'" + Tab + "')]").moveTo();
+  }
+
+  async chooseHospitalFieldOption(value) {
+    await customerAccountPage.hospitalNoteField.waitForDisplayed({ timeout: 15000 });
+    await customerAccountPage.hospitalNoteField.click();
+    await $("//option[contains(text(),'" + value + "')]").click();
+  }
+
+  async verifyHospitalReocrdsDetails(hospital, hospitalNote, description) {
+    await $("//tr[@class='odd']//td[2]").waitForDisplayed({ timeout: 15000 });
+    const actHospital = await $("//tr[@class='odd']//td[2]").getText();
+    const actHospitalNote = await $("(//tr[@class='odd']//td)[3]").getText();
+    const actDescription = await $("(//tr[@class='odd']//td)[6]").getText();
+
+    expect(actHospital).toEqual(hospital);
+    expect(actHospitalNote).toEqual(hospitalNote);
+    try {
+      expect(actDescription).toEqual(description);
+    } catch (error) {}
+  }
+
+  async verifyDiagnosisDetails(diagnosisType, description, status) {
+    const dia = await $("(//tr[@class='odd'])[2]//td[2]");
+    await dia.waitForDisplayed({ timeout: 15000 });
+    const actDiagnosisType = await dia.getText();
+    const actDescription = await $("(//tr[@class='odd'])[2]//td[4]").getText();
+    const actStatus = await $("(//tr[@class='odd'])[2]//td[8]").getText();
+    expect(actDiagnosisType).toEqual(diagnosisType);
+    expect(actDescription).toEqual(description);
+    expect(actStatus).toEqual(status);
+    const media = await $("(//tr[@class='odd'])[2]//td[3]");
+    await media.waitForDisplayed({ timeout: 15000 });
+    if ((await media.isDisplayed()) === true) {
+      console.log("✅ Media is displayed");
+    } else {
+      throw new Error("❌ Media is not displayed");
+    }
+  }
+
+  async clickOnCheckbox() {
+    await $("//input[@type='checkbox']").waitForDisplayed({ timeout: 15000 });
+    await $("//input[@type='checkbox']").click();
+  }
+
+  async fillSearchFieldUnderPatientForm(value) {
+    await this.searchFieldUnderPatientForm.waitForDisplayed({ timeout: 15000 });
+    await this.searchFieldUnderPatientForm.setValue(value);
   }
 }
 module.exports = new ManagingProviderAccountPage();

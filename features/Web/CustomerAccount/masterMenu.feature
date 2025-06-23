@@ -45,8 +45,8 @@ Feature: Test cases for "Master Menu" page
         Then Deleted record should not be visible in the list
 
         Examples:
-            | url | userA | suggestedDiagnosisType | specialCharactors | updatedDiagnosisType | updatedsuggestedType | moreInformation | updatedDiagnosisCode | diagnosisType | diagnosisCode |
-            | loginUrl | customerLoginCrendentails | Skin rash | @@##$%$%%% | Hair | Twisted hair | https://portal.test.firstdayhc.com/login | 17170005 | Skin | 271807003 |
+            | url      | userA                     | suggestedDiagnosisType | specialCharactors | updatedDiagnosisType | updatedsuggestedType | moreInformation                          | updatedDiagnosisCode | diagnosisType | diagnosisCode |
+            | loginUrl | customerLoginCrendentails | Skin rash              | @@##$%$%%%        | Hair                 | Twisted hair         | https://portal.test.firstdayhc.com/login | 17170005             | Skin          | 271807003     |
 
     Scenario Outline: Verify that "Customer" is able to create "New Diagnosis Type" populated with valid data and Verify that "Customer " is not able to create "New Diagnosis type" with same name
         When I click on the second index link Master
@@ -73,8 +73,8 @@ Feature: Test cases for "Master Menu" page
         When I click on the button with text Close
 
         Examples:
-            | diagnosisType | suggestedDiagnosisType | moreInformation | diagnosisCode |
-            | Skin | Skin rash | https://portal.test.firstdayhc.com/login | 271807003 |
+            | diagnosisType | suggestedDiagnosisType | moreInformation                          | diagnosisCode |
+            | Skin          | Skin rash              | https://portal.test.firstdayhc.com/login | 271807003     |
 
     Scenario Outline: Verify that "Customer" is not able to add "New Vaccine Type" and validation message is displaying if mandatory fields is not populated and Verify that "Customer " is able to close "New Vaccine Type" popup by clicking on "Close" button and Verify that "Customer " is not able to create "New Vaccine type" with same name
         When Open web url <url>
@@ -116,8 +116,8 @@ Feature: Test cases for "Master Menu" page
         Then New Vaccine Type popup should be closed successfully
 
         Examples:
-            | url | userA | cvxCode | vaccineName | brandName | description | note | status | nonVaccine | favourite | internalID |
-            | loginUrl | customerLoginCrendentails | 12300 | Auto_Test_Vaccine | Healthcare | The Auto_Test_Vaccine vaccine is designed to protect us from the virus. | Consult the doctor before using this vaccine. | Active | True | Yes | Test@123 |
+            | url      | userA                     | cvxCode | vaccineName       | brandName  | description                                                             | note                                          | status | nonVaccine | favourite | internalID |
+            | loginUrl | customerLoginCrendentails | 12300   | Auto_Test_Vaccine | Healthcare | The Auto_Test_Vaccine vaccine is designed to protect us from the virus. | Consult the doctor before using this vaccine. | Active | True       | Yes       | Test@123   |
 
     Scenario Outline: Verify "Customer" is able to "Search" "Vaccine Type" with valid data and 	Verify that "Customer" is not able to update " Vaccine Type" details and validation message is displaying if mandatory fields is not populated and Verify that "Customer" is able to update " Vaccine Type" details with valid data and and 	Verify "Customer" is able to "Delete" the "Vaccine Type" when clicked on "Delete" icon
         When I click on the second index link Master
@@ -151,8 +151,8 @@ Feature: Test cases for "Master Menu" page
         Then Deleted record should not be visible in the list
 
         Examples:
-            | specialCharactors | vaccineName | updatedCvxCode | updatedVaccineName | updatedBrandName | updatedDescription | updatedNote | updatedStatus | updatedInternalID | updatedNonVaccine | updatedFavourite |
-            | @@##$%$%%% | Auto_Test_Vaccine | 98754 | Updated_Auto_Test_Vaccine | updatedHealthcare | The updated Auto_Test_Vaccine vaccine is designed to protect us from the virus. | Do not get vaccinated without consulting the doctor. | Inactive | @Test12345 | False | No |
+            | specialCharactors | vaccineName       | updatedCvxCode | updatedVaccineName        | updatedBrandName  | updatedDescription                                                              | updatedNote                                          | updatedStatus | updatedInternalID | updatedNonVaccine | updatedFavourite |
+            | @@##$%$%%%        | Auto_Test_Vaccine | 98754          | Updated_Auto_Test_Vaccine | updatedHealthcare | The updated Auto_Test_Vaccine vaccine is designed to protect us from the virus. | Do not get vaccinated without consulting the doctor. | Inactive      | @Test12345        | False             | No               |
 
     Scenario Outline: Verify that "Customer" is able to create "New Vaccine Type" populated with valid data
         When I click on the second index link Master
@@ -176,8 +176,8 @@ Feature: Test cases for "Master Menu" page
         When I populate data <vaccineName> in the "Search" field
         Then "Vaccine type" details should be visible in the list with <cvxCode> and <brandName> and <vaccineName> and <description> and <note> and <status> and <internalID> and <nonVaccine> and <favourite> and <date>
         Examples:
-            | cvxCode | vaccineName | brandName | description | note | status | nonVaccine | favourite | internalID |
-            | 12300 | Auto_Test_Vaccine | Healthcare | The Auto_Test_Vaccine vaccine is designed to protect us from the virus. | Consult the doctor before using this vaccine. | Active | True | Yes | Test@123 |
+            | cvxCode | vaccineName       | brandName  | description                                                             | note                                          | status | nonVaccine | favourite | internalID |
+            | 12300   | Auto_Test_Vaccine | Healthcare | The Auto_Test_Vaccine vaccine is designed to protect us from the virus. | Consult the doctor before using this vaccine. | Active | True       | Yes       | Test@123   |
 
     Scenario Outline: Verify "Customer" is navigated back to the "All Patient Alert " page when clicked on "Back button" displaying on the "Update all patient Alert" page and 	Verify that "Customer" is not able to update "Alerts" details with invalid data
         When Open web url <url>

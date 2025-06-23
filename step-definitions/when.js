@@ -224,28 +224,27 @@ When(/^User click on the link (.*)$/, async (link) => {
 //===============================Master_Menu=============================
 
 When(/^I add first 4 character (.*) in "Diagnosis Type" fields on the form$/, async (type) => {
-  await customerAccountPage.fillDiagnosisTypeField(type)
+  await customerAccountPage.fillDiagnosisTypeField(type);
 });
 
 When(/^I select any "Diagnosis Type" (.*) from the list$/, async (type) => {
-  await customerAccountPage.selectSuggestedDiagnosisType(type)
+  await customerAccountPage.selectSuggestedDiagnosisType(type);
 });
 
 When(/^I fill (.*) data in more information field$/, async (data) => {
-  await customerAccountPage.fillMoreInformationField(data)
+  await customerAccountPage.fillMoreInformationField(data);
 });
 
-
 When(/^I fill (.*) data in cvx code field$/, async (data) => {
-  await customerAccountPage.fillCVXCodeField(data)
+  await customerAccountPage.fillCVXCodeField(data);
 });
 
 When(/^I fill (.*) data in vaccine Name field$/, async (data) => {
-  await customerAccountPage.fillVaccineNameField(data)
+  await customerAccountPage.fillVaccineNameField(data);
 });
 
 When(/^I fill (.*) data in brand Name field$/, async (data) => {
-  await customerAccountPage.fillBrandNameField(data)
+  await customerAccountPage.fillBrandNameField(data);
 });
 
 When(/^I fill (.*) data in description field$/, async (data) => {
@@ -548,7 +547,6 @@ When(/^Click on select provider dropdown$/, async () => {
   await managingProviderAccountPage.clickOnSelectProviderDropdown();
 });
 
-
 When(/^User click on the button (.*) under baby dashboard screen$/, async (button) => {
   await managingProviderAccountPage.clickOnButtonUnderBabyDashboard(button);
 });
@@ -589,9 +587,35 @@ When(/^User should be able to upload file (.*)$/, async (data) => {
   await managingProviderAccountPage.uploadFiles(data);
 });
 
-When(/^I click on added (.*) from the list$/, async (data) => {
-  await managingProviderAccountPage.uploadFiles(data);
+When(/^User should be able to upload folder (.*)$/, async (data) => {
+  await managingProviderAccountPage.uploadFolder(data);
 });
+
+When(/^I click on added (.*) from the list$/, async (data) => {
+  await managingProviderAccountPage.clickOnAddedFile(data);
+});
+
+When(/^I fill (.*) data in edit media description field$/, async (data) => {
+  await managingProviderAccountPage.fillEditMediaDescription(data);
+});
+
+When(/^User hover on the (.*) tab$/, async (data) => {
+  await managingProviderAccountPage.hoverOnTab(data);
+});
+
+When(/^User select option (.*) in hospital note field$/, async (data) => {
+  await managingProviderAccountPage.chooseHospitalFieldOption(data);
+});
+
+When(/^I click on the checkbox$/, async () => {
+  await managingProviderAccountPage.clickOnCheckbox();
+});
+
+When(/^I fill data (.*) in search box under patient medical records$/, async (image) => {
+  await managingProviderAccountPage.fillSearchFieldUnderPatientForm(image);
+});
+
+
 
 
 // =================================Android======================================//

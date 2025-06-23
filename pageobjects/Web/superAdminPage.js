@@ -68,7 +68,7 @@ class SuperAdminPage extends BasePage {
   }
 
   get searchField() {
-    return $("input[type='search']");
+    return $("//div[@id='example_filter']//input[@type='search']");
   }
 
   get newCustomerForm() {
@@ -349,7 +349,7 @@ class SuperAdminPage extends BasePage {
     await browser.pause(3000);
 
     try {
-      await $("(//tr[@class='odd']//td)[1]").click();
+      // await $("(//tr[@class='odd']//td)[1]").click();
       for (let i = 0; i < 4; i++) {
         await $("//td[contains(text(),'" + clinicName + "')]|//a[contains(text(),'" + clinicName + "')]").waitForDisplayed({ timeout: 5000 });
         await this.deleteButton.click();
@@ -439,9 +439,7 @@ class SuperAdminPage extends BasePage {
 
   async verifyCustomerStatus(status) {
     await browser.refresh();
-    await $("((//tr[@class='odd']//td)[9])[1]").waitForDisplayed({
-      timeout: 5000,
-    });
+    await $("((//tr[@class='odd']//td)[9])[1]").waitForDisplayed({ timeout: 5000 });
     var actStatus = await $("((//tr[@class='odd']//td)[9])[1]").getText();
     await expect(actStatus).toEqual(status);
   }
@@ -449,9 +447,7 @@ class SuperAdminPage extends BasePage {
   async searchData(clinicName) {
     await this.searchField.clearValue();
     await this.searchField.setValue(clinicName);
-    await $("//td[contains(text(),'" + clinicName + "')]").waitForDisplayed({
-      timeout: 10000,
-    });
+    await $("//td[contains(text(),'" + clinicName + "')]").waitForDisplayed({timeout: 10000});
   }
 
   async clickOnLinkText(text) {
