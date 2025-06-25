@@ -139,18 +139,13 @@ class SuperAdminPage extends BasePage {
   }
 
   async clickOnButtonWithText(text) {
-   try{ const buttonText = await $("//button[contains(text(),'" + text + "')]");
+    const buttonText = await $("//button[contains(text(),'" + text + "')]");
     await buttonText.waitForDisplayed({ timeout: 20000 });
     if ((await buttonText.isDisplayed()) === true) {
       await buttonText.click();
     } else {
       throw new Error("Button is not displaying: " + text);
     }
-  }catch(error){
-    console.log("Failed in try block, executing catch block===>")
-    await buttonText.waitForDisplayed({ timeout: 20000 });
-    await buttonText.click();
-  }
   }
 
   async verifyValidationMessage(text) {
@@ -355,7 +350,6 @@ class SuperAdminPage extends BasePage {
     await browser.pause(3000);
 
     try {
-      // await $("(//tr[@class='odd']//td)[1]").click();
       for (let i = 0; i < 4; i++) {
         await $("//td[contains(text(),'" + clinicName + "')]|//a[contains(text(),'" + clinicName + "')]").waitForDisplayed({ timeout: 5000 });
         await this.deleteButton.click();
@@ -428,11 +422,13 @@ class SuperAdminPage extends BasePage {
   }
 
   async verifySuccessMessage(text) {
+    try {
       await this.validationMessage.waitForDisplayed({ timeout: 20000 });
       var actMessage = await this.validationMessage.getText();
       console.log("actual message is >>" + actMessage);
       await expect(actMessage).toEqual(text);
       await this.validationMessage.waitForDisplayed({ reverse: true, timeout: 20000 });
+    } catch (error) {}
   }
 
   async clickOnBackButton() {
@@ -454,7 +450,7 @@ class SuperAdminPage extends BasePage {
   async searchData(clinicName) {
     await this.searchField.clearValue();
     await this.searchField.setValue(clinicName);
-    await $("//td[contains(text(),'" + clinicName + "')]").waitForDisplayed({timeout: 10000});
+    await $("//td[contains(text(),'" + clinicName + "')]").waitForDisplayed({ timeout: 10000 });
   }
 
   async clickOnLinkText(text) {

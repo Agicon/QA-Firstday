@@ -288,6 +288,9 @@ Then(/^Record status should be displayed as (.*)$/, async (data) => {
   await managingProviderAccountPage.verifyRecordStatus(data);
 });
 
+Then(/^Other provider records should be visilbe in the list with (.*) and (.*)$/, async (otherProvider, description) => {
+  await managingProviderAccountPage.verifyOtherProviderRecords(otherProvider, description);
+});
 
 
 //---------------------------------Android-Cases------------------------------------//

@@ -141,7 +141,7 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   get selectProviderDropdown() {
-    return $("//select[@id='provider_id']");
+    return $("//select[@id='provider_id']|//select[@id='providers']");
   }
 
   get lastAdjustedDateField() {
@@ -202,6 +202,22 @@ class ManagingProviderAccountPage extends BasePage {
 
   get searchFieldUnderPatientForm() {
     return $("(//input[@type='search'])[1]");
+  }
+
+  get diagnosisCheckbox() {
+    return $("(//div[@class='row'])[5]");
+  }
+
+  get medicationsCheckbox() {
+    return $("(//div[@class='row'])[6]");
+  }
+
+  get vaccinationsCheckbox() {
+    return $("(//div[@class='row'])[19]");
+  }
+
+  get OtherProviderRecordsCheckbox() {
+    return $("(//div[@class='row'])[20]");
   }
 
   async settigsButtonIsDisplayed() {
@@ -561,7 +577,7 @@ class ManagingProviderAccountPage extends BasePage {
 
   async clickOnLinkText(text) {
     const linkText = await $("//a[contains(text(),'" + text + "')]");
-    await linkText.waitForDisplayed({ timeout: 15000 });
+    await linkText.waitForClickable({ timeout: 15000 });
     if ((await linkText.isDisplayed()) === true) {
       await linkText.click();
       console.log("Clicked");
@@ -656,7 +672,6 @@ class ManagingProviderAccountPage extends BasePage {
 
   async clickOnListOption(option) {
     const listOption = await $("//option[contains(text(),'" + option + "')]");
-    await listOption.waitForDisplayed({ timeout: 15000 });
     await listOption.click();
   }
 
@@ -857,6 +872,27 @@ class ManagingProviderAccountPage extends BasePage {
     await $("//a[contains(text(),'" + status + "')]").waitForDisplayed({ timeout: 15000 });
     var actStatus = await $("(//tr[@class='odd']//td)[12]").getText();
     await expect(actStatus).toEqual(status);
+  }
+
+  async verifyOtherProviderRecords(otherProvider, description) {
+    var actOtherProvider = await $("(//tr[@class='odd']//td)[2]").getText();
+    var actDescription = await $("(//tr[@class='odd']//td)[4]").getText();
+    await expect(actOtherProvider).toEqual(otherProvider);
+    await expect(actDescription).toEqual(description);
+    const doc = await $("(//tr[@class='odd']//td)[5]//a");
+    if ((await doc.isDisplayed()) === true) {
+      console.log(" ✅ Added image is displayed");
+    } else {
+      throw new Error("❌ Added image is not displayed");
+    }
+  }
+
+  async selectCheckboxUnderExportRecords() {
+    await this.diagnosisCheckbox.waitForDisplayed({ timeout: 15000 });
+    await this.diagnosisCheckbox.click();
+    await this.medicationsCheckbox.click();
+    await this.vaccinationsCheckbox.click();
+    await this.OtherProviderRecordsCheckbox.click();
   }
 }
 module.exports = new ManagingProviderAccountPage();
