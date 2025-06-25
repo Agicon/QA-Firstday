@@ -522,9 +522,7 @@ class CustomerAccountPage extends BasePage {
   }
 
   async clickOnButtonWithText(text) {
-    await $("//button[contains(text(),'" + text + "')]").waitForDisplayed({
-      timeout: 25000,
-    });
+    await $("//button[contains(text(),'" + text + "')]").waitForDisplayed({ timeout: 25000 });
     await $("//button[contains(text(),'" + text + "')]").click();
   }
 

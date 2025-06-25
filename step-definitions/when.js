@@ -615,6 +615,10 @@ When(/^I fill data (.*) in search box under patient medical records$/, async (im
   await managingProviderAccountPage.fillSearchFieldUnderPatientForm(image);
 });
 
+When(/^I checkmark, all the records under export records$/, async () => {
+  await managingProviderAccountPage.selectCheckboxUnderExportRecords();
+});
+
 
 
 
