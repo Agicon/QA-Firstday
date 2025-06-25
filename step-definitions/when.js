@@ -618,6 +618,10 @@ When(/^I fill data (.*) in search box under patient medical records$/, async (im
 When(/^I hover over the "Results" tab$/, async () => {
   await managingProviderAccountPage.hoverOverResultsTab();
 });
+When(/^I checkmark, all the records under export records$/, async () => {
+  await managingProviderAccountPage.selectCheckboxUnderExportRecords();
+});
+
 
 When(/^Hover over link (.*)$/, async (link) => {
   await managingProviderAccountPage.hoverOverOnLink(link);
