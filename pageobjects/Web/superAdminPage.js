@@ -76,7 +76,7 @@ class SuperAdminPage extends BasePage {
   }
 
   get deleteButton() {
-    return $("(//a[@title='Delete'])[1]");
+    return $("(//a[@title='Delete'])[1]|(//a[@class='btn btn-danger'])[1]");
   }
 
   get deleteMessage() {

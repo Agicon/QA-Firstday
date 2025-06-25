@@ -615,8 +615,37 @@ When(/^I fill data (.*) in search box under patient medical records$/, async (im
   await managingProviderAccountPage.fillSearchFieldUnderPatientForm(image);
 });
 
+When(/^I hover over the "Results" tab$/, async () => {
+  await managingProviderAccountPage.hoverOverResultsTab();
+});
 
+When(/^Hover over link (.*)$/, async (link) => {
+  await managingProviderAccountPage.hoverOverOnLink(link);
+});
 
+When(/^I fill (.*) value in WBC field$/, async (value) => {
+  await managingProviderAccountPage.fillWbcField(value);
+});
+
+When(/^I fill (.*) value in Hgb field$/, async (value) => {
+  await managingProviderAccountPage.fillHgbField(value);
+});
+
+When(/^I fill (.*) value in Hct field$/, async (value) => {
+  await managingProviderAccountPage.fillHctField(value);
+});
+
+When(/^I fill (.*) value in Plts field$/, async (value) => {
+  await managingProviderAccountPage.fillPltsField(value);
+});
+
+When(/^I fill (.*) value in retic field$/, async (value) => {
+  await managingProviderAccountPage.fillReticField(value);
+});
+
+When(/^I clear date filed of report$/, async () => {
+  await managingProviderAccountPage.clearReportDateField();
+});
 
 // =================================Android======================================//
 

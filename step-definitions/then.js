@@ -288,6 +288,52 @@ Then(/^Record status should be displayed as (.*)$/, async (data) => {
   await managingProviderAccountPage.verifyRecordStatus(data);
 });
 
+// -----------------Patient-medical-results----------------//
+Then('I should see the following options in the dropdown', async (dataTable) => {
+  const expectedOptions = dataTable.rawTable.flat();
+      const options = await $$('//*[@id="medical-menu"]/nav/ul/li[3]/ul/li/a');
+const dropdownOption = await $('//*[@id="medical-menu"]/nav/ul/li[3]/ul/li/a');
+console.log('Dropdown option:', await dropdownOption.getText());
+    console.log('Found options:', options.length);
+
+      if (!Array.isArray(options) || options.length === 0) {
+        throw new Error('No options found or options is not an array!');
+    }
+
+  const optionTexts = [];
+    for (let i = 0; i < options.length; i++) {
+        const text = await options[i].getText();
+        optionTexts.push(text);
+    }
+    console.log('Extracted option texts:', optionTexts);
+     await expect(optionTexts).toEqual(expectedOptions);
+ 
+});
+
+Then('I should see the following options in the dropdown under dropdown option', async (dataTable) => {
+  const expectedOptions = dataTable.rawTable.flat();
+      const options = await $$('//*[@id="medical-menu"]/nav/ul/li[3]/ul/li[1]/ul/li/a');
+const dropdownOption = await $('//*[@id="medical-menu"]/nav/ul/li[3]/ul/li[1]/ul/li/a');
+console.log('Dropdown option:', await dropdownOption.getText());
+    console.log('Found options:', options.length);
+
+      if (!Array.isArray(options) || options.length === 0) {
+        throw new Error('No options found or options is not an array!');
+    }
+
+  const optionTexts = [];
+    for (let i = 0; i < options.length; i++) {
+        const text = await options[i].getText();
+        optionTexts.push(text);
+    }
+    console.log('Extracted option texts:', optionTexts);
+     await expect(optionTexts).toEqual(expectedOptions);
+ 
+});
+
+Then(/^Added data (.*) is successfully displaying in table$/, async (data) => {
+  await managingProviderAccountPage.verifyDataInTable(data);
+});
 
 
 //---------------------------------Android-Cases------------------------------------//

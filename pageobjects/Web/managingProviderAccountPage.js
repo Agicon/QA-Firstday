@@ -204,6 +204,37 @@ class ManagingProviderAccountPage extends BasePage {
     return $("(//input[@type='search'])[1]");
   }
 
+    get resultsTab() {
+    return $("//a[contains(text(),'Results ')]");
+  }
+
+      get resultsDateField() {
+    return $("#date_time");
+  }
+
+       get wbcField() {
+    return $("#wbc");
+  }
+
+       get hgbField() {
+    return $("#hgb");
+  }
+
+       get hctField() {
+    return $("#hct");
+  }
+
+       get pltsField() {
+    return $("#plts");
+  }
+
+    get reticField() {
+    return $("#retic");
+  }
+
+
+  
+
   async settigsButtonIsDisplayed() {
     await this.settingsButton.waitForDisplayed({ timeout: 20000 });
     return await this.settingsButton.isDisplayed();
@@ -858,5 +889,55 @@ class ManagingProviderAccountPage extends BasePage {
     var actStatus = await $("(//tr[@class='odd']//td)[12]").getText();
     await expect(actStatus).toEqual(status);
   }
+
+    async hoverOverResultsTab() {
+    await this.resultsTab.waitForDisplayed({ timeout: 15000 });
+    await (await this.resultsTab).moveTo();
+  }
+
+     async hoverOverOnLink(link) {
+      const linkText=await $("(//a[contains(text(),'"+link+"')])[1]")
+    await linkText.waitForDisplayed({ timeout: 15000 });
+    await (await linkText).moveTo();
+  }
+
+    async clearReportDateField() {
+    await this.resultsDateField.clearValue();
+  }
+    async fillResultDateField() {
+       await this.resultsDateField.waitForDisplayed({ timeout: 15000 });
+    await this.resultsDateField.click();
+    await browser.keys("Enter");
+
+  }
+
+    async fillWbcField(value) {
+    await this.wbcField.clearValue();
+    await this.wbcField.setValue(value);
+  }
+
+   async fillHgbField(value) {
+    await this.hgbField.clearValue();
+    await this.hgbField.setValue(value);
+  }
+   async fillHctField(value) {
+    await this.hctField.clearValue();
+    await this.hctField.setValue(value);
+  }
+    async fillPltsField(value) {
+    await this.pltsField.clearValue();
+    await this.pltsField.setValue(value);
+  }
+
+    async fillReticField(value) {
+    await this.reticField.clearValue();
+    await this.reticField.setValue(value);
+  }
+async verifyDataInTable(data){
+const addedData=await $("//td[contains(text(),'"+data+"')]");
+var actData=await addedData.getText();
+console.log("Added data is:>>"+actData);
+ await expect(actData).toEqual(data);
+}
 }
 module.exports = new ManagingProviderAccountPage();

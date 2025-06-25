@@ -58,8 +58,7 @@ Feature: Test cases for the 'Patient' page
 
     Examples:
       | url      | userA                     | validName           | validLastName | validMobile | validRelationshipName | validState | validCity | validAddress     | validZipcode | status | caregiverName               | invalidData | invalidEmail   | specialCharactors |
-      | loginUrl | providerLoginCrendentails | Auto_Test_Caregiver | Autonix | 3652900002 | Doctor | Texas | Fairview | 880 Red Oak Lane | 10001 | Active | Auto_Test_Caregiver Autonix | 1 | #####gmail.com | !@#$%%$#@! |
-
+      | loginUrl | providerLoginCrendentails | Auto_Test_Caregiver | Autonix       |  3652900002 | Doctor                | Texas      | Fairview  | 880 Red Oak Lane |        10001 | Active | Auto_Test_Caregiver Autonix |           1 | #####gmail.com | !@#$%%$#@!        |
   Scenario Outline: Verify "Caregiver "Active/Inactive" status
     When I click on the second index link Caregivers
     Then It redirects on the Active Caregivers screen
@@ -82,11 +81,9 @@ Feature: Test cases for the 'Patient' page
     Then It redirects on the Active Caregivers screen
     When I populate data <validName> in the "Search" field
     Then Verify <validName> is displayed with <status>
-
     Examples:
       | validName           | status | inactiveStatus |
       | Auto_Test_Caregiver | active | Inactive       |
-
   Scenario Outline: Verify "Managing Provider" is not able to update the "Caregiver" and validation displays if any mandatory field is not populated while updating the Caregiver And Verify "Managing Provider" is not able to update the "Caregiver" with invalid details And Verify "Managing Provider" is able to update the "Caregiver" details
     When I click on the second index link Caregivers
     Then It redirects on the Active Caregivers screen
@@ -129,13 +126,10 @@ Feature: Test cases for the 'Patient' page
     Examples:
       | caregiverName               | invalidData | invalidEmail   | specialCharactors | updatedCaregiverName        | updatedLastName | updatedMobile | updatedRelationshipName | updatedState | updatedCity | updatedAddress       | updatedZipcode | status | updatedCaregiver                    |
       | Auto_Test_Caregiver Autonix | 1 | #####gmail.com | !@#$%%$#@! ^&^&^& | Updated_Auto_Test_Caregiver | Autonix | 2026859219 | Parents | Florida | Miami | 8900 Canyon Trail Rd | 00123 | Active | Updated_Auto_Test_Caregiver Autonix |
-
   Scenario Outline: Check and verify user profile functionlities
     When I hover over the "Settings" icon
     When I click on the link text Profile
     Then profile page displays
-
-
   Scenario Outline: User logged in as Provider And Verify the "Managing Provider" is not able to create "New Patient" and validation displays when mandatory field is not populated And Verify the "Managing Provider" is able to create "New Patient " when all the fields are populated with valid data
     Given Open web url <url>
     When I login on web portal using invalid credentials <invalidEmail> and <invalidPassword>
@@ -186,11 +180,9 @@ Feature: Test cases for the 'Patient' page
     When I hover over the "Settings" icon
     When I click on the link text Logout
     Then I get logged out from my account
-
     Examples:
       | url      | invalidEmail       | invalidPassword | validEmail                   | userA                     | validFirstName    | validLastName | birthTime | defaultNumber | gender | hospital | caregiver                                                                  | week | days | treatmentLocation | location | startServiceDate | hospitalLocation | dashboard-AddPatientOption | dashboard-ManagePatientsOption | services        | treatment | status |
       | loginUrl | provider@gmail.com | 261561          | testprovider2may@yopmail.com | providerLoginCrendentails | Auto_Test_Patient | Auto_Johan    | 5:00 Am   | 12356478      | Male   | Default  | Caregiver_auto_test static (caregiverautotest@yopmail.com) (+1 3652900001) | 40   | 6    | Hospital / Clinic | Hospital | 21/05/2025       | Greenville       | Add A New Patient          | Manage Patients                | RPM,TELEMED,EMR | Discharge | Active |
-
   Scenario Outline: Verify the "Managing Provider" is able to create "New patient" when only the mandatory fields are populated with valid data And Verify "Managing Provider" is able to update the "Patient" details And Verify Filters, search features on Active Patient screen And Verify the "Managing Provider" is able to create "New Patient " with "Treatment Location" set as "Home"
     Given Open web url <url>
     When Web app login using <userA>
@@ -246,11 +238,9 @@ Feature: Test cases for the 'Patient' page
     When I click on the button with text Update
     Then Success message Patient Updated Succesfully ! appears
     Then A "New Patient" gets created And it is displayed on the "My Patient list" with <updatedFirstName> and <updatedLastName> and <services> and <treatmentLocation> and <updatedHospitalLocation> and <status>
-
     Examples:
       | url      | userA                     | dashboard-ManagePatientsOption | secondPatientName | invalidData | updatedFirstName   | updatedLastName | updatedHospitalLocation | services    | treatment | status | servicesCheckbox          | inactiveStatus | treatmentLocation | validFirstName    | dashboard-PatientListOption | primaryProvider        | homeLocation | dashboard-AddPatientOption | validLastName | gender | hospital | formServices    | treatmentHomeLocation | randomText | location |
       | loginUrl | providerLoginCrendentails | Manage Patients                | QA_Patient        | 1           | Updated_QA_Patient | Testman         | Lakewood                | TELEMED,EMR | Discharge | Active | Remote patient monitoring | Inactive       | Readmit           | Auto_Test_Patient | My Patient List             | managing_auto_provider | Home         | Add A New Patient          | Testman       | Female | Default  | RPM,TELEMED,EMR | Readmit               | @@@@@@     | Hospital |
-
   Scenario Outline: Verify managing provider is able change "Patient's status to "Active/Inactive" status And Verify the "Managing Provider" is able to "Discharge" Patient Successfully And Verify "Managing Provider" is able to "Delete" the "Patient" when clicked on "Delete" icon And "Managing Provider" is able to assign "Primary provider" to the patient
     When I populate data <updatedFirstName> in the "Search" field
     When I click on the link text Active
@@ -298,11 +288,9 @@ Feature: Test cases for the 'Patient' page
     When I click on the button with text Assign
     When I populate data <validFirstName> in the "Search" field
     Then The <primaryProvider> gets assigned to the patient and provider displays in the dedicated slot on the list
-
     Examples:
       | url      | userA                     | dashboard-ManagePatientsOption | secondPatientName | invalidData | updatedFirstName   | updatedLastName | updatedHospitalLocation | services    | treatment | status | servicesCheckbox          | inactiveStatus | treatmentLocation | validFirstName    | dashboard-PatientListOption | providerOptionCheckbox | primaryProvider        |
       | loginUrl | providerLoginCrendentails | Manage Patients                | QA_Patient        | 1           | Updated_QA_Patient | Testman         | Lakewood                | TELEMED,EMR | Discharge | Active | Remote patient monitoring | Inactive       | Readmit           | Auto_Test_Patient | My Patient List             | Primary Provider       | managing_auto_provider |
-
   Scenario Outline: Create a static patient and verify this patient in mobile caregiver app
     When I hover on the "Dashboard-All Patient" tab
     When I click the <dashboard-ManagePatientsOption> option
@@ -321,11 +309,9 @@ Feature: Test cases for the 'Patient' page
     When I click on the button with text Save
     Then Success message Patient Added Succesfully! appears
     Then A "New Patient" gets created And it is displayed on the "My Patient list" with <validName> and <validLastName> and <formServices> and <treatment> and <hospitalLocation> and <status>
-
     Examples:
       | validName         | validLastName | gender | hospital | caregiver                                                                  | formServices    | treatmentLocation | status | dashboard-ManagePatientsOption | dashboard-AddPatientOption | treatment |
       | Patient_Auto_Test | Ben           | Male   | Default  | Caregiver_auto_test static (caregiverautotest@yopmail.com) (+1 3652900001) | RPM,TELEMED,EMR | Hospital / Clinic | Active | Manage Patients                | Add A New Patient          | Discharge |
-
   Scenario Outline: Verify the "Managing Provider" is not able to create "New Other Provider" and validation displays if any mandatory field is not populated and if invalid data is added in mandatory field and 	Verify the "Managing Provider" is able to create "Other Provider" when only the mandatory fields are populated with valid data and 	Verify the "Customer" is not able to create "New Other Provider" with already registered email
     Given Open web url <url>
     When Web app login using <userA>
@@ -369,11 +355,9 @@ Feature: Test cases for the 'Patient' page
     When I populate fields <validOtherProviderName> but I populate "Email field" with already registered email
     Then validation message Please Enter Unique email. This email is already register with system. appears
     When I click on the button with text Close
-
     Examples:
       | url      | userA                     | validOtherProviderName   | invalidData | invalidEmail   | status | textInMobileNumber | invalidMobileNumber |
       | loginUrl | providerLoginCrendentails | Auto_Test_Other_Provider | 1 | #####gmail.com | Active | abcdef | 12354 |
-
   Scenario Outline: Verify "Managing Provider" is not able to update the "Other Provider" with invalid details and 	Verify "Managing Provider" is not able to update the "Other Provider" and validation displays if any mandatory field is not populated while updating the customer and Verify "Managing Provider" is able to update the "Other Provider's" details
     Then Search and delete duplicate data <updatedName>
     When User search the created provider <validOtherProviderName>
@@ -398,11 +382,9 @@ Feature: Test cases for the 'Patient' page
     When I click On "Delete" icon
     Then Success message Other Provider Deleted !! appears
     Then Deleted record should not be visible in the list
-
     Examples:
       | validOtherProviderName   | updatedName                      | updatedSpecialty | invalidData | status |
       | Auto_Test_Other_Provider | Updated_Auto_Test_Other_Provider | Skin | 1 | Active |
-
   Scenario Outline: Verify the "Managing Provider" is able to create "Other Provider" when all the fields are populated with valid data
     When I click on the second index link Other Providers
     Then It redirects on the Other Providers screen
@@ -425,11 +407,9 @@ Feature: Test cases for the 'Patient' page
     Then Success message Other Provider Added Succesfully. Credentials will be sent to an email ! appears
     When I populate data <validOtherProviderName> in the "Search" field
     Then A "Other Provider" gets created and it displays on the "Other Providers" list with <specialty> and <validOtherProviderName> and <status>
-
     Examples:
       | validOtherProviderName   | specialty     | validMobile | validWebsite         | validOfficeInfo | validState | validCity   | validAddress            | validZipcode | status |
       | Auto_Test_Other_Provider | pediatricians | 2026839019 | https://webdriver.io | IT Office | Bridgeland | Silverstone | Westwood Park, TX 24680 | 10001 | Active |
-
   Scenario Outline: Verify "Managing Provider" is able to change the status of Other Provider to "Inactive" and Verify "Managing Provider" is able to change the status of Other Provider to "Active" and Verify a "Other Provider" with "Inactive" status is not allowed to login on portal
     When User click on "Other Provider" tab
     When I populate data <validOtherProviderName> in the "Search" field
@@ -461,11 +441,9 @@ Feature: Test cases for the 'Patient' page
     When Open web url <url>
     When Web app login using <otherProvider>
     Then provider/dashboard page displays
-
     Examples:
       | validOtherProviderName | url | otherProvider | userA | inactiveStatus |
       | Test_Auto_Other_Provider_For_Provider | loginUrl | otherProviderForProviderStatusCheck | providerLoginCrendentails | Inactive       |
-
   Scenario Outline: Verify the "Managing Provider" is able to add "Medication" for patient's Medical Record and 	Verify the "Managing Provider" is not able to add "Medications" and validation displays if any mandatory field is not populated
     Given Open web url <url>
     When Web app login using <userA>
@@ -495,11 +473,9 @@ Feature: Test cases for the 'Patient' page
     Then Medication details should be visible in the list with <medicationName> and <currentDose> and <measurement> and <frequency> and <interval> and <status>
     When I populate data <specialCharactors> in the "Search" field
     Then No matching records found should be displayed
-
     Examples:
       | url      | userA                     | dashboard-ManagePatientsOption | patientName       | medicationName  | currentDose | measurement | frequency | additionalInformation                         | interval | status | specialCharactors |
       | loginUrl | providerLoginCrendentails | Manage Patients | Patient_Auto_Test | Auto_Medication | 1 | Teaspoon | Twice | Consult the doctor before using this medicine | Day | Active | !@#$%%$#@! |
-
   Scenario Outline: Verify the "Managing Provider" is able to "View and update" the added "Medications" and Verify the "Managing provider" is able to change the "Medications" status and Verify the "Managing provider" is able to search the "Medications" and 	Verify the "Managing provider" is able to delete the "Medications"
     When I populate data <medicationName> in the "Search" field
     When I click on the "View or Update" option under the "Action" section
@@ -536,11 +512,9 @@ Feature: Test cases for the 'Patient' page
     When I click On "Delete" icon
     Then Success message Medication Deleted !! appears
     Then Deleted record should not be visible in the list
-
     Examples:
       | dashboard-ManagePatientsOption | patientName       | medicationName  | updatedMedicationName  | updateCurrentDose | updatedMeasurement | updatedFrequency | updatedInterval | updatedAdditionalInformation                                   | status | inactiveStatus |
       | Manage Patients | Patient_Auto_Test | Auto_Medication | Update_Auto_Medication | 3 | Milliliter | Three Times | Week | Updated info. => Consult the doctor before using this medicine | Active | Inactive |
-
   Scenario Outline: Verify the "Managing Provider" is able to add "Medication" for patient's Medical Record
     When I hover on the "Dashboard-All Patient" tab
     When I click the <dashboard-ManagePatientsOption> option
@@ -562,14 +536,10 @@ Feature: Test cases for the 'Patient' page
     Then Success message Medication Added Succesfully ! appears
     When I populate data <medicationName> in the "Search" field
     Then Medication details should be visible in the list with <medicationName> and <currentDose> and <measurement> and <frequency> and <interval> and <status>
-
     Examples:
       | url      | userA                     | dashboard-ManagePatientsOption | patientName       | medicationName  | currentDose | measurement | frequency | additionalInformation                         | interval | status |
       | loginUrl | providerLoginCrendentails | Manage Patients                | Patient_Auto_Test | Auto_Medication | 1           | Teaspoon    | Twice     | Consult the doctor before using this medicine | Day      | Active |
-
-
 # # //----------------assign other provider----------------------//
-
   Scenario Outline: Verify the functionality of "Assign other provider"
     Given Open web url <url>
     When Web app login using <userA>
@@ -587,13 +557,9 @@ Feature: Test cases for the 'Patient' page
     Then Success message Providers Assign Succesfully appears
     When I populate data <otherProvider> in the "Search" field
     Then Added record <otherProvider> is displaying in list
-
     Examples:
       | url      | userA                     | dashboard-ManagePatientsOption | patientName       | otherProvider       |
       | loginUrl | providerLoginCrendentails | Manage Patients                | Patient_Auto_Test | other_auto_provider |
-
-
-
   Scenario Outline: Verify the "Managing Provider" is able to delete the added "Vaccination" and Verify the "Managing Provider" is not able to add "Vaccination" and validation displays if any mandatory field is not populated and 	Verify the "Managing Provider" is able to add "Pre defined Vaccination" for patient's medical record
     When I click on the link text Medical Record
     When I click on the link text Vaccinations
@@ -615,12 +581,9 @@ Feature: Test cases for the 'Patient' page
     When I click on the button with text Create
     Then Success message Vaccinations Added Succesfully ! appears
     Then Vaccine details should be visible in the list with vaccine name <createdVaccineName> and brand <brandName> and lot number <lotNumber> and comments <comments>
-
     Examples:
       | vaccineName                    | lotNumber | comments                                      | createdVaccineName | brandName  |
       | Auto_Test_Vaccine (Healthcare) | 325698 | Consult the doctor before using this vaccine. | Auto_Test_Vaccine | Healthcare |
-
-
   Scenario Outline: Verify the "Managing Provider" is not able to add "Media" and validation displays if any mandatory field is not populated and Verify the "Managing Provider" is able to add "Media" for patient's medical record and 	Verify the "Managing provider" is able to search the "Media" and 	Verify the "Managing Provider" is able to delete the added "Media"
     When I click on the link text Medical Record
     When I click on the link text Media
@@ -657,8 +620,6 @@ Feature: Test cases for the 'Patient' page
     Examples:
       | image      | fileType | description           | specialCharactors | updatedDescription            |
       | Picture(2) | jpg      | Auto Test description | !@#$%%$#@!        | Updated Auto Test description |
-
-
   Scenario Outline: Verify the "Managing Provider" is able to add "Media" for patient's medical record
     When I click on the link text Medical Record
     When I click on the link text Media
@@ -676,7 +637,6 @@ Feature: Test cases for the 'Patient' page
     Examples:
       | image      | fileType | description           |
       | Picture(2) | jpg      | Auto Test description |
-
   Scenario Outline: Verify the "Managing Provider" is able to add folder for "Media" for patient's medical record
     Then Search and delete duplicate data <folderFileType>
     When I click on the button with text New Media
@@ -694,9 +654,6 @@ Feature: Test cases for the 'Patient' page
     Examples:
       | description           | folder | folderFileType |
       | Auto Test description | images | Folder         |
-
-
-
   Scenario Outline: Verify the "Managing Provider" is not able to add "Diagnosis" and validation displays if any mandatory field is not populated and Verify the "Managing Provider" is able to add pre-defined "Diagnosis" for patient's medical record andVerify the "Managing provider" is able to search the "Diagnosis"
     When I click on the link text Medical Record
     When I click on the link text Diagnosis
@@ -724,11 +681,9 @@ Feature: Test cases for the 'Patient' page
     Then Record status should be displayed as Inactive
     When I click on the link text Inactive
     Then Record status should be displayed as Active
-
     Examples:
       | diagnosisType | description                                   | status | image      | specialCharactors |
       | Skin rash     | Consult the doctor before using this vaccine. | Active | Picture(2) | !@#$%%$#@!        |
-
   Scenario Outline: Verify the "Managing Provider" is able to update the added "Diagnosis" and Verify the "Managing provider" is able to delete the "Diagnosis"
     When I populate data <diagnosisType> in the "Search" field
     When I click on the "View or Update" option under the "Action" section
@@ -744,8 +699,6 @@ Feature: Test cases for the 'Patient' page
     Examples:
       | diagnosisType | updatedDescription                                     | status | updatedImage | updatedDiagnosisType |
       | Skin rash     | Get a medical consultation before taking this vaccine. | Active | Picture(2)   | Twisted hair         |
-
-
   Scenario Outline: Verify the "Managing Provider" is not able to create "New Hospital Records" when mandatory fields are not populated and Verify the "Managing Provider" is able to create "New Hospital Records" when all the fields are populated with valid data
     When I click on the link text Medical Record
     When User hover on the Documents tab
@@ -769,7 +722,6 @@ Feature: Test cases for the 'Patient' page
     Examples:
       | hospital           | image      | description           | hospitalNote |
       | Auto_test_hospital | Picture(2) | Auto Test description | New note     |
-
   Scenario Outline: Verify the "Managing Provider" is able to update "Hospital Records" with valid data and Verify the "Managing Provider" is able to delete "Hospital Records"
     When I click on the "View or Update" option under the "Action" section
     Then It redirects on the Patient_Auto_Test Ben's Update Hospital Record screen
@@ -786,7 +738,6 @@ Feature: Test cases for the 'Patient' page
     Examples:
       | UpdatedHospital | updatedImage | updatedDescription            | hospitalNote |
       | Default         | Picture(1)   | Updated Auto Test description | New note     |
-
   Scenario Outline: Verify the "Managing Provider" is able to create "New Hospital Records" when all the fields are populated with valid data
     When I click on the button with text New Hospital Records
     Then It redirects on the New Hospital Records screen
@@ -801,3 +752,58 @@ Feature: Test cases for the 'Patient' page
     Examples:
       | hospital           | image      | description           | hospitalNote |
       | Auto_test_hospital | Picture(2) | Auto Test description | New note     |
+# //-----------------Patient-medical-record-results-------------------------//
+
+  Scenario Outline: Verify the "Managing Provider" is able to Create "New CBC Result" when all the fields are populated with valid data
+    When I populate data <patientName> in the "Search" field
+    When I click on the link text <patientName>
+    Then patient/dashboard page displays
+    When I click on the link text Medical Record
+    Then patient/diagnosis page displays
+    When I hover over the "Results" tab
+    Then I should see the following options in the dropdown
+      | Laboratory |
+      | Imaging    |
+      | Other      |
+    When Hover over link Laboratory
+    Then I should see the following options in the dropdown under dropdown option
+      | Laboratory CBC                  |
+      | Laboratory Chemistry            |
+      | Laboratory Liver Function Tests |
+      | Laboratory Lipid Tests          |
+      | Laboratory Endocrine            |
+      | Laboratory Coagulation          |
+      | Laboratory Others               |
+    When I click on the link text Laboratory CBC
+    Then result/laboratory_cbc page displays
+    When I click On "Delete" icon
+    When I click on the button with text New CBC Result
+    Then It redirects on the New CBC screen
+    When I clear date filed of report
+    When I click on the button with text Create
+    Then validation message Please enter date & time appears
+    When I click on the button with text Close
+    When I hover over the "Results" tab
+    When Hover over link Laboratory
+    When I click on the link text Laboratory CBC
+    When I click on the button with text New CBC Result
+    Then It redirects on the New CBC screen
+    When User should be able to upload file <image>
+    When I fill <wbc> value in WBC field
+    When I fill <hgb> value in Hgb field
+    When I fill <hct> value in Hct field
+    When I fill <plts> value in Plts field
+    When I fill <retic> value in retic field
+    When I fill <comment> data in comments field
+    When I click on the button with text Create
+    Then Success message CBC Result Added Succesfully ! appears
+    Then Added data <wbc> is successfully displaying in table
+    Then Added data <hgb> is successfully displaying in table
+    Then Added data <hct> is successfully displaying in table
+    Then Added data <plts> is successfully displaying in table
+    Then Added data <retic> is successfully displaying in table
+    Then Added data <comment> is successfully displaying in table
+
+    Examples:
+      | patientName       | image      | comment             | wbc  | hgb | hct  | plts | retic |
+      | Patient_Auto_Test | Picture(2) | this is your report | 14 |   8 | 10 |  210 |    11 |
