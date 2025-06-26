@@ -333,6 +333,7 @@ console.log('Dropdown option:', await dropdownOption.getText());
 
 Then(/^Added data (.*) is successfully displaying in table$/, async (data) => {
   await managingProviderAccountPage.verifyDataInTable(data);
+});
 Then(/^Other provider records should be visilbe in the list with (.*) and (.*)$/, async (otherProvider, description) => {
   await managingProviderAccountPage.verifyOtherProviderRecords(otherProvider, description);
 });
