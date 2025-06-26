@@ -6,7 +6,6 @@ const superAdminPage = require("../pageobjects/Web/superAdminPage");
 const customerAccountPage = require("../pageobjects/Web/customerAccountPage");
 const managingProviderAccountPage = require("../pageobjects/Web/managingProviderAccountPage");
 
-
 //---------------Web-Super Admin----------------------//
 
 Then(/^I navigate to the "Customers" page$/, async () => {
@@ -21,17 +20,9 @@ Then(/^"New customer" form displays$/, async () => {
   await superAdminPage.newCustomerFormIsDisplayed();
 });
 
-Then(
-  /^A "New Customer" gets created and it displays clinic name (.*) first name (.*) last name (.*) email and licence number (.*) on the "Customers list"$/,
-  async (clinicName, firstName, lastName, licenceNumber) => {
-    await superAdminPage.verifyNewCreatedClinic(
-      clinicName,
-      firstName,
-      lastName,
-      licenceNumber
-    );
-  }
-);
+Then(/^A "New Customer" gets created and it displays clinic name (.*) first name (.*) last name (.*) email and licence number (.*) on the "Customers list"$/, async (clinicName, firstName, lastName, licenceNumber) => {
+  await superAdminPage.verifyNewCreatedClinic(clinicName, firstName, lastName, licenceNumber);
+});
 
 Then(/^validation message (.*) appears$/, async (message) => {
   await superAdminPage.verifyValidationMessage(message);
@@ -146,11 +137,11 @@ Then(/^Search and active if provider (.*) is already inactive under (.*) section
 // ===============================Master_Menu=============================
 
 Then(/^(.*) popup should be closed successfully$/, async (text) => {
-  await customerAccountPage.verifyClosedPopup(text)
+  await customerAccountPage.verifyClosedPopup(text);
 });
 
 Then(/^list of diagnosis should appear according to added character$/, async () => {
-  await customerAccountPage.verifyDiagnosisList()
+  await customerAccountPage.verifyDiagnosisList();
 });
 
 Then(/^A "New Diagnosis type" gets created and it displays on the "Diagnosis type" list with (.*) and (.*) and (.*)$/, async (type, code, moreInfo) => {
@@ -158,23 +149,20 @@ Then(/^A "New Diagnosis type" gets created and it displays on the "Diagnosis typ
 });
 
 Then(/^New Hospital note (.*) should display under list$/, async (note) => {
- await customerAccountPage.verifyCreatedHospitalNote(note);
+  await customerAccountPage.verifyCreatedHospitalNote(note);
 });
 
-Then(/^"Vaccine type" details should be visible in the list with (.*) and (.*) and (.*) and (.*) and (.*) and (.*) and (.*) and (.*) and (.*) and (.*)$/, async (cvxCode,brandName,vaccineName,description,note,status,internalID,nonVaccine,favourite,date) => {
-  await customerAccountPage.verifyCreatedVaccine(cvxCode,brandName,vaccineName,description,note,status,internalID,nonVaccine,favourite,date);
+Then(/^"Vaccine type" details should be visible in the list with (.*) and (.*) and (.*) and (.*) and (.*) and (.*) and (.*) and (.*) and (.*) and (.*)$/, async (cvxCode, brandName, vaccineName, description, note, status, internalID, nonVaccine, favourite, date) => {
+  await customerAccountPage.verifyCreatedVaccine(cvxCode, brandName, vaccineName, description, note, status, internalID, nonVaccine, favourite, date);
 });
 
 Then(/^Alert values should be visible in the list with heart rate (.*) and heart rate (.*) and respiratory (.*) and respiratory (.*) and saturation (.*) and saturation (.*) and pulse rate (.*) and pulse rate (.*) and temperature type (.*) and temperature (.*) and temperature (.*)$/, async (heartLessThan, heartGreaterthan, respiratorylessThan, respiratoryGreaterthan, saturationlessThan, saturationGreaterthan, pulselessThan, pulseGreaterthan, tempType, temperaturelessThan, temperatureGreaterthan) => {
   await customerAccountPage.verifyAlertValues(heartLessThan, heartGreaterthan, respiratorylessThan, respiratoryGreaterthan, saturationlessThan, saturationGreaterthan, pulselessThan, pulseGreaterthan, tempType, temperaturelessThan, temperatureGreaterthan);
 });
 
-
 Then(/^Select list option (.*) form from list$/, async (option) => {
- await customerAccountPage.clickOnSelectListOption(option);
+  await customerAccountPage.clickOnSelectListOption(option);
 });
-
-
 
 // ===============================Web-ManagingProviderAccount======================//
 
@@ -255,13 +243,12 @@ Then(/^Medication details should be visible in the list with (.*) and (.*) and (
   await managingProviderAccountPage.verifyCreatedMedication(medicationName, currentDose, measurement, frequency, interval, status);
 });
 
-
 Then(/^Click on option (.*) from list$/, async (option) => {
- await managingProviderAccountPage.clickOnListOption(option);
+  await managingProviderAccountPage.clickOnListOption(option);
 });
 
 Then(/^Added record (.*) is displaying in list$/, async (record) => {
- await managingProviderAccountPage.verifyAddedRecord(record);
+  await managingProviderAccountPage.verifyAddedRecord(record);
 });
 
 Then(/^Vaccine details should be visible in the list with vaccine name (.*) and brand (.*) and lot number (.*) and comments (.*)$/, async (createdVaccineName, brandName, lotNumber, comments) => {
@@ -289,46 +276,44 @@ Then(/^Record status should be displayed as (.*)$/, async (data) => {
 });
 
 // -----------------Patient-medical-results----------------//
-Then('I should see the following options in the dropdown', async (dataTable) => {
+Then("I should see the following options in the dropdown", async (dataTable) => {
   const expectedOptions = dataTable.rawTable.flat();
-      const options = await $$('//*[@id="medical-menu"]/nav/ul/li[3]/ul/li/a');
-const dropdownOption = await $('//*[@id="medical-menu"]/nav/ul/li[3]/ul/li/a');
-console.log('Dropdown option:', await dropdownOption.getText());
-    console.log('Found options:', options.length);
+  const options = await $$('//*[@id="medical-menu"]/nav/ul/li[3]/ul/li/a');
+  const dropdownOption = await $('//*[@id="medical-menu"]/nav/ul/li[3]/ul/li/a');
+  console.log("Dropdown option:", await dropdownOption.getText());
+  console.log("Found options:", options.length);
 
-      if (!Array.isArray(options) || options.length === 0) {
-        throw new Error('No options found or options is not an array!');
-    }
+  if (!Array.isArray(options) || options.length === 0) {
+    throw new Error("No options found or options is not an array!");
+  }
 
   const optionTexts = [];
-    for (let i = 0; i < options.length; i++) {
-        const text = await options[i].getText();
-        optionTexts.push(text);
-    }
-    console.log('Extracted option texts:', optionTexts);
-     await expect(optionTexts).toEqual(expectedOptions);
- 
+  for (let i = 0; i < options.length; i++) {
+    const text = await options[i].getText();
+    optionTexts.push(text);
+  }
+  console.log("Extracted option texts:", optionTexts);
+  await expect(optionTexts).toEqual(expectedOptions);
 });
 
-Then('I should see the following options in the dropdown under dropdown option', async (dataTable) => {
+Then("I should see the following options in the dropdown under dropdown option", async (dataTable) => {
   const expectedOptions = dataTable.rawTable.flat();
-      const options = await $$('//*[@id="medical-menu"]/nav/ul/li[3]/ul/li[1]/ul/li/a');
-const dropdownOption = await $('//*[@id="medical-menu"]/nav/ul/li[3]/ul/li[1]/ul/li/a');
-console.log('Dropdown option:', await dropdownOption.getText());
-    console.log('Found options:', options.length);
+  const options = await $$('//*[@id="medical-menu"]/nav/ul/li[3]/ul/li[1]/ul/li/a');
+  const dropdownOption = await $('//*[@id="medical-menu"]/nav/ul/li[3]/ul/li[1]/ul/li/a');
+  console.log("Dropdown option:", await dropdownOption.getText());
+  console.log("Found options:", options.length);
 
-      if (!Array.isArray(options) || options.length === 0) {
-        throw new Error('No options found or options is not an array!');
-    }
+  if (!Array.isArray(options) || options.length === 0) {
+    throw new Error("No options found or options is not an array!");
+  }
 
   const optionTexts = [];
-    for (let i = 0; i < options.length; i++) {
-        const text = await options[i].getText();
-        optionTexts.push(text);
-    }
-    console.log('Extracted option texts:', optionTexts);
-     await expect(optionTexts).toEqual(expectedOptions);
- 
+  for (let i = 0; i < options.length; i++) {
+    const text = await options[i].getText();
+    optionTexts.push(text);
+  }
+  console.log("Extracted option texts:", optionTexts);
+  await expect(optionTexts).toEqual(expectedOptions);
 });
 
 Then(/^Added data (.*) is successfully displaying in table$/, async (data) => {
@@ -337,6 +322,31 @@ Then(/^Added data (.*) is successfully displaying in table$/, async (data) => {
 Then(/^Other provider records should be visilbe in the list with (.*) and (.*)$/, async (otherProvider, description) => {
   await managingProviderAccountPage.verifyOtherProviderRecords(otherProvider, description);
 });
+
+Then(/^X-Ray result should be visilbe in the list with (.*) and (.*)$/, async (type, description) => {
+  await managingProviderAccountPage.verifyXrayDetails(type, description);
+});
+
+Then(/^Imaging options should be visible in the dropdown under dropdown option$/, async (dataTable) => {
+   const expectedOptions = dataTable.rawTable.flat();
+  const options = await $$('(//ul[@class="dropdown-menu"])[6]//a');
+  const dropdownOption = await $('(//ul[@class="dropdown-menu"])[6]//a');
+  console.log("Dropdown option:", await dropdownOption.getText());
+  console.log("Found options:", options.length);
+
+  if (!Array.isArray(options) || options.length === 0) {
+    throw new Error("No options found or options is not an array!");
+  }
+
+  const optionTexts = [];
+  for (let i = 0; i < options.length; i++) {
+    const text = await options[i].getText();
+    optionTexts.push(text);
+  }
+  console.log("Extracted option texts:", optionTexts);
+  await expect(optionTexts).toEqual(expectedOptions);
+});
+
 
 
 //---------------------------------Android-Cases------------------------------------//

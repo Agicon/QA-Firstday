@@ -651,6 +651,11 @@ When(/^I clear date filed of report$/, async () => {
   await managingProviderAccountPage.clearReportDateField();
 });
 
+When(/^I fill (.*) data in type field$/, async (value) => {
+  await managingProviderAccountPage.fillTypeField(value);
+});
+
+
 // =================================Android======================================//
 
 When(/^login to app using (.*)$/, async (username) => {

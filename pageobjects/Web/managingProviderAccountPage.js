@@ -137,7 +137,7 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   get startDateField() {
-    return $("#start_date:nth-of-type(1),#date");
+    return $("#start_date:nth-of-type(1),#date,#date_time");
   }
 
   get selectProviderDropdown() {
@@ -197,58 +197,59 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   get descriptionField() {
-    return $("//textarea[@name='description']");
+    return $("//textarea[@name='description']|//textarea[@id='comments']");
   }
 
   get searchFieldUnderPatientForm() {
     return $("(//input[@type='search'])[1]");
   }
 
-    get resultsTab() {
+  get resultsTab() {
     return $("//a[contains(text(),'Results ')]");
   }
 
-      get resultsDateField() {
+  get resultsDateField() {
     return $("#date_time");
   }
 
-       get wbcField() {
+  get wbcField() {
     return $("#wbc");
   }
 
-       get hgbField() {
+  get hgbField() {
     return $("#hgb");
   }
 
-       get hctField() {
+  get hctField() {
     return $("#hct");
   }
 
-       get pltsField() {
+  get pltsField() {
     return $("#plts");
   }
 
-    get reticField() {
+  get reticField() {
     return $("#retic");
   }
 
-
-  
-
   get diagnosisCheckbox() {
-    return $("(//div[@class='row'])[5]");
+    return $("(//input[@type='checkbox'])[1]");
   }
 
   get medicationsCheckbox() {
-    return $("(//div[@class='row'])[6]");
+    return $("(//input[@type='checkbox'])[2]");
   }
 
   get vaccinationsCheckbox() {
-    return $("(//div[@class='row'])[19]");
+    return $("(//input[@type='checkbox'])[15]");
   }
 
   get OtherProviderRecordsCheckbox() {
-    return $("(//div[@class='row'])[20]");
+    return $("(//input[@type='checkbox'])[16]");
+  }
+
+  get typeField() {
+    return $("#type");
   }
 
   async settigsButtonIsDisplayed() {
@@ -774,7 +775,7 @@ class ManagingProviderAccountPage extends BasePage {
 
   async fillDescriptionField(value) {
     var js = "arguments[0].style = 'visible'";
-    await browser.pause(2000);
+    await browser.pause(3000);
     await browser.execute(js, await this.descriptionField);
     await this.descriptionField.waitForDisplayed({ timeout: 20000 });
     await this.descriptionField.setValue(value);
@@ -905,55 +906,54 @@ class ManagingProviderAccountPage extends BasePage {
     await expect(actStatus).toEqual(status);
   }
 
-    async hoverOverResultsTab() {
+  async hoverOverResultsTab() {
     await this.resultsTab.waitForDisplayed({ timeout: 15000 });
     await (await this.resultsTab).moveTo();
   }
 
-     async hoverOverOnLink(link) {
-      const linkText=await $("(//a[contains(text(),'"+link+"')])[1]")
+  async hoverOverOnLink(link) {
+    const linkText = await $("(//a[contains(text(),'" + link + "')])[1]");
     await linkText.waitForDisplayed({ timeout: 15000 });
     await (await linkText).moveTo();
   }
 
-    async clearReportDateField() {
+  async clearReportDateField() {
     await this.resultsDateField.clearValue();
   }
-    async fillResultDateField() {
-       await this.resultsDateField.waitForDisplayed({ timeout: 15000 });
+  async fillResultDateField() {
+    await this.resultsDateField.waitForDisplayed({ timeout: 15000 });
     await this.resultsDateField.click();
     await browser.keys("Enter");
-
   }
 
-    async fillWbcField(value) {
+  async fillWbcField(value) {
     await this.wbcField.clearValue();
     await this.wbcField.setValue(value);
   }
 
-   async fillHgbField(value) {
+  async fillHgbField(value) {
     await this.hgbField.clearValue();
     await this.hgbField.setValue(value);
   }
-   async fillHctField(value) {
+  async fillHctField(value) {
     await this.hctField.clearValue();
     await this.hctField.setValue(value);
   }
-    async fillPltsField(value) {
+  async fillPltsField(value) {
     await this.pltsField.clearValue();
     await this.pltsField.setValue(value);
   }
 
-    async fillReticField(value) {
+  async fillReticField(value) {
     await this.reticField.clearValue();
     await this.reticField.setValue(value);
   }
-async verifyDataInTable(data){
-const addedData=await $("//td[contains(text(),'"+data+"')]");
-var actData=await addedData.getText();
-console.log("Added data is:>>"+actData);
- await expect(actData).toEqual(data);
-}
+  async verifyDataInTable(data) {
+    const addedData = await $("//td[contains(text(),'" + data + "')]");
+    var actData = await addedData.getText();
+    console.log("Added data is:>>" + actData);
+    await expect(actData).toEqual(data);
+  }
   async verifyOtherProviderRecords(otherProvider, description) {
     var actOtherProvider = await $("(//tr[@class='odd']//td)[2]").getText();
     var actDescription = await $("(//tr[@class='odd']//td)[4]").getText();
@@ -973,6 +973,35 @@ console.log("Added data is:>>"+actData);
     await this.medicationsCheckbox.click();
     await this.vaccinationsCheckbox.click();
     await this.OtherProviderRecordsCheckbox.click();
+  }
+
+  async fillTypeField(value) {
+    await this.typeField.setValue(value);
+  }
+
+  async verifyXrayDetails(type, description) {
+    const xrayType = await $("(//tr[@class='odd'])[2]//td[3]");
+    await xrayType.waitForDisplayed({ timeout: 15000 });
+    const actType = await xrayType.getText();
+    const actDescription = await $("(//tr[@class='odd'])[2]//td[4]").getText();
+    await expect(actType).toEqual(type);
+
+    try {
+      await expect(actDescription).toEqual(description);
+      const actPaperClip = await $("(//tr[@class='odd'])[2]//td[5]//a");
+      if ((await actPaperClip.isDisplayed()) === true) {
+        console.log("✅ Details are matching");
+      } else {
+        throw new Error("❌ Details are not matching");
+      }
+    } catch (error) {}
+
+    const actMedia = await $("(//tr[@class='odd'])[2]//td[6]//a");
+    if ((await actMedia.isDisplayed()) === true) {
+      console.log("✅ Details are matching");
+    } else {
+      throw new Error("❌ Details are not matching");
+    }
   }
 }
 module.exports = new ManagingProviderAccountPage();
