@@ -57,8 +57,8 @@ Feature: Test cases for the 'Patient' page
         Then Created caregiver should be visible in the list with <caregiverName> and <validMobile> and <validRelationshipName> and <children> and <status>
 
         Examples:
-            | url | userA | validName | validLastName | validMobile | validRelationshipName | validState | validCity | validAddress | validZipcode | status | caregiverName | invalidData | invalidEmail | specialCharactors |
-            | loginUrl | providerLoginCrendentails | Auto_Test_Caregiver | Autonix | 3652900002 | Doctor | Texas | Fairview | 880 Red Oak Lane | 10001 | Active | Auto_Test_Caregiver Autonix | 1 | #####gmail.com | !@#$%%$#@! |
+            | url      | userA                     | validName           | validLastName | validMobile | validRelationshipName | validState | validCity | validAddress     | validZipcode | status | caregiverName               | invalidData | invalidEmail   | specialCharactors |
+            | loginUrl | providerLoginCrendentails | Auto_Test_Caregiver | Autonix       | 3652900002  | Doctor                | Texas      | Fairview  | 880 Red Oak Lane | 10001        | Active | Auto_Test_Caregiver Autonix | 1           | #####gmail.com | !@#$%%$#@!        |
 
     Scenario Outline: Verify "Caregiver "Active/Inactive" status
         When I click on the second index link Caregivers
@@ -127,14 +127,13 @@ Feature: Test cases for the 'Patient' page
         When I click On "Delete" icon
         Then Deleted record should not be visible in the list
         Examples:
-            | caregiverName | invalidData | invalidEmail | specialCharactors | updatedCaregiverName | updatedLastName | updatedMobile | updatedRelationshipName | updatedState | updatedCity | updatedAddress | updatedZipcode | status | updatedCaregiver |
-            | Auto_Test_Caregiver Autonix | 1 | #####gmail.com | !@#$%%$#@! ^&^&^& | Updated_Auto_Test_Caregiver | Autonix | 2026859219 | Parents | Florida | Miami | 8900 Canyon Trail Rd | 00123 | Active | Updated_Auto_Test_Caregiver Autonix |
+            | caregiverName               | invalidData | invalidEmail   | specialCharactors | updatedCaregiverName        | updatedLastName | updatedMobile | updatedRelationshipName | updatedState | updatedCity | updatedAddress       | updatedZipcode | status | updatedCaregiver                    |
+            | Auto_Test_Caregiver Autonix | 1           | #####gmail.com | !@#$%%$#@! ^&^&^& | Updated_Auto_Test_Caregiver | Autonix         | 2026859219    | Parents                 | Florida      | Miami       | 8900 Canyon Trail Rd | 00123          | Active | Updated_Auto_Test_Caregiver Autonix |
 
     Scenario Outline: Check and verify user profile functionlities
         When I hover over the "Settings" icon
         When I click on the link text Profile
         Then profile page displays
-
 
     Scenario Outline: User logged in as Provider And Verify the "Managing Provider" is not able to create "New Patient" and validation displays when mandatory field is not populated And Verify the "Managing Provider" is able to create "New Patient " when all the fields are populated with valid data
         Given Open web url <url>
@@ -371,8 +370,8 @@ Feature: Test cases for the 'Patient' page
         When I click on the button with text Close
 
         Examples:
-            | url | userA | validOtherProviderName | invalidData | invalidEmail | status | textInMobileNumber | invalidMobileNumber |
-            | loginUrl | providerLoginCrendentails | Auto_Test_Other_Provider | 1 | #####gmail.com | Active | abcdef | 12354 |
+            | url      | userA                     | validOtherProviderName   | invalidData | invalidEmail   | status | textInMobileNumber | invalidMobileNumber |
+            | loginUrl | providerLoginCrendentails | Auto_Test_Other_Provider | 1           | #####gmail.com | Active | abcdef             | 12354               |
 
     Scenario Outline: Verify "Managing Provider" is not able to update the "Other Provider" with invalid details and 	Verify "Managing Provider" is not able to update the "Other Provider" and validation displays if any mandatory field is not populated while updating the customer and Verify "Managing Provider" is able to update the "Other Provider's" details
         Then Search and delete duplicate data <updatedName>
@@ -400,8 +399,8 @@ Feature: Test cases for the 'Patient' page
         Then Deleted record should not be visible in the list
 
         Examples:
-            | validOtherProviderName | updatedName | updatedSpecialty | invalidData | status |
-            | Auto_Test_Other_Provider | Updated_Auto_Test_Other_Provider | Skin | 1 | Active |
+            | validOtherProviderName   | updatedName                      | updatedSpecialty | invalidData | status |
+            | Auto_Test_Other_Provider | Updated_Auto_Test_Other_Provider | Skin             | 1           | Active |
 
     Scenario Outline: Verify the "Managing Provider" is able to create "Other Provider" when all the fields are populated with valid data
         When I click on the second index link Other Providers
@@ -427,8 +426,8 @@ Feature: Test cases for the 'Patient' page
         Then A "Other Provider" gets created and it displays on the "Other Providers" list with <specialty> and <validOtherProviderName> and <status>
 
         Examples:
-            | validOtherProviderName | specialty | validMobile | validWebsite | validOfficeInfo | validState | validCity | validAddress | validZipcode | status |
-            | Auto_Test_Other_Provider | pediatricians | 2026839019 | https://webdriver.io | IT Office | Bridgeland | Silverstone | Westwood Park, TX 24680 | 10001 | Active |
+            | validOtherProviderName   | specialty     | validMobile | validWebsite         | validOfficeInfo | validState | validCity   | validAddress            | validZipcode | status |
+            | Auto_Test_Other_Provider | pediatricians | 2026839019  | https://webdriver.io | IT Office       | Bridgeland | Silverstone | Westwood Park, TX 24680 | 10001        | Active |
 
     Scenario Outline: Verify "Managing Provider" is able to change the status of Other Provider to "Inactive" and Verify "Managing Provider" is able to change the status of Other Provider to "Active" and Verify a "Other Provider" with "Inactive" status is not allowed to login on portal
         When User click on "Other Provider" tab
@@ -466,6 +465,8 @@ Feature: Test cases for the 'Patient' page
             | validOtherProviderName                | url      | otherProvider                       | userA                     | inactiveStatus |
             | Test_Auto_Other_Provider_For_Provider | loginUrl | otherProviderForProviderStatusCheck | providerLoginCrendentails | Inactive       |
 
+# # //-----------------Patient-medical-record-results-------------------------//
+
     Scenario Outline: Verify the "Managing Provider" is able to add "Medication" for patient's Medical Record and 	Verify the "Managing Provider" is not able to add "Medications" and validation displays if any mandatory field is not populated
         Given Open web url <url>
         When Web app login using <userA>
@@ -497,8 +498,8 @@ Feature: Test cases for the 'Patient' page
         Then No matching records found should be displayed
 
         Examples:
-            | url | userA | dashboard-ManagePatientsOption | patientName | medicationName | currentDose | measurement | frequency | additionalInformation | interval | status | specialCharactors |
-            | loginUrl | providerLoginCrendentails | Manage Patients | Patient_Auto_Test | Auto_Medication | 1 | Teaspoon | Twice | Consult the doctor before using this medicine | Day | Active | !@#$%%$#@! |
+            | url      | userA                     | dashboard-ManagePatientsOption | patientName       | medicationName  | currentDose | measurement | frequency | additionalInformation                         | interval | status | specialCharactors |
+            | loginUrl | providerLoginCrendentails | Manage Patients                | Patient_Auto_Test | Auto_Medication | 1           | Teaspoon    | Twice     | Consult the doctor before using this medicine | Day      | Active | !@#$%%$#@!        |
 
     Scenario Outline: Verify the "Managing Provider" is able to "View and update" the added "Medications" and Verify the "Managing provider" is able to change the "Medications" status and Verify the "Managing provider" is able to search the "Medications" and 	Verify the "Managing provider" is able to delete the "Medications"
         When I populate data <medicationName> in the "Search" field
@@ -538,8 +539,8 @@ Feature: Test cases for the 'Patient' page
         Then Deleted record should not be visible in the list
 
         Examples:
-            | dashboard-ManagePatientsOption | patientName | medicationName | updatedMedicationName | updateCurrentDose | updatedMeasurement | updatedFrequency | updatedInterval | updatedAdditionalInformation | status | inactiveStatus |
-            | Manage Patients | Patient_Auto_Test | Auto_Medication | Update_Auto_Medication | 3 | Milliliter | Three Times | Week | Updated info. => Consult the doctor before using this medicine | Active | Inactive |
+            | dashboard-ManagePatientsOption | patientName       | medicationName  | updatedMedicationName  | updateCurrentDose | updatedMeasurement | updatedFrequency | updatedInterval | updatedAdditionalInformation                                   | status | inactiveStatus |
+            | Manage Patients                | Patient_Auto_Test | Auto_Medication | Update_Auto_Medication | 3                 | Milliliter         | Three Times      | Week            | Updated info. => Consult the doctor before using this medicine | Active | Inactive       |
 
     Scenario Outline: Verify the "Managing Provider" is able to add "Medication" for patient's Medical Record
         When I hover on the "Dashboard-All Patient" tab
@@ -617,8 +618,8 @@ Feature: Test cases for the 'Patient' page
         Then Vaccine details should be visible in the list with vaccine name <createdVaccineName> and brand <brandName> and lot number <lotNumber> and comments <comments>
 
         Examples:
-            | vaccineName | lotNumber | comments | createdVaccineName | brandName |
-            | Auto_Test_Vaccine (Healthcare) | 325698 | Consult the doctor before using this vaccine. | Auto_Test_Vaccine | Healthcare |
+            | vaccineName                    | lotNumber | comments                                      | createdVaccineName | brandName  |
+            | Auto_Test_Vaccine (Healthcare) | 325698    | Consult the doctor before using this vaccine. | Auto_Test_Vaccine  | Healthcare |
 
 
     Scenario Outline: Verify the "Managing Provider" is not able to add "Media" and validation displays if any mandatory field is not populated and Verify the "Managing Provider" is able to add "Media" for patient's medical record and 	Verify the "Managing provider" is able to search the "Media" and 	Verify the "Managing Provider" is able to delete the added "Media"
@@ -854,58 +855,114 @@ Feature: Test cases for the 'Patient' page
         When I checkmark, all the records under export records
         When I click on the button with text Export
 
-# //-----------------Patient-medical-record-results-------------------------//
 
-  Scenario Outline: Verify the "Managing Provider" is able to Create "New CBC Result" when all the fields are populated with valid data
-    When I populate data <patientName> in the "Search" field
-    When I click on the link text <patientName>
-    Then patient/dashboard page displays
-    When I click on the link text Medical Record
-    Then patient/diagnosis page displays
-    When I hover over the "Results" tab
-    Then I should see the following options in the dropdown
-      | Laboratory |
-      | Imaging    |
-      | Other      |
-    When Hover over link Laboratory
-    Then I should see the following options in the dropdown under dropdown option
-      | Laboratory CBC                  |
-      | Laboratory Chemistry            |
-      | Laboratory Liver Function Tests |
-      | Laboratory Lipid Tests          |
-      | Laboratory Endocrine            |
-      | Laboratory Coagulation          |
-      | Laboratory Others               |
-    When I click on the link text Laboratory CBC
-    Then result/laboratory_cbc page displays
-    When I click On "Delete" icon
-    When I click on the button with text New CBC Result
-    Then It redirects on the New CBC screen
-    When I clear date filed of report
-    When I click on the button with text Create
-    Then validation message Please enter date & time appears
-    When I click on the button with text Close
-    When I hover over the "Results" tab
-    When Hover over link Laboratory
-    When I click on the link text Laboratory CBC
-    When I click on the button with text New CBC Result
-    Then It redirects on the New CBC screen
-    When User should be able to upload file <image>
-    When I fill <wbc> value in WBC field
-    When I fill <hgb> value in Hgb field
-    When I fill <hct> value in Hct field
-    When I fill <plts> value in Plts field
-    When I fill <retic> value in retic field
-    When I fill <comment> data in comments field
-    When I click on the button with text Create
-    Then Success message CBC Result Added Succesfully ! appears
-    Then Added data <wbc> is successfully displaying in table
-    Then Added data <hgb> is successfully displaying in table
-    Then Added data <hct> is successfully displaying in table
-    Then Added data <plts> is successfully displaying in table
-    Then Added data <retic> is successfully displaying in table
-    Then Added data <comment> is successfully displaying in table
+    Scenario Outline: Verify the "Managing Provider" is able to Create "New CBC Result" when all the fields are populated with valid data
+        When I click on the second index link Dashboard - All Patients
+        When I populate data <patientName> in the "Search" field
+        When I click on the link text <patientName>
+        Then patient/dashboard page displays
+        When I click on the link text Medical Record
+        Then patient/diagnosis page displays
+        When I hover over the "Results" tab
+        Then I should see the following options in the dropdown
+            | Laboratory |
+            | Imaging    |
+            | Other      |
+        When Hover over link Laboratory
+        Then I should see the following options in the dropdown under dropdown option
+            | Laboratory CBC                  |
+            | Laboratory Chemistry            |
+            | Laboratory Liver Function Tests |
+            | Laboratory Lipid Tests          |
+            | Laboratory Endocrine            |
+            | Laboratory Coagulation          |
+            | Laboratory Others               |
+        When I click on the link text Laboratory CBC
+        Then result/laboratory_cbc page displays
+        When I click On "Delete" icon
+        When I click on the button with text New CBC Result
+        Then It redirects on the New CBC screen
+        When I clear date filed of report
+        When I click on the button with text Create
+        Then validation message Please enter date & time appears
+        When I click on the button with text Close
+        When I hover over the "Results" tab
+        When Hover over link Laboratory
+        When I click on the link text Laboratory CBC
+        When I click on the button with text New CBC Result
+        Then It redirects on the New CBC screen
+        When User should be able to upload file <image>
+        When I fill <wbc> value in WBC field
+        When I fill <hgb> value in Hgb field
+        When I fill <hct> value in Hct field
+        When I fill <plts> value in Plts field
+        When I fill <retic> value in retic field
+        When I fill <comment> data in comments field
+        When I click on the button with text Create
+        Then Success message CBC Result Added Succesfully ! appears
+        Then Added data <wbc> is successfully displaying in table
+        Then Added data <hgb> is successfully displaying in table
+        Then Added data <hct> is successfully displaying in table
+        Then Added data <plts> is successfully displaying in table
+        Then Added data <retic> is successfully displaying in table
+        Then Added data <comment> is successfully displaying in table
 
-    Examples:
-      | patientName       | image      | comment             | wbc  | hgb | hct  | plts | retic |
-      | Patient_Auto_Test | Picture(2) | this is your report | 14 |   8 | 10 |  210 |    11 |
+        Examples:
+            | patientName       | image      | comment             | wbc | hgb | hct | plts | retic |
+            | Patient_Auto_Test | Picture(2) | this is your report | 14  | 8   | 10  | 210  | 11    |
+
+    Scenario Outline: Verify the "Managing Provider" is not able to create "New XRAY Result" when the mandatory fields are not populated and Verify the "Managing Provider" is able to Create "New XRAY Result" when only the mandatory fields are populated with valid data and Verify the "Managing Provider" is able to delete "XRAY Result"
+        When I click on the link text Medical Record
+        When I hover over the "Results" tab
+        Then I should see the following options in the dropdown
+            | Laboratory |
+            | Imaging    |
+            | Other      |
+        When Hover over link Imaging
+        Then Imaging options should be visible in the dropdown under dropdown option
+            | XRAY       |
+            | CT         |
+            | MRI        |
+            | Ultrasound |
+            | Other      |
+        When I click on the link text XRAY
+        Then It redirects on the Patient_Auto_Test Ben's Imaging XRAY Results screen
+        Then Search and delete duplicate data <type>
+        When I click on the button with text New XRAY Result
+        Then It redirects on the New XRAY screen
+        When I click on the button with text Create
+        Then validation message This field is required. appears
+        Then validation message Please select at least one media file. appears
+        When I select date in start Date field
+        When I fill <type> data in type field
+        When I fill data <image> in search box under patient medical records
+        When I click on the checkbox
+        When I click on the button with text Create
+        Then Success message XRAY Result Added Succesfully ! appears
+        When I populate data <type> in the "Search" field
+        Then X-Ray result should be visilbe in the list with <type> and <description>
+        When I click On "Delete" icon
+        Then Deleted record should not be visible in the list
+
+        Examples:
+            | type          | image      |
+            | Digital X-ray | Picture(2) |
+
+    Scenario Outline: Verify the "Managing Provider" is able to Create "New XRAY Result" when all the fields are populated with valid data and Verify this created x-ray in mobile caregiver app
+        Then Search and delete duplicate data <type>
+        When I click on the button with text New XRAY Result
+        Then It redirects on the New XRAY screen
+        When I select date in start Date field
+        When I fill <type> data in type field
+        When User should be able to upload file <uploadImage>
+        When I fill data <image> in search box under patient medical records
+        When I click on the checkbox
+        When User fill <description> data in description field
+        When I click on the button with text Create
+        Then Success message XRAY Result Added Succesfully ! appears
+        When I populate data <type> in the "Search" field
+        Then X-Ray result should be visilbe in the list with <type> and <description>
+
+        Examples:
+            | type          | image      | uploadImage | description                                   |
+            | Digital X-ray | Picture(2) | Picture(1)  | A Digital X-ray is a modern imaging technique |
