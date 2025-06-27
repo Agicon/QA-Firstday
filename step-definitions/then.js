@@ -323,12 +323,12 @@ Then(/^Other provider records should be visilbe in the list with (.*) and (.*)$/
   await managingProviderAccountPage.verifyOtherProviderRecords(otherProvider, description);
 });
 
-Then(/^X-Ray result should be visilbe in the list with (.*) and (.*)$/, async (type, description) => {
-  await managingProviderAccountPage.verifyXrayDetails(type, description);
+Then(/^(.*) result should be visible in the list with all fields (.*) and (.*)$/, async (imagingOption, type, description) => {
+  await managingProviderAccountPage.verifyImagingRecordsDetailsWithAllFields(imagingOption, type, description);
 });
 
 Then(/^Imaging options should be visible in the dropdown under dropdown option$/, async (dataTable) => {
-   const expectedOptions = dataTable.rawTable.flat();
+  const expectedOptions = dataTable.rawTable.flat();
   const options = await $$('(//ul[@class="dropdown-menu"])[6]//a');
   const dropdownOption = await $('(//ul[@class="dropdown-menu"])[6]//a');
   console.log("Dropdown option:", await dropdownOption.getText());
@@ -345,6 +345,10 @@ Then(/^Imaging options should be visible in the dropdown under dropdown option$/
   }
   console.log("Extracted option texts:", optionTexts);
   await expect(optionTexts).toEqual(expectedOptions);
+});
+
+Then(/^(.*) result should be visible in the list with mandatory fields (.*)$/, async (imagingOption, type) => {
+  await managingProviderAccountPage.verifyImagingRecordsWithMandatoryFields(imagingOption, type);
 });
 
 

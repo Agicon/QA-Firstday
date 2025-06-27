@@ -252,6 +252,22 @@ class ManagingProviderAccountPage extends BasePage {
     return $("#type");
   }
 
+  get typeRecord() {
+    return $("(//tr[@class='odd'])[2]//td[3]");
+  }
+
+  get actMedia() {
+    return $("(//tr[@class='odd'])[2]//td[6]//a");
+  }
+
+  get descriptionRecord() {
+    return $("(//tr[@class='odd'])[2]//td[4]");
+  }
+
+  get actPaperClip() {
+    return $("(//tr[@class='odd'])[2]//td[5]//a");
+  }
+
   async settigsButtonIsDisplayed() {
     await this.settingsButton.waitForDisplayed({ timeout: 20000 });
     return await this.settingsButton.isDisplayed();
@@ -979,25 +995,26 @@ class ManagingProviderAccountPage extends BasePage {
     await this.typeField.setValue(value);
   }
 
-  async verifyXrayDetails(type, description) {
-    const xrayType = await $("(//tr[@class='odd'])[2]//td[3]");
-    await xrayType.waitForDisplayed({ timeout: 15000 });
-    const actType = await xrayType.getText();
-    const actDescription = await $("(//tr[@class='odd'])[2]//td[4]").getText();
+  async verifyImagingRecordsWithMandatoryFields(imagingOption, type) {
+    await this.typeRecord.waitForDisplayed({ timeout: 15000 });
+    const actType = await this.typeRecord.getText();
     await expect(actType).toEqual(type);
 
-    try {
-      await expect(actDescription).toEqual(description);
-      const actPaperClip = await $("(//tr[@class='odd'])[2]//td[5]//a");
-      if ((await actPaperClip.isDisplayed()) === true) {
-        console.log("✅ Details are matching");
-      } else {
-        throw new Error("❌ Details are not matching");
-      }
-    } catch (error) {}
+    if ((await this.actMedia.isDisplayed()) === true) {
+      console.log("✅ Details are matching");
+    } else {
+      throw new Error("❌ Details are not matching");
+    }
+  }
 
-    const actMedia = await $("(//tr[@class='odd'])[2]//td[6]//a");
-    if ((await actMedia.isDisplayed()) === true) {
+  async verifyImagingRecordsDetailsWithAllFields(imagingOption, type, description) {
+    await this.typeRecord.waitForDisplayed({ timeout: 15000 });
+    const actType = await this.typeRecord.getText();
+    const actDescription = await this.descriptionRecord.getText();
+    await expect(actType).toEqual(type);
+    await expect(actDescription).toEqual(description);
+
+    if ((await this.actPaperClip.isDisplayed()) === true && (await this.actMedia.isDisplayed()) === true) {
       console.log("✅ Details are matching");
     } else {
       throw new Error("❌ Details are not matching");
