@@ -629,7 +629,6 @@ When(/^I checkmark, all the records under export records$/, async () => {
   await managingProviderAccountPage.selectCheckboxUnderExportRecords();
 });
 
-
 When(/^Hover over link (.*)$/, async (link) => {
   await managingProviderAccountPage.hoverOverOnLink(link);
 });
@@ -685,6 +684,14 @@ When(/^Click on temperature view detail link$/, async () => {
 When(/^I click on the link (.*) having third index$/, async (text) => {
   await managingProviderAccountPage.clickOnThirdIndexLinkText(text);
 });
+When(/^I click on the imaging>>other button$/, async () => {
+  await managingProviderAccountPage.clickOnImaging_Other_Button();
+});
+
+When(/^I click on the results>>other button$/, async () => {
+  await managingProviderAccountPage.clickOnResults_OtherButton();
+});
+
 
 
 // =================================Android======================================//

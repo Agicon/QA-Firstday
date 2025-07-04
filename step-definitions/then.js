@@ -364,8 +364,23 @@ Then(/^(.*) result should be visible in the list with mandatory fields (.*)$/, a
 
 Then(/^Link text (.*) is displaying$/, async (text) => {
   await managingProviderAccountPage.linkTextIsDisplayed(text);
+
+});
+Then(/^Result of Imaging>>other should be visible in the list with mandatory fields (.*)$/, async (type) => {
+  await managingProviderAccountPage.verifyImaging_Other_MandatoryRecord(type);
 });
 
+Then(/^Result of Imaging>>other should be visible in the list with all fields (.*) and (.*)$/, async (type, result) => {
+  await managingProviderAccountPage.verifyImaging_Other_AllFieldsRecord(type, result);
+});
+
+Then(/^Details of results>>other mandatroy fields should be visible in the list with (.*) and (.*) and (.*)$/, async (type, description, comments) => {
+  await managingProviderAccountPage.verify_Results_other_MandatoryFields(type, description, comments);
+});
+
+Then(/^Details of results>>other module should be visible in the list with all fields (.*) and (.*) and (.*)$/, async (type, description, comments) => {
+  await managingProviderAccountPage.verify_Results_other_AllFields(type, description, comments);
+});
 
 Then(/^Heart rate graph is displaying$/, async () => {
   await managingProviderAccountPage.heartRateGraphIsDisplayed();
@@ -496,7 +511,8 @@ Then(/^I get navigated to (.*) screen$/, async (text) => {
 });
 
 Then(/^I click on the back button$/, async () => {
-  await androidPage.clickOnModuleBackButton();
+  // await androidPage.clickOnModuleBackButton();
+  await browser.back();
 });
 
 Then(/^The selected image (.*) should get updated and displays on "Caregiver's" main screen of the app$/, async (pic) => {
@@ -513,4 +529,17 @@ Then(/^User click on the medication tab$/, async () => {
 
 Then(/^Details of medication should be visible in the list with (.*) and (.*) and (.*) and (.*)$/, async (medicationName, currentDose_And_measurement, frequency, interval) => {
   await androidPage.verifyMobileMedicationDetails(medicationName, currentDose_And_measurement, frequency, interval);
+});
+
+Then(/^User click on the back button under permission screen$/, async () => {
+  await androidPage.clickonbackbutton.waitForDisplayed({ timeout: 15000 });
+  await androidPage.clickonbackbutton.click();
+});
+
+Then(/^Verfiy all the modules on provider dashboard$/, async () => {
+  await androidPage.verifyProviderDashboard();
+});
+
+Then(/^Verify all the feautres under settings module for provider app$/, async () => {
+  await androidPage.verifyProviderSettingsModule();
 });
