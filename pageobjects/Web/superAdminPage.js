@@ -141,6 +141,7 @@ class SuperAdminPage extends BasePage {
   async clickOnButtonWithText(text) {
     const buttonText = await $("//button[contains(text(),'" + text + "')]");
     await buttonText.waitForDisplayed({ timeout: 20000 });
+    await buttonText.waitForClickable({ timeout: 20000 });
     if ((await buttonText.isDisplayed()) === true) {
       await buttonText.click();
     } else {
@@ -345,9 +346,18 @@ class SuperAdminPage extends BasePage {
   }
 
   async searchAndDeleteDuplicateData(clinicName) {
-    await this.searchField.clearValue();
-    await this.searchField.setValue(clinicName);
-    await browser.pause(3000);
+   try {
+     await this.searchField.clearValue();
+     await this.searchField.setValue(clinicName);
+     await browser.pause(3000);
+   } catch (error) {
+     console.log("Search box is not displayed in try block, executing catch block===>");
+     await browser.refresh();
+     await this.searchField.waitForDisplayed({ timeout: 15000 });
+     await this.searchField.clearValue();
+     await this.searchField.setValue(clinicName);
+     await browser.pause(3000);
+   }
 
     try {
       for (let i = 0; i < 4; i++) {

@@ -34,7 +34,7 @@ class AndroidPage extends BasePage {
   }
 
   get deviceLocationPopup() {
-    return $("//android.widget.Button[@resource-id='com.android.permissioncontroller:id/permission_deny_button']");
+    return $('//android.widget.Button[@resource-id="com.android.permissioncontroller:id/permission_allow_button"]');
   }
 
   get notificationAlertPermission() {
@@ -175,6 +175,50 @@ class AndroidPage extends BasePage {
 
   get verifyImage() {
     return $('//android.widget.ImageView[@resource-id="com.app.neonatal.staging:id/iv_child_profile"]');
+  }
+
+  get allPatientsTab() {
+    return $("//android.widget.TextView[contains(@text,'All Patients')]");
+  }
+
+  get myPatientsTab() {
+    return $("//android.widget.TextView[contains(@text,'My Patients')]");
+  }
+
+  get alertsTab() {
+    return $("//android.widget.TextView[contains(@text,'Alerts')]");
+  }
+
+  get settingsTab() {
+    return $("//android.widget.TextView[contains(@text,'Settings')]");
+  }
+
+  get audioAlertSettingsTab() {
+    return $("//android.widget.TextView[contains(@text,'Audio Alert Setting')]");
+  }
+
+  get myProfileTab() {
+    return $("//android.widget.TextView[contains(@text,'My Profile')]");
+  }
+
+  get changePasswordTab() {
+    return $("//android.widget.TextView[contains(@text,'Change Password')]");
+  }
+
+  get contactUsTab() {
+    return $("//android.widget.TextView[contains(@text,'Contact Us')]");
+  }
+
+  get termsAndConditionsTab() {
+    return $("//android.widget.TextView[contains(@text,'Terms & Conditions')]");
+  }
+
+  get privacyPolicyTab() {
+    return $("//android.widget.TextView[contains(@text,'Privacy Policy')]");
+  }
+
+  get logOutTab() {
+    return $("//android.widget.TextView[contains(@text,'Logout')]");
   }
 
   async open(url) {
@@ -647,7 +691,7 @@ class AndroidPage extends BasePage {
   }
 
   async verifyScreenIsDisplayed(data) {
-    const title = await $("//android.widget.TextView[contains(@text,'" + data + "')]");
+    const title = await $("//android.widget.TextView[contains(@text,'" + data + "')]|//android.widget.Button[contains(@text,'" + data + "')]|//android.widget.TextView[contains(@text,'" + data + "')]|//android.widget.Button[contains(@text,'" + data + "')]|//android.widget.EditText[contains(@text,'" + data + "')]");
     await title.waitForDisplayed({ timeout: 15000 });
     if ((await title.isDisplayed()) === true) {
       console.log("✅ " + data + " screen is dispalyed");
@@ -658,6 +702,7 @@ class AndroidPage extends BasePage {
 
   async clickOnOption(data) {
     const option = await $('//android.widget.TextView[contains(@text,"' + data + '")]');
+    await option.scrollIntoView();
     await option.waitForDisplayed({ timeout: 15000 });
     if ((await option.isDisplayed()) === true) {
       await option.click();
@@ -690,13 +735,13 @@ class AndroidPage extends BasePage {
   }
 
   async downloadApp() {
-        const downloadDir = path.resolve(__dirname, "../../downloadApps");
-if (!fs.existsSync(downloadDir)) {
-  fs.mkdirSync(downloadDir, { recursive: true });
-  console.log(`Created folder: ${downloadDir}`);
-} else {
-  console.log(`Folder already exists: ${downloadDir}`);
-}
+    const downloadDir = path.resolve(__dirname, "../../downloadApps");
+    if (!fs.existsSync(downloadDir)) {
+      fs.mkdirSync(downloadDir, { recursive: true });
+      console.log(`Created folder: ${downloadDir}`);
+    } else {
+      console.log(`Folder already exists: ${downloadDir}`);
+    }
     await this.downloadAnywayButton.waitForDisplayed({ timeout: 35000 });
     await this.downloadAnywayButton.click();
     await browser.pause(60000);
@@ -730,7 +775,7 @@ if (!fs.existsSync(downloadDir)) {
 
   async selectChildOption(option) {
     await $("//android.widget.TextView[contains(@text,'" + option + "')]").waitForDisplayed({ timeout: 15000 });
-    (await $("//android.widget.TextView[contains(@text,'" + option + "')]")).click();
+    await $("//android.widget.TextView[contains(@text,'" + option + "')]").click();
   }
 
   async clickOnMedicationTab() {
@@ -752,6 +797,78 @@ if (!fs.existsSync(downloadDir)) {
     expect(actDose).toEqual(currentDose_And_measurement);
     expect(actFrequency).toEqual(frequency);
     expect(actInterval).toEqual(interval);
+  }
+
+  async allPatientsTabIsDisplayed() {
+    await this.allPatientsTab.waitForDisplayed({ timeout: 15000 });
+    return await this.allPatientsTab.isDisplayed();
+  }
+
+  async myPatientsTabIsDisplayed() {
+    await this.myPatientsTab.waitForDisplayed({ timeout: 15000 });
+    return await this.myPatientsTab.isDisplayed();
+  }
+
+  async alertsTabIsDisplayed() {
+    await this.alertsTab.waitForDisplayed({ timeout: 15000 });
+    return await this.alertsTab.isDisplayed();
+  }
+
+  async settingsTabIsDisplayed() {
+    await this.settingsTab.waitForDisplayed({ timeout: 15000 });
+    return await this.settingsTab.isDisplayed();
+  }
+
+  async verifyProviderDashboard() {
+    await this.allPatientsTabIsDisplayed();
+    await this.myPatientsTabIsDisplayed();
+    await this.alertsTabIsDisplayed();
+    await this.settingsTabIsDisplayed();
+  }
+
+  async audioAlertSettingsTabIsDisplayed() {
+    await this.audioAlertSettingsTab.waitForDisplayed({ timeout: 15000 });
+    return await this.audioAlertSettingsTab.isDisplayed();
+  }
+
+  async myProfileTabIsDisplayed() {
+    await this.myProfileTab.waitForDisplayed({ timeout: 15000 });
+    return await this.myProfileTab.isDisplayed();
+  }
+
+  async changePasswordTabIsDisplayed() {
+    await this.changePasswordTab.waitForDisplayed({ timeout: 15000 });
+    return await this.changePasswordTab.isDisplayed();
+  }
+
+  async contactUsTabIsDisplayed() {
+    await this.contactUsTab.waitForDisplayed({ timeout: 15000 });
+    return await this.contactUsTab.isDisplayed();
+  }
+
+  async termsAndConditionsTabIsDisplayed() {
+    await this.termsAndConditionsTab.waitForDisplayed({ timeout: 15000 });
+    return await this.termsAndConditionsTab.isDisplayed();
+  }
+
+  async privacyPolicyTabIsDisplayed() {
+    await this.privacyPolicyTab.waitForDisplayed({ timeout: 15000 });
+    return await this.privacyPolicyTab.isDisplayed();
+  }
+
+  async logOutTabIsDisplayed() {
+    await this.logOutTab.waitForDisplayed({ timeout: 15000 });
+    return await this.logOutTab.isDisplayed();
+  }
+
+  async verifyProviderSettingsModule() {
+    await this.audioAlertSettingsTabIsDisplayed();
+    await this.myProfileTabIsDisplayed();
+    await this.changePasswordTabIsDisplayed();
+    await this.contactUsTabIsDisplayed();
+    await this.termsAndConditionsTabIsDisplayed();
+    await this.privacyPolicyTabIsDisplayed();
+    await this.logOutTabIsDisplayed();
   }
 }
 module.exports = new AndroidPage();

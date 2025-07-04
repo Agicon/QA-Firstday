@@ -6,14 +6,45 @@ Feature: Test cases for login page
     When User leave the "Password field" empty And populate the <invalidEmail> "Email field" And click on "Login" button
     Then User is not able to login
     When User enter invalid <invalidEmail> and <invalidPassword> in their respective fields And click on "Login" button
-    Then Validation message appears This Email is not registered with us
+    Then Validation message appears Incorrect username or password.
     Then User is not able to login
     When User enter valid <validLoginEmail> and <invalidPassword> in their respective fields And click on "Login" button
-    Then Validation message appears Email or Password is incorrect
+    Then Validation message appears Incorrect username or password.
     Then User is not able to login
     When login to app using <validLoginEmail>
     Then Validation message appears Login Success
     Then Verify that user is on FHDA moblie provider homepage
+    Then Verfiy all the modules on provider dashboard
+    When I click on All Patients option
+    Then I get navigated to Search Patient screen
+    When I click on My Patients option
+    Then I get navigated to Search Patient screen
+    When I click on Alerts option
+    Then I get navigated to My Patient screen
+    When I click on Settings option
+    Then Verify all the feautres under settings module for provider app
+    Then I get navigated to Audio Alert Setting screen
+    When I click on Audio Alert Setting option
+    Then I get navigated to Vital Sign Alert screen
+    Then I click on the back button
+    When I click on My Profile option
+    Then I get navigated to My Profile screen
+    Then I click on the back button
+    When I click on Change Password option
+    Then I get navigated to Old Password screen
+    Then I click on the back button
+    When I click on Contact Us option
+    Then I get navigated to Submit screen
+    Then I click on the back button
+    When I click on Terms & Conditions option
+    Then I get navigated to Terms & Conditions screen
+    Then I click on the back button
+    When I click on Privacy Policy option
+    Then I get navigated to Privacy Policy screen
+    Then I click on the back button
+    When I click on Logout option
+    Then I get navigated to Yes screen
+    Then I click on the back button
     When User navigate to the "Settings" tab
     When User click on the "Logout" option
     Then A logout confirmation popup displays
