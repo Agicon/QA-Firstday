@@ -622,7 +622,6 @@ When(/^I checkmark, all the records under export records$/, async () => {
   await managingProviderAccountPage.selectCheckboxUnderExportRecords();
 });
 
-
 When(/^Hover over link (.*)$/, async (link) => {
   await managingProviderAccountPage.hoverOverOnLink(link);
 });
@@ -654,6 +653,15 @@ When(/^I clear date filed of report$/, async () => {
 When(/^I fill (.*) data in type field$/, async (value) => {
   await managingProviderAccountPage.fillTypeField(value);
 });
+
+When(/^I click on the imaging>>other button$/, async () => {
+  await managingProviderAccountPage.clickOnImaging_Other_Button();
+});
+
+When(/^I click on the results>>other button$/, async () => {
+  await managingProviderAccountPage.clickOnResults_OtherButton();
+});
+
 
 
 // =================================Android======================================//

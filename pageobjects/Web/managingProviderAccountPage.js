@@ -193,7 +193,7 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   get iframe() {
-    return $("//iframe[@aria-label='Paste Area']");
+    return $("//iframe[@aria-label='Paste Area']|//iframe[@id='hubspot-conversations-iframe']");
   }
 
   get descriptionField() {
@@ -266,6 +266,38 @@ class ManagingProviderAccountPage extends BasePage {
 
   get actPaperClip() {
     return $("(//tr[@class='odd'])[2]//td[5]//a");
+  }
+
+  get otherTypeRecord() {
+    return $("//tr[@class='odd']//td[3]");
+  }
+
+  get imaging_OtherButton() {
+    return $("(//a[contains(text(),'Other')])[5]");
+  }
+
+  get otherResultRecord() {
+    return $("//tr[@class='odd']//td[4]");
+  }
+
+  get actOther_Paperclip() {
+    return $("//tr[@class='odd']//td[5]//a");
+  }
+
+  get results_OtherButton() {
+    return $("(//a[contains(text(),'Other')])[6]");
+  }
+
+  get resultsOtherTypeRecord() {
+    return $("//tr[@class='odd']//td[2]");
+  }
+
+  get resultsCommentsRecord() {
+    return $("//tr[@class='odd']//td[6]");
+  }
+
+  get welcomeAiMessageCancelButton() {
+    return $("//button[@shape='circle']");
   }
 
   async settigsButtonIsDisplayed() {
@@ -1019,6 +1051,67 @@ class ManagingProviderAccountPage extends BasePage {
     } else {
       throw new Error("❌ Details are not matching");
     }
+  }
+
+  async verifyImaging_Other_MandatoryRecord(type) {
+    await this.otherTypeRecord.waitForDisplayed({ timeout: 15000 });
+    const actType = await this.otherTypeRecord.getText();
+    await expect(actType).toEqual(type);
+  }
+
+  async clickOnImaging_Other_Button() {
+    await this.imaging_OtherButton.waitForDisplayed({ timeout: 15000 });
+    await this.imaging_OtherButton.click();
+  }
+
+  async verifyImaging_Other_AllFieldsRecord(type, result) {
+    await this.otherTypeRecord.waitForDisplayed({ timeout: 15000 });
+    const actType = await this.otherTypeRecord.getText();
+    const actResult = await this.otherResultRecord.getText();
+    await expect(actType).toEqual(type);
+    await expect(actResult).toEqual(result);
+    if ((await this.actOther_Paperclip.isDisplayed()) === true) {
+      console.log("✅ Details are matching");
+    } else {
+      throw new Error("❌ Details are not matching");
+    }
+  }
+
+  async clickOnResults_OtherButton() {
+    await this.results_OtherButton.waitForDisplayed({ timeout: 15000 });
+    await this.results_OtherButton.click();
+  }
+
+  async verify_Results_other_MandatoryFields(type, result, comments) {
+    await this.resultsOtherTypeRecord.waitForDisplayed({ timeout: 15000 });
+    const actType = await this.resultsOtherTypeRecord.getText();
+    const actResult = await this.otherResultRecord.getText();
+    const actComments = await this.resultsCommentsRecord.getText();
+    await expect(actType).toEqual(type);
+    await expect(actResult).toEqual(result);
+    await expect(actComments).toEqual(comments);
+  }
+
+  async verify_Results_other_AllFields(type, result, comments) {
+    await this.resultsOtherTypeRecord.waitForDisplayed({ timeout: 15000 });
+    const actType = await this.resultsOtherTypeRecord.getText();
+    const actResult = await this.otherResultRecord.getText();
+    const actComments = await this.resultsCommentsRecord.getText();
+    await expect(actType).toEqual(type);
+    await expect(actResult).toEqual(result);
+    await expect(actComments).toEqual(comments);
+    if ((await this.actOther_Paperclip.isDisplayed()) === true) {
+      console.log("✅ Details are matching");
+    } else {
+      throw new Error("❌ Details are not matching");
+    }
+  }
+
+  async clickOnWelcomeAiMessageButton() {
+    await browser.switchToFrame(await this.iframe);
+    await this.welcomeAiMessageCancelButton.waitForDisplayed({ timeout: 15000 });
+    await this.welcomeAiMessageCancelButton.click();
+    await browser.switchToFrame(null);
   }
 }
 module.exports = new ManagingProviderAccountPage();
