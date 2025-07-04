@@ -102,6 +102,15 @@ class SuperAdminPage extends BasePage {
   get validationMessage() {
     return $("//div[@class='toast-message']");
   }
+
+   get table() {
+    return $("//table[@class='table']|//div[@id='example_wrapper']|//table[@id='respiratory-settings-table']");
+  }
+  
+     get form() {
+    return $("//form[@class='form-horizontal']");
+  }
+  
   /**
    * a method to encapsule automation code to interact with the page
    * e.g. to login using username and password
@@ -469,6 +478,24 @@ class SuperAdminPage extends BasePage {
     console.log("Current URL:", currentUrl);
     expect(currentUrl).toContain(text);
   }
+
+    async tableIsDisplayed() {
+    if ((await this.table.isDisplayed()) === true) {
+      console.log("successfully redirect on page and table is displaying");
+    } else {
+      throw new Error("Failed to redirect on page, table is not displaying");
+    }
+  }
+
+      async formIsDisplayed() {
+    if ((await this.form.isDisplayed()) === true) {
+      console.log("successfully redirect on page and form is displaying");
+    } else {
+      throw new Error("Failed to redirect on page, form is not displaying");
+    }
+  }
+
+  
 }
 
 module.exports = new SuperAdminPage();

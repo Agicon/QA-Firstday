@@ -361,6 +361,11 @@ When(/^Click on select secondary provider dropdown$/, async () => {
   await customerAccountPage.clickOnSecondaryProviderDropdown();
 });
 
+When(/^I hover over the "Alerts" icon$/, async () => {
+  await customerAccountPage.hoverOverAlertsIcon();
+});
+
+
 //=============================Web-ManagingProviderAccount======================//
 
 When(/^I login on web portal using invalid credentials (.*) and (.*)$/, async (invalidName, invalidPassword) => {
@@ -503,6 +508,7 @@ When(/^I click on the link text (.*)$/, async (text) => {
   await managingProviderAccountPage.clickOnLinkText(text);
 });
 
+
 When(/^I populate fields (.*) but I populate "Email field" with already registered email$/, async (text) => {
   await managingProviderAccountPage.fillAlreadyRegisteredEmailForOtherProvider(text);
 });
@@ -618,6 +624,7 @@ When(/^I fill data (.*) in search box under patient medical records$/, async (im
 When(/^I hover over the "Results" tab$/, async () => {
   await managingProviderAccountPage.hoverOverResultsTab();
 });
+
 When(/^I checkmark, all the records under export records$/, async () => {
   await managingProviderAccountPage.selectCheckboxUnderExportRecords();
 });
@@ -653,6 +660,30 @@ When(/^I clear date filed of report$/, async () => {
 
 When(/^I fill (.*) data in type field$/, async (value) => {
   await managingProviderAccountPage.fillTypeField(value);
+});
+
+When(/^Hover over "Orders" tab$/, async () => {
+  await managingProviderAccountPage.hoverOverOrdersTab();
+});
+
+When(/^Click on heart rate view detail link$/, async () => {
+  await managingProviderAccountPage.clickOnHeartRateViewDetailsLink();
+});
+
+When(/^Click on respiratory rate view detail link$/, async () => {
+  await managingProviderAccountPage.clickOnRespiratoryRateViewDetailsLink();
+});
+
+When(/^Click on O2 saturation view detail link$/, async () => {
+  await managingProviderAccountPage.clickOnO2SaturationViewDetailsLink();
+});
+
+When(/^Click on temperature view detail link$/, async () => {
+  await managingProviderAccountPage.clickOnTemperatureViewDetailsLink();
+});
+
+When(/^I click on the link (.*) having third index$/, async (text) => {
+  await managingProviderAccountPage.clickOnThirdIndexLinkText(text);
 });
 
 

@@ -214,6 +214,10 @@ class CustomerAccountPage extends BasePage {
     return $("(//span[@class='select2-selection select2-selection--multiple'])[1]");
   }
 
+    get alertsIcon() {
+    return $("(//div[@id='MENU']//a[contains(text(),'Alerts')])[1]");
+  }
+
   async managingProviderIsDisplayed() {
     await this.managingProviderLink.waitForDisplayed({ timeut: 25000 });
     return await this.managingProviderLink.isDisplayed();
@@ -715,6 +719,19 @@ class CustomerAccountPage extends BasePage {
     const listOption = await $("//li[contains(text(),'" + option + "')]");
     await listOption.waitForDisplayed({ timeout: 15000 });
     await listOption.click();
+  }
+
+   async hoverOverAlertsIcon() {
+ await this.alertsIcon.moveTo();
+  }
+
+   async secondIndexLinkTextIsDisplayed(text) {
+    const linkText=await $("(//a[contains(text(),'"+text+"')])[2]");
+ if ((await linkText.isDisplayed()) === true) {
+      console.log("Second index link text is displaying");
+    } else {
+      throw new Error("Second index link text is not displaying");
+    }
   }
 }
 module.exports = new CustomerAccountPage();

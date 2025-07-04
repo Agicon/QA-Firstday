@@ -51,6 +51,7 @@ async open(url) {
     var data = TestUtils.getUserCredetials(url); 
     await browser.pause(1000);
     var url = data[0];
+    //  const loginUrl = process.env.WEB_PROVIDER_URL
     console.log("LOGIN PAGE URL:" + url);
     await browser.url(url);
   } 

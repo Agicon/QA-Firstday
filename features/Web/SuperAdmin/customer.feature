@@ -3,6 +3,42 @@ Feature: Test cases for create customer page
   Scenario Outline: User logged in as admin
     Given Open web url <url>
     When Web app login using <userA>
+    Then admin/getUserAnalyze page displays
+    Then It redirects on the Dashboard screen
+    Then Table is displaying on screen
+    When I click on the "Customers" tab
+    Then administrator page displays
+    Then I navigate to the "Customers" page
+    Then Table is displaying on screen
+    When I click on the second index link Contact Us
+    Then contact_us page displays
+    Then It redirects on the Contact Us screen
+    Then Table is displaying on screen
+    When I click on the second index link CMS
+    Then CMS page displays
+    Then It redirects on the CMS screen
+    Then Table is displaying on screen
+    When I click on the second index link Upload LOINC CSV
+    Then loinccsv page displays
+    Then It redirects on the Upload LOINC CSV screen
+    Then Table is displaying on screen
+    When I click on the second index link Upload RxNorm RRF
+    Then rxnormRRF page displays
+    Then It redirects on the Upload RxNorm RRF screen
+    Then Table is displaying on screen
+    When I hover over the "Settings" icon
+    Then Link text Logout is displaying
+    Then Link text Profile is displaying
+    Then Link text Change Password is displaying
+    When I click on the link text Profile
+    Then profile page displays
+    Then It redirects on the Update Profile screen
+    Then Form is displaying on screen
+    When I hover over the "Settings" icon
+    When I click on the link text Change Password
+    Then changePassword page displays
+    Then Form is displaying on screen
+    Then It redirects on the Change Password screen
 
     Examples:
       | url      | userA |
@@ -63,7 +99,7 @@ Feature: Test cases for create customer page
 
     Examples:
       | url      | userA | invalidData | validData | validPhone |
-      | loginUrl | admin | 0           | Testing   | 2026839019 |
+      | loginUrl | admin |           0 | Testing   | 2026839019 |
 
   Scenario Outline: Verify the "Super Admin" is able to create "New Customer" when only mandatory fields are populated and check validation when using already registered email
     When I click on the "Customers" tab
@@ -92,7 +128,7 @@ Feature: Test cases for create customer page
 
     Examples:
       | validClinicName  | validFirstName | validLastName | validNumberOfLicence |
-      | Auto_Test_Clinic | David          | William       | 998                  |
+      | Auto_Test_Clinic | David          | William       |                  998 |
 
   Scenario Outline: Verify the "Super Admin" is able to create "New Customer" when all the fields are populated,view customer verification
     When I click on the "Customers" tab
@@ -142,7 +178,7 @@ Feature: Test cases for create customer page
 
     Examples:
       | validClinicName  | validFirstName | validLastName | validNumberOfLicence | validPhone | validZip | validInformation | country | state | city   | invalidData | updatedClinicName     | updatedFirstName      | updatedLastName      |
-      | Auto_Test_Clinic | John           | William       | 98                   | 3652984561 | 10001    | I am QA engg.    | India   | New   | tester | 2           | UpdateAutomatedClinic | updatedAutomatedFirst | updatedAutomatedLast |
+      | Auto_Test_Clinic | John           | William       |                   98 | 3652984561 |    10001 | I am QA engg.    | India   | New   | tester |           2 | UpdateAutomatedClinic | updatedAutomatedFirst | updatedAutomatedLast |
 
   Scenario Outline: Verify the functionality of active and inactive Status
     When I click on the "Customers" tab

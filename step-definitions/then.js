@@ -48,6 +48,13 @@ Then(/^I Search data (.*)$/, async (data) => {
   await superAdminPage.searchData(data);
 });
 
+Then(/^Table is displaying on screen$/, async () => {
+  await superAdminPage.tableIsDisplayed();
+});
+
+Then(/^Form is displaying on screen$/, async () => {
+  await superAdminPage.formIsDisplayed();
+});
 // ======================================Web-CustomerAccount=============================================//
 
 Then(/^Verify that user successfully redirected on homepage$/, async () => {
@@ -132,6 +139,10 @@ Then(/^(.*) page displays$/, async (text) => {
 
 Then(/^Search and active if provider (.*) is already inactive under (.*) section$/, async (providerName, button) => {
   await customerAccountPage.searchAndActive(providerName, button);
+});
+
+Then(/^Second index Link text (.*) is displaying$/, async (text) => {
+  await customerAccountPage.secondIndexLinkTextIsDisplayed(text);
 });
 
 // ===============================Master_Menu=============================
@@ -351,7 +362,27 @@ Then(/^(.*) result should be visible in the list with mandatory fields (.*)$/, a
   await managingProviderAccountPage.verifyImagingRecordsWithMandatoryFields(imagingOption, type);
 });
 
+Then(/^Link text (.*) is displaying$/, async (text) => {
+  await managingProviderAccountPage.linkTextIsDisplayed(text);
+});
 
+
+Then(/^Heart rate graph is displaying$/, async () => {
+  await managingProviderAccountPage.heartRateGraphIsDisplayed();
+});
+
+
+Then(/^Respiratory rate graph is displaying$/, async () => {
+  await managingProviderAccountPage.respiratoryGraphIsDisplayed();
+});
+
+Then(/^O2 saturation graph is displaying$/, async () => {
+  await managingProviderAccountPage.saturationGraphIsDisplayed();
+});
+
+Then(/^Temperature graph is displaying$/, async () => {
+  await managingProviderAccountPage.temperatureGraphIsDisplayed();
+});
 
 //---------------------------------Android-Cases------------------------------------//
 

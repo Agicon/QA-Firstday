@@ -268,6 +268,49 @@ class ManagingProviderAccountPage extends BasePage {
     return $("(//tr[@class='odd'])[2]//td[5]//a");
   }
 
+    get ordersTab() {
+    return $("//a[contains(text(),'Orders')]");
+  }
+
+      get heartRateViewDetail() {
+    return $("(//a[@title='View details'])[1]");
+  }
+
+        get respiratoryRateViewDetail() {
+    return $("(//a[@title='View details'])[2]");
+  }
+
+      get O2SaturationViewDetail() {
+    return $("(//a[@title='View details'])[3]");
+  }
+
+      get temperatureViewDetail() {
+    return $("(//a[@title='View details'])[4]");
+  }
+
+      get heartRateGraph() {
+    return $("#heartRate_graph");
+  }
+
+        get respiratoryRateGraph() {
+    return $("#respiratoryRate_graph");
+  }
+      get O2SaturationGraph() {
+    return $("#saturationRate_graph");
+  }
+
+      get temperatureGraph() {
+    return $("#temperature_graph");
+  }
+
+        get closeECGpopupButton() {
+    return $("(//button[@class='close'])[1]");
+  }
+
+   get closeSpO2popupButton() {
+    return $("(//button[@class='close'])[1]");
+  }
+  
   async settigsButtonIsDisplayed() {
     await this.settingsButton.waitForDisplayed({ timeout: 20000 });
     return await this.settingsButton.isDisplayed();
@@ -634,6 +677,15 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
+    async linkTextIsDisplayed(text) {
+    const linkText = await $("//a[contains(text(),'" + text + "')]");
+    await linkText.waitForClickable({ timeout: 15000 });
+    if ((await linkText.isDisplayed()) === true) {
+      console.log(" link displayed");
+    } else {
+      throw new Error("link is not displaying: " + text);
+    }
+  }
   async verifyCreatedOtherProvider(specialty, name, status) {
     await $("(//tr[@class='odd']//td)[2]").waitForDisplayed({ timeout: 15000 });
     const actSpecialty = await $("(//tr[@class='odd']//td)[2]").getText();
@@ -1018,6 +1070,87 @@ class ManagingProviderAccountPage extends BasePage {
       console.log("✅ Details are matching");
     } else {
       throw new Error("❌ Details are not matching");
+    }
+  }
+  async hoverOverOrdersTab() {
+    await this.ordersTab.moveTo();
+  }
+
+   async clickOnHeartRateViewDetailsLink(option) {
+    if ((await this.heartRateViewDetail.isDisplayed()) === true) {
+      console.log(" link displayed");
+      await this.heartRateViewDetail.click();
+    } else {
+      throw new Error("link is not displaying: " + option);
+    }
+  }
+
+     async clickOnRespiratoryRateViewDetailsLink(option) {
+    if ((await this.respiratoryRateViewDetail.isDisplayed()) === true) {
+      console.log(" link displayed");
+      await this.respiratoryRateViewDetail.click();
+    } else {
+      throw new Error("link is not displaying: " + option);
+    }
+  }
+
+      async clickOnO2SaturationViewDetailsLink(option) {
+    if ((await this.O2SaturationViewDetail.isDisplayed()) === true) {
+      console.log(" link displayed");
+      await this.O2SaturationViewDetail.click();
+    } else {
+      throw new Error("link is not displaying: " + option);
+    }    
+  }
+
+        async clickOnTemperatureViewDetailsLink(option) {
+    if ((await this.temperatureViewDetail.isDisplayed()) === true) {
+      console.log(" link displayed");
+      await this.temperatureViewDetail.click();
+    } else {
+      throw new Error("link is not displaying: " + option);
+    }
+  }
+  
+    async clickOnThirdIndexLinkText(text) {
+    const linkText = await $("(//a[contains(text(),'" + text + "')])[3]");
+    await linkText.waitForClickable({ timeout: 10000 });
+    if ((await linkText.isDisplayed()) === true) {
+      await linkText.click();
+    } else {
+      throw new Error("link is not displaying: " + text);
+    }
+  }
+
+      async heartRateGraphIsDisplayed() {
+    if ((await this.heartRateGraph.isDisplayed()) === true) {
+      console.log("Graph displayed");
+    } else {
+      throw new Error("Heart rate graph is not displayed");
+    }
+  }
+
+     async respiratoryGraphIsDisplayed() {
+    if ((await this.respiratoryRateGraph.isDisplayed()) === true) {
+      console.log("Graph displayed");
+    } else {
+      throw new Error("Respiratory rate graph is not displayed");
+    }
+  }
+
+     async saturationGraphIsDisplayed() {
+    if ((await this.O2SaturationGraph.isDisplayed()) === true) {
+      console.log("Graph displayed");
+    } else {
+      throw new Error("O2 saturation graph is not displayed");
+    }
+  }
+
+     async temperatureGraphIsDisplayed() {
+    if ((await this.temperatureGraph.isDisplayed()) === true) {
+      console.log("Graph displayed");
+    } else {
+      throw new Error("Temperature graph is not displayed");
     }
   }
 }
