@@ -399,6 +399,30 @@ Then(/^Temperature graph is displaying$/, async () => {
   await managingProviderAccountPage.temperatureGraphIsDisplayed();
 });
 
+Then(/^Respiratory "Bottle method" details should be visible in the list with (.*) and (.*) and (.*) and (.*)$/, async (methodOption, flowRate, oxygen, managingProvider) => {
+  await managingProviderAccountPage.VerifyRespiratoryBottleMethodDetails(methodOption, flowRate, oxygen, managingProvider);
+});
+
+Then(/^Respiratory "Room Air Concentrator method" details should be visible in the list with (.*) and (.*) and (.*) and (.*)$/, async (updatedMethodOption, updatedFlow, additionalSettings, managingProvider) => {
+  await managingProviderAccountPage.VerifyRespiratoryRoomAirConcentratorMethodDetails(updatedMethodOption, updatedFlow, additionalSettings, managingProvider);
+});
+
+Then(/^Verify that "End date" is visible in the list$/, async () => {
+  await managingProviderAccountPage.verifyEndDate();
+});
+
+Then(/^Tracker options should be visible under dropdown$/, async (dataTable) => {
+  await managingProviderAccountPage.verifyTrackerOptions(dataTable);
+});
+
+Then(/^Verify multiple same validation messages on popup with text (.*)$/, async (text) => {
+  await managingProviderAccountPage.verifyMultipleValidationMessages(text);
+});
+
+Then(/^Growth details should be visible in the list with (.*) and (.*) and (.*) and (.*) and (.*) and (.*) and (.*)$/, async (heightcm, heightInches, weightPounds, weightOunce, weightkg, headCircumference_cm, headCircumference_inches) => {
+  await managingProviderAccountPage.verifyGrowthDetails(heightcm, heightInches, weightPounds, weightOunce, weightkg, headCircumference_cm, headCircumference_inches);
+});
+
 //---------------------------------Android-Cases------------------------------------//
 
 Then(/^I should see a flash message saying (.*)$/, async (message) => {
@@ -408,10 +432,12 @@ Then(/^I should see a flash message saying (.*)$/, async (message) => {
 
 Then(/^Verify that user is on homepage$/, async () => {
   await androidPage.denySavePasswordPopup();
-  await androidPage.videoAndPicPermissionPopup.click();
-  await androidPage.clickOnRecordAudioPopup();
-  await androidPage.deviceLocationPopup.click();
-  await androidPage.notificationAlertPermission.click();
+  try {
+    await androidPage.videoAndPicPermissionPopup.click();
+    await androidPage.clickOnRecordAudioPopup();
+    await androidPage.deviceLocationPopup.click();
+    await androidPage.notificationAlertPermission.click();
+  } catch (error) {}
   await androidPage.clickOnOkButton();
   await androidPage.clickonbackbutton.click();
   await androidPage.verifyDashboard();
