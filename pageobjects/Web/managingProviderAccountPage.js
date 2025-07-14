@@ -81,7 +81,7 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   get searchField() {
-    return $("//div[@id='example_filter']//input[@type='search']");
+    return $("//div[@id='example_filter']//input[@type='search']|//input[@type='search']");
   }
 
   get activePatientScreen() {
@@ -193,7 +193,7 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   get iframe() {
-    return $("//iframe[@aria-label='Paste Area']|//iframe[@id='hubspot-conversations-iframe']");
+    return $("//iframe[@aria-label='Paste Area']");
   }
 
   get descriptionField() {
@@ -268,49 +268,49 @@ class ManagingProviderAccountPage extends BasePage {
     return $("(//tr[@class='odd'])[2]//td[5]//a");
   }
 
-    get ordersTab() {
+  get ordersTab() {
     return $("//a[contains(text(),'Orders')]");
   }
 
-      get heartRateViewDetail() {
+  get heartRateViewDetail() {
     return $("(//a[@title='View details'])[1]");
   }
 
-        get respiratoryRateViewDetail() {
+  get respiratoryRateViewDetail() {
     return $("(//a[@title='View details'])[2]");
   }
 
-      get O2SaturationViewDetail() {
+  get O2SaturationViewDetail() {
     return $("(//a[@title='View details'])[3]");
   }
 
-      get temperatureViewDetail() {
+  get temperatureViewDetail() {
     return $("(//a[@title='View details'])[4]");
   }
 
-      get heartRateGraph() {
+  get heartRateGraph() {
     return $("#heartRate_graph");
   }
 
-        get respiratoryRateGraph() {
+  get respiratoryRateGraph() {
     return $("#respiratoryRate_graph");
   }
-      get O2SaturationGraph() {
+  get O2SaturationGraph() {
     return $("#saturationRate_graph");
   }
 
-      get temperatureGraph() {
+  get temperatureGraph() {
     return $("#temperature_graph");
   }
 
-        get closeECGpopupButton() {
+  get closeECGpopupButton() {
     return $("(//button[@class='close'])[1]");
   }
 
-   get closeSpO2popupButton() {
+  get closeSpO2popupButton() {
     return $("(//button[@class='close'])[1]");
   }
-  
+
   get otherTypeRecord() {
     return $("//tr[@class='odd']//td[3]");
   }
@@ -341,6 +341,90 @@ class ManagingProviderAccountPage extends BasePage {
 
   get welcomeAiMessageCancelButton() {
     return $("//button[@shape='circle']");
+  }
+
+  get methodField() {
+    return $("#method:nth-of-type(1)");
+  }
+
+  get flowRateField() {
+    return $("#flow_rate");
+  }
+
+  get oxygenField() {
+    return $("#oxygen:nth-of-type(1)");
+  }
+
+  get RespiratoryMethodField() {
+    return $("//tr[@class='odd']//td[2]");
+  }
+  get RespiratoryFlowrateField() {
+    return $("//tr[@class='odd']//td[3]");
+  }
+  get RespiratoryAdditionalSettingsField() {
+    return $("//tr[@class='odd']//td[4]");
+  }
+  get RespiratoryOxygenField() {
+    return $("//tr[@class='odd']//td[5]");
+  }
+  get RespiratoryManagingProviderField() {
+    return $("//tr[@class='odd']//td[6]");
+  }
+
+  get crossButton() {
+    return $("(//button[@class='close'])[2]");
+  }
+
+  get additionalSettingsField() {
+    return $("#additional_settings:nth-of-type(1)");
+  }
+
+  get endDateField() {
+    return $("#end_date:nth-of-type(1)");
+  }
+
+  get heightInchesField() {
+    return $("#height1:nth-of-type(1)");
+  }
+
+  get poundField() {
+    return $("#weight1:nth-of-type(1)");
+  }
+
+  get headInchField() {
+    return $("#head1:nth-of-type(1)");
+  }
+
+  get weightOunceField() {
+    return $("#weight2:nth-of-type(1)");
+  }
+
+  get height_cm_Value() {
+    return $("(//tr[@class='odd']//td)[4]");
+  }
+
+  get heightInchValue() {
+    return $("(//tr[@class='odd']//td)[5]");
+  }
+
+  get WeightPoundsValue() {
+    return $("(//tr[@class='odd']//td)[6]");
+  }
+
+  get WeightOunceValue() {
+    return $("(//tr[@class='odd']//td)[7]");
+  }
+
+  get WeightKgValue() {
+    return $("(//tr[@class='odd']//td)[8]");
+  }
+
+  get head_cm_Value() {
+    return $("(//tr[@class='odd']//td)[9]");
+  }
+
+  get head_inch_Value() {
+    return $("(//tr[@class='odd']//td)[10]");
   }
 
   async settigsButtonIsDisplayed() {
@@ -560,6 +644,7 @@ class ManagingProviderAccountPage extends BasePage {
         await $("//a[contains(text(),'" + text + "')]").waitForDisplayed({ timeout: 10000 });
         await superAdminPage.deleteButton.click();
         await superAdminPage.clickOnButtonWithText("Yes");
+        await browser.pause(2000);
         await this.deletePatientMessage.waitForDisplayed({ timeout: 20000 });
         await this.deletePatientMessage.waitForDisplayed({ reverse: true, timeout: 20000 });
       }
@@ -660,16 +745,6 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-  async clickOnButtonText(text) {
-    const linkText = await $("(//a[contains(text(),'" + text + "')])[2]");
-    await linkText.waitForClickable({ timeout: 10000 });
-    if ((await linkText.isDisplayed()) === true) {
-      await linkText.click();
-    } else {
-      throw new Error("link is not displaying: " + text);
-    }
-  }
-
   async verifyCreatedCaregiver(name, mobile, relationship, children, status) {
     const actualName = await $("(//tr[@class='odd']//td)[2]").getText();
     const actualMobile = await $("(//tr[@class='odd']//td)[4]").getText();
@@ -709,7 +784,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-    async linkTextIsDisplayed(text) {
+  async linkTextIsDisplayed(text) {
     const linkText = await $("//a[contains(text(),'" + text + "')]");
     await linkText.waitForClickable({ timeout: 15000 });
     if ((await linkText.isDisplayed()) === true) {
@@ -1108,7 +1183,7 @@ class ManagingProviderAccountPage extends BasePage {
     await this.ordersTab.moveTo();
   }
 
-   async clickOnHeartRateViewDetailsLink(option) {
+  async clickOnHeartRateViewDetailsLink(option) {
     if ((await this.heartRateViewDetail.isDisplayed()) === true) {
       console.log(" link displayed");
       await this.heartRateViewDetail.click();
@@ -1117,7 +1192,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-     async clickOnRespiratoryRateViewDetailsLink(option) {
+  async clickOnRespiratoryRateViewDetailsLink(option) {
     if ((await this.respiratoryRateViewDetail.isDisplayed()) === true) {
       console.log(" link displayed");
       await this.respiratoryRateViewDetail.click();
@@ -1126,16 +1201,16 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-      async clickOnO2SaturationViewDetailsLink(option) {
+  async clickOnO2SaturationViewDetailsLink(option) {
     if ((await this.O2SaturationViewDetail.isDisplayed()) === true) {
       console.log(" link displayed");
       await this.O2SaturationViewDetail.click();
     } else {
       throw new Error("link is not displaying: " + option);
-    }    
+    }
   }
 
-        async clickOnTemperatureViewDetailsLink(option) {
+  async clickOnTemperatureViewDetailsLink(option) {
     if ((await this.temperatureViewDetail.isDisplayed()) === true) {
       console.log(" link displayed");
       await this.temperatureViewDetail.click();
@@ -1143,8 +1218,8 @@ class ManagingProviderAccountPage extends BasePage {
       throw new Error("link is not displaying: " + option);
     }
   }
-  
-    async clickOnThirdIndexLinkText(text) {
+
+  async clickOnThirdIndexLinkText(text) {
     const linkText = await $("(//a[contains(text(),'" + text + "')])[3]");
     await linkText.waitForClickable({ timeout: 10000 });
     if ((await linkText.isDisplayed()) === true) {
@@ -1154,7 +1229,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-      async heartRateGraphIsDisplayed() {
+  async heartRateGraphIsDisplayed() {
     if ((await this.heartRateGraph.isDisplayed()) === true) {
       console.log("Graph displayed");
     } else {
@@ -1162,7 +1237,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-     async respiratoryGraphIsDisplayed() {
+  async respiratoryGraphIsDisplayed() {
     if ((await this.respiratoryRateGraph.isDisplayed()) === true) {
       console.log("Graph displayed");
     } else {
@@ -1170,7 +1245,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-     async saturationGraphIsDisplayed() {
+  async saturationGraphIsDisplayed() {
     if ((await this.O2SaturationGraph.isDisplayed()) === true) {
       console.log("Graph displayed");
     } else {
@@ -1178,7 +1253,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-     async temperatureGraphIsDisplayed() {
+  async temperatureGraphIsDisplayed() {
     if ((await this.temperatureGraph.isDisplayed()) === true) {
       console.log("Graph displayed");
     } else {
@@ -1240,9 +1315,174 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   async clickOnWelcomeAiMessageButton() {
-    await browser.switchToFrame(await this.iframe);
-    await this.welcomeAiMessageCancelButton.waitForDisplayed({ timeout: 15000 });
-    await this.welcomeAiMessageCancelButton.click();
-    await browser.switchToFrame(null);
+    const dragElement = await $('//div[@title="Drag"]');
+    await dragElement.waitForDisplayed({ timeout: 15000 });
+    const targetElement = await $("(//section[@class='content']//img)[1]");
+    await targetElement.waitForDisplayed({ timeout: 15000 });
+    await dragElement.dragAndDrop(targetElement);
+  }
+
+  async clickOnSecondIndexButtonWithText(text) {
+    const buttonText = await $("(//button[contains(text(),'" + text + "')])[2]");
+    await buttonText.waitForDisplayed({ timeout: 20000 });
+    if ((await buttonText.isDisplayed()) === true) {
+      await buttonText.click();
+    } else {
+      throw new Error("❌ Button is not displaying: " + text);
+    }
+  }
+
+  async selectValueFromMethodField(option) {
+    await this.methodField.waitForDisplayed({ timeout: 15000 });
+    await this.methodField.click();
+    await $("//option[contains(text(),'" + option + "')]").click();
+  }
+
+  async fillFlowRateField(value) {
+    await this.flowRateField.waitForDisplayed({ timeout: 15000 });
+    await this.flowRateField.setValue(value);
+  }
+
+  async fillOxygenField(value) {
+    await this.oxygenField.waitForDisplayed({ timeout: 15000 });
+    await this.oxygenField.setValue(value);
+  }
+
+  async VerifyRespiratoryBottleMethodDetails(methodOption, flowRate, oxygen, managingProvider) {
+    await this.RespiratoryMethodField.waitForDisplayed({ timeout: 15000 });
+    const actMethod = await this.RespiratoryMethodField.getText();
+    const actFlowrate = await this.RespiratoryFlowrateField.getText();
+    const actOxygen = await this.RespiratoryOxygenField.getText();
+    const actManagingProviderField = await this.RespiratoryManagingProviderField.getText();
+    await expect(actMethod).toEqual(methodOption);
+    await expect(actFlowrate).toEqual(flowRate);
+    await expect(actOxygen).toEqual(oxygen);
+    await expect(actManagingProviderField).toEqual(managingProvider);
+  }
+
+  async VerifyRespiratoryRoomAirConcentratorMethodDetails(updatedMethodOption, updatedFlow, additionalSettings, managingProvider) {
+    await this.RespiratoryMethodField.waitForDisplayed({ timeout: 15000 });
+    const actMethod = await this.RespiratoryMethodField.getText();
+    const actFlowrate = await this.RespiratoryFlowrateField.getText();
+    const actAdditionalSettings = await this.RespiratoryAdditionalSettingsField.getText();
+    const actManagingProviderField = await this.RespiratoryManagingProviderField.getText();
+    await expect(actMethod).toEqual(updatedMethodOption);
+    await expect(actFlowrate).toEqual(updatedFlow);
+    await expect(actAdditionalSettings).toEqual(additionalSettings);
+    await expect(actManagingProviderField).toEqual(managingProvider);
+  }
+
+  async clickOnCrossButton() {
+    await this.crossButton.waitForDisplayed({ timeout: 15000 });
+    await this.crossButton.click();
+  }
+
+  async fillAdditionalSettingsFieldField(value) {
+    await this.additionalSettingsField.waitForDisplayed({ timeout: 15000 });
+    await this.additionalSettingsField.setValue(value);
+  }
+
+  async fillEndDateField() {
+    await this.endDateField.waitForDisplayed({ timeout: 15000 });
+    await this.endDateField.click();
+    await browser.keys("ArrowRight");
+    await browser.keys("Enter");
+  }
+
+  async verifyEndDate() {
+    const date = await $("(//tr[@class='even']//td)[8]");
+    await date.waitForDisplayed({ timeout: 15000 });
+    const EndDate = await date.getText();
+    const datePart = EndDate.slice(0, 11);
+    const actEndDate = await $("(//td[contains(text(),'" + datePart + "')])[3]");
+
+    if ((await actEndDate.isDisplayed()) === true) {
+      const actEndDateText = await actEndDate.getText();
+      const endDate = actEndDateText.slice(0, 11);
+      console.log("✅ " + " <<< " + endDate + " >>> " + " End date is displayed in the list");
+    } else {
+      throw new Error("❌ End date is not diplayed in the list");
+    }
+  }
+
+  async verifyTrackerOptions(dataTable) {
+    const expectedOptions = dataTable.rawTable.flat();
+    const options = await $$('(//ul[@class="dropdown-menu"])[7]//a');
+    const dropdownOption = await $('(//ul[@class="dropdown-menu"])[7]//a');
+    console.log("Dropdown option:", await dropdownOption.getText());
+    console.log("Found options:", options.length);
+
+    if (!Array.isArray(options) || options.length === 0) {
+      throw new Error("No options found or options is not an array!");
+    }
+
+    const optionTexts = [];
+    for (let i = 0; i < options.length; i++) {
+      const text = await options[i].getText();
+      optionTexts.push(text);
+    }
+    console.log("Extracted option texts:", optionTexts);
+    await expect(optionTexts).toEqual(expectedOptions);
+  }
+
+  async verifyMultipleValidationMessages(message) {
+    const secondValidation = await $("(//span[@class='help-block alert alert-danger'])[2]").getText();
+    const ThirdValidation = await $("(//span[@class='help-block alert alert-danger'])[3]").getText();
+
+    await expect(secondValidation).toEqual(message);
+    await expect(ThirdValidation).toEqual(message);
+  }
+
+  async fillHeightField(Data) {
+    await this.heightInchesField.waitForDisplayed({ timeout: 15000 });
+    await this.heightInchesField.setValue(Data);
+  }
+
+  async fillPoundField(Data) {
+    await this.poundField.waitForDisplayed({ timeout: 15000 });
+    await this.poundField.setValue(Data);
+  }
+
+  async fillHeadInchField(Data) {
+    await this.headInchField.waitForDisplayed({ timeout: 15000 });
+    await this.headInchField.setValue(Data);
+  }
+
+  async fillWeightOunceField(Data) {
+    await this.weightOunceField.waitForDisplayed({ timeout: 15000 });
+    await this.weightOunceField.setValue(Data);
+  }
+
+  async verifyGrowthDetails(heightcm, heightInches, weightPounds, weightOunce, weightkg, headCircumference_cm, headCircumference_inches) {
+    await this.height_cm_Value.waitForDisplayed({ timeout: 15000 });
+    const actHeightCm = await this.height_cm_Value.getText();
+    const heightInch = await this.heightInchValue.getText();
+    const actHeightInch = heightInch.replace(".00", "");
+    const WeightPound = await this.WeightPoundsValue.getText();
+    const actWeightPound = WeightPound.replace(".00", "");
+    const WeightOunce = await this.WeightOunceValue.getText();
+    const actWeightOunce = WeightOunce.replace(".00", "");
+    const actWeightKg = await this.WeightKgValue.getText();
+    const actHeadCm = await this.head_cm_Value.getText();
+    const HeadInch = await this.head_inch_Value.getText();
+    const actHeadInch = HeadInch.replace(".00", "");
+
+    await expect(actHeightCm).toEqual(heightcm);
+    await expect(actHeightInch).toEqual(heightInches);
+    await expect(actWeightPound).toEqual(weightPounds);
+    await expect(actWeightOunce).toEqual(weightOunce);
+    await expect(actWeightKg).toEqual(weightkg);
+    await expect(actHeadCm).toEqual(headCircumference_cm);
+    await expect(actHeadInch).toEqual(headCircumference_inches);
+  }
+
+  async removeDataFromGrowthFields() {
+    await this.heightInchesField.waitForDisplayed({ timeout: 15000 });
+    await this.heightInchesField.clearValue();
+    await this.poundField.clearValue();
+    await this.weightOunceField.clearValue();
+    await this.headInchField.clearValue();
   }
 }
+
+module.exports = new ManagingProviderAccountPage();

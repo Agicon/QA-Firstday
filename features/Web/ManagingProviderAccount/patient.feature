@@ -1,108 +1,108 @@
 Feature: Test cases for the 'Patient' page
 
-  Scenario Outline: Verify all options and there redirections on dashboard
-    Given Open web url <url>
-    When Web app login using <userA>
-    Then providers/dashboard page displays
-    Then It redirects on the Dashboard screen
-    Then Table is displaying on screen
-    When I hover on the "Dashboard-All Patient" tab
-    Then Second index Link text Manage Patients is displaying
-    Then Second index Link text My Patient List is displaying
-    Then Second index Link text Add A New Patient is displaying
-    When I click on the second index link My Patients
-    Then mypatients page displays
-    Then It redirects on the My Patients screen
-    Then Table is displaying on screen
-    When I click on the second index link Caregivers
-    Then parents page displays
-    Then It redirects on the Active Caregivers screen
-    Then Table is displaying on screen
-    When I click on the second index link Other Providers
-    Then manageProviders page displays
-    Then It redirects on the Other Providers screen
-    Then Table is displaying on screen
-    When I hover on the "Dashboard-All Patient" tab
-    When I click on the second index link Manage Patients
-    Then patients page displays
-    Then It redirects on the Active Patients screen
-    Then Table is displaying on screen
-    When I hover on the "Dashboard-All Patient" tab
-    When I click on the second index link My Patient List
-    Then assignproviders page displays
-    Then It redirects on the Assign Patient screen
-    Then Table is displaying on screen
-    When I hover on the "Dashboard-All Patient" tab
-    When I click on the second index link Add A New Patient
-    Then patient/new page displays
-    Then It redirects on the Add Patient Details screen
-    Then Form is displaying on screen
-    When I hover over the "Settings" icon
-    Then Link text Logout is displaying
-    Then Link text Profile is displaying
-    Then Link text Change Password is displaying
-    When I click on the link text Profile
-    Then profile page displays
-    Then It redirects on the Update Profile screen
-    Then Form is displaying on screen
-    When I hover over the "Settings" icon
-    When I click on the link text Change Password
-    Then changePassword page displays
-    Then Form is displaying on screen
-    Then It redirects on the Change Password screen
+    Scenario Outline: Verify all options and their redirections on dashboard
+        Given Open web url <url>
+        When Web app login using <userA>
+        Then providers/dashboard page displays
+        Then It redirects on the Dashboard screen
+        Then Table is displaying on screen
+        When I hover on the "Dashboard-All Patient" tab
+        Then Second index Link text Manage Patients is displaying
+        Then Second index Link text My Patient List is displaying
+        Then Second index Link text Add A New Patient is displaying
+        When I click on the second index link My Patients
+        Then mypatients page displays
+        Then It redirects on the My Patients screen
+        Then Table is displaying on screen
+        When I click on the second index link Caregivers
+        Then parents page displays
+        Then It redirects on the Active Caregivers screen
+        Then Table is displaying on screen
+        When I click on the second index link Other Providers
+        Then manageProviders page displays
+        Then It redirects on the Other Providers screen
+        Then Table is displaying on screen
+        When I hover on the "Dashboard-All Patient" tab
+        When I click on the second index link Manage Patients
+        Then patients page displays
+        Then It redirects on the Active Patients screen
+        Then Table is displaying on screen
+        When I hover on the "Dashboard-All Patient" tab
+        When I click on the second index link My Patient List
+        Then assignproviders page displays
+        Then It redirects on the Assign Patient screen
+        Then Table is displaying on screen
+        When I hover on the "Dashboard-All Patient" tab
+        When I click on the second index link Add A New Patient
+        Then patient/new page displays
+        Then It redirects on the Add Patient Details screen
+        Then Form is displaying on screen
+        When I hover over the "Settings" icon
+        Then Link text Logout is displaying
+        Then Link text Profile is displaying
+        Then Link text Change Password is displaying
+        When I click on the link text Profile
+        Then profile page displays
+        Then It redirects on the Update Profile screen
+        Then Form is displaying on screen
+        When I hover over the "Settings" icon
+        When I click on the link text Change Password
+        Then changePassword page displays
+        Then Form is displaying on screen
+        Then It redirects on the Change Password screen
 
-    Examples:
-      | url      | userA                     |
-      | loginUrl | providerLoginCrendentails |
+        Examples:
+            | url      | userA                     |
+            | loginUrl | providerLoginCrendentails |
 
-  Scenario Outline: Verify all patient options and there redirections on dashboard
-    When I hover on the "Dashboard-All Patient" tab
-    When I click on the second index link My Patient List
-    When I populate data <patientName> in the "Search" field
-    When I click on the link text <patientName>
-    When Click on heart rate view detail link
-    Then #heartRate_graph page displays
-    Then Heart rate graph is displaying
-    When I click on the link Dashboard having third index
-    When Click on respiratory rate view detail link
-    Then #respiratoryRate_graph page displays
-    Then Respiratory rate graph is displaying
-    When I click on the link Dashboard having third index
-    When Click on O2 saturation view detail link
-    Then #saturationRate_graph page displays
-    Then O2 saturation graph is displaying
-    When I click on the link Dashboard having third index
-    When Click on temperature view detail link
-    Then #temperature_graph page displays
-    Then Temperature graph is displaying
-    When I click on the button with text Live ECG
-    When I click on the button with text Live SpO2
-    When I click on the button with text Live Per Seconds Data
-    When I click on the button with text Live Download Excel
-    When I click on the button with text Alert History
-    When I click on the button with text Alert Settings
-    When I click on the link Dashboard having third index
-    When I click on the link text Vital Signs
-    Then vitalsigns page displays
-    When I click on the link text Medical Record
-    Then diagnosis page displays
-    Then Table is displaying on screen
-    When User click on the button Other Provider under baby dashboard screen
-    Then providers page displays
-    Then Table is displaying on screen
-    When I click on the link text Appointment
-    Then appointment page displays
-    Then Table is displaying on screen
-    When Hover over "Orders" tab
-    When I click on the link text Respiratory
-    Then respiratorySettings page displays
-    Then Table is displaying on screen
+    Scenario Outline: Verify all patient options and their redirections on dashboard
+        When I hover on the "Dashboard-All Patient" tab
+        When I click on the second index link My Patient List
+        When I populate data <patientName> in the "Search" field
+        When I click on the link text <patientName>
+        When Click on heart rate view detail link
+        Then #heartRate_graph page displays
+        Then Heart rate graph is displaying
+        When I click on the link Dashboard having third index
+        When Click on respiratory rate view detail link
+        Then #respiratoryRate_graph page displays
+        Then Respiratory rate graph is displaying
+        When I click on the link Dashboard having third index
+        When Click on O2 saturation view detail link
+        Then #saturationRate_graph page displays
+        Then O2 saturation graph is displaying
+        When I click on the link Dashboard having third index
+        When Click on temperature view detail link
+        Then #temperature_graph page displays
+        Then Temperature graph is displaying
+        When I click on the button with text Live ECG
+        When I click on the button with text Live SpO2
+        When I click on the button with text Live Per Seconds Data
+        When I click on the button with text Live Download Excel
+        When I click on the button with text Alert History
+        When I click on the button with text Alert Settings
+        When I click on the link Dashboard having third index
+        When I click on the link text Vital Signs
+        Then vitalsigns page displays
+        When I click on the link text Medical Record
+        Then diagnosis page displays
+        Then Table is displaying on screen
+        When User click on the button Other Provider under baby dashboard screen
+        Then providers page displays
+        Then Table is displaying on screen
+        When I click on the link text Appointment
+        Then appointment page displays
+        Then Table is displaying on screen
+        When Hover over "Orders" tab
+        When I click on the link text Respiratory
+        Then respiratorySettings page displays
+        Then Table is displaying on screen
 
-    Examples:
-      | patientName       |
-      | Patient_Auto_Test |
+        Examples:
+            | patientName       |
+            | Patient_Auto_Test |
 
-  Scenario Outline: Verify the "Managing Provider" is able to create "New Caregiver" when all the fields are populated with valid data And 	Verify the "Managing Provider" is able to create "New Caregiver" when only the mandatory fields are populated with valid data and 	Verify the "Managing Provider" is able to create "New Caregiver" when only the mandatory fields are populated with valid data and if any mandatory field is not populated And Verify "Managing Provider is able to "Delete" the "caregiver" when clicked on "Delete" icon
+    Scenario Outline: Verify the "Managing Provider" is able to create "New Caregiver" when all the fields are populated with valid data And 	Verify the "Managing Provider" is able to create "New Caregiver" when only the mandatory fields are populated with valid data and 	Verify the "Managing Provider" is able to create "New Caregiver" when only the mandatory fields are populated with valid data and if any mandatory field is not populated And Verify "Managing Provider is able to "Delete" the "caregiver" when clicked on "Delete" icon
         Given Open web url <url>
         When Web app login using <userA>
         Then providers/dashboard page displays
@@ -670,7 +670,7 @@ Feature: Test cases for the 'Patient' page
             | url      | userA                     | dashboard-ManagePatientsOption | patientName       | medicationName  | currentDose | measurement | frequency | additionalInformation                         | interval | status |
             | loginUrl | providerLoginCrendentails | Manage Patients                | Patient_Auto_Test | Auto_Medication | 1           | Teaspoon    | Twice     | Consult the doctor before using this medicine | Day      | Active |
 
-# # //----------------assign other provider----------------------//
+# # # # //----------------assign other provider----------------------//
 
     Scenario Outline: Verify the functionality of "Assign other provider"
         Given Open web url <url>
@@ -1161,7 +1161,7 @@ Feature: Test cases for the 'Patient' page
 
 
 
-# //------------------------Vikas code--------------------------//
+# # //------------------------Vikas code--------------------------//
 
     Scenario Outline: Verify the "Managing Provider" is not able to create "New XRAY Result" when the mandatory fields are not populated and Verify the "Managing Provider" is able to Create "New XRAY Result" when only the mandatory fields are populated with valid data and Verify the "Managing Provider" is able to delete "XRAY Result"
         When I click on the link text Medical Record
@@ -1497,3 +1497,157 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | type              | description           | comments                                                | uploadImage |
             | Auto Other result | Auto test description | No evidence of disease or injury, Everything is normal. | Picture(1)  |
+
+    Scenario Outline: Verify that 'Add Respiratory Settings' button is visible when the Respiratory Settings table is empty and Verify that when user does not populate the mandatory fields on 'Add Respiratory Settings' form the validation displays with the fields andVerify that when user populates the mandatory fields on 'Add Respiratory Settings' form with valid data then "Respiratory Settings" gets created and 	Verify that search bar is displaying to search for specific records when user populates the search field then the result displays according to the keyword
+        When Hover over "Orders" tab
+        When I click on the link text Respiratory
+        Then respiratorySettings page displays
+        When I drag chat container banner
+        Then Search and delete duplicate data <methodOption>
+        When I click on the button with text History Chart
+        Then No flow rate data available. should be displayed
+        When User click on the "Cross" button
+        When I click on the second index button with text Add Respiratory Settings
+        Then It redirects on the Respiratory Settings screen
+        When I click on the button with text Add Respiratory Settings
+        Then validation message Please select a respiratory method. appears
+        Then validation message Please enter the flow rate. appears
+        When I select the option <methodOption> from method dropdown
+        When I click on the button with text Add Respiratory Settings
+        Then validation message Please enter the flow rate. appears
+        Then validation message Please enter the oxygen value. appears
+        When I fill <LessNumber> data in flow rate field
+        Then validation message Flow rate must be at least 1. appears
+        When I fill <LessNumber> data in oxygen field
+        Then validation message Oxygen must be at least 21. appears
+        When I fill <HigherNumber> data in flow rate field
+        Then validation message Flow rate cannot exceed 1000. appears
+        When I fill <HigherNumber> data in oxygen field
+        Then validation message Oxygen cannot exceed 100. appears
+        When I fill <flowRate> data in flow rate field
+        When I fill <oxygen> data in oxygen field
+        When I click on the button with text Add Respiratory Settings
+        Then Success message Respiratory Settings Added Successfully! appears
+        When I populate data <methodOption> in the "Search" field
+        Then Respiratory "Bottle method" details should be visible in the list with <methodOption> and <flowRate> and <oxygen> and <managingProvider>
+
+        Examples:
+            | methodOption | flowRate | oxygen | LessNumber | HigherNumber | managingProvider       |
+            | Bottle       | 5        | 90     | 0          | 5000         | managing_auto_provider |
+
+
+    Scenario Outline: Verify that user is able to edit the active record by clicking on 'View/Update' option and Verify that clicking on 'Delete' on a record prompts a confirmation dialog, and upon confirmation, the record is deleted from the table
+        When I populate data <methodOption> in the "Search" field
+        When I click on the "View or Update" option under the "Action" section
+        When I select the option <updatedMethodOption> from method dropdown
+        When I fill <updatedFlow> data in flow rate field
+        When I fill <additionalSettings> data in additional settings field
+        When I select date in the "End date" field
+        When I click on the button with text Update
+        Then Success message Respiratory Settings Updated Successfully! appears
+        When I populate data <updatedMethodOption> in the "Search" field
+        Then Respiratory "Room Air Concentrator method" details should be visible in the list with <updatedMethodOption> and <updatedFlow> and <additionalSettings> and <managingProvider>
+        When I populate data <updatedMethodOption> in the "Search" field
+        When I click On "Delete" icon
+        Then Deleted record should not be visible in the list
+        Examples:
+            | methodOption | updatedMethodOption   | updatedFlow | additionalSettings    | managingProvider       |
+            | Bottle       | Room Air Concentrator | 10          | Auto test respiratory | managing_auto_provider |
+
+    Scenario Outline: Verify that clicking 'Update Respiratory Settings' opens a form pre-filled with the most recent settings for editing.
+        Then Search and delete duplicate data <methodOption>
+        When I click on the second index button with text Add Respiratory Settings
+        Then It redirects on the Respiratory Settings screen
+        When I select the option <methodOption> from method dropdown
+        When I fill <flowRate> data in flow rate field
+        When I fill <oxygen> data in oxygen field
+        When I click on the button with text Add Respiratory Settings
+        Then Success message Respiratory Settings Added Successfully! appears
+        When I populate data <methodOption> in the "Search" field
+        Then Respiratory "Bottle method" details should be visible in the list with <methodOption> and <flowRate> and <oxygen> and <managingProvider>
+        When I click on the second index button with text Update Respiratory Settings
+        Then It redirects on the Respiratory Settings screen
+        When I fill <updatedFlow> data in flow rate field
+        When I fill <updatedOxygen> data in oxygen field
+        When I click on the button with text Update Respiratory Settings
+        Then Success message Respiratory Settings Added Successfully! appears
+        Then Verify that "End date" is visible in the list
+
+        Examples:
+            | methodOption | flowRate | oxygen | managingProvider       | updatedFlow | updatedOxygen |
+            | Bottle       | 5        | 90     | managing_auto_provider | 10          | 80            |
+
+
+    Scenario Outline: Verify that when user populates the mandatory fields on 'Add Respiratory Settings' form with valid data then "Respiratory Settings" gets created
+        Then Search and delete duplicate data <methodOption>
+        When I click on the second index button with text Add Respiratory Settings
+        Then It redirects on the Respiratory Settings screen
+        When I select the option <methodOption> from method dropdown
+        When I fill <flowRate> data in flow rate field
+        When I fill <oxygen> data in oxygen field
+        When I click on the button with text Add Respiratory Settings
+        Then Success message Respiratory Settings Added Successfully! appears
+        When I populate data <methodOption> in the "Search" field
+        Then Respiratory "Bottle method" details should be visible in the list with <methodOption> and <flowRate> and <oxygen> and <managingProvider>
+        Examples:
+            | methodOption | flowRate | oxygen | managingProvider       |
+            | Bottle       | 5        | 90     | managing_auto_provider |
+
+
+    Scenario Outline: Verify the "Managing Provider" is not able to add "Growth" tracking and validation displays if any mandatory field is not populated and Verify the "Managing Provider" is able to create "Growth" tracking for patient's Medical Record and Verify the "Managing provider" is able to search the "Growth Results"
+        When I click on the link text Medical Record
+        When Hover over link Tracker
+        Then Tracker options should be visible under dropdown
+            | Growth    |
+            | Nutrition |
+            | Diapering |
+            | Sleep     |
+        When I click on the link text Growth
+        Then It redirects on the Patient_Auto_Test Ben's Growth Chart screen
+        When I drag chat container banner
+        When I click on the button with text Growth Results
+        Then Search and delete duplicate data <heightcm>
+        When Hover over link Tracker
+        When I click on the link text Growth
+        When I click on the button with text New Growth Result
+        Then It redirects on the New Growth Result screen
+        When I click on the button with text Create
+        Then validation message Please enter Hight / Weight / Head Circumference value appears
+        Then Verify multiple same validation messages on popup with text Please enter Hight / Weight / Head Circumference value
+        When I select date in start Date field
+        When I fill <heightInches> data in "Height" field
+        When I fill <weightPounds> data in "Weight" field
+        When I fill <weightPounds> data in "Weight Ounce" field
+        When I fill <headCircumference_inches> data in "Head Circumference" field
+        When I click on the button with text Create
+        Then Success message Growth Result Added Succesfully ! appears
+        When I click on the button with text Growth Results
+        When I populate data <heightInches> in the "Search" field
+        Then Growth details should be visible in the list with <heightcm> and <heightInches> and <weightPounds> and <weightPounds> and <weightkg> and <headCircumference_cm> and <headCircumference_inches>
+        When I populate data <specialCharactors> in the "Search" field
+        Then No matching records found should be displayed
+        Examples:
+            | heightInches | weightPounds | headCircumference_inches | heightcm | weightkg | headCircumference_cm | specialCharactors |
+            | 24           | 8            | 14                       | 60.96    | 3.86     | 35.56                | !@#$%%$#@!        |
+
+
+    Scenario Outline: Verify the "Managing Provider" is able to "View and update" the added "Growth" Result and Verify the "Managing provider" is able to delete the "Growth Results"
+        When I populate data <heightInches> in the "Search" field
+        When I click on the "View or Update" option under the "Action" section
+        Then It redirects on the Patient_Auto_Test Ben's Update Growth Result screen
+        When I remove data from required fields on updation form
+        When I click on the button with text Update
+        Then validation message Please enter Hight / Weight / Head Circumference value appears
+        When I fill <updatedHeightInch> data in "Height" field
+        When I fill <updatedWeight> data in "Weight" field
+        When I fill <updatedWeight> data in "Weight Ounce" field
+        When I fill <updatedHeadCircumference_inches> data in "Head Circumference" field
+        When I click on the button with text Update
+        Then Success message Updated Succesfully ! appears
+        When I populate data <updatedHeightInch> in the "Search" field
+        Then Growth details should be visible in the list with <updatedHeightcm> and <updatedHeightInch> and <updatedWeight> and <updatedWeight> and <updatedWeightkg> and <updatedHeadCircumference_cm> and <updatedHeadCircumference_inches>
+        When I click On "Delete" icon
+        Then Deleted record should not be visible in the list
+        Examples:
+            | heightInches | updatedHeightInch | updatedWeight | updatedHeadCircumference_inches | updatedHeightcm | updatedWeightkg | updatedHeadCircumference_cm |
+            | 24           | 22                | 7             | 12                              | 55.88           | 3.37            | 30.48                       |
