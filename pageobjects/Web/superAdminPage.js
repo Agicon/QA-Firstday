@@ -68,7 +68,7 @@ class SuperAdminPage extends BasePage {
   }
 
   get searchField() {
-    return $("//div[@id='example_filter']//input[@type='search']");
+    return $("//div[@id='example_filter']//input[@type='search']|//input[@type='search']");
   }
 
   get newCustomerForm() {
@@ -110,7 +110,7 @@ class SuperAdminPage extends BasePage {
      get form() {
     return $("//form[@class='form-horizontal']|//form[@method='post']");
   }
-  
+
   /**
    * a method to encapsule automation code to interact with the page
    * e.g. to login using username and password
@@ -355,26 +355,27 @@ class SuperAdminPage extends BasePage {
   }
 
   async searchAndDeleteDuplicateData(clinicName) {
-   try {
-     await this.searchField.clearValue();
-     await this.searchField.setValue(clinicName);
-     await browser.pause(3000);
-   } catch (error) {
-     console.log("Search box is not displayed in try block, executing catch block===>");
-     await browser.refresh();
-     await this.searchField.waitForDisplayed({ timeout: 15000 });
-     await this.searchField.clearValue();
-     await this.searchField.setValue(clinicName);
-     await browser.pause(3000);
-   }
+    try {
+      await this.searchField.clearValue();
+      await this.searchField.setValue(clinicName);
+      await browser.pause(3000);
+    } catch (error) {
+      console.log("Search box is not displayed in try block, executing catch block===>");
+      await browser.refresh();
+      await this.searchField.waitForDisplayed({ timeout: 15000 });
+      await this.searchField.clearValue();
+      await this.searchField.setValue(clinicName);
+      await browser.pause(3000);
+    }
 
     try {
       for (let i = 0; i < 4; i++) {
         await $("//td[contains(text(),'" + clinicName + "')]|//a[contains(text(),'" + clinicName + "')]").waitForDisplayed({ timeout: 5000 });
         await this.deleteButton.click();
         await this.clickOnButtonWithText("Yes");
-        await this.deleteMessage.waitForDisplayed({ timeout: 20000 });
-        await this.deleteMessage.waitForDisplayed({ reverse: true, timeout: 20000 });
+        await browser.pause(3000);
+        // await this.deleteMessage.waitForDisplayed({ timeout: 20000 });
+        // await this.deleteMessage.waitForDisplayed({ reverse: true, timeout: 20000 });
       }
     } catch (error) {}
   }
@@ -422,6 +423,7 @@ class SuperAdminPage extends BasePage {
       await this.validationMessage.waitForDisplayed({ reverse: true, timeout: 20000 });
       for (let i = 0; i <= 5; i++) {
         await this.deleteButton.waitForDisplayed({ timeout: 10000 });
+        await browser.scroll(0, 500);
         await this.deleteButton.click();
         await this.clickOnButtonWithText("Yes");
         await this.deleteMessage.waitForDisplayed({ timeout: 20000 });
@@ -489,7 +491,7 @@ class SuperAdminPage extends BasePage {
     expect(currentUrl).toContain(text);
   }
 
-    async tableIsDisplayed() {
+  async tableIsDisplayed() {
     if ((await this.table.isDisplayed()) === true) {
       console.log("successfully redirect on page and table is displaying");
     } else {
@@ -505,8 +507,6 @@ class SuperAdminPage extends BasePage {
       throw new Error("Failed to redirect on page, form is not displaying");
     }
   }
-
-  
 }
 
 module.exports = new SuperAdminPage();

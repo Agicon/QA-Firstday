@@ -221,6 +221,10 @@ class AndroidPage extends BasePage {
     return $("//android.widget.TextView[contains(@text,'Logout')]");
   }
 
+  get backButton() {
+    return $("(//android.widget.ImageView)[1]");
+  }
+
   async open(url) {
     var data = TestUtils.getUserCredetials(url);
     await browser.pause(1000);

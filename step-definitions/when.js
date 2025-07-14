@@ -365,7 +365,6 @@ When(/^I hover over the "Alerts" icon$/, async () => {
   await customerAccountPage.hoverOverAlertsIcon();
 });
 
-
 //=============================Web-ManagingProviderAccount======================//
 
 When(/^I login on web portal using invalid credentials (.*) and (.*)$/, async (invalidName, invalidPassword) => {
@@ -508,7 +507,6 @@ When(/^I click on the link text (.*)$/, async (text) => {
   await managingProviderAccountPage.clickOnLinkText(text);
 });
 
-
 When(/^I populate fields (.*) but I populate "Email field" with already registered email$/, async (text) => {
   await managingProviderAccountPage.fillAlreadyRegisteredEmailForOtherProvider(text);
 });
@@ -543,10 +541,6 @@ When(/^I fill (.*) data in additional information field$/, async (text) => {
 
 When(/^I select date in start Date field$/, async () => {
   await managingProviderAccountPage.fillStartDateField();
-});
-
-When(/^I click on the second index button (.*)$/, async (data) => {
-  await managingProviderAccountPage.clickOnButtonText(data);
 });
 
 When(/^Click on select provider dropdown$/, async () => {
@@ -729,6 +723,58 @@ When(/^I fill value in Phos (.*) field$/, async (data) => {
 When(/^I fill value in Mg (.*) field$/, async (data) => {
   await managingProviderAccountPage.fillMgField(data);
 });
+When(/^I click on the second index button with text (.*)$/, async (data) => {
+  await managingProviderAccountPage.clickOnSecondIndexButtonWithText(data);
+});
+
+When(/^I select the option (.*) from method dropdown$/, async (data) => {
+  await managingProviderAccountPage.selectValueFromMethodField(data);
+});
+
+When(/^I fill (.*) data in flow rate field$/, async (data) => {
+  await managingProviderAccountPage.fillFlowRateField(data);
+});
+
+When(/^I fill (.*) data in oxygen field$/, async (data) => {
+  await managingProviderAccountPage.fillOxygenField(data);
+});
+
+When(/^User click on the "Cross" button$/, async () => {
+  await managingProviderAccountPage.clickOnCrossButton();
+});
+
+When(/^I fill (.*) data in additional settings field$/, async (data) => {
+  await managingProviderAccountPage.fillAdditionalSettingsFieldField(data);
+});
+
+When(/^I select date in the "End date" field$/, async () => {
+  await managingProviderAccountPage.fillEndDateField();
+});
+
+When(/^I drag chat container banner$/, async () => {
+  await managingProviderAccountPage.clickOnWelcomeAiMessageButton();
+});
+
+When(/^I fill (.*) data in "Height" field$/, async (data) => {
+  await managingProviderAccountPage.fillHeightField(data);
+});
+
+When(/^I fill (.*) data in "Weight" field$/, async (data) => {
+  await managingProviderAccountPage.fillPoundField(data);
+});
+
+When(/^I fill (.*) data in "Head Circumference" field$/, async (data) => {
+  await managingProviderAccountPage.fillHeadInchField(data);
+});
+
+When(/^I fill (.*) data in "Weight Ounce" field$/, async (data) => {
+  await managingProviderAccountPage.fillWeightOunceField(data);
+});
+
+When(/^I remove data from required fields on updation form$/, async () => {
+  await managingProviderAccountPage.removeDataFromGrowthFields();
+});
+
 
 
 // =================================Android======================================//
