@@ -157,7 +157,7 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   get commentsField() {
-    return $("#comments");
+    return $("//textarea[@id='comments']|//textarea[@id='Comments']");
   }
 
   get vaccineField() {
@@ -209,7 +209,7 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   get resultsDateField() {
-    return $("#date_time");
+    return $("//input[@id='date_time']|//input[@id='Date']");
   }
 
   get wbcField() {
@@ -268,49 +268,61 @@ class ManagingProviderAccountPage extends BasePage {
     return $("(//tr[@class='odd'])[2]//td[5]//a");
   }
 
-    get ordersTab() {
+  get ordersTab() {
     return $("//a[contains(text(),'Orders')]");
   }
 
-      get heartRateViewDetail() {
+  get heartRateViewDetail() {
     return $("(//a[@title='View details'])[1]");
   }
 
-        get respiratoryRateViewDetail() {
+  get respiratoryRateViewDetail() {
     return $("(//a[@title='View details'])[2]");
   }
 
-      get O2SaturationViewDetail() {
+  get O2SaturationViewDetail() {
     return $("(//a[@title='View details'])[3]");
   }
 
-      get temperatureViewDetail() {
+  get temperatureViewDetail() {
     return $("(//a[@title='View details'])[4]");
   }
 
-      get heartRateGraph() {
+  get heartRateGraph() {
     return $("#heartRate_graph");
   }
 
-        get respiratoryRateGraph() {
+  get respiratoryRateGraph() {
     return $("#respiratoryRate_graph");
   }
-      get O2SaturationGraph() {
+  get O2SaturationGraph() {
     return $("#saturationRate_graph");
   }
 
-      get temperatureGraph() {
+  get temperatureGraph() {
     return $("#temperature_graph");
   }
 
-        get closeECGpopupButton() {
+  get closeECGpopupButton() {
     return $("(//button[@class='close'])[1]");
   }
 
-   get closeSpO2popupButton() {
-    return $("(//button[@class='close'])[1]");
+  get liveSpO2Graph() {
+    return $("//canvas[@id='canvas_spo2']");
   }
-  
+
+  get liveECGgraph() {
+    return $("(//canvas[@id='canvas'])[1]");
+  }
+
+  get closeSpO2popupButton() {
+    return $("(//button[@class='close'])[2]");
+  }
+
+  get closeDownloadExcelpopupButton() {
+    return $("(//button[@class='close'])[3]");
+  }
+
   get otherTypeRecord() {
     return $("//tr[@class='odd']//td[3]");
   }
@@ -343,6 +355,47 @@ class ManagingProviderAccountPage extends BasePage {
     return $("//button[@shape='circle']");
   }
 
+  get NaField() {
+    return $("#Na");
+  }
+
+    get KField() {
+    return $("#K");
+  }
+
+  get ClField() {
+    return $("#Cl");
+  }
+
+  get Co2Field() {
+    return $("#Co2");
+  }
+
+    get BunField() {
+    return $("#Bun");
+  }
+  get CrField() {
+    return $("#Cr");
+  }
+
+
+ get GluField() {
+    return $("#Glu");
+  }
+
+   get CaField() {
+    return $("#Ca");
+  }
+
+   get PhosField() {
+    return $("#Phos");
+  }
+
+   get MgField() {
+    return $("#Mg");
+  }
+
+   
   async settigsButtonIsDisplayed() {
     await this.settingsButton.waitForDisplayed({ timeout: 20000 });
     return await this.settingsButton.isDisplayed();
@@ -709,7 +762,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-    async linkTextIsDisplayed(text) {
+  async linkTextIsDisplayed(text) {
     const linkText = await $("//a[contains(text(),'" + text + "')]");
     await linkText.waitForClickable({ timeout: 15000 });
     if ((await linkText.isDisplayed()) === true) {
@@ -1108,7 +1161,7 @@ class ManagingProviderAccountPage extends BasePage {
     await this.ordersTab.moveTo();
   }
 
-   async clickOnHeartRateViewDetailsLink(option) {
+  async clickOnHeartRateViewDetailsLink(option) {
     if ((await this.heartRateViewDetail.isDisplayed()) === true) {
       console.log(" link displayed");
       await this.heartRateViewDetail.click();
@@ -1117,7 +1170,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-     async clickOnRespiratoryRateViewDetailsLink(option) {
+  async clickOnRespiratoryRateViewDetailsLink(option) {
     if ((await this.respiratoryRateViewDetail.isDisplayed()) === true) {
       console.log(" link displayed");
       await this.respiratoryRateViewDetail.click();
@@ -1126,16 +1179,16 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-      async clickOnO2SaturationViewDetailsLink(option) {
+  async clickOnO2SaturationViewDetailsLink(option) {
     if ((await this.O2SaturationViewDetail.isDisplayed()) === true) {
       console.log(" link displayed");
       await this.O2SaturationViewDetail.click();
     } else {
       throw new Error("link is not displaying: " + option);
-    }    
+    }
   }
 
-        async clickOnTemperatureViewDetailsLink(option) {
+  async clickOnTemperatureViewDetailsLink(option) {
     if ((await this.temperatureViewDetail.isDisplayed()) === true) {
       console.log(" link displayed");
       await this.temperatureViewDetail.click();
@@ -1143,8 +1196,8 @@ class ManagingProviderAccountPage extends BasePage {
       throw new Error("link is not displaying: " + option);
     }
   }
-  
-    async clickOnThirdIndexLinkText(text) {
+
+  async clickOnThirdIndexLinkText(text) {
     const linkText = await $("(//a[contains(text(),'" + text + "')])[3]");
     await linkText.waitForClickable({ timeout: 10000 });
     if ((await linkText.isDisplayed()) === true) {
@@ -1154,7 +1207,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-      async heartRateGraphIsDisplayed() {
+  async heartRateGraphIsDisplayed() {
     if ((await this.heartRateGraph.isDisplayed()) === true) {
       console.log("Graph displayed");
     } else {
@@ -1162,7 +1215,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-     async respiratoryGraphIsDisplayed() {
+  async respiratoryGraphIsDisplayed() {
     if ((await this.respiratoryRateGraph.isDisplayed()) === true) {
       console.log("Graph displayed");
     } else {
@@ -1170,7 +1223,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-     async saturationGraphIsDisplayed() {
+  async saturationGraphIsDisplayed() {
     if ((await this.O2SaturationGraph.isDisplayed()) === true) {
       console.log("Graph displayed");
     } else {
@@ -1178,7 +1231,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-     async temperatureGraphIsDisplayed() {
+  async temperatureGraphIsDisplayed() {
     if ((await this.temperatureGraph.isDisplayed()) === true) {
       console.log("Graph displayed");
     } else {
@@ -1245,4 +1298,179 @@ class ManagingProviderAccountPage extends BasePage {
     await this.welcomeAiMessageCancelButton.click();
     await browser.switchToFrame(null);
   }
+
+  async clickOnCloseLiveECGButton() {
+    if ((await this.closeECGpopupButton.isDisplayed()) === true) {
+      await this.closeECGpopupButton.click();
+    } else {
+      throw new Error("close live ecg popup button is not displayed");
+    }
+  }
+
+  async clickOnCloseLiveSpO2Button() {
+    if ((await this.closeSpO2popupButton.isDisplayed()) === true) {
+      await this.closeSpO2popupButton.click();
+    } else {
+      throw new Error("close live SpO2 popup button is not displayed");
+    }
+  }
+
+  async clickOnCloseDownloadExcelButton() {
+    if ((await this.closeDownloadExcelpopupButton.isDisplayed()) === true) {
+      await this.closeDownloadExcelpopupButton.click();
+    } else {
+      throw new Error("close download excel popup button is not displayed");
+    }
+  }
+
+  async liveECGgraphIsDisplayed() {
+    await this.liveECGgraph.waitForDisplayed({ timeout: 8000 });
+    if ((await this.liveECGgraph.isDisplayed()) === true) {
+      console.log("Live ECG graph is displaying successfully");
+    } else {
+      throw new Error("Live ECG graph is not displayed");
+    }
+  }
+
+  async liveSpO2graphIsDisplayed() {
+    await this.liveSpO2Graph.waitForDisplayed({ timeout: 3000 });
+    if ((await this.liveSpO2Graph.isDisplayed()) === true) {
+      console.log("Live SpO2 graph is displaying successfully");
+    } else {
+      throw new Error("Live SpO2 graph is not displayed");
+    }
+  }
+
+  async buttonTextIsDisplayed(text) {
+    const buttonText = await $("(//button[contains(text(),'" + text + "')])");
+    if ((await buttonText.isDisplayed()) === true) {
+      console.log("Button displaying successfully");
+    } else {
+      throw new Error("Failed to redirect on page because button is not displayed>>" + text);
+    }
+  }
+
+  async chartIsDisplayed() {
+    await this.chartData.waitForDisplayed({ timeout: 5000 });
+    if ((await this.chartData.isDisplayed()) === true) {
+      console.log("Chart is displaying successfully");
+    } else {
+      throw new Error("Chart is not displayed");
+    }
+  }
+
+
+    async fillNaField(data) {
+      await browser.pause(3000);
+    await this.NaField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.NaField.isDisplayed()) === true) {
+       await this.NaField.clearValue();
+      await this.NaField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("Na field is not displayed");
+    }
+  }
+
+     async fillKField(data) {
+    await this.KField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.KField.isDisplayed()) === true) {
+       await this.KField.clearValue();
+      await this.KField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("K field is not displayed");
+    }
+  }
+
+     async fillClField(data) {
+    await this.ClField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.ClField.isDisplayed()) === true) {
+       await this.ClField.clearValue();
+      await this.ClField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("Cl field is not displayed");
+    }
+  }
+
+     async fillCo2Field(data) {
+    await this.Co2Field.waitForDisplayed({ timeout: 5000 });
+    if ((await this.Co2Field.isDisplayed()) === true) {
+       await this.Co2Field.clearValue();
+      await this.Co2Field.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("Co2 field is not displayed");
+    }
+  }
+
+     async fillBUNField(data) {
+    await this.BunField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.BunField.isDisplayed()) === true) {
+       await this.BunField.clearValue();
+      await this.BunField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("BUN field is not displayed");
+    }
+  }
+
+     async fillCrField(data) {
+    await this.CrField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.CrField.isDisplayed()) === true) {
+       await this.CrField.clearValue();
+      await this.CrField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("Cr field is not displayed");
+    }
+  }
+
+     async fillGluField(data) {
+    await this.GluField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.GluField.isDisplayed()) === true) {
+       await this.GluField.clearValue();
+      await this.GluField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("Glu field is not displayed");
+    }
+  }
+
+     async fillCaField(data) {
+    await this.CaField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.CaField.isDisplayed()) === true) {
+       await this.CaField.clearValue();
+      await this.CaField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("Ca field is not displayed");
+    }
+  }
+
+    async fillPhosField(data) {
+    await this.PhosField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.PhosField.isDisplayed()) === true) {
+       await this.PhosField.clearValue();
+      await this.PhosField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("Phos field is not displayed");
+    }
+  }
+
+    async fillMgField(data) {
+    await this.MgField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.MgField.isDisplayed()) === true) {
+       await this.MgField.clearValue();
+      await this.MgField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("Mg field is not displayed");
+    }
+  }
+
+  
 }
+module.exports = new ManagingProviderAccountPage();

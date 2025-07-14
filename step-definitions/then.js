@@ -286,6 +286,10 @@ Then(/^Record status should be displayed as (.*)$/, async (data) => {
   await managingProviderAccountPage.verifyRecordStatus(data);
 });
 
+Then(/^Click on close download excel button$/, async () => {
+  await managingProviderAccountPage.clickOnCloseDownloadExcelButton();
+});
+
 // -----------------Patient-medical-results----------------//
 Then("I should see the following options in the dropdown", async (dataTable) => {
   const expectedOptions = dataTable.rawTable.flat();
@@ -399,7 +403,30 @@ Then(/^Temperature graph is displaying$/, async () => {
   await managingProviderAccountPage.temperatureGraphIsDisplayed();
 });
 
-//---------------------------------Android-Cases------------------------------------//
+Then(/^Live ECG graph should displayed$/, async () => {
+  await managingProviderAccountPage.liveECGgraphIsDisplayed();
+});
+Then(/^Click on close live ECG popup$/, async () => {
+  await managingProviderAccountPage.clickOnCloseLiveECGButton();
+});
+
+Then(/^Live SpO2 graph should displayed$/, async () => {
+  await managingProviderAccountPage.liveSpO2graphIsDisplayed();
+});
+Then(/^Click on close live SpO2 popup$/, async () => {
+  await managingProviderAccountPage.clickOnCloseLiveSpO2Button();
+});
+
+Then(/^Button text (.*) is displayed on screen$/, async (text) => {
+  await managingProviderAccountPage.buttonTextIsDisplayed(text);
+});
+
+Then(/^Chart is displayed on screen$/, async () => {
+  await managingProviderAccountPage.chartIsDisplayed();
+});
+
+
+// ---------------------------------Android-Cases------------------------------------//
 
 Then(/^I should see a flash message saying (.*)$/, async (message) => {
   await expect(SecurePage.flashAlert).toBeExisting();

@@ -870,5 +870,16 @@ class AndroidPage extends BasePage {
     await this.privacyPolicyTabIsDisplayed();
     await this.logOutTabIsDisplayed();
   }
+
+   async clickOnOption(data) {
+    const option = await $('//android.widget.TextView[contains(@text,"' + data + '")]');
+    await option.scrollIntoView();
+    await option.waitForDisplayed({ timeout: 15000 });
+    if ((await option.isDisplayed()) === true) {
+      await option.click();
+    } else {
+      throw new Error("❌ " + option + " is not dispalyed");
+    }
+  }
 }
 module.exports = new AndroidPage();

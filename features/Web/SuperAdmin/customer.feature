@@ -1,6 +1,6 @@
 Feature: Test cases for create customer page
 
-  Scenario Outline: User logged in as admin
+  Scenario Outline: User logged in as admin and verify all redirection scripts
     Given Open web url <url>
     When Web app login using <userA>
     Then admin/getUserAnalyze page displays

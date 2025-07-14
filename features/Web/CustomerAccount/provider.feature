@@ -1,5 +1,4 @@
 Feature: Test cases for "Managing Provider" page
-
   Scenario Outline: Login as customer and verify the all options redirections
     When Open web url <url>
     When Web app login using <userA>
@@ -12,9 +11,9 @@ Feature: Test cases for "Managing Provider" page
     When I click on the second index link Subadmin
     Then subadmin page displays
     Then Table is displaying on screen
-    #    When I click on the second index link Other Providers
-    # Then manageProviders page displays
-    # Then Table is displaying on screen
+    When I click on the second index link Other Providers
+    Then manageProviders page displays
+    Then Table is displaying on screen
     When I click on the second index link Assign Providers
     Then patients page displays
     Then Table is displaying on screen
@@ -28,6 +27,29 @@ Feature: Test cases for "Managing Provider" page
     When I click on the second index link Provider Alerts
     Then alerts/provider page displays
     Then Table is displaying on screen
+    When I click on the second index link Assign Providers
+    Then administrator/patients page displays
+    Then Table is displaying on screen
+    When I click on the second index link Master
+    When I click on the second index link Vaccine Type
+    Then vaccineType page displays
+    Then Table is displaying on screen
+    When I click on the second index link Master
+    When I click on the second index link Hospital Note
+    Then hospitalNote page displays
+    Then Table is displaying on screen
+    When I click on the second index link Master
+    When I click on the second index link All Patients Alert
+    Then administrator/allAlert page displays
+    Then Table is displaying on screen
+    When I click on the second index link Master
+    When I click on the second index link Hospital/Office
+    Then administrator/hospital page displays
+    Then Table is displaying on screen
+    When I click on the second index link Master
+    When I click on the second index link Alert Duration
+    Then alertDuration page displays
+    Then Form is displaying on screen
     When I hover over the "Settings" icon
     Then Link text Logout is displaying
     Then Link text Profile is displaying
@@ -41,7 +63,6 @@ Feature: Test cases for "Managing Provider" page
     Then changePassword page displays
     Then Form is displaying on screen
     Then It redirects on the Change Password screen
-
     Examples:
       | url      | userA                     |
       | loginUrl | customerLoginCrendentails |
@@ -159,6 +180,23 @@ Feature: Test cases for "Managing Provider" page
     When Open web url <url>
     When Web app login using <provider>
     Then provider/dashboard page displays
+    When I hover over the "Settings" icon
+    Then Link text Logout is displaying
+    Then Link text My Appointments is displaying
+    Then Link text Profile is displaying
+    Then Link text Change Password is displaying
+    When I click on the link text My Appointments
+    Then my-appointments page displays
+    Then It redirects on the My Appointments screen
+    When I hover over the "Settings" icon
+    When I click on the link text Profile
+    Then profile page displays
+    Then Form is displaying on screen
+    When I hover over the "Settings" icon
+    When I click on the link text Change Password
+    Then change-password page displays
+    Then Form is displaying on screen
+    Then It redirects on the Change Password screen
     Examples:
       | validName           | url      | provider                    | userA                     |
       | other_auto_provider | loginUrl | otherProviderForStatusCheck | customerLoginCrendentails |
@@ -182,3 +220,48 @@ Feature: Test cases for "Managing Provider" page
     Examples:
       | url      | userA                     | patient           | primary_Provider       | secondary_Provider     |
       | loginUrl | customerLoginCrendentails | Patient_Auto_Test | managing_auto_provider | managing_auto_provider |
+
+  Scenario Outline: Verify the assign provider finctionality
+    When Open web url <url>
+    When Web app login using <credentials>
+    Then It redirects on the Dashboard screen
+    Then subadmin/dashboard page displays
+    When I click on the second index link Managing Providers
+    Then providers page displays
+    Then User should on "Managing Provider" page
+    Then Table is displaying on screen
+    When I click on the second index link Hospital/Office
+    Then hospital page displays
+    Then Table is displaying on screen
+    When I click on the second index link Vaccine Type
+    Then vaccineType page displays
+    Then Table is displaying on screen
+    When I click on the second index link Diagnosis Type
+    Then diagnosisType page displays
+    Then Table is displaying on screen
+    When I click on the second index link Hospital Note
+    Then hospitalNote page displays
+    Then Table is displaying on screen
+    When I click on the second index link Master
+    Then Second index Link text All Patients Alert is displaying
+    When I click on the second index link All Patients Alert
+    Then allAlert page displays
+    Then It redirects on the All Patients Alert screen
+    Then Table is displaying on screen
+    When I hover over the "Settings" icon
+    Then Link text Logout is displaying
+    Then Link text Profile is displaying
+    Then Link text Change Password is displaying
+    When I click on the link text Profile
+    Then profile page displays
+    Then It redirects on the Update Profile screen
+    Then Form is displaying on screen
+    When I hover over the "Settings" icon
+    When I click on the link text Change Password
+    Then changePassword page displays
+    Then Form is displaying on screen
+    Then It redirects on the Change Password screen
+
+    Examples:
+      | url      | credentials | patient           | primary_Provider       | secondary_Provider     |
+      | loginUrl | checkuser   | Patient_Auto_Test | managing_auto_provider | managing_auto_provider |

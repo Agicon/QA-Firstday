@@ -692,6 +692,43 @@ When(/^I click on the results>>other button$/, async () => {
   await managingProviderAccountPage.clickOnResults_OtherButton();
 });
 
+When(/^I fill value in Na (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillNaField(data);
+});
+
+When(/^I fill value in K (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillKField(data);
+});
+
+When(/^I fill value in Cl (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillClField(data);
+});
+
+When(/^I fill value in Co2 (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillCo2Field(data);
+});
+
+When(/^I fill value in BUN (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillBUNField(data);
+});
+
+When(/^I fill value in Cr (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillCrField(data);
+});
+
+When(/^I fill value in Glu (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillGluField(data);
+});
+When(/^I fill value in Ca (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillCaField(data);
+});
+When(/^I fill value in Phos (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillPhosField(data);
+});
+
+When(/^I fill value in Mg (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillMgField(data);
+});
 
 
 // =================================Android======================================//

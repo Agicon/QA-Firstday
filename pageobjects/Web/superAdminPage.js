@@ -104,11 +104,11 @@ class SuperAdminPage extends BasePage {
   }
 
    get table() {
-    return $("//table[@class='table']|//div[@id='example_wrapper']|//table[@id='respiratory-settings-table']");
+    return $("//table[@class='table']|//div[@id='example_wrapper']|//table[@id='respiratory-settings-table']|//table[@id='example']");
   }
   
      get form() {
-    return $("//form[@class='form-horizontal']");
+    return $("//form[@class='form-horizontal']|//form[@method='post']");
   }
   
   /**
@@ -498,6 +498,7 @@ class SuperAdminPage extends BasePage {
   }
 
       async formIsDisplayed() {
+        await browser.pause(2000);
     if ((await this.form.isDisplayed()) === true) {
       console.log("successfully redirect on page and form is displaying");
     } else {
