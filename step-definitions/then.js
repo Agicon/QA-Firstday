@@ -368,7 +368,6 @@ Then(/^(.*) result should be visible in the list with mandatory fields (.*)$/, a
 
 Then(/^Link text (.*) is displaying$/, async (text) => {
   await managingProviderAccountPage.linkTextIsDisplayed(text);
-
 });
 Then(/^Result of Imaging>>other should be visible in the list with mandatory fields (.*)$/, async (type) => {
   await managingProviderAccountPage.verifyImaging_Other_MandatoryRecord(type);
@@ -389,7 +388,6 @@ Then(/^Details of results>>other module should be visible in the list with all f
 Then(/^Heart rate graph is displaying$/, async () => {
   await managingProviderAccountPage.heartRateGraphIsDisplayed();
 });
-
 
 Then(/^Respiratory rate graph is displaying$/, async () => {
   await managingProviderAccountPage.respiratoryGraphIsDisplayed();
@@ -425,7 +423,6 @@ Then(/^Chart is displayed on screen$/, async () => {
   await managingProviderAccountPage.chartIsDisplayed();
 });
 
-
 Then(/^Respiratory "Bottle method" details should be visible in the list with (.*) and (.*) and (.*) and (.*)$/, async (methodOption, flowRate, oxygen, managingProvider) => {
   await managingProviderAccountPage.VerifyRespiratoryBottleMethodDetails(methodOption, flowRate, oxygen, managingProvider);
 });
@@ -448,6 +445,26 @@ Then(/^Verify multiple same validation messages on popup with text (.*)$/, async
 
 Then(/^Growth details should be visible in the list with (.*) and (.*) and (.*) and (.*) and (.*) and (.*) and (.*)$/, async (heightcm, heightInches, weightPounds, weightOunce, weightkg, headCircumference_cm, headCircumference_inches) => {
   await managingProviderAccountPage.verifyGrowthDetails(heightcm, heightInches, weightPounds, weightOunce, weightkg, headCircumference_cm, headCircumference_inches);
+});
+
+Then(/^I navigate to the "Growth" page and the Graph or Chart of added "Growth Results" displays$/, async () => {
+  await managingProviderAccountPage.verifyGrowthGraph();
+});
+
+Then(/^Nutrition order "Breast Feed" details should be visile in the list with (.*) and (.*)$/, async (nutritionType, nutritionFrequency) => {
+  await managingProviderAccountPage.verifyNutritionOrderBreastFeed(nutritionType, nutritionFrequency);
+});
+
+Then(/^Nutrition order "Bottle" details should be visile in the list with (.*) and (.*) and (.*) and (.*) and (.*) and (.*)$/, async (updatedNutritionRecord, updatedNutritionFrequency, nutritionMilk, fortificationName, calories, volumeMLs) => {
+  await managingProviderAccountPage.verifyNutritionOrderBreastFeed(nutritionType, nutritionFrequency);
+});
+
+Then(/^Verify user is redirected to (.*) and (.*) is displayed$/, async (firstOption, data) => {
+  await managingProviderAccountPage.verifyNutritionWorkflow(data);
+});
+
+Then(/^Verify the graph on web with value (.*)$/, async (graphValue) => {
+  await managingProviderAccountPage.verifyGraph(graphValue);
 });
 
 //---------------------------------Android-Cases------------------------------------//
@@ -595,4 +612,12 @@ Then(/^Verfiy all the modules on provider dashboard$/, async () => {
 
 Then(/^Verify all the feautres under settings module for provider app$/, async () => {
   await androidPage.verifyProviderSettingsModule();
+});
+
+Then(/^Verify that added minutes (.*) is displaying on the screen$/, async (minutes) => {
+  await androidPage.verifyAddedMinutes(minutes);
+});
+
+Then(/^User click on the cross button$/, async () => {
+  await androidPage.clickOnCrossButton();
 });
