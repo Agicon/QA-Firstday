@@ -51,208 +51,211 @@ Feature: Test cases for the 'Patient' page
         Then Form is displaying on screen
         Then It redirects on the Change Password screen
 
-    Examples:
-      | url      | userA                     |
-      | loginUrl | providerLoginCrendentails |
-  Scenario Outline: Verify all patient options and there redirections on dashboard
-    When I hover on the "Dashboard-All Patient" tab
-    When I click on the second index link My Patient List
-    When I populate data <patientName> in the "Search" field
-    When I click on the link text <patientName>
-    When Click on heart rate view detail link
-    Then #heartRate_graph page displays
-    Then Heart rate graph is displaying
-    When I click on the link Dashboard having third index
-    When Click on respiratory rate view detail link
-    Then #respiratoryRate_graph page displays
-    Then Respiratory rate graph is displaying
-    When I click on the link Dashboard having third index
-    When Click on O2 saturation view detail link
-    Then #saturationRate_graph page displays
-    Then O2 saturation graph is displaying
-    When I click on the link Dashboard having third index
-    When Click on temperature view detail link
-    Then #temperature_graph page displays
-    Then Temperature graph is displaying
-    When I click on the button with text Live ECG
-    Then Live ECG graph should displayed
-    Then Click on close live ECG popup
-    When I click on the button with text Live SpO2
-    Then Live SpO2 graph should displayed
-    Then Click on close live SpO2 popup
-    When I click on the button with text Per Seconds Data
-    Then timestreamData page displays
-    Then Table is displaying on screen
-    When I click on the link Dashboard having third index
-    When Click on heart rate view detail link
-    When I click on the button with text Download Excel
-    Then Form is displaying on screen
-    Then Click on close download excel button
-    When I click on the button with text Alert History
-    Then alertHistory page displays
-    Then Table is displaying on screen
-    When I click on the link Dashboard having third index
-    When Click on heart rate view detail link
-    When I click on the button with text Alert Settings
-    Then alertSetting page displays
-    Then Table is displaying on screen
-    When I click on the link Dashboard having third index
-    When I click on the link text Vital Signs
-    Then vitalsigns page displays
-    When I click on the link text Medical Record
-    Then diagnosis page displays
-    Then Table is displaying on screen
-    When User click on the button Other Provider under baby dashboard screen
-    Then providers page displays
-    Then Table is displaying on screen
-    When I click on the link text Appointment
-    Then appointment page displays
-    Then Table is displaying on screen
-    When Hover over "Orders" tab
-    When I click on the link text Respiratory
-    Then respiratorySettings page displays
-    Then Table is displaying on screen
-    Examples:
-      | patientName       |
-      | Patient_Auto_Test |
-  Scenario Outline: Verify all patient options and there redirections on dashboard
-    When I click on the link text Medical Record
-    Then diagnosis page displays
-    When I click on the link text Medications
-    Then medication page displays
-    Then Table is displaying on screen
-    When I click on the link text Vaccinations
-    Then vaccinations page displays
-    Then Table is displaying on screen
-    When I click on the link text Media
-    Then media page displays
-    Then Table is displaying on screen
-    When User hover on the Documents tab
-    When I click on the link text Hospital Records
-    Then hospitalRecords page displays
-    Then Table is displaying on screen
-    When User hover on the Documents tab
-    When I click on the link text Other Providers Records
-    Then Table is displaying on screen
-    When User hover on the Documents tab
-    When I click on the link text Export Records
-    Then Form is displaying on screen
-    When I hover over the "Results" tab
-    Then I should see the following options in the dropdown
-      | Laboratory |
-      | Imaging    |
-      | Other      |
-    When Hover over link Laboratory
-    Then I should see the following options in the dropdown under dropdown option
-      | Laboratory CBC                  |
-      | Laboratory Chemistry            |
-      | Laboratory Liver Function Tests |
-      | Laboratory Lipid Tests          |
-      | Laboratory Endocrine            |
-      | Laboratory Coagulation          |
-      | Laboratory Others               |
-    When I click on the link text Laboratory CBC
-    Then result/laboratory_cbc page displays
-    Then Button text New CBC Result is displayed on screen
-    When I hover over the "Results" tab
-    When Hover over link Laboratory
-    When I click on the link text Laboratory Chemistry
-    Then result/laboratory_chemistry page displays
-    Then Button text New Chemistry is displayed on screen
-    When I hover over the "Results" tab
-    When Hover over link Laboratory
-    When I click on the link text Laboratory Liver Function Tests
-    Then result/laboratory_chemistry/2 page displays
-    Then Button text New Liver Function Tests is displayed on screen
-    When I hover over the "Results" tab
-    When Hover over link Laboratory
-    When I click on the link text Laboratory Lipid Tests
-    Then result/laboratory_chemistry/3 page displays
-    Then Button text New Lipid Tests is displayed on screen
-    When I hover over the "Results" tab
-    When Hover over link Laboratory
-    When I click on the link text Laboratory Endocrine
-    Then result/laboratory_endocrine page displays
-    Then Button text New Endocrine Result is displayed on screen
-    When I hover over the "Results" tab
-    When Hover over link Laboratory
-    When I click on the link text Laboratory Coagulation
-    Then result/laboratory_coagulation page displays
-    Then Button text New Coagulation Result is displayed on screen
-    When I hover over the "Results" tab
-    When Hover over link Laboratory
-    When I click on the link text Laboratory Others
-    Then result/laboratory_others page displays
-    Then Button text New Other Results is displayed on screen
-    When I hover over the "Results" tab
-    When Hover over link Imaging
-    Then Imaging options should be visible in the dropdown under dropdown option
-      | XRAY       |
-      | CT         |
-      | MRI        |
-      | Ultrasound |
-      | Other      |
-    When I click on the link text XRAY
-    Then result/imaging_xray page displays
-    Then Table is displaying on screen
-    When I hover over the "Results" tab
-    When Hover over link Imaging
-    When I click on the link text Ultrasound
-    Then result/imaging_ultrasound page displays
-    Then Table is displaying on screen
-    When I hover over the "Results" tab
-    When Hover over link Imaging
-    When I click on the link text CT
-    Then result/imaging_ct page displays
-    Then Table is displaying on screen
-    When I hover over the "Results" tab
-    When Hover over link Imaging
-    When I click on the link text MRI
-    Then result/imaging_mri page displays
-    Then Table is displaying on screen
-    When I hover over the "Results" tab
-    When Hover over link Imaging
-    When I click on the imaging>>other button
-    Then result/imaging_other page displays
-    Then Table is displaying on screen
-    When I hover over the "Results" tab
-    When I click on the results>>other button
-    Then result/other page displays
-    Then Table is displaying on screen
-    When User hover on the Documents tab
-    When I click on the link text Hospital Records
-    Then hospitalRecords page displays
-    Then Table is displaying on screen
-    Then Button text New Hospital Records is displayed on screen
-    When User hover on the Documents tab
-    When I click on the link text Other Providers Records
-    Then patient/otherproviders page displays
-    Then Table is displaying on screen
-    Then Button text New Other Provider Records is displayed on screen
-    When User hover on the Documents tab
-    When I click on the link text Export Records
-    Then patient/sharerecords page displays
-    Then Button text Export is displayed on screen
-    When User hover on the Tracker tab
-    When I click on the link text Growth
-    Then patient/growth/ page displays
-    Then Button text New Growth Result is displayed on screen
-    When User hover on the Tracker tab
-    When I click on the link text Nutrition
-    Then patient/nutrition page displays
-    Then Button text Manage Nutrition Orders is displayed on screen
-    When User hover on the Tracker tab
-    When I click on the link text Diapering
-    Then patient/diapering page displays
-    Then Chart is displayed on screen
-    When User hover on the Tracker tab
-    When I click on the link text Sleep
-    Then patient/sleep page displays
-    Then Chart is displayed on screen
-    Examples:
-      | patientName       |
-      | Patient_Auto_Test |
-  Scenario Outline: Verify the "Managing Provider" is able to create "New Caregiver" when all the fields are populated with valid data And 	Verify the "Managing Provider" is able to create "New Caregiver" when only the mandatory fields are populated with valid data and 	Verify the "Managing Provider" is able to create "New Caregiver" when only the mandatory fields are populated with valid data and if any mandatory field is not populated And Verify "Managing Provider is able to "Delete" the "caregiver" when clicked on "Delete" icon
+        Examples:
+            | url      | userA                     |
+            | loginUrl | providerLoginCrendentails |
+
+    Scenario Outline: Verify all patient options and there redirections on dashboard
+        When I hover on the "Dashboard-All Patient" tab
+        When I click on the second index link My Patient List
+        When I populate data <patientName> in the "Search" field
+        When I click on the link text <patientName>
+        When Click on heart rate view detail link
+        Then #heartRate_graph page displays
+        Then Heart rate graph is displaying
+        When I click on the link Dashboard having third index
+        When Click on respiratory rate view detail link
+        Then #respiratoryRate_graph page displays
+        Then Respiratory rate graph is displaying
+        When I click on the link Dashboard having third index
+        When Click on O2 saturation view detail link
+        Then #saturationRate_graph page displays
+        Then O2 saturation graph is displaying
+        When I click on the link Dashboard having third index
+        When Click on temperature view detail link
+        Then #temperature_graph page displays
+        Then Temperature graph is displaying
+        When I click on the button with text Live ECG
+        Then Live ECG graph should displayed
+        Then Click on close live ECG popup
+        When I click on the button with text Live SpO2
+        Then Live SpO2 graph should displayed
+        Then Click on close live SpO2 popup
+        When I click on the button with text Per Seconds Data
+        Then timestreamData page displays
+        Then Table is displaying on screen
+        When I click on the link Dashboard having third index
+        When Click on heart rate view detail link
+        When I click on the button with text Download Excel
+        Then Form is displaying on screen
+        Then Click on close download excel button
+        When I click on the button with text Alert History
+        Then alertHistory page displays
+        Then Table is displaying on screen
+        When I click on the link Dashboard having third index
+        When Click on heart rate view detail link
+        When I click on the button with text Alert Settings
+        Then alertSetting page displays
+        Then Table is displaying on screen
+        When I click on the link Dashboard having third index
+        When I click on the link text Vital Signs
+        Then vitalsigns page displays
+        When I click on the link text Medical Record
+        Then diagnosis page displays
+        Then Table is displaying on screen
+        When User click on the button Other Provider under baby dashboard screen
+        Then providers page displays
+        Then Table is displaying on screen
+        When I click on the link text Appointment
+        Then appointment page displays
+        Then Table is displaying on screen
+        When Hover over "Orders" tab
+        When I click on the link text Respiratory
+        Then respiratorySettings page displays
+        Then Table is displaying on screen
+        Examples:
+            | patientName       |
+            | Patient_Auto_Test |
+
+    Scenario Outline: Verify all patient options and there redirections on dashboard
+        When I click on the link text Medical Record
+        Then diagnosis page displays
+        When I click on the link text Medications
+        Then medication page displays
+        Then Table is displaying on screen
+        When I click on the link text Vaccinations
+        Then vaccinations page displays
+        Then Table is displaying on screen
+        When I click on the link text Media
+        Then media page displays
+        Then Table is displaying on screen
+        When User hover on the Documents tab
+        When I click on the link text Hospital Records
+        Then hospitalRecords page displays
+        Then Table is displaying on screen
+        When User hover on the Documents tab
+        When I click on the link text Other Providers Records
+        Then Table is displaying on screen
+        When User hover on the Documents tab
+        When I click on the link text Export Records
+        Then Form is displaying on screen
+        When I hover over the "Results" tab
+        Then I should see the following options in the dropdown
+            | Laboratory |
+            | Imaging    |
+            | Other      |
+        When Hover over link Laboratory
+        Then I should see the following options in the dropdown under dropdown option
+            | Laboratory CBC                  |
+            | Laboratory Chemistry            |
+            | Laboratory Liver Function Tests |
+            | Laboratory Lipid Tests          |
+            | Laboratory Endocrine            |
+            | Laboratory Coagulation          |
+            | Laboratory Others               |
+        When I click on the link text Laboratory CBC
+        Then result/laboratory_cbc page displays
+        Then Button text New CBC Result is displayed on screen
+        When I hover over the "Results" tab
+        When Hover over link Laboratory
+        When I click on the link text Laboratory Chemistry
+        Then result/laboratory_chemistry page displays
+        Then Button text New Chemistry is displayed on screen
+        When I hover over the "Results" tab
+        When Hover over link Laboratory
+        When I click on the link text Laboratory Liver Function Tests
+        Then result/laboratory_chemistry/2 page displays
+        Then Button text New Liver Function Tests is displayed on screen
+        When I hover over the "Results" tab
+        When Hover over link Laboratory
+        When I click on the link text Laboratory Lipid Tests
+        Then result/laboratory_chemistry/3 page displays
+        Then Button text New Lipid Tests is displayed on screen
+        When I hover over the "Results" tab
+        When Hover over link Laboratory
+        When I click on the link text Laboratory Endocrine
+        Then result/laboratory_endocrine page displays
+        Then Button text New Endocrine Result is displayed on screen
+        When I hover over the "Results" tab
+        When Hover over link Laboratory
+        When I click on the link text Laboratory Coagulation
+        Then result/laboratory_coagulation page displays
+        Then Button text New Coagulation Result is displayed on screen
+        When I hover over the "Results" tab
+        When Hover over link Laboratory
+        When I click on the link text Laboratory Others
+        Then result/laboratory_others page displays
+        Then Button text New Other Results is displayed on screen
+        When I hover over the "Results" tab
+        When Hover over link Imaging
+        Then Imaging options should be visible in the dropdown under dropdown option
+            | XRAY       |
+            | CT         |
+            | MRI        |
+            | Ultrasound |
+            | Other      |
+        When I click on the link text XRAY
+        Then result/imaging_xray page displays
+        Then Table is displaying on screen
+        When I hover over the "Results" tab
+        When Hover over link Imaging
+        When I click on the link text Ultrasound
+        Then result/imaging_ultrasound page displays
+        Then Table is displaying on screen
+        When I hover over the "Results" tab
+        When Hover over link Imaging
+        When I click on the link text CT
+        Then result/imaging_ct page displays
+        Then Table is displaying on screen
+        When I hover over the "Results" tab
+        When Hover over link Imaging
+        When I click on the link text MRI
+        Then result/imaging_mri page displays
+        Then Table is displaying on screen
+        When I hover over the "Results" tab
+        When Hover over link Imaging
+        When I click on the imaging>>other button
+        Then result/imaging_other page displays
+        Then Table is displaying on screen
+        When I hover over the "Results" tab
+        When I click on the results>>other button
+        Then result/other page displays
+        Then Table is displaying on screen
+        When User hover on the Documents tab
+        When I click on the link text Hospital Records
+        Then hospitalRecords page displays
+        Then Table is displaying on screen
+        Then Button text New Hospital Records is displayed on screen
+        When User hover on the Documents tab
+        When I click on the link text Other Providers Records
+        Then patient/otherproviders page displays
+        Then Table is displaying on screen
+        Then Button text New Other Provider Records is displayed on screen
+        When User hover on the Documents tab
+        When I click on the link text Export Records
+        Then patient/sharerecords page displays
+        Then Button text Export is displayed on screen
+        When User hover on the Tracker tab
+        When I click on the link text Growth
+        Then patient/growth/ page displays
+        Then Button text New Growth Result is displayed on screen
+        When User hover on the Tracker tab
+        When I click on the link text Nutrition
+        Then patient/nutrition page displays
+        Then Button text Manage Nutrition Orders is displayed on screen
+        When User hover on the Tracker tab
+        When I click on the link text Diapering
+        Then patient/diapering page displays
+        Then Chart is displayed on screen
+        When User hover on the Tracker tab
+        When I click on the link text Sleep
+        Then patient/sleep page displays
+        Then Chart is displayed on screen
+        Examples:
+            | patientName       |
+            | Patient_Auto_Test |
+
+    Scenario Outline: Verify the "Managing Provider" is able to create "New Caregiver" when all the fields are populated with valid data And 	Verify the "Managing Provider" is able to create "New Caregiver" when only the mandatory fields are populated with valid data and 	Verify the "Managing Provider" is able to create "New Caregiver" when only the mandatory fields are populated with valid data and if any mandatory field is not populated And Verify "Managing Provider is able to "Delete" the "caregiver" when clicked on "Delete" icon
         Given Open web url <url>
         When Web app login using <userA>
         Then providers/dashboard page displays
@@ -310,6 +313,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | url      | userA                     | validName           | validLastName | validMobile | validRelationshipName | validState | validCity | validAddress     | validZipcode | status | caregiverName               | invalidData | invalidEmail   | specialCharactors |
             | loginUrl | providerLoginCrendentails | Auto_Test_Caregiver | Autonix       | 3652900002  | Doctor                | Texas      | Fairview  | 880 Red Oak Lane | 10001        | Active | Auto_Test_Caregiver Autonix | 1           | #####gmail.com | !@#$%%$#@!        |
+
     Scenario Outline: Verify "Caregiver "Active/Inactive" status
         When I click on the second index link Caregivers
         Then It redirects on the Active Caregivers screen
@@ -335,6 +339,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | validName           | status | inactiveStatus |
             | Auto_Test_Caregiver | active | Inactive       |
+
     Scenario Outline: Verify "Managing Provider" is not able to update the "Caregiver" and validation displays if any mandatory field is not populated while updating the Caregiver And Verify "Managing Provider" is not able to update the "Caregiver" with invalid details And Verify "Managing Provider" is able to update the "Caregiver" details
         When I click on the second index link Caregivers
         Then It redirects on the Active Caregivers screen
@@ -377,10 +382,12 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | caregiverName               | invalidData | invalidEmail   | specialCharactors | updatedCaregiverName        | updatedLastName | updatedMobile | updatedRelationshipName | updatedState | updatedCity | updatedAddress       | updatedZipcode | status | updatedCaregiver                    |
             | Auto_Test_Caregiver Autonix | 1           | #####gmail.com | !@#$%%$#@! ^&^&^& | Updated_Auto_Test_Caregiver | Autonix         | 2026859219    | Parents                 | Florida      | Miami       | 8900 Canyon Trail Rd | 00123          | Active | Updated_Auto_Test_Caregiver Autonix |
+
     Scenario Outline: Check and verify user profile functionlities
         When I hover over the "Settings" icon
         When I click on the link text Profile
         Then profile page displays
+
     Scenario Outline: User logged in as Provider And Verify the "Managing Provider" is not able to create "New Patient" and validation displays when mandatory field is not populated And Verify the "Managing Provider" is able to create "New Patient " when all the fields are populated with valid data
         Given Open web url <url>
         When I login on web portal using invalid credentials <invalidEmail> and <invalidPassword>
@@ -434,6 +441,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | url      | invalidEmail       | invalidPassword | validEmail                   | userA                     | validFirstName    | validLastName | birthTime | defaultNumber | gender | hospital | caregiver                                                                  | week | days | treatmentLocation | location | startServiceDate | hospitalLocation | dashboard-AddPatientOption | dashboard-ManagePatientsOption | services        | treatment | status |
             | loginUrl | provider@gmail.com | 261561          | testprovider2may@yopmail.com | providerLoginCrendentails | Auto_Test_Patient | Auto_Johan    | 5:00 Am   | 12356478      | Male   | Default  | Caregiver_auto_test static (caregiverautotest@yopmail.com) (+1 3652900001) | 40   | 6    | Hospital / Clinic | Hospital | 21/05/2025       | Greenville       | Add A New Patient          | Manage Patients                | RPM,TELEMED,EMR | Discharge | Active |
+
     Scenario Outline: Verify the "Managing Provider" is able to create "New patient" when only the mandatory fields are populated with valid data And Verify "Managing Provider" is able to update the "Patient" details And Verify Filters, search features on Active Patient screen And Verify the "Managing Provider" is able to create "New Patient " with "Treatment Location" set as "Home"
         Given Open web url <url>
         When Web app login using <userA>
@@ -492,6 +500,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | url      | userA                     | dashboard-ManagePatientsOption | secondPatientName | invalidData | updatedFirstName   | updatedLastName | updatedHospitalLocation | services    | treatment | status | servicesCheckbox          | inactiveStatus | treatmentLocation | validFirstName    | dashboard-PatientListOption | primaryProvider        | homeLocation | dashboard-AddPatientOption | validLastName | gender | hospital | formServices    | treatmentHomeLocation | randomText | location |
             | loginUrl | providerLoginCrendentails | Manage Patients                | QA_Patient        | 1           | Updated_QA_Patient | Testman         | Lakewood                | TELEMED,EMR | Discharge | Active | Remote patient monitoring | Inactive       | Readmit           | Auto_Test_Patient | My Patient List             | managing_auto_provider | Home         | Add A New Patient          | Testman       | Female | Default  | RPM,TELEMED,EMR | Readmit               | @@@@@@     | Hospital |
+
     Scenario Outline: Verify managing provider is able change "Patient's status to "Active/Inactive" status And Verify the "Managing Provider" is able to "Discharge" Patient Successfully And Verify "Managing Provider" is able to "Delete" the "Patient" when clicked on "Delete" icon And "Managing Provider" is able to assign "Primary provider" to the patient
         When I populate data <updatedFirstName> in the "Search" field
         When I click on the link text Active
@@ -542,6 +551,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | url      | userA                     | dashboard-ManagePatientsOption | secondPatientName | invalidData | updatedFirstName   | updatedLastName | updatedHospitalLocation | services    | treatment | status | servicesCheckbox          | inactiveStatus | treatmentLocation | validFirstName    | dashboard-PatientListOption | providerOptionCheckbox | primaryProvider        |
             | loginUrl | providerLoginCrendentails | Manage Patients                | QA_Patient        | 1           | Updated_QA_Patient | Testman         | Lakewood                | TELEMED,EMR | Discharge | Active | Remote patient monitoring | Inactive       | Readmit           | Auto_Test_Patient | My Patient List             | Primary Provider       | managing_auto_provider |
+
     Scenario Outline: Create a static patient and verify this patient in mobile caregiver app
         When I hover on the "Dashboard-All Patient" tab
         When I click the <dashboard-ManagePatientsOption> option
@@ -563,6 +573,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | validName         | validLastName | gender | hospital | caregiver                                                                  | formServices    | treatmentLocation | status | dashboard-ManagePatientsOption | dashboard-AddPatientOption | treatment |
             | Patient_Auto_Test | Ben           | Male   | Default  | Caregiver_auto_test static (caregiverautotest@yopmail.com) (+1 3652900001) | RPM,TELEMED,EMR | Hospital / Clinic | Active | Manage Patients                | Add A New Patient          | Discharge |
+
     Scenario Outline: Verify the "Managing Provider" is not able to create "New Other Provider" and validation displays if any mandatory field is not populated and if invalid data is added in mandatory field and 	Verify the "Managing Provider" is able to create "Other Provider" when only the mandatory fields are populated with valid data and 	Verify the "Customer" is not able to create "New Other Provider" with already registered email
         Given Open web url <url>
         When Web app login using <userA>
@@ -609,6 +620,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | url      | userA                     | validOtherProviderName   | invalidData | invalidEmail   | status | textInMobileNumber | invalidMobileNumber |
             | loginUrl | providerLoginCrendentails | Auto_Test_Other_Provider | 1           | #####gmail.com | Active | abcdef             | 12354               |
+
     Scenario Outline: Verify "Managing Provider" is not able to update the "Other Provider" with invalid details and 	Verify "Managing Provider" is not able to update the "Other Provider" and validation displays if any mandatory field is not populated while updating the customer and Verify "Managing Provider" is able to update the "Other Provider's" details
         Then Search and delete duplicate data <updatedName>
         When User search the created provider <validOtherProviderName>
@@ -636,6 +648,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | validOtherProviderName   | updatedName                      | updatedSpecialty | invalidData | status |
             | Auto_Test_Other_Provider | Updated_Auto_Test_Other_Provider | Skin             | 1           | Active |
+
     Scenario Outline: Verify the "Managing Provider" is able to create "Other Provider" when all the fields are populated with valid data
         When I click on the second index link Other Providers
         Then It redirects on the Other Providers screen
@@ -661,6 +674,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | validOtherProviderName   | specialty     | validMobile | validWebsite         | validOfficeInfo | validState | validCity   | validAddress            | validZipcode | status |
             | Auto_Test_Other_Provider | pediatricians | 2026839019  | https://webdriver.io | IT Office       | Bridgeland | Silverstone | Westwood Park, TX 24680 | 10001        | Active |
+
     Scenario Outline: Verify "Managing Provider" is able to change the status of Other Provider to "Inactive" and Verify "Managing Provider" is able to change the status of Other Provider to "Active" and Verify a "Other Provider" with "Inactive" status is not allowed to login on portal
         When User click on "Other Provider" tab
         When I populate data <validOtherProviderName> in the "Search" field
@@ -695,7 +709,9 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | validOtherProviderName                | url      | otherProvider                       | userA                     | inactiveStatus |
             | Test_Auto_Other_Provider_For_Provider | loginUrl | otherProviderForProviderStatusCheck | providerLoginCrendentails | Inactive       |
+
 # # //-----------------Patient-medical-record-results-------------------------//
+
     Scenario Outline: Verify the "Managing Provider" is able to add "Medication" for patient's Medical Record and 	Verify the "Managing Provider" is not able to add "Medications" and validation displays if any mandatory field is not populated
         Given Open web url <url>
         When Web app login using <userA>
@@ -728,6 +744,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | url      | userA                     | dashboard-ManagePatientsOption | patientName       | medicationName  | currentDose | measurement | frequency | additionalInformation                         | interval | status | specialCharactors |
             | loginUrl | providerLoginCrendentails | Manage Patients                | Patient_Auto_Test | Auto_Medication | 1           | Teaspoon    | Twice     | Consult the doctor before using this medicine | Day      | Active | !@#$%%$#@!        |
+
     Scenario Outline: Verify the "Managing Provider" is able to "View and update" the added "Medications" and Verify the "Managing provider" is able to change the "Medications" status and Verify the "Managing provider" is able to search the "Medications" and 	Verify the "Managing provider" is able to delete the "Medications"
         When I populate data <medicationName> in the "Search" field
         When I click on the "View or Update" option under the "Action" section
@@ -767,6 +784,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | dashboard-ManagePatientsOption | patientName       | medicationName  | updatedMedicationName  | updateCurrentDose | updatedMeasurement | updatedFrequency | updatedInterval | updatedAdditionalInformation                                   | status | inactiveStatus |
             | Manage Patients                | Patient_Auto_Test | Auto_Medication | Update_Auto_Medication | 3                 | Milliliter         | Three Times      | Week            | Updated info. => Consult the doctor before using this medicine | Active | Inactive       |
+
     Scenario Outline: Verify the "Managing Provider" is able to add "Medication" for patient's Medical Record
         When I hover on the "Dashboard-All Patient" tab
         When I click the <dashboard-ManagePatientsOption> option
@@ -791,7 +809,9 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | url      | userA                     | dashboard-ManagePatientsOption | patientName       | medicationName  | currentDose | measurement | frequency | additionalInformation                         | interval | status |
             | loginUrl | providerLoginCrendentails | Manage Patients                | Patient_Auto_Test | Auto_Medication | 1           | Teaspoon    | Twice     | Consult the doctor before using this medicine | Day      | Active |
-# # //----------------assign other provider----------------------//
+
+# # # //----------------assign other provider----------------------//
+
     Scenario Outline: Verify the functionality of "Assign other provider"
         Given Open web url <url>
         When Web app login using <userA>
@@ -812,6 +832,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | url      | userA                     | dashboard-ManagePatientsOption | patientName       | otherProvider       |
             | loginUrl | providerLoginCrendentails | Manage Patients                | Patient_Auto_Test | other_auto_provider |
+
     Scenario Outline: Verify the "Managing Provider" is able to delete the added "Vaccination" and Verify the "Managing Provider" is not able to add "Vaccination" and validation displays if any mandatory field is not populated and 	Verify the "Managing Provider" is able to add "Pre defined Vaccination" for patient's medical record
         When I click on the link text Medical Record
         When I click on the link text Vaccinations
@@ -836,6 +857,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | vaccineName                    | lotNumber | comments                                      | createdVaccineName | brandName  |
             | Auto_Test_Vaccine (Healthcare) | 325698    | Consult the doctor before using this vaccine. | Auto_Test_Vaccine  | Healthcare |
+
     Scenario Outline: Verify the "Managing Provider" is not able to add "Media" and validation displays if any mandatory field is not populated and Verify the "Managing Provider" is able to add "Media" for patient's medical record and 	Verify the "Managing provider" is able to search the "Media" and 	Verify the "Managing Provider" is able to delete the added "Media"
         When I click on the link text Medical Record
         When I click on the link text Media
@@ -872,6 +894,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | image      | fileType | description           | specialCharactors | updatedDescription            |
             | Picture(2) | jpg      | Auto Test description | !@#$%%$#@!        | Updated Auto Test description |
+
     Scenario Outline: Verify the "Managing Provider" is able to add "Media" for patient's medical record
         When I click on the link text Medical Record
         When I click on the link text Media
@@ -889,6 +912,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | image      | fileType | description           |
             | Picture(2) | jpg      | Auto Test description |
+
     Scenario Outline: Verify the "Managing Provider" is able to add folder for "Media" for patient's medical record
         Then Search and delete duplicate data <folderFileType>
         When I click on the button with text New Media
@@ -906,6 +930,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | description           | folder | folderFileType |
             | Auto Test description | images | Folder         |
+
     Scenario Outline: Verify the "Managing Provider" is not able to add "Diagnosis" and validation displays if any mandatory field is not populated and Verify the "Managing Provider" is able to add pre-defined "Diagnosis" for patient's medical record andVerify the "Managing provider" is able to search the "Diagnosis"
         When I click on the link text Medical Record
         When I click on the link text Diagnosis
@@ -936,6 +961,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | diagnosisType | description                                   | status | image      | specialCharactors |
             | Skin rash     | Consult the doctor before using this vaccine. | Active | Picture(2) | !@#$%%$#@!        |
+
     Scenario Outline: Verify the "Managing Provider" is able to update the added "Diagnosis" and Verify the "Managing provider" is able to delete the "Diagnosis"
         When I populate data <diagnosisType> in the "Search" field
         When I click on the "View or Update" option under the "Action" section
@@ -951,6 +977,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | diagnosisType | updatedDescription                                     | status | updatedImage | updatedDiagnosisType |
             | Skin rash     | Get a medical consultation before taking this vaccine. | Active | Picture(2)   | Twisted hair         |
+
     Scenario Outline: Verify the "Managing Provider" is not able to create "New Hospital Records" when mandatory fields are not populated and Verify the "Managing Provider" is able to create "New Hospital Records" when all the fields are populated with valid data
         When I click on the link text Medical Record
         When User hover on the Documents tab
@@ -974,6 +1001,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | hospital           | image      | description           | hospitalNote |
             | Auto_test_hospital | Picture(2) | Auto Test description | New note     |
+
     Scenario Outline: Verify the "Managing Provider" is able to update "Hospital Records" with valid data and Verify the "Managing Provider" is able to delete "Hospital Records"
         When I click on the "View or Update" option under the "Action" section
         Then It redirects on the Patient_Auto_Test Ben's Update Hospital Record screen
@@ -990,6 +1018,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | UpdatedHospital | updatedImage | updatedDescription            | hospitalNote |
             | Default         | Picture(1)   | Updated Auto Test description | New note     |
+
     Scenario Outline: Verify the "Managing Provider" is able to create "New Hospital Records" when all the fields are populated with valid data
         When I click on the button with text New Hospital Records
         Then It redirects on the New Hospital Records screen
@@ -1004,6 +1033,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | hospital           | image      | description           | hospitalNote |
             | Auto_test_hospital | Picture(2) | Auto Test description | New note     |
+
     Scenario Outline: Verify the "Managing Provider" is not able to create "New Other Provider Records" when mandatory fields are not populated and	Verify the "Managing Provider" is able to create "New Other Provider Records" when all the fields are populated with valid data andVerify the "Managing Provider" is able to search "Other Provider Records" and Verify the "Managing Provider" is able to delete "Other Provider Records"
         When I click on the link text Medical Record
         When User hover on the Documents tab
@@ -1029,6 +1059,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | otherProvider       | image      | description                          |
             | other_auto_provider | Picture(1) | Auto Test other provider description |
+
     Scenario Outline: Verify the "Managing Provider" is able to create "New Other Provider Records" when all the fields are populated with valid data
         Then Search and delete duplicate data <otherProvider>
         When I click on the button with text New Other Provider Records
@@ -1045,6 +1076,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | otherProvider       | image      | description                          |
             | other_auto_provider | Picture(1) | Auto Test other provider description |
+
     Scenario Outline: Verify the "Managing Provider" is able to export the added records
         When I click on the link text Medical Record
         When User hover on the Documents tab
@@ -1053,13 +1085,13 @@ Feature: Test cases for the 'Patient' page
         When I checkmark, all the records under export records
         When I click on the button with text Export
 
-  Scenario Outline: Verify the "Managing Provider" is able to Create "New CBC Result" when all the fields are populated with valid data
-    When I click on the second index link Dashboard - All Patients
-    When I populate data <patientName> in the "Search" field
-    When I click on the link text <patientName>
-    Then patient/dashboard page displays
-    When I click on the link text Medical Record
-    Then patient/diagnosis page displays
+    Scenario Outline: Verify the "Managing Provider" is able to Create "New CBC Result" when all the fields are populated with valid data
+        When I click on the second index link Dashboard - All Patients
+        When I populate data <patientName> in the "Search" field
+        When I click on the link text <patientName>
+        Then patient/dashboard page displays
+        When I click on the link text Medical Record
+        Then patient/diagnosis page displays
         When I hover over the "Results" tab
         Then I should see the following options in the dropdown
             | Laboratory |
@@ -1104,9 +1136,10 @@ Feature: Test cases for the 'Patient' page
         Then Added data <retic> is successfully displaying in table
         Then Added data <comment> is successfully displaying in table
 
-    Examples:
-      | patientName       | image      | comment             | wbc | hgb | hct | plts | retic |
-      | Patient_Auto_Test | Picture(2) | this is your report |  14 |   8 |  10 |  210 |    11 |
+        Examples:
+            | patientName | image | comment | wbc | hgb | hct | plts | retic |
+            | Patient_Auto_Test | Picture(2) | this is your report | 14 | 8 | 10 | 210 | 11 |
+
     Scenario Outline: Verify the "Managing Provider" is able to update "CBC Results" with valid and invalid data
         When I hover over the "Results" tab
         When Hover over link Laboratory
@@ -1137,85 +1170,86 @@ Feature: Test cases for the 'Patient' page
             | patientName       | image      | comment             | wbc | hgb | hct | plts | retic |
             | Patient_Auto_Test | Picture(2) | this is your report | 12  | 7   | 9   | 205  | 10    |
 
-  Scenario Outline: Verify the "Managing Provider" is able to Create "New Chemistry Result" using valid and invalid data also verify the validations
-    When I hover over the "Results" tab
-    When Hover over link Laboratory
-    When I click on the link text Laboratory Chemistry
-    Then result/laboratory_chemistry page displays
-    Then Button text New Chemistry is displayed on screen
-    When I click On "Delete" icon
-    When I click on the button with text New Chemistry
-    When I clear date filed of report
-    When I click on the button with text Create
-    Then validation message Date is required appears
-    When I click on the button with text Close
-    When I hover over the "Results" tab
-    When Hover over link Laboratory
-    When I click on the link text Laboratory Chemistry
-    When I click on the button with text New Chemistry
-    When I fill value in Na <Na> field
-    When I fill value in K <K> field
-    When I fill value in Cl <Cl> field
-    When I fill value in Co2 <Co2> field
-    When I fill value in BUN <BUN> field
-    When I fill value in Cr <Cr> field
-    When I fill value in Glu <Glu> field
-    When I fill value in Ca <Ca> field
-    When I fill value in Phos <Phos> field
-    When I fill value in Mg <Mg> field
-    When I click on the button with text Create
-    Then Success message Chemistry Result Added Succesfully ! appears
-    Then Added data <Na> is successfully displaying in table
-    Then Added data <K> is successfully displaying in table
-    Then Added data <Cl> is successfully displaying in table
-    Then Added data <Co2> is successfully displaying in table
-    Then Added data <BUN> is successfully displaying in table
-    Then Added data <Cr> is successfully displaying in table
-    Then Added data <Phos> is successfully displaying in table
-    Then Added data <Mg> is successfully displaying in table
+    Scenario Outline: Verify the "Managing Provider" is able to Create "New Chemistry Result" using valid and invalid data also verify the validations
+        When I hover over the "Results" tab
+        When Hover over link Laboratory
+        When I click on the link text Laboratory Chemistry
+        Then result/laboratory_chemistry page displays
+        Then Button text New Chemistry is displayed on screen
+        When I click On "Delete" icon
+        When I click on the button with text New Chemistry
+        When I clear date filed of report
+        When I click on the button with text Create
+        Then validation message Date is required appears
+        When I click on the button with text Close
+        When I hover over the "Results" tab
+        When Hover over link Laboratory
+        When I click on the link text Laboratory Chemistry
+        When I click on the button with text New Chemistry
+        When I fill value in Na <Na> field
+        When I fill value in K <K> field
+        When I fill value in Cl <Cl> field
+        When I fill value in Co2 <Co2> field
+        When I fill value in BUN <BUN> field
+        When I fill value in Cr <Cr> field
+        When I fill value in Glu <Glu> field
+        When I fill value in Ca <Ca> field
+        When I fill value in Phos <Phos> field
+        When I fill value in Mg <Mg> field
+        When I click on the button with text Create
+        Then Success message Chemistry Result Added Succesfully ! appears
+        Then Added data <Na> is successfully displaying in table
+        Then Added data <K> is successfully displaying in table
+        Then Added data <Cl> is successfully displaying in table
+        Then Added data <Co2> is successfully displaying in table
+        Then Added data <BUN> is successfully displaying in table
+        Then Added data <Cr> is successfully displaying in table
+        Then Added data <Phos> is successfully displaying in table
+        Then Added data <Mg> is successfully displaying in table
 
-    Examples:
-      | Na  | K   | Cl  | Co2 | BUN | Cr  | Glu | Ca  | Phos | Mg  |
-      | 139 | 4.2 | 113 |  24 |  15 | 0.9 |  92 | 9.3 |  3.5 | 2.0 |
+        Examples:
+            | Na | K | Cl | Co2 | BUN | Cr | Glu | Ca | Phos | Mg |
+            | 139 | 4.2 | 113 | 24 | 15 | 0.9 | 92 | 9.3 | 3.5 | 2.0 |
 
-  Scenario Outline: Verify the "Managing Provider" is able to update "Chemistry Results" with valid and invalid data
-    When I hover over the "Results" tab
-    When Hover over link Laboratory
-    When I click on the link text Laboratory Chemistry
-    When I click On "Edit" icon
-    When I clear date filed of report
-    When I click on the button with text Update
-    Then validation message Date is required appears
-    When I click on the button with text Close
-    When I hover over the "Results" tab
-    When Hover over link Laboratory
-    When I click on the link text Laboratory Chemistry
-    When I click On "Edit" icon
-   When I fill value in Na <Na> field
-    When I fill value in K <K> field
-    When I fill value in Cl <Cl> field
-    When I fill value in Co2 <Co2> field
-    When I fill value in BUN <BUN> field
-    When I fill value in Cr <Cr> field
-    When I fill value in Glu <Glu> field
-    When I fill value in Ca <Ca> field
-    When I fill value in Phos <Phos> field
-    When I fill value in Mg <Mg> field
-    When I click on the button with text Update
-    # Then Success message Chemistry Result Updated Succesfully ! appears
-    Then Added data <Na> is successfully displaying in table
-    Then Added data <K> is successfully displaying in table
-    Then Added data <Cl> is successfully displaying in table
-    Then Added data <Co2> is successfully displaying in table
-    Then Added data <BUN> is successfully displaying in table
-    Then Added data <Cr> is successfully displaying in table
-    Then Added data <Phos> is successfully displaying in table
-    Then Added data <Mg> is successfully displaying in table
-      Examples:
-      | Na  | K   | Cl  | Co2 | BUN | Cr  | Glu | Ca  | Phos | Mg  |
-      | 140 | 5.2 | 115 |  26 |  20 | 0.8 |  95 | 9.4|  3.6 | 3.0 |
+    Scenario Outline: Verify the "Managing Provider" is able to update "Chemistry Results" with valid and invalid data
+        When I hover over the "Results" tab
+        When Hover over link Laboratory
+        When I click on the link text Laboratory Chemistry
+        When I click On "Edit" icon
+        When I clear date filed of report
+        When I click on the button with text Update
+        Then validation message Date is required appears
+        When I click on the button with text Close
+        When I hover over the "Results" tab
+        When Hover over link Laboratory
+        When I click on the link text Laboratory Chemistry
+        When I click On "Edit" icon
+        When I fill value in Na <Na> field
+        When I fill value in K <K> field
+        When I fill value in Cl <Cl> field
+        When I fill value in Co2 <Co2> field
+        When I fill value in BUN <BUN> field
+        When I fill value in Cr <Cr> field
+        When I fill value in Glu <Glu> field
+        When I fill value in Ca <Ca> field
+        When I fill value in Phos <Phos> field
+        When I fill value in Mg <Mg> field
+        When I click on the button with text Update
+        # Then Success message Chemistry Result Updated Succesfully ! appears
+        Then Added data <Na> is successfully displaying in table
+        Then Added data <K> is successfully displaying in table
+        Then Added data <Cl> is successfully displaying in table
+        Then Added data <Co2> is successfully displaying in table
+        Then Added data <BUN> is successfully displaying in table
+        Then Added data <Cr> is successfully displaying in table
+        Then Added data <Phos> is successfully displaying in table
+        Then Added data <Mg> is successfully displaying in table
+        Examples:
+            | Na | K | Cl | Co2 | BUN | Cr | Glu | Ca | Phos | Mg |
+            | 140 | 5.2 | 115 | 26 | 20 | 0.8 | 95 | 9.4 | 3.6 | 3.0 |
 
 # //------------------------Vikas code--------------------------//
+
     Scenario Outline: Verify the "Managing Provider" is not able to create "New XRAY Result" when the mandatory fields are not populated and Verify the "Managing Provider" is able to Create "New XRAY Result" when only the mandatory fields are populated with valid data and Verify the "Managing Provider" is able to delete "XRAY Result"
         When I click on the link text Medical Record
         When I hover over the "Results" tab
@@ -1251,6 +1285,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | imagingOption | type          | image      |
             | XRAY          | Digital X-ray | Picture(2) |
+
     Scenario Outline: Verify the "Managing Provider" is able to Create "New XRAY Result" when all the fields are populated with valid data and Verify this created x-ray in mobile caregiver app
         Then Search and delete duplicate data <type>
         When I click on the button with text New XRAY Result
@@ -1268,6 +1303,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | imagingOption | type          | image      | uploadImage | result                                                  |
             | XRAY          | Digital X-ray | Picture(2) | Picture(1)  | No evidence of disease or injury, Everything is normal. |
+
     Scenario Outline: Verify the "Managing Provider" is not able to Create "New CT Result" when the mandatory fields are not populated and	Verify the "Managing Provider" is able to Create "New CT Result" when only the mandatory fields are populated with valid data and Verify the "Managing Provider" is able to search "CT Result" andVerify the "Managing Provider" is able to delete "CT Result"
         When I click on the link text Medical Record
         When I hover over the "Results" tab
@@ -1303,6 +1339,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | imagingOption | type       | image      |
             | CT            | Digital CT | Picture(2) |
+
     Scenario Outline: Verify the "Managing Provider" is able to Create "New CT Result" when all the fields are populated with valid data
         Then Search and delete duplicate data <type>
         When I click on the button with text New CT Result
@@ -1321,6 +1358,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | imagingOption | type       | image      | uploadImage | result                                                  |
             | CT            | Digital CT | Picture(2) | Picture(1)  | No evidence of disease or injury, Everything is normal. |
+
     Scenario Outline: Verify the "Managing Provider" is not able to create "New MRI Result" when the mandatory fields are not populated and Verify the "Managing Provider" is able to create "New MRI Result" when only the mandatory fields are populated with valid data and Verify the "Managing Provider" is able to search "MRI Result" and Verify the "Managing Provider" is able to delete "MRI Result"
         When I click on the link text Medical Record
         When I hover over the "Results" tab
@@ -1356,6 +1394,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | imagingOption | type        | image      |
             | MRI           | Digital MRI | Picture(2) |
+
     Scenario Outline: Verify the "Managing Provider" is able to Create "New MRI Result" when all the fields are populated with valid data
         Then Search and delete duplicate data <type>
         When I click on the button with text New MRI Result
@@ -1373,6 +1412,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | imagingOption | type        | image      | uploadImage | result                                                  |
             | MRI           | Digital MRI | Picture(2) | Picture(1)  | No evidence of disease or injury, Everything is normal. |
+
     Scenario Outline: Verify the "Managing Provider" is not able to Create "New Ultrasound Result" when the mandatory fields are not populated and Verify the "Managing Provider" is able to Create "New Ultrasound Result" when only the mandatory fields are populated with valid data and Verify the "Managing Provider" is able to search "Ultrasound Result" and Verify the "Managing Provider" is able to delete "Ultrasound Result"
         When I click on the link text Medical Record
         When I hover over the "Results" tab
@@ -1408,6 +1448,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | imagingOption | type               | image      |
             | Ultrasound    | Digital Ultrasound | Picture(2) |
+
     Scenario Outline: Verify the "Managing Provider" is able to Create "New Ultrasound Result" when all the fields are populated with valid data
         Then Search and delete duplicate data <type>
         When I click on the button with text New Ultrasound Result
@@ -1425,6 +1466,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | imagingOption | type               | image      | uploadImage | result                                                  |
             | Ultrasound    | Digital Ultrasound | Picture(2) | Picture(1)  | No evidence of disease or injury, Everything is normal. |
+
     Scenario Outline: Verify the "Managing Provider" is not able to Create "New Imaging Other Result" when the mandatory fields are not populated and Verify the "Managing Provider" is able to Create "New Imaging Other Result" when only the mandatory fields are populated with valid data and Verify the "Managing Provider" is able to search "Imaging Other Result" and Verify the "Managing Provider" is able to delete "Imaging Other Result"
         When I click on the link text Medical Record
         When I hover over the "Results" tab
@@ -1457,6 +1499,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | type         |
             | Other result |
+
     Scenario Outline: Verify the "Managing Provider" is able to Create "New Imaging Other Result" when all the fields are populated with valid data
         Then Search and delete duplicate data <type>
         When I click on the button with text New Imaging Other Result
@@ -1472,6 +1515,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | type         | uploadImage | result                                                  |
             | Other result | Picture(1)  | No evidence of disease or injury, Everything is normal. |
+
     Scenario Outline: Verify the "Managing Provider" is not able to Create "New Other Result" when the mandatory fields are not populated and Verify the "Managing Provider" is able to Create "New Other Result" when only the mandatory fields are populated with valid data and Verify the "Managing Provider" is able to search "Other Result"
         When I click on the link text Medical Record
         When I hover over the "Results" tab
@@ -1499,6 +1543,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | type              | description           | comments                                                |
             | Auto Other result | Auto test description | No evidence of disease or injury, Everything is normal. |
+
     Scenario Outline: Verify the "Managing Provider" is able to update "Other Result" with valid data and Verify the "Managing Provider" is able to delete "Other Result"
         When I populate data <type> in the "Search" field
         When I click on the "View or Update" option under the "Action" section
@@ -1516,6 +1561,7 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | type              | updatedType               | updatedDescription    | updatedComments       | uploadImage |
             | Auto Other result | Updated Auto Other result | Results>>othermodules | Everything is normal. | Picture(1)  |
+
     Scenario Outline: Verify the "Managing Provider" is able to Create "New Other Result" when all the fields are populated with valid data
         Then Search and delete duplicate data <type>
         When I click on the button with text New Other Result
@@ -1640,7 +1686,7 @@ Feature: Test cases for the 'Patient' page
         Then It redirects on the Patient_Auto_Test Ben's Growth Chart screen
         When I drag chat container banner
         When I click on the button with text Growth Results
-        Then Search and delete duplicate data <heightcm>
+        Then Search and delete duplicate data <heightInches>
         When Hover over link Tracker
         When I click on the link text Growth
         When I click on the button with text New Growth Result
@@ -1664,6 +1710,11 @@ Feature: Test cases for the 'Patient' page
             | heightInches | weightPounds | headCircumference_inches | heightcm | weightkg | headCircumference_cm | specialCharactors |
             | 24           | 8            | 14                       | 60.96    | 3.86     | 35.56                | !@#$%%$#@!        |
 
+    Scenario Outline: Verify the "Managing Provider" is able to see "Graph" of added "Growth result" on "Growth" page
+        When Hover over link Tracker
+        When I click on the link text Growth
+        Then It redirects on the Patient_Auto_Test Ben's Growth Chart screen
+        Then I navigate to the "Growth" page and the Graph or Chart of added "Growth Results" displays
 
     Scenario Outline: Verify the "Managing Provider" is able to "View and update" the added "Growth" Result and Verify the "Managing provider" is able to delete the "Growth Results"
         When I populate data <heightInches> in the "Search" field
@@ -1685,3 +1736,182 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | heightInches | updatedHeightInch | updatedWeight | updatedHeadCircumference_inches | updatedHeightcm | updatedWeightkg | updatedHeadCircumference_cm |
             | 24           | 22                | 7             | 12                              | 55.88           | 3.37            | 30.48                       |
+
+
+    Scenario Outline: Verify the "Managing Provider" is able to create "Growth" tracking for patient's Medical Record and verify this created record in mobile app
+        When Hover over link Tracker
+        Then Tracker options should be visible under dropdown
+            | Growth    |
+            | Nutrition |
+            | Diapering |
+            | Sleep     |
+        When I click on the link text Growth
+        Then It redirects on the Patient_Auto_Test Ben's Growth Chart screen
+        When I drag chat container banner
+        When I click on the button with text Growth Results
+        Then Search and delete duplicate data <heightcm>
+        When Hover over link Tracker
+        When I click on the link text Growth
+        When I click on the button with text New Growth Result
+        Then It redirects on the New Growth Result screen
+        When I select date in start Date field
+        When I fill <heightInches> data in "Height" field
+        When I fill <weightPounds> data in "Weight" field
+        When I fill <weightPounds> data in "Weight Ounce" field
+        When I fill <headCircumference_inches> data in "Head Circumference" field
+        When I click on the button with text Create
+        Then Success message Growth Result Added Succesfully ! appears
+        When I click on the button with text Growth Results
+        When I populate data <heightInches> in the "Search" field
+        Then Growth details should be visible in the list with <heightcm> and <heightInches> and <weightPounds> and <weightPounds> and <weightkg> and <headCircumference_cm> and <headCircumference_inches>
+        Examples:
+            | heightInches | weightPounds | headCircumference_inches | heightcm | weightkg | headCircumference_cm |
+            | 24           | 8            | 14                       | 60.96    | 3.86     | 35.56                |
+
+    # # Scenario Outline: Verify the "Managing Provider" is not able to add "Nutrition order" and validation displays if any mandatory field is not populated
+    # #     When I click on the link text Medical Record
+    # #     When Hover over link Tracker
+    # #     Then Tracker options should be visible under dropdown
+    # #         | Growth    |
+    # #         | Nutrition |
+    # #         | Diapering |
+    # #         | Sleep     |
+    # #     When I click on the link text Nutrition
+    # #     Then It redirects on the Patient_Auto_Test Ben's Nutrition screen
+    # #     When I drag chat container banner
+    # #     When I click on the button with text Manage Nutrition Orders
+    # #     Then It redirects on the Patient_Auto_Test Ben's Nutrition Orders screen
+    # #     Then Search and delete duplicate data <createdNutritionRecord>
+    # #     When I click on the button with text New Nutrition Order
+    # #     Then It redirects on the New Nutrition Order screen
+    # #     When I click on the button with text Create
+    # #     Then validation message This field is required. appears
+    # #     Then validation message Please enter frequency. appears
+    # #     When I fill <nutritionType> data in "Nutrition Type" field
+    # #     When I fill <nutritionFrequency> data in "Nutrition Frequency" field
+    # #     When I click on the button with text Create
+    # #     Then Success message Nutrition Order Added Succesfully ! appears
+    # #     When I populate data <createdNutritionRecord> in the "Search" field
+    # #     Then Nutrition order "Breast Feed" details should be visile in the list with <createdNutritionRecord> and <nutritionFrequency>
+    # #     When I populate data <specialCharactors> in the "Search" field
+    # #     Then No matching records found should be displayed
+
+
+    # #     Examples:
+    # #         | nutritionType | nutritionFrequency | createdNutritionRecord | specialCharactors |
+    # #         | Breast Feed   | On Demand          | Breast Feeding         | !@#$%%$#@!        |
+
+    # # Scenario Outline: Verify the "Managing Provider" is able to "View and update" the added "Nutrition order"
+    # #     When I populate data <createdNutritionRecord> in the "Search" field
+    # #     When I click on the "View or Update" option under the "Action" section
+    # #     Then It redirects on the Patient_Auto_Test Ben's Nutrition Orders screen
+    # #     When I fill <updatedNutritionType> data in "Nutrition Type" field
+    # #     When I fill <updatedNutritionFrequency> data in "Nutrition Frequency" field
+    # #     When I fill <nutritionMilk> data in "Nutrition Milk" field
+    # #     When I fill <calories> data in "Calories" field
+    # #     When I fill <nutritionfortification> data in "Nutrition fortification" field
+    # #     When I fill <fortificationName> data in "Name" field
+    # #     When I fill <volumeMLs> data in "Volume MLs" field
+    # #     When I click on the button with text Update
+    # #     Then Success message Order Updated Succesfully ! appears
+    # #     When I populate data <updatedNutritionRecord> in the "Search" field
+    # #     Then Nutrition order "Bottle" details should be visile in the list with <updatedNutritionRecord> and <updatedNutritionFrequency> and <nutritionMilk> and <fortificationName> and <calories> and <volumeMLs>
+    # #     Examples:
+    # #         | createdNutritionRecord | updatedNutritionType | updatedNutritionFrequency | nutritionMilk | calories | nutritionfortification | fortificationName | volumeMLs | updatedNutritionRecord |
+    # #         | Breast Feeding         | Bottle               | Every 2 hours             | Mother Milk   | 25       | Other                  | Vitamins          | 50        | Bottle Feeding         |
+
+    Scenario Outline: Verify the "Managing Provider" is not able to add "Nutrition order" and validation displays if any mandatory field is not populated and Verify that if the 'Managing Provider' selects the 'Yes' radio button only, the nutrition order should be created.
+        When Hover over "Orders" tab
+        When I click on the link text Nutrition
+        Then patient/nutrition page displays
+        Then Link text New Nutrition Order is displaying
+        When I click on the link text New Nutrition Order
+        Then Verify user is redirected to <firstOption> and Baby breastfeeding consistently? is displayed
+        When I click on the button with text Next
+        Then validation message Please select if the baby is breastfeeding consistently. appears
+        When I click on the breast feeding "Yes" radio button
+        When I click on the button with text Next
+        Then Verify user is redirected to <secondOption> and Do you want baby to supplement after breastfeeding? is displayed
+        When User click on the Multiple index "Next" Button
+        Then validation message Please select if you want baby to supplement after breastfeeding. appears
+        When I click on the supplement "Yes" radio button
+        When User click on the Multiple index "Next" Button
+        Then validation message Please enter the minimum mL/kg/day supplemental goal. appears
+        Then validation message Please select if the infant is feeding ad lib. appears
+        When I fill <invalidSupplementalGoal> data in "SupplementalGoal" field
+        Then validation message Supplemental goal must be at least 1. appears
+        When I fill <invalidMaxSupplementalGoal> data in "SupplementalGoal" field
+        Then validation message Supplemental goal cannot be greater than 1000. appears
+        When I fill <supplementalGoal> data in "SupplementalGoal" field
+        When I click on the ad lib "Yes" radio button
+        When User click on the Multiple index "Next" Button
+        Then Verify user is redirected to <fifthOption> and Doctor wants you to breastfeed on demand and supplement ad lib by bottle with minimum: is displayed
+        Examples:
+            | firstOption   | secondOption | invalidSupplementalGoal | supplementalGoal | invalidMaxSupplementalGoal | fifthOption |
+            | Breastfeeding | Feeding Goal | 0                       | 25               | 5000                       | Summary     |
+
+    Scenario Outline: Verify that if the 'Managing Provider' selects the 'No' radio button only, the nutrition order should be created.
+        When Hover over "Orders" tab
+        When I click on the link text Nutrition
+        Then patient/nutrition page displays
+        Then Link text New Nutrition Order is displaying
+        When I click on the link text New Nutrition Order
+        Then Verify user is redirected to <firstOption> and Baby breastfeeding consistently? is displayed
+        When I click on the breast feeding "No" radio button
+        When I click on the button with text Next
+        Then Verify user is redirected to <secondOption> and Desired total mL/kg/day feeding goal is displayed
+        When I fill <feedingGoal> data in "Feeding goal" field
+        When I click on the feeding ad lib "No" radio button
+        When User click on the third index "Next" Button
+        Then Verify user is redirected to <thirdOption> and Add Nutrition Entry is displayed
+        When I click on the button with text Add Nutrition Entry
+        Then It redirects on the New Nutrition Order screen
+        When I fill <milkField> data in "Nutrition Milk" field
+        When I fill <fortificationField> data in "Nutrition fortification" field
+        When I fill <fortificationName> data in "Name" field
+        When I fill <calories> data in "Calories" field
+        When I click on the button with text Add
+        Then Added data <milkField> is successfully displaying in table
+        Then Added data <formula> is successfully displaying in table
+        Then Added data <fortificationName> is successfully displaying in table
+        Then Added data <calories> is successfully displaying in table
+        When I click on the button with text Add Nutrition Entry
+        When I fill <secondMilkType> data in "Nutrition Milk" field
+        When I fill <fortificationField> data in "Nutrition fortification" field
+        When I fill <fortificationName> data in "Name" field
+        When I fill <calories> data in "Calories" field
+        When I click on the button with text Add
+        Then Added data <secondMilkType> is successfully displaying in table
+        Then Added data <formula> is successfully displaying in table
+        Then Added data <fortificationName> is successfully displaying in table
+        Then Added data <calories> is successfully displaying in table
+        When I click on the button with text Add Nutrition Entry
+        When I fill <thirdMilkType> data in "Nutrition Milk" field
+        When I fill <formula> data in "Formula" field
+        When I fill <calories> data in "Calories" field
+        When I click on the button with text Add
+        Then Added data <thirdMilkType> is successfully displaying in table
+        Then Added data <formula> is successfully displaying in table
+        Then Added data <calories> is successfully displaying in table
+        When User click on the fourth index "Next" Button
+        Then Verify user is redirected to <fourthOption> and What percent of feedings will be by bottle and gavage? is displayed
+        When I fill <invalidBottlePercentage> data in "Bottle percentage" field
+        When User click on the fifth index "Next" Button
+        Then validation message Please select a gavage duration. appears
+        When I fill <validBottlePercentage> data in "Bottle percentage" field
+        When I fill <gavageDuration> data in "Gavage Duration" field
+        When User click on the fifth index "Next" Button
+        Then Verify user is redirected to <fifthOption> and Doctor wants you to feed your infant with is displayed
+        Examples:
+            | firstOption   | secondOption | feedingGoal | thirdOption | milkField   | fortificationField | fortificationName | calories | formula   | secondMilkType | thirdMilkType | fourthOption  | invalidBottlePercentage | validBottlePercentage | fifthOption | gavageDuration |
+            | Breastfeeding | Feeding Goal | 40          | Composition | Mother Milk | Other              | Auto test         | 30       | Auto test | Donor Milk     | Formula       | Bottle/Gavage | 0                       | 90                    | Summary     | 30 minutes     |
+
+
+    Scenario Outline: Verify the nutrition graph
+        When I click on the link text Medical Record
+        When Hover over link Tracker
+        When I click on the second index link Nutrition
+        Then Verify the graph on web with value <graphValue>
+        Examples:
+            | graphValue |
+            | 10         |

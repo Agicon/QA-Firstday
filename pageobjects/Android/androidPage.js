@@ -225,6 +225,46 @@ class AndroidPage extends BasePage {
     return $("(//android.widget.ImageView)[1]");
   }
 
+  get milkMinutesField() {
+    return $("//android.widget.EditText[contains(@text,'Minutes')]");
+  }
+
+  get addedMinutes() {
+    return $("(//android.view.View)[3]");
+  }
+
+  get selectMilkField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_select_milk"]');
+  }
+
+  get bottleVolumnField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_volume"]');
+  }
+
+  get selectFortificationField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_fortification"]');
+  }
+
+  get caloriesField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_calories"]');
+  }
+
+  get noteField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_note"]');
+  }
+
+  get crossButton() {
+    return $('//XCUIElementTypeButton[@name="icn close"]|//android.widget.ImageView[@resource-id="com.app.neonatal.staging:id/iv_close"]');
+  }
+
+  get rightArrowButton() {
+    return $('//android.widget.ImageView[@resource-id="com.app.neonatal.staging:id/iv_right_arrow"]');
+  }
+
+  get diaperWeightField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_gram"]');
+  }
+
   async open(url) {
     var data = TestUtils.getUserCredetials(url);
     await browser.pause(1000);
@@ -317,7 +357,7 @@ class AndroidPage extends BasePage {
     }
   }
 
-  async clickOnButtonWithText(text) {
+  async clickOnMobileButtonWithText(text) {
     const buttonText = await $("//android.widget.Button[contains(@text,'" + text + "')]");
     await buttonText.waitForDisplayed({ timeout: 20000 });
     if ((await buttonText.isDisplayed()) === true) {
@@ -331,6 +371,7 @@ class AndroidPage extends BasePage {
     const messageText1 = await $("//android.widget.Toast");
     var actualMessage = await messageText1.getText();
     await expect(actualMessage).toEqual(text);
+    await messageText1.waitForDisplayed({ reverse: true, timeout: 20000 });
   }
 
   async settingsTAbIsDisplayed() {
@@ -711,7 +752,7 @@ class AndroidPage extends BasePage {
     if ((await option.isDisplayed()) === true) {
       await option.click();
     } else {
-      throw new Error("❌ " + option + " is not dispalyed");
+      throw new Error("❌ " + data + " is not dispalyed");
     }
   }
 
@@ -749,7 +790,6 @@ class AndroidPage extends BasePage {
     await this.downloadAnywayButton.waitForDisplayed({ timeout: 35000 });
     await this.downloadAnywayButton.click();
     await browser.pause(60000);
-    // const downloadDir = path.resolve(__dirname, "../../downloadApps");
     const apkFile = fs.readdirSync(downloadDir).find((file) => file.endsWith(".apk"));
 
     try {
@@ -758,12 +798,10 @@ class AndroidPage extends BasePage {
       files.forEach((file) => {
         const oldFilePath = path.join(downloadDir, file);
 
-        // Only rename files, not folders
         if (fs.statSync(oldFilePath).isFile()) {
           const newFileName = file.substring(0, 4) + path.extname(file);
           const newFilePath = path.join(downloadDir, newFileName);
 
-          // Avoid overwriting files accidentally
           if (oldFilePath !== newFilePath && !fs.existsSync(newFilePath)) {
             fs.renameSync(oldFilePath, newFilePath);
             console.log(`Renamed: ${file} → ${newFileName}`);
@@ -875,15 +913,65 @@ class AndroidPage extends BasePage {
     await this.logOutTabIsDisplayed();
   }
 
-   async clickOnOption(data) {
-    const option = await $('//android.widget.TextView[contains(@text,"' + data + '")]');
-    await option.scrollIntoView();
+  async fillMinutesField(data) {
+    await this.milkMinutesField.waitForDisplayed({ timeout: 15000 });
+    await this.milkMinutesField.setValue(data);
+  }
+
+  async verifyAddedMinutes(minutes) {
+    await this.addedMinutes.waitForDisplayed({ timeout: 15000 });
+    const actMin = await this.addedMinutes.getText();
+    console.log("time" + actMin);
+    const minText = await actMin.replace("00::00", "");
+    console.log("time text" + minText);
+    expect(actMin).toEqual(minutes);
+  }
+
+  async fillSelectMilkField(data) {
+    await this.selectMilkField.waitForDisplayed({ timeout: 15000 });
+    await this.selectMilkField.click();
+    await $("//android.widget.TextView[contains(@text,'" + data + "')]").click();
+  }
+
+  async fillBottleVolumnField(data) {
+    await this.bottleVolumnField.waitForDisplayed({ timeout: 15000 });
+    await this.bottleVolumnField.setValue(data);
+  }
+
+  async fillSelectFortificationField(data) {
+    await this.selectFortificationField.waitForDisplayed({ timeout: 15000 });
+    await this.selectFortificationField.click();
+    const option = await $("//android.widget.TextView[contains(@text,'" + data + "')]");
     await option.waitForDisplayed({ timeout: 15000 });
-    if ((await option.isDisplayed()) === true) {
-      await option.click();
-    } else {
-      throw new Error("❌ " + option + " is not dispalyed");
-    }
+    await option.click();
+  }
+
+  async fillCaloriesField(data) {
+    await this.caloriesField.waitForDisplayed({ timeout: 15000 });
+    await this.caloriesField.click();
+    const option = await $("//android.widget.CheckedTextView[contains(@text,'" + data + "')]");
+    await option.waitForDisplayed({ timeout: 15000 });
+    await option.click();
+  }
+
+  async fillNoteField(data) {
+    await this.noteField.waitForDisplayed({ timeout: 15000 });
+    await this.noteField.setValue(data);
+  }
+
+  async clickOnCrossButton() {
+    await this.crossButton.waitForDisplayed({ timeout: 15000 });
+    await this.crossButton.click();
+  }
+
+  async clickOnRightArrowButton() {
+    await this.rightArrowButton.waitForDisplayed({ timeout: 15000 });
+    await this.rightArrowButton.click();
+  }
+
+  async fillDiaperWeightField(data) {
+    await this.diaperWeightField.waitForDisplayed({ timeout: 15000 });
+    await this.diaperWeightField.setValue(data);
   }
 }
 module.exports = new AndroidPage();

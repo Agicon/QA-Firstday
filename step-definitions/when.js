@@ -775,7 +775,93 @@ When(/^I remove data from required fields on updation form$/, async () => {
   await managingProviderAccountPage.removeDataFromGrowthFields();
 });
 
+When(/^I fill (.*) data in "Nutrition Type" field$/, async (data) => {
+  await managingProviderAccountPage.fillNutritionTypeField(data);
+});
 
+When(/^I fill (.*) data in "Nutrition Frequency" field$/, async (data) => {
+  await managingProviderAccountPage.fillNutritionFrequencyField(data);
+});
+
+When(/^I fill (.*) data in "Nutrition Milk" field$/, async (data) => {
+  await managingProviderAccountPage.fillNutritionMilkField(data);
+});
+
+When(/^I fill (.*) data in "Calories" field$/, async (data) => {
+  await managingProviderAccountPage.fillCaloriesFieldField(data);
+});
+
+When(/^I fill (.*) data in "Nutrition fortification" field$/, async (data) => {
+  await managingProviderAccountPage.fillNutritionfortificationField(data);
+});
+
+When(/^I fill (.*) data in "Name" field$/, async (data) => {
+  await managingProviderAccountPage.fillNameField(data);
+});
+
+When(/^I fill (.*) data in "Volume MLs" field$/, async (data) => {
+  await managingProviderAccountPage.fillVolumeMlsField(data);
+});
+
+When(/^I click on the breast feeding "Yes" radio button$/, async () => {
+  await managingProviderAccountPage.clickOnBreastFeeding_Yes_RadioButton();
+});
+
+When(/^User click on the Multiple index "Next" Button$/, async () => {
+  await managingProviderAccountPage.multipleIndexNextButton();
+});
+
+When(/^I click on the supplement "Yes" radio button$/, async () => {
+  await managingProviderAccountPage.clickOnSupplement_Yes_RadioButton();
+});
+
+When(/^I fill (.*) data in "SupplementalGoal" field$/, async (data) => {
+  await managingProviderAccountPage.fillSupplementalGoalField(data);
+});
+
+When(/^I click on the ad lib "Yes" radio button$/, async () => {
+  await managingProviderAccountPage.clickOnAdLib_Yes_RadioButton();
+});
+
+When(/^I click on the ad lib "No" radio button$/, async () => {
+  await managingProviderAccountPage.clickOnAdLib_No_RadioButton();
+});
+
+When(/^I click on the breast feeding "No" radio button$/, async () => {
+  await managingProviderAccountPage.clickOnBreastFeeding_No_RadioButton();
+});
+
+When(/^I fill (.*) data in "Feeding goal" field$/, async (data) => {
+  await managingProviderAccountPage.fillFeedingGoalField(data);
+});
+
+When(/^User click on the third index "Next" Button$/, async () => {
+  await managingProviderAccountPage.clickOnThirdIndexNextButton();
+});
+
+When(/^I click on the feeding ad lib "No" radio button$/, async () => {
+  await managingProviderAccountPage.clickOnFeedingAdLib_No_radioButton();
+});
+
+When(/^I fill (.*) data in "Formula" field$/, async (data) => {
+  await managingProviderAccountPage.fillFormulaField(data);
+});
+
+When(/^User click on the fourth index "Next" Button$/, async () => {
+  await managingProviderAccountPage.clickOnFourthIndexNextButton();
+});
+
+When(/^I fill (.*) data in "Bottle percentage" field$/, async (data) => {
+  await managingProviderAccountPage.fillBottlePercentField(data);
+});
+
+When(/^User click on the fifth index "Next" Button$/, async () => {
+  await managingProviderAccountPage.clickOnFifthIndexNextButton();
+});
+
+When(/^I fill (.*) data in "Gavage Duration" field$/, async (data) => {
+  await managingProviderAccountPage.fillGavageDurationField(data);
+});
 
 // =================================Android======================================//
 
@@ -844,7 +930,7 @@ When(/^User click on the "Logout" option$/, async () => {
 });
 
 When(/^User click on the button with text (.*)$/, async (Button) => {
-  await androidPage.clickOnButtonWithText(Button);
+  await androidPage.clickOnMobileButtonWithText(Button);
 });
 
 When(/^User click on "Hamburger" icon displaying in the top left corner$/, async () => {
@@ -860,3 +946,34 @@ When(/^I click on "Edit" icon from "Profile Picture" section$/, async () => {
   await androidPage.clickOnOkButton();
 });
 
+When(/^I fill (.*) data in "Minutes" field$/, async (data) => {
+  await androidPage.fillMinutesField(data);
+});
+
+When(/^I fill (.*) data in "Select Milk" field$/, async (data) => {
+  await androidPage.fillSelectMilkField(data);
+});
+
+When(/^I fill (.*) data in "Bottle Volumn" field$/, async (data) => {
+  await androidPage.fillBottleVolumnField(data);
+});
+
+When(/^I fill (.*) data in "Select Fortification" field$/, async (data) => {
+  await androidPage.fillSelectFortificationField(data);
+});
+
+When(/^I fill (.*) data in mobile "Calories" field$/, async (data) => {
+  await androidPage.fillCaloriesField(data);
+});
+
+When(/^I fill (.*) data in "Note" field$/, async (data) => {
+  await androidPage.fillNoteField(data);
+});
+
+When(/^User click on the right arrow button$/, async () => {
+  await androidPage.clickOnRightArrowButton();
+});
+
+When(/^I fill (.*) data in "Diaper Weight" field$/, async (data) => {
+  await androidPage.fillDiaperWeightField(data);
+});
