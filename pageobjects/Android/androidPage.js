@@ -265,6 +265,42 @@ class AndroidPage extends BasePage {
     return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_gram"]');
   }
 
+  get dateField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_growth_date"]');
+  }
+
+  get form_OK_Button() {
+    return $('//android.widget.Button[@resource-id="android:id/button1"]');
+  }
+
+  get heightInchField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_growth_inch"]');
+  }
+
+  get weightPoundField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_growth_pound"]');
+  }
+
+  get weightOunceField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_growth_ounce"]');
+  }
+
+  get headCircumferenceField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_head_inch"]');
+  }
+
+  get growthHeightRecord() {
+    return $('//android.widget.TextView[@resource-id="com.app.neonatal.staging:id/tv_height_value"]');
+  }
+
+  get growthWeightRecord() {
+    return $('//android.widget.TextView[@resource-id="com.app.neonatal.staging:id/tv_weight_value"]');
+  }
+
+  get growthHeadRecord() {
+    return $('//android.widget.TextView[@resource-id="com.app.neonatal.staging:id/tv_head_circum_value"]');
+  }
+
   async open(url) {
     var data = TestUtils.getUserCredetials(url);
     await browser.pause(1000);
@@ -972,6 +1008,65 @@ class AndroidPage extends BasePage {
   async fillDiaperWeightField(data) {
     await this.diaperWeightField.waitForDisplayed({ timeout: 15000 });
     await this.diaperWeightField.setValue(data);
+  }
+
+  async selectDate() {
+    await this.dateField.waitForDisplayed({ timeout: 15000 });
+    await this.dateField.click();
+  }
+
+  async clickOnFormOKButton() {
+    await this.form_OK_Button.waitForDisplayed({ timeout: 15000 });
+    await this.form_OK_Button.click();
+  }
+
+  async fillHeightInchField(data) {
+    await this.heightInchField.waitForDisplayed({ timeout: 15000 });
+    await this.heightInchField.click();
+    await this.heightInchField.setValue(data);
+    await browser.keys("Tab");
+    await browser.keys("Tab");
+  }
+
+  async fillWeightPoundField(data) {
+    await this.weightPoundField.waitForDisplayed({ timeout: 15000 });
+    await this.weightPoundField.click();
+    await this.weightPoundField.setValue(data);
+    await browser.keys("Tab");
+  }
+
+  async fillWeightOunceField(data) {
+    await this.weightOunceField.waitForDisplayed({ timeout: 15000 });
+    await this.weightOunceField.click();
+    await this.weightOunceField.setValue(data);
+    await browser.keys("Tab");
+    await browser.keys("Tab");
+  }
+
+  async fillHeadCircumferenceField(data) {
+    await this.headCircumferenceField.waitForDisplayed({ timeout: 15000 });
+    await this.headCircumferenceField.click();
+    await this.headCircumferenceField.setValue(data);
+    await browser.keys("Tab");
+    await browser.keys("Tab");
+  }
+
+  async verifyMobileGrowthDetails(heightInch, weightPound, weightOunce, headCircumference) {
+    const regex = /^\d+/;
+    await this.growthHeightRecord.waitForDisplayed({ timeout: 15000 });
+    const actHeight = await this.growthHeightRecord.getText();
+    const actHeightText = await actHeight.match(regex)[0];
+    const actWeightPound = await this.growthWeightRecord.getText();
+    const actWeightPoundText = await actWeightPound.match(regex)[0];
+    const actWeightOunce = await this.growthWeightRecord.getText();
+    const actWeightOunceText = await actWeightOunce.replace(/.*(10)\.0.*/, "$1");
+    const actHead = await this.growthHeadRecord.getText();
+    const actHeadText = await actHead.match(regex)[0];
+
+    await expect(actHeightText).toEqual(heightInch);
+    await expect(actWeightPoundText).toEqual(weightPound);
+    await expect(actWeightOunceText).toEqual(weightOunce);
+    await expect(actHeadText).toEqual(headCircumference);
   }
 }
 module.exports = new AndroidPage();

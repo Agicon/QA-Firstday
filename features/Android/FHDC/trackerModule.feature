@@ -113,3 +113,26 @@ Feature: Testcases for the modules in caregiver mobile app
         Examples:
             | note                                | diaperWeight |
             | Observe your baby’s little gestures | 50           |
+
+
+    Scenario Outline: Verify the validation message is displaying while mandatory fields is not filled for "Growth" results
+        When I click on Growth option
+        Then I get navigated to Edit Growth screen
+        When User click on the button with text Add Growth
+        Then I get navigated to New Growth Result screen
+        When User click on the button with text Create
+        Then Validation message appears Date is required field
+        When User selects date in "Date" field
+        When User click on the form "OK" button
+        When I fill <heightInch> data in mobile "Height Inch" field
+        When I fill <weightPound> data in mobile "Weight Pound" field
+        When I fill <weightOunce> data in mobile "Weight Ounce" field
+        When I fill <headCircumference> data in mobile "Head Circumference" field
+        When User click on the button with text Create
+        Then Validation message appears Growth result added successfully!
+        When User click on the button with text Edit Growth
+        Then I get navigated to Growth List screen
+        Then Added mobile growth details should be visible with Height inch <heightInch> and Weight Pound <weightPound> and Weight Ounce <weightOunce> and Head Circumference <headCircumference>
+        Examples:
+            | heightInch | weightPound | weightOunce | headCircumference |
+            | 20         | 8           | 10          | 15                |
