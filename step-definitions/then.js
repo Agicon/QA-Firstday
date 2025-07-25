@@ -621,3 +621,9 @@ Then(/^Verify that added minutes (.*) is displaying on the screen$/, async (minu
 Then(/^User click on the cross button$/, async () => {
   await androidPage.clickOnCrossButton();
 });
+
+Then(/^Added mobile growth details should be visible with Height inch (.*) and Weight Pound (.*) and Weight Ounce (.*) and Head Circumference (.*)$/, async (heightInch, weightPound, weightOunce, headCircumference) => {
+  await androidPage.verifyMobileGrowthDetails(heightInch, weightPound, weightOunce, headCircumference);
+});
+
+

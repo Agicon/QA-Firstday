@@ -977,3 +977,30 @@ When(/^User click on the right arrow button$/, async () => {
 When(/^I fill (.*) data in "Diaper Weight" field$/, async (data) => {
   await androidPage.fillDiaperWeightField(data);
 });
+
+
+When(/^User selects date in "Date" field$/, async () => {
+  await androidPage.selectDate();
+});
+
+When(/^User click on the form "OK" button$/, async () => {
+  await androidPage.clickOnFormOKButton();
+});
+
+When(/^I fill (.*) data in mobile "Height Inch" field$/, async (data) => {
+  await androidPage.fillHeightInchField(data);
+});
+
+When(/^I fill (.*) data in mobile "Weight Pound" field$/, async (data) => {
+  await androidPage.fillWeightPoundField(data);
+});
+
+When(/^I fill (.*) data in mobile "Weight Ounce" field$/, async (data) => {
+  await androidPage.fillWeightOunceField(data);
+});
+
+When(/^I fill (.*) data in mobile "Head Circumference" field$/, async (data) => {
+  await androidPage.fillHeadCircumferenceField(data);
+});
+
+
