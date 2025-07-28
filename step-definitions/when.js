@@ -978,7 +978,6 @@ When(/^I fill (.*) data in "Diaper Weight" field$/, async (data) => {
   await androidPage.fillDiaperWeightField(data);
 });
 
-
 When(/^User selects date in "Date" field$/, async () => {
   await androidPage.selectDate();
 });
@@ -1003,4 +1002,10 @@ When(/^I fill (.*) data in mobile "Head Circumference" field$/, async (data) => 
   await androidPage.fillHeadCircumferenceField(data);
 });
 
+When(/^Delete the mobile record using "Delete" button$/, async () => {
+  await androidPage.deleteRecord();
+});
 
+When(/^Press the 'Back' button repeatedly until the user reaches the starting module (.*)$/, async (startingModule) => {
+  await androidPage.clickToTheStartingPoint(startingModule);
+});
