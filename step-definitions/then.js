@@ -506,6 +506,17 @@ Then(/^Verify all the features inside medical report$/, async () => {
   await androidPage.sendUsresultIsDisplayed();
 });
 
+Then(/^For android device, verify all the features inside medical report$/, async () => {
+  await androidPage.diagnosisIsDisplayed();
+  await androidPage.medicationIsDisplayed();
+  await androidPage.resultsIsDisplayed();
+  await androidPage.trackerIsDisplayed();
+  await androidPage.vaccinationsIsDisplayed();
+  await androidPage.mediaIsDisplayed();
+  await androidPage.documentsIsDisplayed();
+  await androidPage.sendUsresultIsDisplayed();
+});
+
 Then(/^Verify all the tabs inside providers module$/, async () => {
   await androidPage.providerTabIsDisplayed();
   await androidPage.appointmentsTabIsDisplayed();
@@ -581,8 +592,7 @@ Then(/^I get navigated to (.*) screen$/, async (text) => {
 });
 
 Then(/^I click on the back button$/, async () => {
-  // await androidPage.clickOnModuleBackButton();
-  await browser.back();
+  await androidPage.clickOnModuleBackButton();
 });
 
 Then(/^The selected image (.*) should get updated and displays on "Caregiver's" main screen of the app$/, async (pic) => {
@@ -626,4 +636,10 @@ Then(/^Added mobile growth details should be visible with Height inch (.*) and W
   await androidPage.verifyMobileGrowthDetails(heightInch, weightPound, weightOunce, headCircumference);
 });
 
+Then(/^Deleted mobile record should not be visible in the list$/, async () => {
+  await androidPage.verifyDeletedMobileRecord();
+});
 
+Then(/^Use "Back command" to close the popup$/, async () => {
+  await browser.back();
+});

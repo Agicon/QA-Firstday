@@ -301,6 +301,14 @@ class AndroidPage extends BasePage {
     return $('//android.widget.TextView[@resource-id="com.app.neonatal.staging:id/tv_head_circum_value"]');
   }
 
+  get deleteButton() {
+    return $("//android.widget.TextView[contains(@text,'Delete')]");
+  }
+
+  get noRecordFoundText() {
+    return $("//android.widget.TextView[contains(@text,'No Record Found.')]");
+  }
+
   async open(url) {
     var data = TestUtils.getUserCredetials(url);
     await browser.pause(1000);
@@ -783,7 +791,9 @@ class AndroidPage extends BasePage {
 
   async clickOnOption(data) {
     const option = await $('//android.widget.TextView[contains(@text,"' + data + '")]');
-    await option.scrollIntoView();
+    try {
+      await option.scrollIntoView();
+    } catch (error) {}
     await option.waitForDisplayed({ timeout: 15000 });
     if ((await option.isDisplayed()) === true) {
       await option.click();
@@ -1059,14 +1069,40 @@ class AndroidPage extends BasePage {
     const actWeightPound = await this.growthWeightRecord.getText();
     const actWeightPoundText = await actWeightPound.match(regex)[0];
     const actWeightOunce = await this.growthWeightRecord.getText();
-    const actWeightOunceText = await actWeightOunce.replace(/.*(10)\.0.*/, "$1");
+    const parts = actWeightOunce.split("&");
+    const actOunceValue = parts.length > 1 ? parts[1].match(/\d+/)[0] : null;
     const actHead = await this.growthHeadRecord.getText();
     const actHeadText = await actHead.match(regex)[0];
 
     await expect(actHeightText).toEqual(heightInch);
     await expect(actWeightPoundText).toEqual(weightPound);
-    await expect(actWeightOunceText).toEqual(weightOunce);
+    await expect(actOunceValue).toEqual(weightOunce);
     await expect(actHeadText).toEqual(headCircumference);
+  }
+
+  async deleteRecord() {
+    await this.deleteButton.waitForDisplayed({ timeout: 15000 });
+    await this.deleteButton.click();
+    await this.clickOnMobileButtonWithText("Yes");
+  }
+
+  async verifyDeletedMobileRecord() {
+    await this.noRecordFoundText.waitForDisplayed({ timeout: 15000 });
+    if ((await this.noRecordFoundText.isDisplayed()) == true) {
+      console.log("✅ Record deleted successfully");
+    } else {
+      throw new Error("❌ Failed to delete record");
+    }
+  }
+
+  async clickToTheStartingPoint(text) {
+    const startingPoint = await $("//android.widget.TextView[contains(@text,'" + text + "')]");
+    do {
+      await browser.back();
+      if ((await this.crossButton.isDisplayed()) === true) {
+        await this.crossButton.click();
+      }
+    } while ((await startingPoint.isDisplayed()) === false);
   }
 }
 module.exports = new AndroidPage();

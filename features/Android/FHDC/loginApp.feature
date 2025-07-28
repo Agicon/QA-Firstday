@@ -28,10 +28,10 @@ Feature: Test cases for login page
         Then I click on the back button
         When I click on Temperature option
         Then I get navigated to Axilla screen
-        Then I click on the back button
+        Then Use "Back command" to close the popup
         Then I click on the back button
         When User clicks on medical report module
-        Then Verify all the features inside medical report
+        Then For android device, verify all the features inside medical report
         When I click on Diagnosis option
         Then I get navigated to Active screen
         Then I click on the back button
@@ -51,7 +51,7 @@ Feature: Test cases for login page
         Then I click on the back button
         When I click on Send Us a Result option
         Then I get navigated to Take Picture screen
-        Then I click on the back button
+        Then Use "Back command" to close the popup
         Then I click on the back button
         When I click on Tracker option
         Then I get navigated to Growth screen
@@ -75,11 +75,11 @@ Feature: Test cases for login page
         Then I click on the back button
         When I click on Send Us A Document option
         Then I get navigated to Take Picture screen
-        Then I click on the back button
+        Then Use "Back command" to close the popup
         Then I click on the back button
         When I click on Send Us a Result option
         Then I get navigated to Take Picture screen
-        Then I click on the back button
+        Then Use "Back command" to close the popup
         Then I click on the back button
         When User clicks on providers module on homepage
         Then Verify all the tabs inside providers module
@@ -105,7 +105,7 @@ Feature: Test cases for login page
         Then I click on the back button
         When I click on Change Child option
         Then I get navigated to Select your child screen
-        Then I click on the back button
+        Then Use "Back command" to close the popup
         Then I click on the back button
         When User click on "Hamburger" icon displaying in the top left corner
         When User click on the "Logout" option

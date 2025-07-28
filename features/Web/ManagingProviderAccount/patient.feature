@@ -1137,8 +1137,8 @@ Feature: Test cases for the 'Patient' page
         Then Added data <comment> is successfully displaying in table
 
         Examples:
-            | patientName | image | comment | wbc | hgb | hct | plts | retic |
-            | Patient_Auto_Test | Picture(2) | this is your report | 14 | 8 | 10 | 210 | 11 |
+            | patientName       | image      | comment             | wbc | hgb | hct | plts | retic |
+            | Patient_Auto_Test | Picture(2) | this is your report | 14  | 8   | 10  | 210  | 11    |
 
     Scenario Outline: Verify the "Managing Provider" is able to update "CBC Results" with valid and invalid data
         When I hover over the "Results" tab
@@ -1208,8 +1208,8 @@ Feature: Test cases for the 'Patient' page
         Then Added data <Mg> is successfully displaying in table
 
         Examples:
-            | Na | K | Cl | Co2 | BUN | Cr | Glu | Ca | Phos | Mg |
-            | 139 | 4.2 | 113 | 24 | 15 | 0.9 | 92 | 9.3 | 3.5 | 2.0 |
+            | Na  | K   | Cl  | Co2 | BUN | Cr  | Glu | Ca  | Phos | Mg  |
+            | 139 | 4.2 | 113 | 24  | 15  | 0.9 | 92  | 9.3 | 3.5  | 2.0 |
 
     Scenario Outline: Verify the "Managing Provider" is able to update "Chemistry Results" with valid and invalid data
         When I hover over the "Results" tab
@@ -1245,8 +1245,8 @@ Feature: Test cases for the 'Patient' page
         Then Added data <Phos> is successfully displaying in table
         Then Added data <Mg> is successfully displaying in table
         Examples:
-            | Na | K | Cl | Co2 | BUN | Cr | Glu | Ca | Phos | Mg |
-            | 140 | 5.2 | 115 | 26 | 20 | 0.8 | 95 | 9.4 | 3.6 | 3.0 |
+            | Na  | K   | Cl  | Co2 | BUN | Cr  | Glu | Ca  | Phos | Mg  |
+            | 140 | 5.2 | 115 | 26  | 20  | 0.8 | 95  | 9.4 | 3.6  | 3.0 |
 
 # //------------------------Vikas code--------------------------//
 
@@ -1749,7 +1749,7 @@ Feature: Test cases for the 'Patient' page
         Then It redirects on the Patient_Auto_Test Ben's Growth Chart screen
         When I drag chat container banner
         When I click on the button with text Growth Results
-        Then Search and delete duplicate data <heightcm>
+        Then Search and delete duplicate data <heightInches>
         When Hover over link Tracker
         When I click on the link text Growth
         When I click on the button with text New Growth Result
@@ -1915,3 +1915,16 @@ Feature: Test cases for the 'Patient' page
         Examples:
             | graphValue |
             | 10         |
+
+
+    Scenario Outline: Verify the mobile growth details are visible on the web
+        When I click on the link text Medical Record
+        When Hover over link Tracker
+        When I click on the link text Growth
+        Then It redirects on the Patient_Auto_Test Ben's Growth Chart screen
+        When I click on the button with text Growth Results
+        When I populate data <heightInches> in the "Search" field
+        Then Growth details should be visible in the list with <heightcm> and <heightInches> and <weightPounds> and <weightOunce> and <weightkg> and <headCircumference_cm> and <headCircumference_inches>
+        Examples:
+            | heightInches | weightPounds | headCircumference_inches | heightcm | weightkg | headCircumference_cm | weightOunce |
+            | 20           | 8            | 15                       | 50.80    | 3.91     | 38.10                | 10          |

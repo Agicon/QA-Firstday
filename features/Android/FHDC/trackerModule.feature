@@ -9,6 +9,7 @@ Feature: Testcases for the modules in caregiver mobile app
         Then I get navigated to Growth screen
         When I click on Nutrition option
         Then I get navigated to View Nutrition Graph screen
+        Then Validation message appears No Record Found
         When I click on Bottle option
         Then I get navigated to Select Milk screen
         When I click on Add Manual Time option
@@ -49,8 +50,8 @@ Feature: Testcases for the modules in caregiver mobile app
         When I fill <minutes> data in "Minutes" field
         Then User click on the cross button
         Examples:
-            | minutes |
-            | 10      |
+            | minutes | startingModule |
+            | 10      | Left Breast    |
 
 
     Scenario Outline: Verify that "Caregiver" is able to add nutrition "Gavage Fed" details of patient
@@ -69,8 +70,8 @@ Feature: Testcases for the modules in caregiver mobile app
         When I fill <note> data in "Note" field
         Then User click on the cross button
         Examples:
-            | minutes | selectMilk  | bottleVolumn | fortification | calories | note                                              |
-            | 10      | Mother Milk | 50           | Auto test     | 25       | Observe Your Baby’s Response while Bottle Feeding |
+            | minutes | selectMilk  | bottleVolumn | fortification | calories | note                                              | startingModule |
+            | 10      | Mother Milk | 50           | Auto test     | 25       | Observe Your Baby’s Response while Bottle Feeding | Gavage Fed     |
 
 
     Scenario Outline: Verify that "Caregiver" is able to add "Sleep" details of patient
@@ -88,8 +89,8 @@ Feature: Testcases for the modules in caregiver mobile app
         When I fill <minutes> data in "Minutes" field
         Then User click on the cross button
         Examples:
-            | minutes |
-            | 10      |
+            | minutes | startingModule |
+            | 10      | Sleep          |
 
 
     Scenario Outline: Verify that "Caregiver" is able to add "Diapering" details of patient
@@ -111,11 +112,31 @@ Feature: Testcases for the modules in caregiver mobile app
         When I fill <diaperWeight> data in "Diaper Weight" field
         Then User click on the cross button
         Examples:
-            | note                                | diaperWeight |
-            | Observe your baby’s little gestures | 50           |
+            | note                                | diaperWeight | startingModule |
+            | Observe your baby’s little gestures | 50           | Diapering      |
 
 
-    Scenario Outline: Verify the validation message is displaying while mandatory fields is not filled for "Growth" results
+    Scenario Outline: Verify the "Caregiver" is able to view and Edit "Growth" results added by the provider through web and Verify the "Caregiver" is able to delete "Growth" results added by the provider through web
+        When I click on Growth option
+        Then I get navigated to Edit Growth screen
+        When User click on the button with text Edit Growth
+        Then I get navigated to Growth List screen
+        When I click on Edit option
+        When I fill <updatedHeightInch> data in mobile "Height Inch" field
+        When I fill <updatedWeightPound> data in mobile "Weight Pound" field
+        When I fill <updateWeightOunce> data in mobile "Weight Ounce" field
+        When I fill <updatedHeadCircumference> data in mobile "Head Circumference" field
+        When User click on the button with text Save
+        Then Added mobile growth details should be visible with Height inch <updatedHeightInch> and Weight Pound <updatedWeightPound> and Weight Ounce <updateWeightOunce> and Head Circumference <updatedHeadCircumference>
+        When Delete the mobile record using "Delete" button
+        Then Deleted mobile record should not be visible in the list
+        Examples:
+            | updatedHeightInch | updatedWeightPound | updateWeightOunce | updatedHeadCircumference | startingModule |
+            | 24                | 10                 | 12                | 16                       | Growth         |
+
+
+    Scenario Outline: Verify the validation message is displaying while mandatory fields is not filled for "Growth" results and Verify the "Caregiver" is able to Add "Growth" results with valid data
+        Then I click on the back button
         When I click on Growth option
         Then I get navigated to Edit Growth screen
         When User click on the button with text Add Growth
@@ -134,5 +155,42 @@ Feature: Testcases for the modules in caregiver mobile app
         Then I get navigated to Growth List screen
         Then Added mobile growth details should be visible with Height inch <heightInch> and Weight Pound <weightPound> and Weight Ounce <weightOunce> and Head Circumference <headCircumference>
         Examples:
-            | heightInch | weightPound | weightOunce | headCircumference |
-            | 20         | 8           | 10          | 15                |
+            | heightInch | weightPound | weightOunce | headCircumference | startingModule |
+            | 20         | 8           | 10          | 15                | Growth         |
+
+
+    Scenario Outline: Verify the "Caregiver" is able to "Edit" the added "Growth Results"
+        When I click on Edit option
+        When I fill <updatedHeightInch> data in mobile "Height Inch" field
+        When I fill <updatedWeightPound> data in mobile "Weight Pound" field
+        When I fill <updateWeightOunce> data in mobile "Weight Ounce" field
+        When I fill <updatedHeadCircumference> data in mobile "Head Circumference" field
+        When User click on the button with text Save
+        Then Added mobile growth details should be visible with Height inch <updatedHeightInch> and Weight Pound <updatedWeightPound> and Weight Ounce <updateWeightOunce> and Head Circumference <updatedHeadCircumference>
+        When Delete the mobile record using "Delete" button
+        Then Deleted mobile record should not be visible in the list
+        Examples:
+            | updatedHeightInch | updatedWeightPound | updateWeightOunce | updatedHeadCircumference |
+            | 24                | 10                 | 12                | 16                       |
+
+
+    Scenario Outline: Verify the "Caregiver" is able to Add "Growth" results with valid data and created record should be visible on the web
+        Then I click on the back button
+        When I click on Growth option
+        Then I get navigated to Edit Growth screen
+        When User click on the button with text Add Growth
+        Then I get navigated to New Growth Result screen
+        When User selects date in "Date" field
+        When User click on the form "OK" button
+        When I fill <heightInch> data in mobile "Height Inch" field
+        When I fill <weightPound> data in mobile "Weight Pound" field
+        When I fill <weightOunce> data in mobile "Weight Ounce" field
+        When I fill <headCircumference> data in mobile "Head Circumference" field
+        When User click on the button with text Create
+        Then Validation message appears Growth result added successfully!
+        When User click on the button with text Edit Growth
+        Then I get navigated to Growth List screen
+        Then Added mobile growth details should be visible with Height inch <heightInch> and Weight Pound <weightPound> and Weight Ounce <weightOunce> and Head Circumference <headCircumference>
+        Examples:
+            | heightInch | weightPound | weightOunce | headCircumference | startingModule |
+            | 20         | 8           | 10          | 15                | Growth         |
