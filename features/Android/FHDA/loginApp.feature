@@ -22,7 +22,7 @@ Feature: Test cases for login page
     When I click on Alerts option
     Then I get navigated to My Patient screen
     When I click on Settings option
-    Then Verify all the feautres under settings module for provider app
+    Then Verify all the feautres under settings module for provider app 
     Then I get navigated to Audio Alert Setting screen
     When I click on Audio Alert Setting option
     Then I get navigated to Vital Sign Alert screen

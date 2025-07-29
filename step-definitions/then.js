@@ -55,6 +55,10 @@ Then(/^Table is displaying on screen$/, async () => {
 Then(/^Form is displaying on screen$/, async () => {
   await superAdminPage.formIsDisplayed();
 });
+
+Then(/^Results are not displayed after delete$/, async () => {
+  await superAdminPage.verifyDeletedResult();
+});
 // ======================================Web-CustomerAccount=============================================//
 
 Then(/^Verify that user successfully redirected on homepage$/, async () => {
@@ -334,6 +338,10 @@ Then("I should see the following options in the dropdown under dropdown option",
 Then(/^Added data (.*) is successfully displaying in table$/, async (data) => {
   await managingProviderAccountPage.verifyDataInTable(data);
 });
+
+Then(/^Header (.*) is successfully displaying in table$/, async (data) => {
+  await managingProviderAccountPage.verifyTableHeader(data);
+});
 Then(/^Other provider records should be visilbe in the list with (.*) and (.*)$/, async (otherProvider, description) => {
   await managingProviderAccountPage.verifyOtherProviderRecords(otherProvider, description);
 });
@@ -447,6 +455,10 @@ Then(/^Growth details should be visible in the list with (.*) and (.*) and (.*) 
   await managingProviderAccountPage.verifyGrowthDetails(heightcm, heightInches, weightPounds, weightOunce, weightkg, headCircumference_cm, headCircumference_inches);
 });
 
+Then(/^Verify searched data (.*) is dipslying in result laboratory table$/, async (text) => {
+  await managingProviderAccountPage.verifySearchedLaboratoryResult(text);
+
+  });
 Then(/^I navigate to the "Growth" page and the Graph or Chart of added "Growth Results" displays$/, async () => {
   await managingProviderAccountPage.verifyGrowthGraph();
 });
