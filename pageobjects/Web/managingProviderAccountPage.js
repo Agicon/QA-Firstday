@@ -598,6 +598,14 @@ class ManagingProviderAccountPage extends BasePage {
     return $("#gavage_duration:nth-of-type(1)");
   }
 
+  get diaperingTypeDropdown() {
+    return $("#diapering_type:nth-of-type(1)");
+  }
+
+  get nutritionTypeDropdown() {
+    return $("#filter_type:nth-of-type(1)");
+  }
+
   async settigsButtonIsDisplayed() {
     await this.settingsButton.waitForDisplayed({ timeout: 20000 });
     return await this.settingsButton.isDisplayed();
@@ -1992,12 +2000,40 @@ class ManagingProviderAccountPage extends BasePage {
     await this.gavageDurationField.selectByVisibleText(Data);
   }
 
-  async verifyGraph(data) {
-    await browser.pause(4000);
+  async verifyNutritionGraph(nutritionType, data) {
+    await browser.pause(3000);
     const addedData = await $("(//*[contains(text(),'" + data + "')])[3]");
     var actData = await addedData.getText();
-    console.log("Added data is:>>" + actData);
+    console.log("✅ Added " + nutritionType + " data is:>> " + actData);
     await expect(actData).toEqual(data);
+  }
+
+  async verifySleepGraph(data) {
+    await browser.pause(3000);
+    const addedData = await $("(//*[contains(text(),'" + data + "')])[1]");
+    var actData = await addedData.getText();
+    console.log("✅ Added " + data + " data is:>> " + actData);
+    await expect(actData).toEqual(data);
+  }
+
+  async verifyDiaperingGraph(diaperingOption, data) {
+    await browser.pause(3000);
+    const addedData = await $("(//*[contains(text(),'" + data + "')])[2]");
+    var actData = await addedData.getText();
+    console.log("✅ Added " + diaperingOption + " data is:>> " + actData);
+    await expect(actData).toEqual(data);
+  }
+
+  async chooseDiaperingType(Data) {
+    await this.diaperingTypeDropdown.waitForDisplayed({ timeout: 15000 });
+    await this.diaperingTypeDropdown.click();
+    await this.diaperingTypeDropdown.selectByVisibleText(Data);
+  }
+
+  async chooseNutritionType(Data) {
+    await this.nutritionTypeDropdown.waitForDisplayed({ timeout: 15000 });
+    await this.nutritionTypeDropdown.click();
+    await this.nutritionTypeDropdown.selectByVisibleText(Data);
   }
 }
 module.exports = new ManagingProviderAccountPage();

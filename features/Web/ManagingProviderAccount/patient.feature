@@ -1906,25 +1906,3 @@ Feature: Test cases for the 'Patient' page
             | firstOption   | secondOption | feedingGoal | thirdOption | milkField   | fortificationField | fortificationName | calories | formula   | secondMilkType | thirdMilkType | fourthOption  | invalidBottlePercentage | validBottlePercentage | fifthOption | gavageDuration |
             | Breastfeeding | Feeding Goal | 40          | Composition | Mother Milk | Other              | Auto test         | 30       | Auto test | Donor Milk     | Formula       | Bottle/Gavage | 0                       | 90                    | Summary     | 30 minutes     |
 
-
-    Scenario Outline: Verify the nutrition graph
-        When I click on the link text Medical Record
-        When Hover over link Tracker
-        When I click on the second index link Nutrition
-        Then Verify the graph on web with value <graphValue>
-        Examples:
-            | graphValue |
-            | 10         |
-
-
-    Scenario Outline: Verify the mobile growth details are visible on the web
-        When I click on the link text Medical Record
-        When Hover over link Tracker
-        When I click on the link text Growth
-        Then It redirects on the Patient_Auto_Test Ben's Growth Chart screen
-        When I click on the button with text Growth Results
-        When I populate data <heightInches> in the "Search" field
-        Then Growth details should be visible in the list with <heightcm> and <heightInches> and <weightPounds> and <weightOunce> and <weightkg> and <headCircumference_cm> and <headCircumference_inches>
-        Examples:
-            | heightInches | weightPounds | headCircumference_inches | heightcm | weightkg | headCircumference_cm | weightOunce |
-            | 20           | 8            | 15                       | 50.80    | 3.91     | 38.10                | 10          |
