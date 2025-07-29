@@ -67,8 +67,8 @@ class SuperAdminPage extends BasePage {
     return $("#expiry_date");
   }
 
-  get searchField() {
-    return $("//div[@id='example_filter']//input[@type='search']|//input[@type='search']");
+ get searchField() {
+    return $("//div[@id='example_filter']//input[@type='search']|(//label//input[@type='search'])[2]");
   }
 
   get newCustomerForm() {
@@ -99,15 +99,18 @@ class SuperAdminPage extends BasePage {
     return $("//td[@class='dataTables_empty']");
   }
 
+  get emptyReport() {
+    return $("//div[contains(text(),'No Records Found')]");
+  }
   get validationMessage() {
     return $("//div[@class='toast-message']");
   }
 
-   get table() {
+  get table() {
     return $("//table[@class='table']|//div[@id='example_wrapper']|//table[@id='respiratory-settings-table']|//table[@id='example']");
   }
-  
-     get form() {
+
+  get form() {
     return $("//form[@class='form-horizontal']|//form[@method='post']");
   }
 
@@ -499,12 +502,21 @@ class SuperAdminPage extends BasePage {
     }
   }
 
-      async formIsDisplayed() {
-        await browser.pause(2000);
+  async formIsDisplayed() {
+    await browser.pause(2000);
     if ((await this.form.isDisplayed()) === true) {
       console.log("successfully redirect on page and form is displaying");
     } else {
       throw new Error("Failed to redirect on page, form is not displaying");
+    }
+  }
+
+  async verifyDeletedResult() {
+    await browser.pause(2000);
+    if ((await this.emptyReport.isDisplayed()) === true) {
+      console.log("successfully deleted record");
+    } else {
+      throw new Error("Failed to delete results");
     }
   }
 }

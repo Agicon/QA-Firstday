@@ -777,6 +777,57 @@ When(/^I remove data from required fields on updation form$/, async () => {
 
 
 
+When(/^I fill value in TBili (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillTBiliField(data);
+});
+
+When(/^I fill value in TBiliC (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillTBiliCField(data);
+});
+
+When(/^I fill value in DBili (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillDBiliField(data);
+});
+
+When(/^I fill value in AlkP (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillAlkPField(data);
+});
+
+When(/^I fill value in Tprot (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillTprotField(data);
+});
+
+When(/^I fill value in Alb (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillAlbField(data);
+});
+
+When(/^I fill value in Ast (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillAstField(data);
+});
+When(/^I fill value in Alt (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillAltField(data);
+});
+When(/^I fill value in GGT (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillGGTField(data);
+});
+
+
+
+When(/^I fill value in Trig (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillTrigField(data);
+});
+
+When(/^I fill value in cholesterol (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillCholesterolField(data);
+});
+
+When(/^I fill value in HDL (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillHDLField(data);
+});
+
+When(/^I fill value in LDL (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillLDLField(data);
+});
 // =================================Android======================================//
 
 When(/^login to app using (.*)$/, async (username) => {

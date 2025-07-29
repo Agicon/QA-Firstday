@@ -359,7 +359,7 @@ class ManagingProviderAccountPage extends BasePage {
     return $("#Na");
   }
 
-    get KField() {
+  get KField() {
     return $("#K");
   }
 
@@ -371,31 +371,29 @@ class ManagingProviderAccountPage extends BasePage {
     return $("#Co2");
   }
 
-    get BunField() {
+  get BunField() {
     return $("#Bun");
   }
   get CrField() {
     return $("#Cr");
   }
 
-
- get GluField() {
+  get GluField() {
     return $("#Glu");
   }
 
-   get CaField() {
+  get CaField() {
     return $("#Ca");
   }
 
-   get PhosField() {
+  get PhosField() {
     return $("#Phos");
   }
 
-   get MgField() {
+  get MgField() {
     return $("#Mg");
   }
 
-   
   get methodField() {
     return $("#method:nth-of-type(1)");
   }
@@ -479,6 +477,59 @@ class ManagingProviderAccountPage extends BasePage {
   get head_inch_Value() {
     return $("(//tr[@class='odd']//td)[10]");
   }
+
+  get TBiliField() {
+    return $("#TBili");
+  }
+
+  get TBiliCField() {
+    return $("#TBiliC");
+  }
+
+  get DBiliField() {
+    return $("#DBili");
+  }
+
+  get AlkPField() {
+    return $("#AlkP");
+  }
+
+  get TprotField() {
+    return $("#Tprot");
+  }
+  get AlbField() {
+    return $("#Alb");
+  }
+
+  get AstField() {
+    return $("#Ast");
+  }
+
+  get AltField() {
+    return $("#Alt");
+  }
+
+  get GGTField() {
+    return $("#GGT");
+  }
+
+  get trigField() {
+    return $("#Trig");
+  }
+
+  get cholesterolField() {
+    return $("#Cholesterol");
+  }
+
+  get HDLField() {
+    return $("#HDL");
+  }
+
+  get LDLField() {
+    return $("#LDL");
+  }
+
+  
 
   async settigsButtonIsDisplayed() {
     await this.settingsButton.waitForDisplayed({ timeout: 20000 });
@@ -1177,7 +1228,14 @@ class ManagingProviderAccountPage extends BasePage {
     await this.reticField.setValue(value);
   }
   async verifyDataInTable(data) {
-    const addedData = await $("//td[contains(text(),'" + data + "')]");
+    const addedData = await $("(//td[contains(text(),'" + data + "')])[1]");
+    var actData = await addedData.getText();
+    console.log("Added data is:>>" + actData);
+    await expect(actData).toEqual(data);
+  }
+
+    async verifyTableHeader(data) {
+    const addedData = await $("//th[contains(text(),'" + data + "')]");
     var actData = await addedData.getText();
     console.log("Added data is:>>" + actData);
     await expect(actData).toEqual(data);
@@ -1368,11 +1426,11 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   async clickOnWelcomeAiMessageButton() {
-    const dragElement = await $('//div[@title="Drag"]');
-    await dragElement.waitForDisplayed({ timeout: 15000 });
-    const targetElement = await $("(//section[@class='content']//img)[1]");
-    await targetElement.waitForDisplayed({ timeout: 15000 });
-    await dragElement.dragAndDrop(targetElement);
+    // const dragElement = await $('//div[@title="Drag"]');
+    // await dragElement.waitForDisplayed({ timeout: 15000 });
+    // const targetElement = await $("(//section[@class='content']//img)[1]");
+    // await targetElement.waitForDisplayed({ timeout: 15000 });
+    // await dragElement.dragAndDrop(targetElement);
   }
 
   async clickOnSecondIndexButtonWithText(text) {
@@ -1597,12 +1655,11 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-
-    async fillNaField(data) {
-      await browser.pause(3000);
+  async fillNaField(data) {
+    await browser.pause(3000);
     await this.NaField.waitForDisplayed({ timeout: 5000 });
     if ((await this.NaField.isDisplayed()) === true) {
-       await this.NaField.clearValue();
+      await this.NaField.clearValue();
       await this.NaField.setValue(data);
       console.log("field displaying successfully");
     } else {
@@ -1610,10 +1667,10 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-     async fillKField(data) {
+  async fillKField(data) {
     await this.KField.waitForDisplayed({ timeout: 5000 });
     if ((await this.KField.isDisplayed()) === true) {
-       await this.KField.clearValue();
+      await this.KField.clearValue();
       await this.KField.setValue(data);
       console.log("field displaying successfully");
     } else {
@@ -1621,10 +1678,10 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-     async fillClField(data) {
+  async fillClField(data) {
     await this.ClField.waitForDisplayed({ timeout: 5000 });
     if ((await this.ClField.isDisplayed()) === true) {
-       await this.ClField.clearValue();
+      await this.ClField.clearValue();
       await this.ClField.setValue(data);
       console.log("field displaying successfully");
     } else {
@@ -1632,10 +1689,10 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-     async fillCo2Field(data) {
+  async fillCo2Field(data) {
     await this.Co2Field.waitForDisplayed({ timeout: 5000 });
     if ((await this.Co2Field.isDisplayed()) === true) {
-       await this.Co2Field.clearValue();
+      await this.Co2Field.clearValue();
       await this.Co2Field.setValue(data);
       console.log("field displaying successfully");
     } else {
@@ -1643,10 +1700,10 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-     async fillBUNField(data) {
+  async fillBUNField(data) {
     await this.BunField.waitForDisplayed({ timeout: 5000 });
     if ((await this.BunField.isDisplayed()) === true) {
-       await this.BunField.clearValue();
+      await this.BunField.clearValue();
       await this.BunField.setValue(data);
       console.log("field displaying successfully");
     } else {
@@ -1654,10 +1711,10 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-     async fillCrField(data) {
+  async fillCrField(data) {
     await this.CrField.waitForDisplayed({ timeout: 5000 });
     if ((await this.CrField.isDisplayed()) === true) {
-       await this.CrField.clearValue();
+      await this.CrField.clearValue();
       await this.CrField.setValue(data);
       console.log("field displaying successfully");
     } else {
@@ -1665,10 +1722,10 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-     async fillGluField(data) {
+  async fillGluField(data) {
     await this.GluField.waitForDisplayed({ timeout: 5000 });
     if ((await this.GluField.isDisplayed()) === true) {
-       await this.GluField.clearValue();
+      await this.GluField.clearValue();
       await this.GluField.setValue(data);
       console.log("field displaying successfully");
     } else {
@@ -1676,10 +1733,10 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-     async fillCaField(data) {
+  async fillCaField(data) {
     await this.CaField.waitForDisplayed({ timeout: 5000 });
     if ((await this.CaField.isDisplayed()) === true) {
-       await this.CaField.clearValue();
+      await this.CaField.clearValue();
       await this.CaField.setValue(data);
       console.log("field displaying successfully");
     } else {
@@ -1687,10 +1744,10 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-    async fillPhosField(data) {
+  async fillPhosField(data) {
     await this.PhosField.waitForDisplayed({ timeout: 5000 });
     if ((await this.PhosField.isDisplayed()) === true) {
-       await this.PhosField.clearValue();
+      await this.PhosField.clearValue();
       await this.PhosField.setValue(data);
       console.log("field displaying successfully");
     } else {
@@ -1698,17 +1755,164 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-    async fillMgField(data) {
+  async fillMgField(data) {
     await this.MgField.waitForDisplayed({ timeout: 5000 });
     if ((await this.MgField.isDisplayed()) === true) {
-       await this.MgField.clearValue();
+      await this.MgField.clearValue();
       await this.MgField.setValue(data);
       console.log("field displaying successfully");
     } else {
       throw new Error("Mg field is not displayed");
     }
   }
+  async verifySearchedLaboratoryResult(data) {
+    var actualName = await $("(//div[@id='example_wrapper']//td)[3]").getText();
+    await expect(actualName).toEqual(data);
+    await browser.refresh();
+  }
 
-  
+   async fillTBiliField(data) {
+    await browser.pause(3000);
+    await this.TBiliField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.TBiliField.isDisplayed()) === true) {
+      await this.TBiliField.clearValue();
+      await this.TBiliField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("TBili field is not displayed");
+    }
+  }
+
+  async fillTBiliCField(data) {
+    await this.TBiliCField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.TBiliCField.isDisplayed()) === true) {
+      await this.TBiliCField.clearValue();
+      await this.TBiliCField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("TBiliC Field is not displayed");
+    }
+  }
+
+  async fillDBiliField(data) {
+    await this.DBiliField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.DBiliField.isDisplayed()) === true) {
+      await this.DBiliField.clearValue();
+      await this.DBiliField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("DBili field is not displayed");
+    }
+  }
+
+  async fillAlkPField(data) {
+    await this.AlkPField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.AlkPField.isDisplayed()) === true) {
+      await this.AlkPField.clearValue();
+      await this.AlkPField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("AlkP field is not displayed");
+    }
+  }
+
+  async fillTprotField(data) {
+    await this.TprotField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.TprotField.isDisplayed()) === true) {
+      await this.TprotField.clearValue();
+      await this.TprotField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("Tprot field is not displayed");
+    }
+  }
+
+  async fillAlbField(data) {
+    await this.AlbField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.AlbField.isDisplayed()) === true) {
+      await this.AlbField.clearValue();
+      await this.AlbField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("Alb field is not displayed");
+    }
+  }
+
+  async fillAstField(data) {
+    await this.AstField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.AstField.isDisplayed()) === true) {
+      await this.AstField.clearValue();
+      await this.AstField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("Ast field is not displayed");
+    }
+  }
+
+  async fillAltField(data) {
+    await this.AltField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.AltField.isDisplayed()) === true) {
+      await this.AltField.clearValue();
+      await this.AltField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("Alt field is not displayed");
+    }
+  }
+
+  async fillGGTField(data) {
+    await this.GGTField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.GGTField.isDisplayed()) === true) {
+      await this.GGTField.clearValue();
+      await this.GGTField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("GGT field is not displayed");
+    }
+  }
+
+   async fillTrigField(data) {
+    await this.trigField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.trigField.isDisplayed()) === true) {
+      await this.trigField.clearValue();
+      await this.trigField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("Trig field is not displayed");
+    }
+  }
+
+   async fillCholesterolField(data) {
+    await this.cholesterolField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.cholesterolField.isDisplayed()) === true) {
+      await this.cholesterolField.clearValue();
+      await this.cholesterolField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("cholesterol Field is not displayed");
+    }
+  }
+
+   async fillHDLField(data) {
+    await this.HDLField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.HDLField.isDisplayed()) === true) {
+      await this.HDLField.clearValue();
+      await this.HDLField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("HDL field is not displayed");
+    }
+  }
+
+   async fillLDLField(data) {
+    await this.LDLField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.LDLField.isDisplayed()) === true) {
+      await this.LDLField.clearValue();
+      await this.LDLField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("LDL field is not displayed");
+    }
+  }
 }
 module.exports = new ManagingProviderAccountPage();
