@@ -824,30 +824,7 @@ Feature: Test cases for the 'Patient' page
     Examples:
       | url      | userA                     | dashboard-ManagePatientsOption | patientName       | medicationName  | currentDose | measurement | frequency | additionalInformation                         | interval | status |
       | loginUrl | providerLoginCrendentails | Manage Patients                | Patient_Auto_Test | Auto_Medication |           1 | Teaspoon    | Twice     | Consult the doctor before using this medicine | Day      | Active |
-# # //----------------assign other provider----------------------//
-
-  Scenario Outline: Verify the functionality of "Assign other provider"
-    Given Open web url <url>
-    When Web app login using <userA>
-    Then providers/dashboard page displays
-    When I hover on the "Dashboard-All Patient" tab
-    When I click the <dashboard-ManagePatientsOption> option
-    When I populate data <patientName> in the "Search" field
-    When I click on the link text <patientName>
-    When User click on the button Other Provider under baby dashboard screen
-    Then Search and delete duplicate data <otherProvider>
-    When User click on the button text Assign Other Provider
-    When Click on select provider dropdown
-    Then Click on option <otherProvider> from list
-    When I click on the button with text Assign
-    Then Success message Providers Assign Succesfully appears
-    When I populate data <otherProvider> in the "Search" field
-    Then Added record <otherProvider> is displaying in list
-
-    Examples:
-      | url      | userA                     | dashboard-ManagePatientsOption | patientName       | otherProvider       |
-      | loginUrl | providerLoginCrendentails | Manage Patients                | Patient_Auto_Test | other_auto_provider |
-
+#
   Scenario Outline: Verify the "Managing Provider" is able to delete the added "Vaccination" and Verify the "Managing Provider" is not able to add "Vaccination" and validation displays if any mandatory field is not populated and 	Verify the "Managing Provider" is able to add "Pre defined Vaccination" for patient's medical record
     When I click on the link text Medical Record
     When I click on the link text Vaccinations
@@ -1933,65 +1910,7 @@ Feature: Test cases for the 'Patient' page
       | methodOption | flowRate | oxygen | managingProvider       |
       | Bottle       |        5 |     90 | managing_auto_provider |
 
-  Scenario Outline: Verify the "Managing Provider" is not able to add "Growth" tracking and validation displays if any mandatory field is not populated and Verify the "Managing Provider" is able to create "Growth" tracking for patient's Medical Record and Verify the "Managing provider" is able to search the "Growth Results"
-    When I click on the link text Medical Record
-    When Hover over link Tracker
-    Then Tracker options should be visible under dropdown
-      | Growth    |
-      | Nutrition |
-      | Diapering |
-      | Sleep     |
-    When I click on the link text Growth
-    Then It redirects on the Patient_Auto_Test Ben's Growth Chart screen
-    When I drag chat container banner
-    When I click on the button with text Growth Results
-    Then Search and delete duplicate data <heightcm>
-    When Hover over link Tracker
-    When I click on the link text Growth
-    When I click on the button with text New Growth Result
-    Then It redirects on the New Growth Result screen
-    When I click on the button with text Create
-    Then validation message Please enter Hight / Weight / Head Circumference value appears
-    Then Verify multiple same validation messages on popup with text Please enter Hight / Weight / Head Circumference value
-    When I select date in start Date field
-    When I fill <heightInches> data in "Height" field
-    When I fill <weightPounds> data in "Weight" field
-    When I fill <weightPounds> data in "Weight Ounce" field
-    When I fill <headCircumference_inches> data in "Head Circumference" field
-    When I click on the button with text Create
-    Then Success message Growth Result Added Succesfully ! appears
-    When I click on the button with text Growth Results
-    When I populate data <heightInches> in the "Search" field
-    Then Growth details should be visible in the list with <heightcm> and <heightInches> and <weightPounds> and <weightPounds> and <weightkg> and <headCircumference_cm> and <headCircumference_inches>
-    When I populate data <specialCharactors> in the "Search" field
-    Then No matching records found should be displayed
-
-    Examples:
-      | heightInches | weightPounds | headCircumference_inches | heightcm | weightkg | headCircumference_cm | specialCharactors |
-      |           24 |            8 |                       14 |    60.96 |     3.86 |                35.56 | !@#$%%$#@!        |
-
-  Scenario Outline: Verify the "Managing Provider" is able to "View and update" the added "Growth" Result and Verify the "Managing provider" is able to delete the "Growth Results"
-    When I populate data <heightInches> in the "Search" field
-    When I click on the "View or Update" option under the "Action" section
-    Then It redirects on the Patient_Auto_Test Ben's Update Growth Result screen
-    When I remove data from required fields on updation form
-    When I click on the button with text Update
-    Then validation message Please enter Hight / Weight / Head Circumference value appears
-    When I fill <updatedHeightInch> data in "Height" field
-    When I fill <updatedWeight> data in "Weight" field
-    When I fill <updatedWeight> data in "Weight Ounce" field
-    When I fill <updatedHeadCircumference_inches> data in "Head Circumference" field
-    When I click on the button with text Update
-    Then Success message Updated Succesfully ! appears
-    When I populate data <updatedHeightInch> in the "Search" field
-    Then Growth details should be visible in the list with <updatedHeightcm> and <updatedHeightInch> and <updatedWeight> and <updatedWeight> and <updatedWeightkg> and <updatedHeadCircumference_cm> and <updatedHeadCircumference_inches>
-    When I click On "Delete" icon
-    Then Deleted record should not be visible in the list
-
-    Examples:
-      | heightInches | updatedHeightInch | updatedWeight | updatedHeadCircumference_inches | updatedHeightcm | updatedWeightkg | updatedHeadCircumference_cm |
-      |           24 |                22 |             7 |                              12 |           55.88 |            3.37 |                       30.48 |
-
+ 
   Scenario Outline: Verify the functionality of "Assign other provider"
     When I hover on the "Dashboard-All Patient" tab
     When I click the <dashboard-ManagePatientsOption> option
@@ -2135,3 +2054,235 @@ Feature: Test cases for the 'Patient' page
     Examples:
       | validTrig | validCholesterol | validHDL | validLDL | comment                  | uploadImage |
       |        55 |               60 |       25 |       25 | This is the final report | Picture(1)  |
+    Scenario Outline: Verify the "Managing Provider" is not able to add "Growth" tracking and validation displays if any mandatory field is not populated and Verify the "Managing Provider" is able to create "Growth" tracking for patient's Medical Record and Verify the "Managing provider" is able to search the "Growth Results"
+        When I click on the link text Medical Record
+        When Hover over link Tracker
+        Then Tracker options should be visible under dropdown
+            | Growth    |
+            | Nutrition |
+            | Diapering |
+            | Sleep     |
+        When I click on the link text Growth
+        Then It redirects on the Patient_Auto_Test Ben's Growth Chart screen
+        When I drag chat container banner
+        When I click on the button with text Growth Results
+        Then Search and delete duplicate data <heightInches>
+        When Hover over link Tracker
+        When I click on the link text Growth
+        When I click on the button with text New Growth Result
+        Then It redirects on the New Growth Result screen
+        When I click on the button with text Create
+        Then validation message Please enter Hight / Weight / Head Circumference value appears
+        Then Verify multiple same validation messages on popup with text Please enter Hight / Weight / Head Circumference value
+        When I select date in start Date field
+        When I fill <heightInches> data in "Height" field
+        When I fill <weightPounds> data in "Weight" field
+        When I fill <weightPounds> data in "Weight Ounce" field
+        When I fill <headCircumference_inches> data in "Head Circumference" field
+        When I click on the button with text Create
+        Then Success message Growth Result Added Succesfully ! appears
+        When I click on the button with text Growth Results
+        When I populate data <heightInches> in the "Search" field
+        Then Growth details should be visible in the list with <heightcm> and <heightInches> and <weightPounds> and <weightPounds> and <weightkg> and <headCircumference_cm> and <headCircumference_inches>
+        When I populate data <specialCharactors> in the "Search" field
+        Then No matching records found should be displayed
+        Examples:
+            | heightInches | weightPounds | headCircumference_inches | heightcm | weightkg | headCircumference_cm | specialCharactors |
+            | 24           | 8            | 14                       | 60.96    | 3.86     | 35.56                | !@#$%%$#@!        |
+
+    Scenario Outline: Verify the "Managing Provider" is able to see "Graph" of added "Growth result" on "Growth" page
+        When Hover over link Tracker
+        When I click on the link text Growth
+        Then It redirects on the Patient_Auto_Test Ben's Growth Chart screen
+        Then I navigate to the "Growth" page and the Graph or Chart of added "Growth Results" displays
+
+    Scenario Outline: Verify the "Managing Provider" is able to "View and update" the added "Growth" Result and Verify the "Managing provider" is able to delete the "Growth Results"
+        When I populate data <heightInches> in the "Search" field
+        When I click on the "View or Update" option under the "Action" section
+        Then It redirects on the Patient_Auto_Test Ben's Update Growth Result screen
+        When I remove data from required fields on updation form
+        When I click on the button with text Update
+        Then validation message Please enter Hight / Weight / Head Circumference value appears
+        When I fill <updatedHeightInch> data in "Height" field
+        When I fill <updatedWeight> data in "Weight" field
+        When I fill <updatedWeight> data in "Weight Ounce" field
+        When I fill <updatedHeadCircumference_inches> data in "Head Circumference" field
+        When I click on the button with text Update
+        Then Success message Updated Succesfully ! appears
+        When I populate data <updatedHeightInch> in the "Search" field
+        Then Growth details should be visible in the list with <updatedHeightcm> and <updatedHeightInch> and <updatedWeight> and <updatedWeight> and <updatedWeightkg> and <updatedHeadCircumference_cm> and <updatedHeadCircumference_inches>
+        When I click On "Delete" icon
+        Then Deleted record should not be visible in the list
+        Examples:
+            | heightInches | updatedHeightInch | updatedWeight | updatedHeadCircumference_inches | updatedHeightcm | updatedWeightkg | updatedHeadCircumference_cm |
+            | 24           | 22                | 7             | 12                              | 55.88           | 3.37            | 30.48                       |
+
+
+    Scenario Outline: Verify the "Managing Provider" is able to create "Growth" tracking for patient's Medical Record and verify this created record in mobile app
+        When Hover over link Tracker
+        Then Tracker options should be visible under dropdown
+            | Growth    |
+            | Nutrition |
+            | Diapering |
+            | Sleep     |
+        When I click on the link text Growth
+        Then It redirects on the Patient_Auto_Test Ben's Growth Chart screen
+        When I drag chat container banner
+        When I click on the button with text Growth Results
+        Then Search and delete duplicate data <heightInches>
+        When Hover over link Tracker
+        When I click on the link text Growth
+        When I click on the button with text New Growth Result
+        Then It redirects on the New Growth Result screen
+        When I select date in start Date field
+        When I fill <heightInches> data in "Height" field
+        When I fill <weightPounds> data in "Weight" field
+        When I fill <weightPounds> data in "Weight Ounce" field
+        When I fill <headCircumference_inches> data in "Head Circumference" field
+        When I click on the button with text Create
+        Then Success message Growth Result Added Succesfully ! appears
+        When I click on the button with text Growth Results
+        When I populate data <heightInches> in the "Search" field
+        Then Growth details should be visible in the list with <heightcm> and <heightInches> and <weightPounds> and <weightPounds> and <weightkg> and <headCircumference_cm> and <headCircumference_inches>
+        Examples:
+            | heightInches | weightPounds | headCircumference_inches | heightcm | weightkg | headCircumference_cm |
+            | 24           | 8            | 14                       | 60.96    | 3.86     | 35.56                |
+
+    # # Scenario Outline: Verify the "Managing Provider" is not able to add "Nutrition order" and validation displays if any mandatory field is not populated
+    # #     When I click on the link text Medical Record
+    # #     When Hover over link Tracker
+    # #     Then Tracker options should be visible under dropdown
+    # #         | Growth    |
+    # #         | Nutrition |
+    # #         | Diapering |
+    # #         | Sleep     |
+    # #     When I click on the link text Nutrition
+    # #     Then It redirects on the Patient_Auto_Test Ben's Nutrition screen
+    # #     When I drag chat container banner
+    # #     When I click on the button with text Manage Nutrition Orders
+    # #     Then It redirects on the Patient_Auto_Test Ben's Nutrition Orders screen
+    # #     Then Search and delete duplicate data <createdNutritionRecord>
+    # #     When I click on the button with text New Nutrition Order
+    # #     Then It redirects on the New Nutrition Order screen
+    # #     When I click on the button with text Create
+    # #     Then validation message This field is required. appears
+    # #     Then validation message Please enter frequency. appears
+    # #     When I fill <nutritionType> data in "Nutrition Type" field
+    # #     When I fill <nutritionFrequency> data in "Nutrition Frequency" field
+    # #     When I click on the button with text Create
+    # #     Then Success message Nutrition Order Added Succesfully ! appears
+    # #     When I populate data <createdNutritionRecord> in the "Search" field
+    # #     Then Nutrition order "Breast Feed" details should be visile in the list with <createdNutritionRecord> and <nutritionFrequency>
+    # #     When I populate data <specialCharactors> in the "Search" field
+    # #     Then No matching records found should be displayed
+
+
+    # #     Examples:
+    # #         | nutritionType | nutritionFrequency | createdNutritionRecord | specialCharactors |
+    # #         | Breast Feed   | On Demand          | Breast Feeding         | !@#$%%$#@!        |
+
+    # # Scenario Outline: Verify the "Managing Provider" is able to "View and update" the added "Nutrition order"
+    # #     When I populate data <createdNutritionRecord> in the "Search" field
+    # #     When I click on the "View or Update" option under the "Action" section
+    # #     Then It redirects on the Patient_Auto_Test Ben's Nutrition Orders screen
+    # #     When I fill <updatedNutritionType> data in "Nutrition Type" field
+    # #     When I fill <updatedNutritionFrequency> data in "Nutrition Frequency" field
+    # #     When I fill <nutritionMilk> data in "Nutrition Milk" field
+    # #     When I fill <calories> data in "Calories" field
+    # #     When I fill <nutritionfortification> data in "Nutrition fortification" field
+    # #     When I fill <fortificationName> data in "Name" field
+    # #     When I fill <volumeMLs> data in "Volume MLs" field
+    # #     When I click on the button with text Update
+    # #     Then Success message Order Updated Succesfully ! appears
+    # #     When I populate data <updatedNutritionRecord> in the "Search" field
+    # #     Then Nutrition order "Bottle" details should be visile in the list with <updatedNutritionRecord> and <updatedNutritionFrequency> and <nutritionMilk> and <fortificationName> and <calories> and <volumeMLs>
+    # #     Examples:
+    # #         | createdNutritionRecord | updatedNutritionType | updatedNutritionFrequency | nutritionMilk | calories | nutritionfortification | fortificationName | volumeMLs | updatedNutritionRecord |
+    # #         | Breast Feeding         | Bottle               | Every 2 hours             | Mother Milk   | 25       | Other                  | Vitamins          | 50        | Bottle Feeding         |
+
+    Scenario Outline: Verify the "Managing Provider" is not able to add "Nutrition order" and validation displays if any mandatory field is not populated and Verify that if the 'Managing Provider' selects the 'Yes' radio button only, the nutrition order should be created.
+        When Hover over "Orders" tab
+        When I click on the link text Nutrition
+        Then patient/nutrition page displays
+        Then Link text New Nutrition Order is displaying
+        When I click on the link text New Nutrition Order
+        Then Verify user is redirected to <firstOption> and Baby breastfeeding consistently? is displayed
+        When I click on the button with text Next
+        Then validation message Please select if the baby is breastfeeding consistently. appears
+        When I click on the breast feeding "Yes" radio button
+        When I click on the button with text Next
+        Then Verify user is redirected to <secondOption> and Do you want baby to supplement after breastfeeding? is displayed
+        When User click on the Multiple index "Next" Button
+        Then validation message Please select if you want baby to supplement after breastfeeding. appears
+        When I click on the supplement "Yes" radio button
+        When User click on the Multiple index "Next" Button
+        Then validation message Please enter the minimum mL/kg/day supplemental goal. appears
+        Then validation message Please select if the infant is feeding ad lib. appears
+        When I fill <invalidSupplementalGoal> data in "SupplementalGoal" field
+        Then validation message Supplemental goal must be at least 1. appears
+        When I fill <invalidMaxSupplementalGoal> data in "SupplementalGoal" field
+        Then validation message Supplemental goal cannot be greater than 1000. appears
+        When I fill <supplementalGoal> data in "SupplementalGoal" field
+        When I click on the ad lib "Yes" radio button
+        When User click on the Multiple index "Next" Button
+        Then Verify user is redirected to <fifthOption> and Doctor wants you to breastfeed on demand and supplement ad lib by bottle with minimum: is displayed
+        Examples:
+            | firstOption   | secondOption | invalidSupplementalGoal | supplementalGoal | invalidMaxSupplementalGoal | fifthOption |
+            | Breastfeeding | Feeding Goal | 0                       | 25               | 5000                       | Summary     |
+
+    Scenario Outline: Verify that if the 'Managing Provider' selects the 'No' radio button only, the nutrition order should be created.
+        When Hover over "Orders" tab
+        When I click on the link text Nutrition
+        Then patient/nutrition page displays
+        Then Link text New Nutrition Order is displaying
+        When I click on the link text New Nutrition Order
+        Then Verify user is redirected to <firstOption> and Baby breastfeeding consistently? is displayed
+        When I click on the breast feeding "No" radio button
+        When I click on the button with text Next
+        Then Verify user is redirected to <secondOption> and Desired total mL/kg/day feeding goal is displayed
+        When I fill <feedingGoal> data in "Feeding goal" field
+        When I click on the feeding ad lib "No" radio button
+        When User click on the third index "Next" Button
+        Then Verify user is redirected to <thirdOption> and Add Nutrition Entry is displayed
+        When I click on the button with text Add Nutrition Entry
+        Then It redirects on the New Nutrition Order screen
+        When I fill <milkField> data in "Nutrition Milk" field
+        When I fill <fortificationField> data in "Nutrition fortification" field
+        When I fill <fortificationName> data in "Name" field
+        When I fill <calories> data in "Calories" field
+        When I click on the button with text Add
+        Then Added data <milkField> is successfully displaying in table
+        Then Added data <formula> is successfully displaying in table
+        Then Added data <fortificationName> is successfully displaying in table
+        Then Added data <calories> is successfully displaying in table
+        When I click on the button with text Add Nutrition Entry
+        When I fill <secondMilkType> data in "Nutrition Milk" field
+        When I fill <fortificationField> data in "Nutrition fortification" field
+        When I fill <fortificationName> data in "Name" field
+        When I fill <calories> data in "Calories" field
+        When I click on the button with text Add
+        Then Added data <secondMilkType> is successfully displaying in table
+        Then Added data <formula> is successfully displaying in table
+        Then Added data <fortificationName> is successfully displaying in table
+        Then Added data <calories> is successfully displaying in table
+        When I click on the button with text Add Nutrition Entry
+        When I fill <thirdMilkType> data in "Nutrition Milk" field
+        When I fill <formula> data in "Formula" field
+        When I fill <calories> data in "Calories" field
+        When I click on the button with text Add
+        Then Added data <thirdMilkType> is successfully displaying in table
+        Then Added data <formula> is successfully displaying in table
+        Then Added data <calories> is successfully displaying in table
+        When User click on the fourth index "Next" Button
+        Then Verify user is redirected to <fourthOption> and What percent of feedings will be by bottle and gavage? is displayed
+        When I fill <invalidBottlePercentage> data in "Bottle percentage" field
+        When User click on the fifth index "Next" Button
+        Then validation message Please select a gavage duration. appears
+        When I fill <validBottlePercentage> data in "Bottle percentage" field
+        When I fill <gavageDuration> data in "Gavage Duration" field
+        When User click on the fifth index "Next" Button
+        Then Verify user is redirected to <fifthOption> and Doctor wants you to feed your infant with is displayed
+        Examples:
+            | firstOption   | secondOption | feedingGoal | thirdOption | milkField   | fortificationField | fortificationName | calories | formula   | secondMilkType | thirdMilkType | fourthOption  | invalidBottlePercentage | validBottlePercentage | fifthOption | gavageDuration |
+            | Breastfeeding | Feeding Goal | 40          | Composition | Mother Milk | Other              | Auto test         | 30       | Auto test | Donor Milk     | Formula       | Bottle/Gavage | 0                       | 90                    | Summary     | 30 minutes     |
+

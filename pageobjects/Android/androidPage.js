@@ -225,6 +225,90 @@ class AndroidPage extends BasePage {
     return $("(//android.widget.ImageView)[1]");
   }
 
+  get milkMinutesField() {
+    return $("//android.widget.EditText[contains(@text,'Minutes')]");
+  }
+
+  get addedMinutes() {
+    return $("(//android.view.View)[3]");
+  }
+
+  get selectMilkField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_select_milk"]');
+  }
+
+  get bottleVolumnField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_volume"]');
+  }
+
+  get selectFortificationField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_fortification"]');
+  }
+
+  get caloriesField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_calories"]');
+  }
+
+  get noteField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_note"]');
+  }
+
+  get crossButton() {
+    return $('//XCUIElementTypeButton[@name="icn close"]|//android.widget.ImageView[@resource-id="com.app.neonatal.staging:id/iv_close"]');
+  }
+
+  get rightArrowButton() {
+    return $('//android.widget.ImageView[@resource-id="com.app.neonatal.staging:id/iv_right_arrow"]');
+  }
+
+  get diaperWeightField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_gram"]');
+  }
+
+  get dateField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_growth_date"]');
+  }
+
+  get form_OK_Button() {
+    return $('//android.widget.Button[@resource-id="android:id/button1"]');
+  }
+
+  get heightInchField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_growth_inch"]');
+  }
+
+  get weightPoundField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_growth_pound"]');
+  }
+
+  get weightOunceField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_growth_ounce"]');
+  }
+
+  get headCircumferenceField() {
+    return $('//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_head_inch"]');
+  }
+
+  get growthHeightRecord() {
+    return $('//android.widget.TextView[@resource-id="com.app.neonatal.staging:id/tv_height_value"]');
+  }
+
+  get growthWeightRecord() {
+    return $('//android.widget.TextView[@resource-id="com.app.neonatal.staging:id/tv_weight_value"]');
+  }
+
+  get growthHeadRecord() {
+    return $('//android.widget.TextView[@resource-id="com.app.neonatal.staging:id/tv_head_circum_value"]');
+  }
+
+  get deleteButton() {
+    return $("//android.widget.TextView[contains(@text,'Delete')]");
+  }
+
+  get noRecordFoundText() {
+    return $("//android.widget.TextView[contains(@text,'No Record Found.')]");
+  }
+
   async open(url) {
     var data = TestUtils.getUserCredetials(url);
     await browser.pause(1000);
@@ -317,7 +401,7 @@ class AndroidPage extends BasePage {
     }
   }
 
-  async clickOnButtonWithText(text) {
+  async clickOnMobileButtonWithText(text) {
     const buttonText = await $("//android.widget.Button[contains(@text,'" + text + "')]");
     await buttonText.waitForDisplayed({ timeout: 20000 });
     if ((await buttonText.isDisplayed()) === true) {
@@ -331,6 +415,7 @@ class AndroidPage extends BasePage {
     const messageText1 = await $("//android.widget.Toast");
     var actualMessage = await messageText1.getText();
     await expect(actualMessage).toEqual(text);
+    await messageText1.waitForDisplayed({ reverse: true, timeout: 20000 });
   }
 
   async settingsTAbIsDisplayed() {
@@ -706,12 +791,14 @@ class AndroidPage extends BasePage {
 
   async clickOnOption(data) {
     const option = await $('//android.widget.TextView[contains(@text,"' + data + '")]');
-    await option.scrollIntoView();
+    try {
+      await option.scrollIntoView();
+    } catch (error) {}
     await option.waitForDisplayed({ timeout: 15000 });
     if ((await option.isDisplayed()) === true) {
       await option.click();
     } else {
-      throw new Error("❌ " + option + " is not dispalyed");
+      throw new Error("❌ " + data + " is not dispalyed");
     }
   }
 
@@ -749,7 +836,6 @@ class AndroidPage extends BasePage {
     await this.downloadAnywayButton.waitForDisplayed({ timeout: 35000 });
     await this.downloadAnywayButton.click();
     await browser.pause(60000);
-    // const downloadDir = path.resolve(__dirname, "../../downloadApps");
     const apkFile = fs.readdirSync(downloadDir).find((file) => file.endsWith(".apk"));
 
     try {
@@ -758,12 +844,10 @@ class AndroidPage extends BasePage {
       files.forEach((file) => {
         const oldFilePath = path.join(downloadDir, file);
 
-        // Only rename files, not folders
         if (fs.statSync(oldFilePath).isFile()) {
           const newFileName = file.substring(0, 4) + path.extname(file);
           const newFilePath = path.join(downloadDir, newFileName);
 
-          // Avoid overwriting files accidentally
           if (oldFilePath !== newFilePath && !fs.existsSync(newFilePath)) {
             fs.renameSync(oldFilePath, newFilePath);
             console.log(`Renamed: ${file} → ${newFileName}`);
@@ -875,15 +959,150 @@ class AndroidPage extends BasePage {
     await this.logOutTabIsDisplayed();
   }
 
-   async clickOnOption(data) {
-    const option = await $('//android.widget.TextView[contains(@text,"' + data + '")]');
-    await option.scrollIntoView();
+  async fillMinutesField(data) {
+    await this.milkMinutesField.waitForDisplayed({ timeout: 15000 });
+    await this.milkMinutesField.setValue(data);
+  }
+
+  async verifyAddedMinutes(minutes) {
+    await this.addedMinutes.waitForDisplayed({ timeout: 15000 });
+    const actMin = await this.addedMinutes.getText();
+    console.log("time" + actMin);
+    const minText = await actMin.replace("00::00", "");
+    console.log("time text" + minText);
+    expect(actMin).toEqual(minutes);
+  }
+
+  async fillSelectMilkField(data) {
+    await this.selectMilkField.waitForDisplayed({ timeout: 15000 });
+    await this.selectMilkField.click();
+    await $("//android.widget.TextView[contains(@text,'" + data + "')]").click();
+  }
+
+  async fillBottleVolumnField(data) {
+    await this.bottleVolumnField.waitForDisplayed({ timeout: 15000 });
+    await this.bottleVolumnField.setValue(data);
+  }
+
+  async fillSelectFortificationField(data) {
+    await this.selectFortificationField.waitForDisplayed({ timeout: 15000 });
+    await this.selectFortificationField.click();
+    const option = await $("//android.widget.TextView[contains(@text,'" + data + "')]");
     await option.waitForDisplayed({ timeout: 15000 });
-    if ((await option.isDisplayed()) === true) {
-      await option.click();
+    await option.click();
+  }
+
+  async fillCaloriesField(data) {
+    await this.caloriesField.waitForDisplayed({ timeout: 15000 });
+    await this.caloriesField.click();
+    const option = await $("//android.widget.CheckedTextView[contains(@text,'" + data + "')]");
+    await option.waitForDisplayed({ timeout: 15000 });
+    await option.click();
+  }
+
+  async fillNoteField(data) {
+    await this.noteField.waitForDisplayed({ timeout: 15000 });
+    await this.noteField.setValue(data);
+  }
+
+  async clickOnCrossButton() {
+    await this.crossButton.waitForDisplayed({ timeout: 15000 });
+    await this.crossButton.click();
+  }
+
+  async clickOnRightArrowButton() {
+    await this.rightArrowButton.waitForDisplayed({ timeout: 15000 });
+    await this.rightArrowButton.click();
+  }
+
+  async fillDiaperWeightField(data) {
+    await this.diaperWeightField.waitForDisplayed({ timeout: 15000 });
+    await this.diaperWeightField.setValue(data);
+  }
+
+  async selectDate() {
+    await this.dateField.waitForDisplayed({ timeout: 15000 });
+    await this.dateField.click();
+  }
+
+  async clickOnFormOKButton() {
+    await this.form_OK_Button.waitForDisplayed({ timeout: 15000 });
+    await this.form_OK_Button.click();
+  }
+
+  async fillHeightInchField(data) {
+    await this.heightInchField.waitForDisplayed({ timeout: 15000 });
+    await this.heightInchField.click();
+    await this.heightInchField.setValue(data);
+    await browser.keys("Tab");
+    await browser.keys("Tab");
+  }
+
+  async fillWeightPoundField(data) {
+    await this.weightPoundField.waitForDisplayed({ timeout: 15000 });
+    await this.weightPoundField.click();
+    await this.weightPoundField.setValue(data);
+    await browser.keys("Tab");
+  }
+
+  async fillWeightOunceField(data) {
+    await this.weightOunceField.waitForDisplayed({ timeout: 15000 });
+    await this.weightOunceField.click();
+    await this.weightOunceField.setValue(data);
+    await browser.keys("Tab");
+    await browser.keys("Tab");
+  }
+
+  async fillHeadCircumferenceField(data) {
+    await this.headCircumferenceField.waitForDisplayed({ timeout: 15000 });
+    await this.headCircumferenceField.click();
+    await this.headCircumferenceField.setValue(data);
+    await browser.keys("Tab");
+    await browser.keys("Tab");
+  }
+
+  async verifyMobileGrowthDetails(heightInch, weightPound, weightOunce, headCircumference) {
+    const regex = /^\d+/;
+    await this.growthHeightRecord.waitForDisplayed({ timeout: 15000 });
+    const actHeight = await this.growthHeightRecord.getText();
+    const actHeightText = await actHeight.match(regex)[0];
+    const actWeightPound = await this.growthWeightRecord.getText();
+    const actWeightPoundText = await actWeightPound.match(regex)[0];
+    const actWeightOunce = await this.growthWeightRecord.getText();
+    const parts = actWeightOunce.split("&");
+    const actOunceValue = parts.length > 1 ? parts[1].match(/\d+/)[0] : null;
+    const actHead = await this.growthHeadRecord.getText();
+    const actHeadText = await actHead.match(regex)[0];
+
+    await expect(actHeightText).toEqual(heightInch);
+    await expect(actWeightPoundText).toEqual(weightPound);
+    await expect(actOunceValue).toEqual(weightOunce);
+    await expect(actHeadText).toEqual(headCircumference);
+  }
+
+  async deleteRecord() {
+    await this.deleteButton.waitForDisplayed({ timeout: 15000 });
+    await this.deleteButton.click();
+    await this.clickOnMobileButtonWithText("Yes");
+  }
+
+  async verifyDeletedMobileRecord() {
+    await this.noRecordFoundText.waitForDisplayed({ timeout: 15000 });
+    if ((await this.noRecordFoundText.isDisplayed()) == true) {
+      console.log("✅ Record deleted successfully");
     } else {
-      throw new Error("❌ " + option + " is not dispalyed");
+      throw new Error("❌ Failed to delete record");
     }
+  }
+
+  async clickToTheStartingPoint(text) {
+    const startingPoint = await $("//android.widget.TextView[contains(@text,'" + text + "')]");
+    do {
+      await browser.back();
+      if ((await this.crossButton.isDisplayed()) === true) {
+        await this.crossButton.click();
+      }
+    } while ((await startingPoint.isDisplayed()) === false);
   }
 }
 module.exports = new AndroidPage();

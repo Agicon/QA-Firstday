@@ -376,7 +376,6 @@ Then(/^(.*) result should be visible in the list with mandatory fields (.*)$/, a
 
 Then(/^Link text (.*) is displaying$/, async (text) => {
   await managingProviderAccountPage.linkTextIsDisplayed(text);
-
 });
 Then(/^Result of Imaging>>other should be visible in the list with mandatory fields (.*)$/, async (type) => {
   await managingProviderAccountPage.verifyImaging_Other_MandatoryRecord(type);
@@ -397,7 +396,6 @@ Then(/^Details of results>>other module should be visible in the list with all f
 Then(/^Heart rate graph is displaying$/, async () => {
   await managingProviderAccountPage.heartRateGraphIsDisplayed();
 });
-
 
 Then(/^Respiratory rate graph is displaying$/, async () => {
   await managingProviderAccountPage.respiratoryGraphIsDisplayed();
@@ -433,7 +431,6 @@ Then(/^Chart is displayed on screen$/, async () => {
   await managingProviderAccountPage.chartIsDisplayed();
 });
 
-
 Then(/^Respiratory "Bottle method" details should be visible in the list with (.*) and (.*) and (.*) and (.*)$/, async (methodOption, flowRate, oxygen, managingProvider) => {
   await managingProviderAccountPage.VerifyRespiratoryBottleMethodDetails(methodOption, flowRate, oxygen, managingProvider);
 });
@@ -460,6 +457,34 @@ Then(/^Growth details should be visible in the list with (.*) and (.*) and (.*) 
 
 Then(/^Verify searched data (.*) is dipslying in result laboratory table$/, async (text) => {
   await managingProviderAccountPage.verifySearchedLaboratoryResult(text);
+
+  });
+Then(/^I navigate to the "Growth" page and the Graph or Chart of added "Growth Results" displays$/, async () => {
+  await managingProviderAccountPage.verifyGrowthGraph();
+});
+
+Then(/^Nutrition order "Breast Feed" details should be visile in the list with (.*) and (.*)$/, async (nutritionType, nutritionFrequency) => {
+  await managingProviderAccountPage.verifyNutritionOrderBreastFeed(nutritionType, nutritionFrequency);
+});
+
+Then(/^Nutrition order "Bottle" details should be visile in the list with (.*) and (.*) and (.*) and (.*) and (.*) and (.*)$/, async (updatedNutritionRecord, updatedNutritionFrequency, nutritionMilk, fortificationName, calories, volumeMLs) => {
+  await managingProviderAccountPage.verifyNutritionOrderBreastFeed(nutritionType, nutritionFrequency);
+});
+
+Then(/^Verify user is redirected to (.*) and (.*) is displayed$/, async (firstOption, data) => {
+  await managingProviderAccountPage.verifyNutritionWorkflow(data);
+});
+
+Then(/^Verify the graph of "Sleep" module on web with value (.*)$/, async (graphValue) => {
+  await managingProviderAccountPage.verifySleepGraph(graphValue);
+});
+
+Then(/^Verify the (.*) graph on web with value (.*)$/, async (diaperingOption, graphValue) => {
+  await managingProviderAccountPage.verifyDiaperingGraph(diaperingOption, graphValue);
+});
+
+Then(/^Verify (.*) on the web with value (.*)$/, async (nutritionType, graphValue) => {
+  await managingProviderAccountPage.verifyNutritionGraph(nutritionType, graphValue);
 });
 
 
@@ -493,6 +518,17 @@ Then(/^Verify all the features inside vital signs$/, async () => {
 });
 
 Then(/^Verify all the features inside medical report$/, async () => {
+  await androidPage.diagnosisIsDisplayed();
+  await androidPage.medicationIsDisplayed();
+  await androidPage.resultsIsDisplayed();
+  await androidPage.trackerIsDisplayed();
+  await androidPage.vaccinationsIsDisplayed();
+  await androidPage.mediaIsDisplayed();
+  await androidPage.documentsIsDisplayed();
+  await androidPage.sendUsresultIsDisplayed();
+});
+
+Then(/^For android device, verify all the features inside medical report$/, async () => {
   await androidPage.diagnosisIsDisplayed();
   await androidPage.medicationIsDisplayed();
   await androidPage.resultsIsDisplayed();
@@ -578,8 +614,7 @@ Then(/^I get navigated to (.*) screen$/, async (text) => {
 });
 
 Then(/^I click on the back button$/, async () => {
-  // await androidPage.clickOnModuleBackButton();
-  await browser.back();
+  await androidPage.clickOnModuleBackButton();
 });
 
 Then(/^The selected image (.*) should get updated and displays on "Caregiver's" main screen of the app$/, async (pic) => {
@@ -609,4 +644,24 @@ Then(/^Verfiy all the modules on provider dashboard$/, async () => {
 
 Then(/^Verify all the feautres under settings module for provider app$/, async () => {
   await androidPage.verifyProviderSettingsModule();
+});
+
+Then(/^Verify that added minutes (.*) is displaying on the screen$/, async (minutes) => {
+  await androidPage.verifyAddedMinutes(minutes);
+});
+
+Then(/^User click on the cross button$/, async () => {
+  await androidPage.clickOnCrossButton();
+});
+
+Then(/^Added mobile growth details should be visible with Height inch (.*) and Weight Pound (.*) and Weight Ounce (.*) and Head Circumference (.*)$/, async (heightInch, weightPound, weightOunce, headCircumference) => {
+  await androidPage.verifyMobileGrowthDetails(heightInch, weightPound, weightOunce, headCircumference);
+});
+
+Then(/^Deleted mobile record should not be visible in the list$/, async () => {
+  await androidPage.verifyDeletedMobileRecord();
+});
+
+Then(/^Use "Back command" to close the popup$/, async () => {
+  await browser.back();
 });

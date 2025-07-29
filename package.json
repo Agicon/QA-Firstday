@@ -17,7 +17,9 @@
      "webPatientPage": "npm run remove-allure && wdio run ./wdio.confWeb.js --suite newPatientPage",
     "runBothSuites": "npm run remove-allure && npm run newCustomerPage && npm run webProviderPage",
     "webMasterMenuPage": "wdio run ./wdio.confWeb.js --suite masterMenuPage",
-    "runBothSuites_Web_And_Android": "npm run remove-allure && npm run webPatientPage && npm run androidLoginPage-FHDC"
+    "runBothSuites_Web_And_Android": "npm run remove-allure && npm run webPatientPage && npm run androidLoginPage-FHDC",
+    "androidTrackerPage": "npm run remove-allure && wdio run ./wdio.confFHDC.js --suite androidTrackerModule",
+     "mobile_And_Web_InterlinkedCases": "npm run remove-allure && wdio run ./wdio.confWeb.js --suite interlinkedCases"
   },
   "keywords": [],
   "author": "",

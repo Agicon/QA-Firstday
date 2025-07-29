@@ -44,7 +44,7 @@ Feature: Test cases for login page
     Then I click on the back button
     When I click on Logout option
     Then I get navigated to Yes screen
-    Then I click on the back button
+    Then Use "Back command" to close the popup
     When User navigate to the "Settings" tab
     When User click on the "Logout" option
     Then A logout confirmation popup displays

@@ -36,6 +36,7 @@ exports.config = {
     webProviderPage: ["./features/Web/CustomerAccount/provider.feature"],
     newPatientPage: ["./features/Web/ManagingProviderAccount/patient.feature"],
     masterMenuPage: ["./features/Web/CustomerAccount/masterMenu.feature"],
+    interlinkedCases: ["./features/Web/ManagingProviderAccount/interlinkedMobileAndWebCases.feature"],
   },
   exclude: [
     // 'path/to/excluded/files'

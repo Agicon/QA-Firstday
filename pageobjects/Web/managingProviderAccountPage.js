@@ -530,6 +530,133 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   
+  get growthGraph() {
+    return $("//div[@id='htmlwidget_container']");
+  }
+
+  get growthIframe() {
+    return $("//iframe[@id='growth_iframe']");
+  }
+
+  get nutritionTypeField() {
+    return $("#nutrition_type:nth-of-type(1)");
+  }
+
+  get nutritionFrequencyField() {
+    return $("#nutrition_duration:nth-of-type(1)");
+  }
+
+  get createdNutritionTypeData() {
+    return $("(//tr[@class='odd']//td)[1]");
+  }
+
+  get createdNutritionFrequencyData() {
+    return $("(//tr[@class='odd']//td)[2]");
+  }
+
+  get nutritionMilkField() {
+    return $("#nutrition_milk:nth-of-type(1)");
+  }
+
+  get caloriesField() {
+    return $("#calories:nth-of-type(1)");
+  }
+
+  get nutritionfortificationField() {
+    return $("#nutrition_fortification:nth-of-type(1)");
+  }
+
+  get nameField() {
+    return $("#nutrition_fortification_new:nth-of-type(1)");
+  }
+
+  get volumeMlsField() {
+    return $("#volume:nth-of-type(1)");
+  }
+
+  get milkTypeData() {
+    return $("(//tr[@class='odd']//td)[3]");
+  }
+
+  get fortificationTypeData() {
+    return $("(//tr[@class='odd']//td)[3]");
+  }
+
+  get milkTypeData() {
+    return $("(//tr[@class='odd']//td)[3]");
+  }
+
+  get milkTypeData() {
+    return $("(//tr[@class='odd']//td)[3]");
+  }
+
+  get breastFeeding_Yes_RadioButton() {
+    return $("#breastfeedingWorkFlow_yes");
+  }
+
+  get breastFeeding_No_RadioButton() {
+    return $("#breastfeedingWorkFlow_no");
+  }
+
+  get supplement_Yes_RadioButton() {
+    return $("#supplementation_required_yes");
+  }
+
+  get supplement_No_RadioButton() {
+    return $("#supplementation_required_no");
+  }
+
+  get supplementalGoalField() {
+    return $("(//input[@id='supplemental_goal'])[1]|(//input[@id='supplemental_goal'])[2]");
+  }
+
+  get adLib_Yes_RadioButton() {
+    return $("(//input[@name='ad_lib_supplemental_goal'])[1]");
+  }
+
+  get adLib_No_RadioButton() {
+    return $("(//input[@name='ad_lib_supplemental_goal'])[2]");
+  }
+
+  get feedingGoalField() {
+    return $("(//input[@id='supplemental_goal'])[2]");
+  }
+
+  get feedingAdLib_No_radioButton() {
+    return $("(//input[@name='ad_lib_supplemental_goal_no'])[2]");
+  }
+
+  get formulaField() {
+    return $("#nutrition_milk_formula:nth-of-type(1)");
+  }
+
+  get thirdIndexNextButton() {
+    return $("(//button[contains(text(),'Next')])[3]");
+  }
+
+  get fourthIndexNextButton() {
+    return $("(//button[contains(text(),'Next')])[4]");
+  }
+
+  get fifthIndexNextButton() {
+    return $("(//button[contains(text(),'Next')])[5]");
+  }
+
+  get bottlePercentField() {
+    return $("#bottle_percent:nth-of-type(1)");
+  }
+
+  get gavageDurationField() {
+    return $("#gavage_duration:nth-of-type(1)");
+  }
+
+  get diaperingTypeDropdown() {
+    return $("#diapering_type:nth-of-type(1)");
+  }
+
+  get nutritionTypeDropdown() {
+    return $("#filter_type:nth-of-type(1)");
+  }
 
   async settigsButtonIsDisplayed() {
     await this.settingsButton.waitForDisplayed({ timeout: 20000 });
@@ -1227,6 +1354,7 @@ class ManagingProviderAccountPage extends BasePage {
     await this.reticField.clearValue();
     await this.reticField.setValue(value);
   }
+
   async verifyDataInTable(data) {
     const addedData = await $("(//td[contains(text(),'" + data + "')])[1]");
     var actData = await addedData.getText();
@@ -1240,6 +1368,7 @@ class ManagingProviderAccountPage extends BasePage {
     console.log("Added data is:>>" + actData);
     await expect(actData).toEqual(data);
   }
+
   async verifyOtherProviderRecords(otherProvider, description) {
     var actOtherProvider = await $("(//tr[@class='odd']//td)[2]").getText();
     var actDescription = await $("(//tr[@class='odd']//td)[4]").getText();
@@ -1913,6 +2042,204 @@ class ManagingProviderAccountPage extends BasePage {
     } else {
       throw new Error("LDL field is not displayed");
     }
+  }
+  async verifyGrowthGraph() {
+    (await this.growthIframe).waitForExist({ timeout: 15000 });
+    console.log("Iframe swithced");
+    await browser.switchToFrame(await this.growthIframe);
+    await this.growthGraph.waitForDisplayed({ timeout: 20000 });
+    if ((await this.growthGraph).isDisplayed() === true) {
+      console.log("✅ Growth graph is visible on screen");
+    } else {
+      throw new Error("❌ Failed to verify growth graph");
+    }
+    await browser.switchToFrame(Null);
+  }
+
+  async fillNutritionTypeField(Data) {
+    await this.nutritionTypeField.waitForDisplayed({ timeout: 15000 });
+    await this.nutritionTypeField.click();
+    await this.nutritionTypeField.selectByVisibleText(Data);
+  }
+
+  async fillNutritionFrequencyField(Data) {
+    await this.nutritionFrequencyField.waitForDisplayed({ timeout: 15000 });
+    await this.nutritionFrequencyField.click();
+    await this.nutritionFrequencyField.selectByVisibleText(Data);
+  }
+
+  async verifyNutritionOrderBreastFeed(nutritionType, nutritionFrequency) {
+    await this.createdNutritionTypeData.waitForDisplayed({ timeout: 15000 });
+    const actNutritionType = await this.createdNutritionTypeData.getText();
+    const actFrequencyType = await this.createdNutritionFrequencyData.getText();
+    await expect(actNutritionType).toEqual(nutritionType);
+    await expect(actFrequencyType).toEqual(nutritionFrequency);
+  }
+
+  async fillNutritionMilkField(Data) {
+    await this.nutritionMilkField.waitForDisplayed({ timeout: 15000 });
+    await this.nutritionMilkField.click();
+    await this.nutritionMilkField.selectByVisibleText(Data);
+  }
+
+  async fillCaloriesFieldField(Data) {
+    await this.caloriesField.waitForDisplayed({ timeout: 15000 });
+    await this.caloriesField.click();
+    await this.caloriesField.selectByVisibleText(Data);
+  }
+
+  async fillNutritionfortificationField(Data) {
+    await this.nutritionfortificationField.waitForDisplayed({ timeout: 15000 });
+    await this.nutritionfortificationField.click();
+    await this.nutritionfortificationField.selectByVisibleText(Data);
+  }
+
+  async fillNameField(Data) {
+    await this.nameField.waitForDisplayed({ timeout: 15000 });
+    await this.nameField.click();
+    await this.nameField.setValue(Data);
+  }
+
+  async fillVolumeMlsField(Data) {
+    await this.volumeMlsField.waitForDisplayed({ timeout: 15000 });
+    await this.volumeMlsField.click();
+    await this.volumeMlsField.setValue(Data);
+  }
+
+  async verifyNutritionOrderBottleFeed(updatedNutritionRecord, updatedNutritionFrequency, nutritionMilk, fortificationName, calories, volumeMLs) {
+    await this.createdNutritionTypeData.waitForDisplayed({ timeout: 15000 });
+    const actUpdatedNutritionType = await this.createdNutritionTypeData.getText();
+    const actUpdatedFrequencyType = await this.createdNutritionFrequencyData.getText();
+
+    await expect(actUpdatedNutritionType).toEqual(updatedNutritionRecord);
+    await expect(actUpdatedFrequencyType).toEqual(updatedNutritionFrequency);
+  }
+
+  async clickOnBreastFeeding_Yes_RadioButton() {
+    await this.breastFeeding_Yes_RadioButton.waitForDisplayed({ timeout: 15000 });
+    await this.breastFeeding_Yes_RadioButton.click();
+  }
+
+  async clickOnBreastFeeding_No_RadioButton() {
+    await this.breastFeeding_No_RadioButton.waitForDisplayed({ timeout: 15000 });
+    await this.breastFeeding_No_RadioButton.click();
+  }
+
+  async verifyNutritionWorkflow(data) {
+    const verifyworkflowpage = await $("//label[contains(text(),'" + data + "')]|//div[contains(text(),'" + data + "')]|//button[contains(text(),'" + data + "')]");
+    await verifyworkflowpage.waitForDisplayed({ timeout: 15000 });
+    if ((await verifyworkflowpage.isDisplayed()) === true) {
+      console.log("✅ " + data + " page is displayed");
+    } else {
+      throw new Error("❌ " + data + " page is not displayed ");
+    }
+  }
+
+  async multipleIndexNextButton() {
+    const buttons = await $("(//button[contains(text(),'Next')])[2]|(//button[contains(text(),'Next')])[4]|(//button[contains(text(),'Next')])[5]");
+    await buttons.waitForDisplayed({ timeout: 10000 });
+    await buttons.click();
+  }
+
+  async clickOnSupplement_Yes_RadioButton() {
+    await this.supplement_Yes_RadioButton.waitForDisplayed({ timeout: 15000 });
+    await this.supplement_Yes_RadioButton.click();
+  }
+
+  async fillSupplementalGoalField(Data) {
+    await this.supplementalGoalField.waitForDisplayed({ timeout: 15000 });
+    await this.supplementalGoalField.click();
+    await this.supplementalGoalField.setValue(Data);
+  }
+
+  async clickOnAdLib_Yes_RadioButton() {
+    await this.adLib_Yes_RadioButton.waitForDisplayed({ timeout: 15000 });
+    await this.adLib_Yes_RadioButton.click();
+  }
+
+  async clickOnAdLib_No_RadioButton() {
+    await this.adLib_No_RadioButton.waitForDisplayed({ timeout: 15000 });
+    await this.adLib_No_RadioButton.click();
+  }
+
+  async fillFeedingGoalField(Data) {
+    await this.feedingGoalField.waitForDisplayed({ timeout: 15000 });
+    await this.feedingGoalField.click();
+    await this.feedingGoalField.setValue(Data);
+  }
+
+  async clickOnFeedingAdLib_No_radioButton() {
+    await this.feedingAdLib_No_radioButton.waitForDisplayed({ timeout: 15000 });
+    await this.feedingAdLib_No_radioButton.click();
+  }
+
+  async clickOnThirdIndexNextButton() {
+    await this.thirdIndexNextButton.waitForDisplayed({ timeout: 15000 });
+    await this.thirdIndexNextButton.click();
+  }
+
+  async fillFormulaField(Data) {
+    await this.formulaField.waitForDisplayed({ timeout: 15000 });
+    await this.formulaField.click();
+    await this.formulaField.selectByVisibleText(Data);
+  }
+
+  async clickOnFourthIndexNextButton() {
+    await this.fourthIndexNextButton.waitForDisplayed({ timeout: 15000 });
+    await this.fourthIndexNextButton.click();
+  }
+
+  async fillBottlePercentField(Data) {
+    await this.bottlePercentField.waitForDisplayed({ timeout: 15000 });
+    await this.bottlePercentField.click();
+    await this.bottlePercentField.setValue(Data);
+  }
+
+  async clickOnFifthIndexNextButton() {
+    await this.fifthIndexNextButton.waitForDisplayed({ timeout: 15000 });
+    await this.fifthIndexNextButton.click();
+  }
+
+  async fillGavageDurationField(Data) {
+    await this.gavageDurationField.waitForDisplayed({ timeout: 15000 });
+    await this.gavageDurationField.click();
+    await this.gavageDurationField.selectByVisibleText(Data);
+  }
+
+  async verifyNutritionGraph(nutritionType, data) {
+    await browser.pause(3000);
+    const addedData = await $("(//*[contains(text(),'" + data + "')])[3]");
+    var actData = await addedData.getText();
+    console.log("✅ Added " + nutritionType + " data is:>> " + actData);
+    await expect(actData).toEqual(data);
+  }
+
+  async verifySleepGraph(data) {
+    await browser.pause(3000);
+    const addedData = await $("(//*[contains(text(),'" + data + "')])[1]");
+    var actData = await addedData.getText();
+    console.log("✅ Added " + data + " data is:>> " + actData);
+    await expect(actData).toEqual(data);
+  }
+
+  async verifyDiaperingGraph(diaperingOption, data) {
+    await browser.pause(3000);
+    const addedData = await $("(//*[contains(text(),'" + data + "')])[2]");
+    var actData = await addedData.getText();
+    console.log("✅ Added " + diaperingOption + " data is:>> " + actData);
+    await expect(actData).toEqual(data);
+  }
+
+  async chooseDiaperingType(Data) {
+    await this.diaperingTypeDropdown.waitForDisplayed({ timeout: 15000 });
+    await this.diaperingTypeDropdown.click();
+    await this.diaperingTypeDropdown.selectByVisibleText(Data);
+  }
+
+  async chooseNutritionType(Data) {
+    await this.nutritionTypeDropdown.waitForDisplayed({ timeout: 15000 });
+    await this.nutritionTypeDropdown.click();
+    await this.nutritionTypeDropdown.selectByVisibleText(Data);
   }
 }
 module.exports = new ManagingProviderAccountPage();
