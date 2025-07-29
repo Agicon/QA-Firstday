@@ -863,6 +863,16 @@ When(/^I fill (.*) data in "Gavage Duration" field$/, async (data) => {
   await managingProviderAccountPage.fillGavageDurationField(data);
 });
 
+When(/^I select option (.*) from diapering dropdown$/, async (diaperingOption) => {
+  await managingProviderAccountPage.chooseDiaperingType(diaperingOption);
+});
+
+When(/^I choose (.*) option from "Nutrition" dropdown$/, async (nutritionType) => {
+  await managingProviderAccountPage.chooseNutritionType(nutritionType);
+});
+
+
+
 // =================================Android======================================//
 
 When(/^login to app using (.*)$/, async (username) => {

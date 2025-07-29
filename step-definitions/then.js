@@ -463,9 +463,19 @@ Then(/^Verify user is redirected to (.*) and (.*) is displayed$/, async (firstOp
   await managingProviderAccountPage.verifyNutritionWorkflow(data);
 });
 
-Then(/^Verify the graph on web with value (.*)$/, async (graphValue) => {
-  await managingProviderAccountPage.verifyGraph(graphValue);
+Then(/^Verify the graph of "Sleep" module on web with value (.*)$/, async (graphValue) => {
+  await managingProviderAccountPage.verifySleepGraph(graphValue);
 });
+
+Then(/^Verify the (.*) graph on web with value (.*)$/, async (diaperingOption, graphValue) => {
+  await managingProviderAccountPage.verifyDiaperingGraph(diaperingOption, graphValue);
+});
+
+Then(/^Verify (.*) on the web with value (.*)$/, async (nutritionType, graphValue) => {
+  await managingProviderAccountPage.verifyNutritionGraph(nutritionType, graphValue);
+});
+
+
 
 //---------------------------------Android-Cases------------------------------------//
 
