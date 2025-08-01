@@ -1,4 +1,4 @@
-const { $, browser } = require("@wdio/globals");
+
 const BasePage = require("./testBase");
 const { remote } = require("webdriverio");
 const superAdminPage = require("./superAdminPage");
@@ -529,7 +529,7 @@ class ManagingProviderAccountPage extends BasePage {
     return $("#LDL");
   }
 
-  
+
   get growthGraph() {
     return $("//div[@id='htmlwidget_container']");
   }
@@ -817,7 +817,7 @@ class ManagingProviderAccountPage extends BasePage {
     await expect(actualLocation).toEqual(location);
     try {
       await expect(actualHospitalLocation).toEqual(hospitalLocation);
-    } catch (error) {}
+    } catch (error) { }
     await expect(actualStatus).toEqual(status);
   }
 
@@ -879,7 +879,7 @@ class ManagingProviderAccountPage extends BasePage {
         await this.deletePatientMessage.waitForDisplayed({ timeout: 20000 });
         await this.deletePatientMessage.waitForDisplayed({ reverse: true, timeout: 20000 });
       }
-    } catch (error) {}
+    } catch (error) { }
   }
 
   async clickOnUpdateButton() {
@@ -1031,7 +1031,7 @@ class ManagingProviderAccountPage extends BasePage {
     const actStatus = await $("(//tr[@class='odd']//td)[6]").getText();
     try {
       expect(actSpecialty).toEqual(specialty);
-    } catch (error) {}
+    } catch (error) { }
     expect(actName).toEqual(name);
     expect(actStatus).toEqual(status);
   }
@@ -1082,7 +1082,7 @@ class ManagingProviderAccountPage extends BasePage {
     await this.startDateField.click();
     try {
       await $("//button[contains(text(),'Apply')]").click();
-    } catch (error) {}
+    } catch (error) { }
     await browser.keys("Enter");
   }
 
@@ -1275,7 +1275,7 @@ class ManagingProviderAccountPage extends BasePage {
     expect(actHospitalNote).toEqual(hospitalNote);
     try {
       expect(actDescription).toEqual(description);
-    } catch (error) {}
+    } catch (error) { }
   }
 
   async verifyDiagnosisDetails(diagnosisType, description, status) {
@@ -1362,7 +1362,7 @@ class ManagingProviderAccountPage extends BasePage {
     await expect(actData).toEqual(data);
   }
 
-    async verifyTableHeader(data) {
+  async verifyTableHeader(data) {
     const addedData = await $("//th[contains(text(),'" + data + "')]");
     var actData = await addedData.getText();
     console.log("Added data is:>>" + actData);
@@ -1900,7 +1900,7 @@ class ManagingProviderAccountPage extends BasePage {
     await browser.refresh();
   }
 
-   async fillTBiliField(data) {
+  async fillTBiliField(data) {
     await browser.pause(3000);
     await this.TBiliField.waitForDisplayed({ timeout: 5000 });
     if ((await this.TBiliField.isDisplayed()) === true) {
@@ -2000,7 +2000,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-   async fillTrigField(data) {
+  async fillTrigField(data) {
     await this.trigField.waitForDisplayed({ timeout: 5000 });
     if ((await this.trigField.isDisplayed()) === true) {
       await this.trigField.clearValue();
@@ -2011,7 +2011,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-   async fillCholesterolField(data) {
+  async fillCholesterolField(data) {
     await this.cholesterolField.waitForDisplayed({ timeout: 5000 });
     if ((await this.cholesterolField.isDisplayed()) === true) {
       await this.cholesterolField.clearValue();
@@ -2022,7 +2022,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-   async fillHDLField(data) {
+  async fillHDLField(data) {
     await this.HDLField.waitForDisplayed({ timeout: 5000 });
     if ((await this.HDLField.isDisplayed()) === true) {
       await this.HDLField.clearValue();
@@ -2033,7 +2033,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-   async fillLDLField(data) {
+  async fillLDLField(data) {
     await this.LDLField.waitForDisplayed({ timeout: 5000 });
     if ((await this.LDLField.isDisplayed()) === true) {
       await this.LDLField.clearValue();

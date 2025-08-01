@@ -1,4 +1,4 @@
-const { $, browser } = require("@wdio/globals");
+
 const BasePage = require("./testBase");
 const { remote } = require("webdriverio");
 
@@ -67,7 +67,7 @@ class SuperAdminPage extends BasePage {
     return $("#expiry_date");
   }
 
- get searchField() {
+  get searchField() {
     return $("//div[@id='example_filter']//input[@type='search']|(//label//input[@type='search'])[2]");
   }
 
@@ -380,7 +380,7 @@ class SuperAdminPage extends BasePage {
         // await this.deleteMessage.waitForDisplayed({ timeout: 20000 });
         // await this.deleteMessage.waitForDisplayed({ reverse: true, timeout: 20000 });
       }
-    } catch (error) {}
+    } catch (error) { }
   }
 
   async verifyValidationMessage(text) {
@@ -452,7 +452,7 @@ class SuperAdminPage extends BasePage {
       console.log("actual message is >>" + actMessage);
       await expect(actMessage).toEqual(text);
       await this.validationMessage.waitForDisplayed({ reverse: true, timeout: 20000 });
-    } catch (error) {}
+    } catch (error) { }
   }
 
   async clickOnBackButton() {
