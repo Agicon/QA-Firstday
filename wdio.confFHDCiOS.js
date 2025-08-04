@@ -1,3 +1,6 @@
+const path = require("path");
+const appPath = path.resolve(__dirname, "./pageobjects/testData/apps/NeoNatal_Dev.app");
+
 exports.config = {
   //
   // ====================
@@ -21,15 +24,15 @@ exports.config = {
   // of the config file unless it's absolute.
   //
   specs: [
-      './features/**/*.feature'
+    './features/**/*.feature'
   ],
   suites: {
-      androidLoginPage: ["./features/iOS/FHDC/loginApp.feature"],
-     
-    },
+    iOSLoginPageFHDC: ["./features/iOS/FHDC/login_Redirections_Logout_App.feature"],
+    iOSTrackerModule: ["./features/iOS/FHDC/iOSTrackerModule.feature"]
+  },
   // Patterns to exclude.
   exclude: [
-      // 'path/to/excluded/files'
+    // 'path/to/excluded/files'
   ],
   //
   // ============
@@ -54,20 +57,19 @@ exports.config = {
   // https://saucelabs.com/platform/platform-configurator
   //
   capabilities: [
-   
-      {
-        "platformName": "iOS",
-        "appium:platformVersion": "18.2",
-        "appium:deviceName": "iPhone 16",
-        "appium:automationName": "XCUITest",
-        "appium:app": './pageobjects/testData/apps/NeoNatal_Dev.app',
-        "appium:bundleId": "com.firstdayhc.dev",
-        'appium:newCommandTimeout': 300,
-        "appium:noReset": false,   
-      },
-    
+
+    {
+      "platformName": "iOS",
+      "appium:platformVersion": "18.2",
+      "appium:deviceName": "iPhone 15",
+      "appium:automationName": "XCUITest",
+      "appium:app": appPath,
+      'appium:newCommandTimeout': 300,
+      "appium:noReset": false,
+    },
+
   ],
- 
+
 
   //
   // ===================
@@ -118,7 +120,6 @@ exports.config = {
   // commands. Instead, they hook themselves up into the test process.
   // services: [],
   services: ['appium'],
-
   // Framework you want to run your specs with.
   // The following are supported: Mocha, Jasmine, and Cucumber
   // see also: https://webdriver.io/docs/frameworks
@@ -126,7 +127,7 @@ exports.config = {
   // Make sure you have the wdio adapter package for the specific framework installed
   // before running any tests.
   framework: 'cucumber',
-  
+
   //
   // The number of times to retry the entire specfile when it fails as a whole
   // specFileRetries: 1,
@@ -142,49 +143,49 @@ exports.config = {
   // see also: https://webdriver.io/docs/dot-reporter
   // reporters: ['spec',['allure', {outputDir: 'allure-results'}]],
   reporters: [
-      "spec",
-      // ['junit', {
-      //     outputDir: './Reports/junit-report/',
-      //     outputFileFormat: function (options) { // optional
-      //         return 'junit-report.xml'
-      //     }
-      // }],
-      [
-        "allure",
-        {
-          outputDir: "allure-results/",
-          disableWebdriverStepsReporting: false,
-          disableWebdriverScreenshotsReporting: false,
-          useCucumberStepReporter: false,
-        },
-      ],
+    "spec",
+    // ['junit', {
+    //     outputDir: './Reports/junit-report/',
+    //     outputFileFormat: function (options) { // optional
+    //         return 'junit-report.xml'
+    //     }
+    // }],
+    [
+      "allure",
+      {
+        outputDir: "allure-results/",
+        disableWebdriverStepsReporting: false,
+        disableWebdriverScreenshotsReporting: false,
+        useCucumberStepReporter: true,
+      },
     ],
+  ],
   // If you are using Cucumber you need to specify the location of your step definitions.
   cucumberOpts: {
-      // <string[]> (file/dir) require files before executing features
-      require: ['./step-definitions/**/*.js'],
-      // <boolean> show full backtrace for errors
-      backtrace: false,
-      // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
-      requireModule: [],
-      // <boolean> invoke formatters without executing steps
-      dryRun: false,
-      // <boolean> abort the run on first failure
-      failFast: false,
-      // <string[]> Only execute the scenarios with name matching the expression (repeatable).
-      name: [],
-      // <boolean> hide step definition snippets for pending steps
-      snippets: true,
-      // <boolean> hide source uris
-      source: true,
-      // <boolean> fail if there are any undefined or pending steps
-      strict: false,
-      // <string> (expression) only execute the features or scenarios with tags matching the expression
-      tagExpression: '',
-      // <number> timeout for step definitions
-      timeout: 100000,
-      // <boolean> Enable this config to treat undefined definitions as warnings.
-      ignoreUndefinedDefinitions: false
+    // <string[]> (file/dir) require files before executing features
+    require: ['./step-definitions/**/*.js'],
+    // <boolean> show full backtrace for errors
+    backtrace: false,
+    // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
+    requireModule: [],
+    // <boolean> invoke formatters without executing steps
+    dryRun: false,
+    // <boolean> abort the run on first failure
+    failFast: false,
+    // <string[]> Only execute the scenarios with name matching the expression (repeatable).
+    name: [],
+    // <boolean> hide step definition snippets for pending steps
+    snippets: true,
+    // <boolean> hide source uris
+    source: true,
+    // <boolean> fail if there are any undefined or pending steps
+    strict: false,
+    // <string> (expression) only execute the features or scenarios with tags matching the expression
+    tagExpression: '',
+    // <number> timeout for step definitions
+    timeout: 100000,
+    // <boolean> Enable this config to treat undefined definitions as warnings.
+    ignoreUndefinedDefinitions: false
   },
 
 
@@ -233,8 +234,8 @@ exports.config = {
    */
   beforeSession: async function (config, capabilities, specs) {
     const del = require("del");
-       await del(["allure-report"],["allure-results"]);
-     },
+    await del(["allure-report"], ["allure-results"]);
+  },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
    * variables like `browser`. It is the perfect place to define custom commands.
@@ -254,7 +255,7 @@ exports.config = {
       await driver.executeScript('mobile: shell', {
         command: 'am kill-all',
         args: []
-        
+
       });
       console.log('All Android apps have been killed.');
     }
@@ -265,7 +266,7 @@ exports.config = {
     // });
     // console.log('App cache and data cleared for Android app.');
   },
-  
+
   // },
   /**
    * Runs before a WebdriverIO command gets executed.
@@ -333,7 +334,7 @@ exports.config = {
    */
   // afterFeature: function (uri, feature) {
   // },
-  
+
   /**
    * Runs after a WebdriverIO command gets executed
    * @param {string} commandName hook command name

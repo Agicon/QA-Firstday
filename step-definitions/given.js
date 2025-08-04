@@ -1,8 +1,8 @@
 import { Given } from "@cucumber/cucumber";
-const { expect, $, browser } = require("@wdio/globals");
+
 
 import LoginWebPage from "../pageobjects/Web/loginPage";
-import androidPage from "../pageobjects/Android/androidPage";
+import mobileLoginPage from "../pageobjects/Mobile/loginPage";
 const pages = {};
 //---------------Web-Steps----------------------//
 
