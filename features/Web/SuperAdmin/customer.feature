@@ -43,7 +43,6 @@ Feature: Test cases for create customer page
     Examples:
       | url      | userA |
       | loginUrl | admin |
-
   Scenario Outline: Verify the "Super Admin" is not able to create "New Customer" and validation displays if any mandatory field is not populated and verify the working of close button in popup
     When I click on the "Customers" tab
     Then I navigate to the "Customers" page
@@ -96,11 +95,9 @@ Feature: Test cases for create customer page
     Then validation message Expiry date must be greater than today. appears
     When I click on the button with text Close
     Then A "New Customer" form closes
-
     Examples:
       | url      | userA | invalidData | validData | validPhone |
       | loginUrl | admin |           0 | Testing   | 2026839019 |
-
   Scenario Outline: Verify the "Super Admin" is able to create "New Customer" when only mandatory fields are populated and check validation when using already registered email
     When I click on the "Customers" tab
     Then I navigate to the "Customers" page
@@ -125,11 +122,9 @@ Feature: Test cases for create customer page
     When I click on the button with text Create
     Then validation message This email has already been taken appears
     When I click on the button with text Close
-
     Examples:
       | validClinicName  | validFirstName | validLastName | validNumberOfLicence |
       | Auto_Test_Clinic | David          | William       |                  998 |
-
   Scenario Outline: Verify the "Super Admin" is able to create "New Customer" when all the fields are populated,view customer verification
     When I click on the "Customers" tab
     Then I navigate to the "Customers" page
@@ -175,11 +170,9 @@ Feature: Test cases for create customer page
     Then A "New Customer" gets created and it displays clinic name <updatedClinicName> first name <updatedFirstName> last name <updatedLastName> email and licence number <validNumberOfLicence> on the "Customers list"
     When I click On "Delete" icon
     Then Success message Customer Deleted successfully !! appears
-
     Examples:
       | validClinicName  | validFirstName | validLastName | validNumberOfLicence | validPhone | validZip | validInformation | country | state | city   | invalidData | updatedClinicName     | updatedFirstName      | updatedLastName      |
       | Auto_Test_Clinic | John           | William       |                   98 | 3652984561 |    10001 | I am QA engg.    | India   | New   | tester |           2 | UpdateAutomatedClinic | updatedAutomatedFirst | updatedAutomatedLast |
-
   Scenario Outline: Verify the functionality of active and inactive Status
     When I click on the "Customers" tab
     Then I navigate to the "Customers" page
@@ -199,7 +192,101 @@ Feature: Test cases for create customer page
     Given Open web url <url>
     When Web app login using <customer>
     Then Verify that user successfully redirected on homepage
-
     Examples:
       | validClinicName      | url      | userA | customer               |
       | Auto_cust_for_status | loginUrl | admin | customerForStatusCheck |
+
+  Scenario Outline: Verify Super admin is not able to add new device under "Device Management" and verify all validations, also verify User is able to add new device using valid data
+    When I click on the second index link Device Management
+    Then device page displays
+    Then It redirects on the Device Management screen
+    Then Search and delete duplicate data <vitalType1>
+    When I click on the button with text Add Device
+    Then It redirects on the Add Device screen
+    When I click on the button with text Save
+    Then validation message Please select vital type. appears
+    Then validation message Please enter company name. appears
+    When I click on "Vital Type" dropdown
+    Then Click on option <vitalType1> from list
+    When Fill <companyName> in company name field
+    When I click on the button with text Save
+    Then Success message Device Added Succesfully appears
+    When I populate data <vitalType1> in the "Search" field
+    Then Verify new device is added with vitral <vitalType1> and company name <companyName>
+
+    Examples:
+      | vitalType1 | companyName       | vitalType2    | vitalType3  |
+      | ECG        | Auto_Company_test | O2 Saturation | Temperature |
+
+  Scenario Outline: Verify Super admin is not able to Update device under "Device Management" and verify all validations, also verify User is able to Update new device using valid data and verify delete functionality
+    When I click on the second index link Device Management
+    Then device page displays
+    Then It redirects on the Device Management screen
+    Then Search and delete duplicate data <vitalType2>
+    When I populate data <vitalType1> in the "Search" field
+    When I click on the "View or Update" option under the "Action" section
+    Then It redirects on the Device Update screen
+    When I click on "Vital Type" dropdown
+    Then Click on option <vitalDefault> from list
+    When I click on the button with text Update
+    Then validation message Please select vital type. appears
+    When I click on "Vital Type" dropdown
+    Then Click on option <vitalType2> from list
+    When Fill <updatedCompanyName> in company name field
+    When I click on the button with text Update
+    When I populate data <vitalType2> in the "Search" field
+    Then Verify new device is added with vitral <vitalType2> and company name <updatedCompanyName>
+    When I click On "Delete" icon
+    Then Deleted record should not be visible in the list
+
+    Examples:
+      | vitalType1 | updatedCompanyName | vitalDefault             | vitalType2  |
+      | ECG        | Auto_Company_test  | Please select vital type | Temperature |
+
+  Scenario Outline: Verify user is able to add ECG device under Device Management
+    Then Search and delete duplicate data <vitalType>
+    When I click on the button with text Add Device
+    Then It redirects on the Add Device screen
+    When I click on "Vital Type" dropdown
+    Then Click on option <vitalType> from list
+    When Fill <companyName> in company name field
+    When I click on the button with text Save
+    Then Success message Device Added Succesfully appears
+    When I populate data <vitalType> in the "Search" field
+    Then Verify new device is added with vitral <vitalType> and company name <companyName>
+
+    Examples:
+      | vitalType | companyName       |
+      | ECG       | Auto_Company_test |
+
+  Scenario Outline: Verify user is able to add O2 Saturation device under Device Management
+    Then Search and delete duplicate data <vitalType>
+    When I click on the button with text Add Device
+    Then It redirects on the Add Device screen
+    When I click on "Vital Type" dropdown
+    Then Click on option <vitalType> from list
+    When Fill <companyName> in company name field
+    When I click on the button with text Save
+    Then Success message Device Added Succesfully appears
+    When I populate data <vitalType> in the "Search" field
+    Then Verify new device is added with vitral <vitalType> and company name <companyName>
+
+    Examples:
+      | vitalType     | companyName       |
+      | O2 Saturation | Auto_Company_test |
+
+  Scenario Outline: Verify user is able to add Temperature device under Device Management
+    Then Search and delete duplicate data <vitalType>
+    When I click on the button with text Add Device
+    Then It redirects on the Add Device screen
+    When I click on "Vital Type" dropdown
+    Then Click on option <vitalType> from list
+    When Fill <companyName> in company name field
+    When I click on the button with text Save
+    Then Success message Device Added Succesfully appears
+    When I populate data <vitalType> in the "Search" field
+    Then Verify new device is added with vitral <vitalType> and company name <companyName>
+
+    Examples:
+      | vitalType   | companyName       |
+      | Temperature | Auto_Company_test |

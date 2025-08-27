@@ -81,7 +81,7 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   get searchField() {
-    return $("//div[@id='example_filter']//input[@type='search']|//input[@type='search']");
+    return $("//*[@id='example_filter']/label/input|//*[@id='respiratory-settings-table_filter']/label/input|//*[@id='example1_filter']/label/input|//*[@id='monitoring-order-table_filter']/label/input|//*[@id='device-brand-table_filter']/label/input");
   }
 
   get activePatientScreen() {
@@ -157,7 +157,7 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   get commentsField() {
-    return $("//textarea[@id='comments']|//textarea[@id='Comments']");
+    return $("//textarea[@id='comments']|//textarea[@id='Comments']|//textarea[@id='comment']");
   }
 
   get vaccineField() {
@@ -187,9 +187,8 @@ class ManagingProviderAccountPage extends BasePage {
   get okButton() {
     return $("//a[@title='OK']");
   }
-
   get bodyField() {
-    return $("//body");
+    return $("//body[@aria-label='To enrich screen reader interactions, please activate Accessibility in Grammarly extension settings']");
   }
 
   get iframe() {
@@ -209,7 +208,7 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   get resultsDateField() {
-    return $("//input[@id='date_time']|//input[@id='Date']");
+    return $("//input[@id='date_time']|//input[@id='Date']|//input[@id='date']|//input[@id='appointment_date']");
   }
 
   get wbcField() {
@@ -529,7 +528,6 @@ class ManagingProviderAccountPage extends BasePage {
     return $("#LDL");
   }
 
-  
   get growthGraph() {
     return $("//div[@id='htmlwidget_container']");
   }
@@ -656,6 +654,81 @@ class ManagingProviderAccountPage extends BasePage {
 
   get nutritionTypeDropdown() {
     return $("#filter_type:nth-of-type(1)");
+  }
+  get chartData() {
+    return $("//div[@class='highcharts-container ']");
+  }
+
+  get TSHField() {
+    return $("#tsh");
+  }
+
+  get T4Field() {
+    return $("#t4");
+  }
+
+  get freeT4Field() {
+    return $("#free_t4");
+  }
+
+  get T3Field() {
+    return $("#t3");
+  }
+
+  get cortisolField() {
+    return $("#cortisol");
+  }
+
+  get ACTHField() {
+    return $("#acth");
+  }
+
+  get PTField() {
+    return $("//input[@id='PT']");
+  }
+
+  get aPTTField() {
+    return $("#aPTT");
+  }
+
+  get TTField() {
+    return $("#TT");
+  }
+
+  get fibrinogenField() {
+    return $("#Fibrinogen");
+  }
+
+  get ECGDeviceDropdown() {
+    return $("#ecg_brand_id");
+  }
+
+  get ECGDurationDropdown() {
+    return $("#ecg_duration");
+  }
+
+  get O2SaturationDeviceDropdown() {
+    return $("#spo2_brand_id");
+  }
+
+  get O2SeturationDurationDropdown() {
+    return $("#spo2_duration");
+  }
+
+  get temperatureDeviceDropdown() {
+    return $("#temp_brand_id");
+  }
+
+  get temperatureDurationDropdown() {
+    return $("#temp_duration");
+  }
+
+  get temperatureDurationText() {
+    return $("#temp_duration_text");
+  }
+
+  get titleField() {
+    return $("#new_tit_1_result");
   }
 
   async settigsButtonIsDisplayed() {
@@ -1195,9 +1268,8 @@ class ManagingProviderAccountPage extends BasePage {
     await browser.keys(["Delete"]);
     await this.pasteButton.waitForDisplayed({ timeout: 15000 });
     await this.pasteButton.click();
+    await browser.pause(3000);
     await browser.switchToFrame(await this.iframe);
-    await this.bodyField.waitForDisplayed({ timeout: 15000 });
-    await this.bodyField.click();
     await browser.pause(1000);
     await browser.keys(["Control", "v"]);
     await browser.switchToFrame(null);
@@ -1362,8 +1434,15 @@ class ManagingProviderAccountPage extends BasePage {
     await expect(actData).toEqual(data);
   }
 
-    async verifyTableHeader(data) {
+  async verifyTableHeader(data) {
     const addedData = await $("//th[contains(text(),'" + data + "')]");
+    var actData = await addedData.getText();
+    console.log("Added data is:>>" + actData);
+    await expect(actData).toEqual(data);
+  }
+
+  async verifyPeragraphInTable(data) {
+    const addedData = await $("//p[contains(text(),'" + data + "')]");
     var actData = await addedData.getText();
     console.log("Added data is:>>" + actData);
     await expect(actData).toEqual(data);
@@ -1555,11 +1634,11 @@ class ManagingProviderAccountPage extends BasePage {
   }
 
   async clickOnWelcomeAiMessageButton() {
-    // const dragElement = await $('//div[@title="Drag"]');
-    // await dragElement.waitForDisplayed({ timeout: 15000 });
-    // const targetElement = await $("(//section[@class='content']//img)[1]");
-    // await targetElement.waitForDisplayed({ timeout: 15000 });
-    // await dragElement.dragAndDrop(targetElement);
+    const dragElement = await $('//div[@title="Drag"]');
+    await dragElement.waitForDisplayed({ timeout: 15000 });
+    const targetElement = await $("(//section[@class='content']//img)[1]");
+    await targetElement.waitForDisplayed({ timeout: 15000 });
+    await dragElement.dragAndDrop(targetElement);
   }
 
   async clickOnSecondIndexButtonWithText(text) {
@@ -1900,7 +1979,7 @@ class ManagingProviderAccountPage extends BasePage {
     await browser.refresh();
   }
 
-   async fillTBiliField(data) {
+  async fillTBiliField(data) {
     await browser.pause(3000);
     await this.TBiliField.waitForDisplayed({ timeout: 5000 });
     if ((await this.TBiliField.isDisplayed()) === true) {
@@ -2000,7 +2079,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-   async fillTrigField(data) {
+  async fillTrigField(data) {
     await this.trigField.waitForDisplayed({ timeout: 5000 });
     if ((await this.trigField.isDisplayed()) === true) {
       await this.trigField.clearValue();
@@ -2011,7 +2090,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-   async fillCholesterolField(data) {
+  async fillCholesterolField(data) {
     await this.cholesterolField.waitForDisplayed({ timeout: 5000 });
     if ((await this.cholesterolField.isDisplayed()) === true) {
       await this.cholesterolField.clearValue();
@@ -2022,7 +2101,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-   async fillHDLField(data) {
+  async fillHDLField(data) {
     await this.HDLField.waitForDisplayed({ timeout: 5000 });
     if ((await this.HDLField.isDisplayed()) === true) {
       await this.HDLField.clearValue();
@@ -2033,7 +2112,7 @@ class ManagingProviderAccountPage extends BasePage {
     }
   }
 
-   async fillLDLField(data) {
+  async fillLDLField(data) {
     await this.LDLField.waitForDisplayed({ timeout: 5000 });
     if ((await this.LDLField.isDisplayed()) === true) {
       await this.LDLField.clearValue();
@@ -2240,6 +2319,201 @@ class ManagingProviderAccountPage extends BasePage {
     await this.nutritionTypeDropdown.waitForDisplayed({ timeout: 15000 });
     await this.nutritionTypeDropdown.click();
     await this.nutritionTypeDropdown.selectByVisibleText(Data);
+  }
+
+  async fillTSHField(data) {
+    await this.TSHField.waitForDisplayed({ timeout: 5000 });
+    if ((await this.TSHField.isDisplayed()) === true) {
+      await this.TSHField.clearValue();
+      await this.TSHField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("TSH field is not displayed");
+    }
+  }
+
+  async fillT4Field(data) {
+    await this.T4Field.waitForDisplayed({ timeout: 5000 });
+    if ((await this.T4Field.isDisplayed()) === true) {
+      await this.T4Field.clearValue();
+      await this.T4Field.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("T4 field is not displayed");
+    }
+  }
+
+  async fillFreeT4Field(data) {
+    if ((await this.freeT4Field.isDisplayed()) === true) {
+      await this.freeT4Field.clearValue();
+      await this.freeT4Field.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("Free T4 field is not displayed");
+    }
+  }
+
+  async fillT3Field(data) {
+    if ((await this.T3Field.isDisplayed()) === true) {
+      await this.T3Field.clearValue();
+      await this.T3Field.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("T3 field is not displayed");
+    }
+  }
+
+  async fillCortisolField(data) {
+    if ((await this.cortisolField.isDisplayed()) === true) {
+      await this.cortisolField.clearValue();
+      await this.cortisolField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("cortisol Field is not displayed");
+    }
+  }
+
+  async fillACTHField(data) {
+    if ((await this.ACTHField.isDisplayed()) === true) {
+      await this.ACTHField.clearValue();
+      await this.ACTHField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("ACTH Field is not displayed");
+    }
+  }
+
+  async fillPTField(data) {
+    await browser.pause(300);
+    await this.PTField.waitForDisplayed({ timeout: 3000 });
+    if ((await this.PTField.isDisplayed()) === true) {
+      await this.PTField.clearValue();
+      await this.PTField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("PT Field is not displayed");
+    }
+  }
+
+  async fillaPTTField(data) {
+    if ((await this.aPTTField.isDisplayed()) === true) {
+      await this.aPTTField.clearValue();
+      await this.aPTTField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("aPTT Field is not displayed");
+    }
+  }
+
+  async fillTTField(data) {
+    if ((await this.TTField.isDisplayed()) === true) {
+      await this.TTField.clearValue();
+      await this.TTField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("TT Field is not displayed");
+    }
+  }
+
+  async fillFibrinogenField(data) {
+    if ((await this.fibrinogenField.isDisplayed()) === true) {
+      await this.fibrinogenField.clearValue();
+      await this.fibrinogenField.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("fibrinogen Field is not displayed");
+    }
+  }
+
+  async selectECGDeviceDropdownOption(data) {
+    if ((await this.ECGDeviceDropdown.isDisplayed()) === true) {
+      await this.ECGDeviceDropdown.click();
+      await (await $("(//option[contains(text(),'" + data + "')])[1]")).click();
+      console.log("ECG Device Dropdown is displaying successfully");
+    } else {
+      throw new Error("ECG Device Dropdown is not displayed");
+    }
+  }
+
+  async selectECGDurationDropdownOption(data) {
+    if ((await this.ECGDurationDropdown.isDisplayed()) === true) {
+      await this.ECGDurationDropdown.click();
+      await (await $("(//option[contains(text(),'" + data + "')])[1]")).click();
+      console.log("ECG Duration Dropdown is displaying successfully");
+    } else {
+      throw new Error("ECG Duration Dropdown is not displayed");
+    }
+  }
+
+  async selectO2SaturationDeviceDropdownOption(data) {
+    if ((await this.O2SaturationDeviceDropdown.isDisplayed()) === true) {
+      await this.O2SaturationDeviceDropdown.click();
+      await (await $("(//option[contains(text(),'" + data + "')])[2]")).click();
+
+      console.log("O2 Saturation Device Dropdown is displaying successfully");
+    } else {
+      throw new Error("O2 Saturation Device Dropdown is not displayed");
+    }
+  }
+
+  async selectO2SaturationDurationDropdownOption(data) {
+    if ((await this.O2SeturationDurationDropdown.isDisplayed()) === true) {
+      await this.O2SeturationDurationDropdown.click();
+      await (await $("(//option[contains(text(),'" + data + "')])[2]")).click();
+      console.log("O2 Saturation Duration Dropdown is displaying successfully");
+    } else {
+      throw new Error("O2 Saturation Duration Dropdown is not displayed");
+    }
+  }
+
+  async selectTemperatureDeviceDropdownOption(data) {
+    if ((await this.temperatureDeviceDropdown.isDisplayed()) === true) {
+      await this.temperatureDeviceDropdown.click();
+      await (await $("(//option[contains(text(),'" + data + "')])[3]")).click();
+      console.log("Temperature Device Dropdown is displaying successfully");
+    } else {
+      throw new Error("Temperature Device Dropdown is not displayed");
+    }
+  }
+
+  async selectTemperatureDurationDropdownOption(data) {
+    if ((await this.temperatureDurationDropdown.isDisplayed()) === true) {
+      await this.temperatureDurationDropdown.click();
+      await (await $("(//option[contains(text(),'" + data + "')])[3]")).click();
+      console.log("Temperature Duration Dropdown is displaying successfully");
+    } else {
+      throw new Error("Temperature Duration Dropdown is not displayed");
+    }
+  }
+
+  async fillTemperatureDurationField(data) {
+    if ((await this.temperatureDurationText.isDisplayed()) === true) {
+      await this.temperatureDurationText.clearValue();
+      await this.temperatureDurationText.setValue(data);
+      console.log("field displaying successfully");
+    } else {
+      throw new Error("temperature duration text Field is not displayed");
+    }
+  }
+
+  async verifyAddedMonitoringData(Device, data) {
+    const MonitoringData = await $("//td[contains(text(),'" + Device + " - " + data + "')]");
+    MonitoringData.waitForDisplayed({ timeout: 5000 });
+    if (MonitoringData.isDisplayed() == true) {
+      console.log("Temperature Duration Dropdown is displaying successfully");
+    } else {
+      throw new Error("Temperature Duration Dropdown is not displayed");
+    }
+  }
+  async fillOtherTitleField(data) {
+    if ((await this.titleField.isDisplayed()) === true) {
+      console.log("filling Title field");
+      await this.titleField.click();
+      await this.titleField.clearValue();
+      await this.titleField.setValue(data);
+    } else {
+      throw new Error("Title field is not displaying in form");
+    }
   }
 }
 module.exports = new ManagingProviderAccountPage();

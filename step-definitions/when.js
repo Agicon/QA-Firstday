@@ -118,6 +118,15 @@ When(/^I update the "Customer form" but does not populate one of the mandatory f
 When(/^I click on link text (.*)$/, async (text) => {
   await superAdminPage.clickOnLinkText(text);
 });
+
+When(/^I click on "Vital Type" dropdown$/, async () => {
+  await superAdminPage.clickOnVitralDropdown();
+});
+
+When(/^Fill (.*) in company name field$/, async (text) => {
+  await superAdminPage.fillCompanyNameField(text);
+});
+
 // ======================================Web-CoustomerAccount=============================================//
 
 When(/^User click on "Managing Provider" tab$/, async () => {
@@ -655,6 +664,10 @@ When(/^I fill (.*) data in type field$/, async (value) => {
   await managingProviderAccountPage.fillTypeField(value);
 });
 
+When(/^I fill title (.*) in title field field$/, async (value) => {
+  await managingProviderAccountPage.fillOtherTitleField(value);
+});
+
 When(/^Hover over "Orders" tab$/, async () => {
   await managingProviderAccountPage.hoverOverOrdersTab();
 });
@@ -871,8 +884,6 @@ When(/^I choose (.*) option from "Nutrition" dropdown$/, async (nutritionType) =
   await managingProviderAccountPage.chooseNutritionType(nutritionType);
 });
 
-
-
 When(/^I fill value in TBili (.*) field$/, async (data) => {
   await managingProviderAccountPage.fillTBiliField(data);
 });
@@ -907,8 +918,6 @@ When(/^I fill value in GGT (.*) field$/, async (data) => {
   await managingProviderAccountPage.fillGGTField(data);
 });
 
-
-
 When(/^I fill value in Trig (.*) field$/, async (data) => {
   await managingProviderAccountPage.fillTrigField(data);
 });
@@ -923,6 +932,74 @@ When(/^I fill value in HDL (.*) field$/, async (data) => {
 
 When(/^I fill value in LDL (.*) field$/, async (data) => {
   await managingProviderAccountPage.fillLDLField(data);
+});
+
+When(/^I fill value in TSH (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillTSHField(data);
+});
+
+When(/^I fill value in T4 (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillT4Field(data);
+});
+
+When(/^I fill value in Free T4 (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillFreeT4Field(data);
+});
+
+When(/^I fill value in T3 (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillT3Field(data);
+});
+
+When(/^I fill value in Cortisol (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillCortisolField(data);
+});
+
+When(/^I fill value in ACTH (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillACTHField(data);
+});
+
+When(/^I fill value in PT (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillPTField(data);
+});
+
+When(/^I fill value in aPTT (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillaPTTField(data);
+});
+
+When(/^I fill value in TT (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillTTField(data);
+});
+
+When(/^I fill value in Fibrinogen (.*) field$/, async (data) => {
+  await managingProviderAccountPage.fillFibrinogenField(data);
+});
+
+When(/^I click on ECG device dropdown and select option (.*)$/, async (data) => {
+  await managingProviderAccountPage.selectECGDeviceDropdownOption(data);
+});
+
+When(/^I click on ECG duration dropdown and select option (.*)$/, async (data) => {
+  await managingProviderAccountPage.selectECGDurationDropdownOption(data);
+});
+
+When(/^I click on O2 saturation device dropdown and select option (.*)$/, async (data) => {
+  await managingProviderAccountPage.selectO2SaturationDeviceDropdownOption(data);
+});
+
+When(/^I click on O2 saturation duration dropdown and select option (.*)$/, async (data) => {
+  await managingProviderAccountPage.selectO2SaturationDurationDropdownOption(data);
+});
+
+When(/^I click on Temperature device dropdown and select option (.*)$/, async (data) => {
+  await managingProviderAccountPage.selectTemperatureDeviceDropdownOption(data);
+});
+
+When(/^I click on Temperature devduration dropdown and select option (.*)$/, async (data) => {
+  await managingProviderAccountPage.selectTemperatureDurationDropdownOption(data);
+});
+
+When(/^Fill temperature duration field using data (.*)$/, async (data) => {
+  await managingProviderAccountPage.fillTemperatureDurationField(data);
 });
 // =================================Android======================================//
 

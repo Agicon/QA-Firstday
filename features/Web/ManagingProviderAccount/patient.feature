@@ -825,6 +825,7 @@ Feature: Test cases for the 'Patient' page
       | url      | userA                     | dashboard-ManagePatientsOption | patientName       | medicationName  | currentDose | measurement | frequency | additionalInformation                         | interval | status |
       | loginUrl | providerLoginCrendentails | Manage Patients                | Patient_Auto_Test | Auto_Medication |           1 | Teaspoon    | Twice     | Consult the doctor before using this medicine | Day      | Active |
 #
+
   Scenario Outline: Verify the "Managing Provider" is able to delete the added "Vaccination" and Verify the "Managing Provider" is not able to add "Vaccination" and validation displays if any mandatory field is not populated and 	Verify the "Managing Provider" is able to add "Pre defined Vaccination" for patient's medical record
     When I click on the link text Medical Record
     When I click on the link text Vaccinations
@@ -1472,7 +1473,337 @@ Feature: Test cases for the 'Patient' page
     Examples:
       | validTrig | invalidTrig | invalidCholesterol | validCholesterol | validHDL | invalidHDL | validLDL | invalidLDL | comment                    | uploadImage |
       |        60 |           5 |                 15 |               54 |       22 |         08 |       21 |         09 | This is the updated report | Picture(1)  |
-# //------------------------Vikas code--------------------------//
+
+  Scenario Outline: Verify the "Managing Provider" is able to Create "New Laboratory Endocrine Results" using valid and invalid data also verify the validations
+    When I hover over the "Results" tab
+    When Hover over link Laboratory
+    When I click on the link text Laboratory Endocrine
+    Then laboratory_endocrine page displays
+    Then Button text New Endocrine Result is displayed on screen
+    When I click on the button with text New Endocrine Result
+    When I clear date filed of report
+    When I click on the button with text Create
+    Then validation message Please enter date & time appears
+    When I click on the button with text Close
+    When I hover over the "Results" tab
+    When Hover over link Laboratory
+    When I click on the link text Laboratory Endocrine
+    When I click on the button with text New Endocrine Result
+    When I fill value in TSH <invalidTSH> field
+    When I fill value in T4 <invalidT4> field
+    When I fill value in Free T4 <invalidFreeT4> field
+    When I fill value in T3 <invalidT3> field
+    When I fill value in Cortisol <invalidCortisol> field
+    When I click on the button with text Create
+    Then validation message Please enter a value less than or equal to 6. appears
+    Then validation message Please enter a value less than or equal to 15. appears
+    Then validation message Please enter a value less than or equal to 3. appears
+    Then validation message Please enter a value less than or equal to 250. appears
+    Then validation message Please enter a value less than or equal to 50. appears
+    When I fill value in TSH <validTSH> field
+    When I fill value in T4 <validT4> field
+    When I fill value in Free T4 <validFreeT4> field
+    When I fill value in T3 <validT3> field
+    When I fill value in Cortisol <validCortisol> field
+    When I fill value in ACTH <invalidACTH> field
+    When I click on the button with text Create
+    Then validation message Please enter a value less than or equal to 50. appears
+    When I fill value in ACTH <validACTH> field
+    When User should be able to upload file <uploadImage>
+    When I fill <comment> data in comments field
+    When I click on the button with text Create
+    Then Success message Laboratory Endocrine Added Succesfully ! appears
+    Then Added data <validTSH> is successfully displaying in table
+    Then Added data <validT4> is successfully displaying in table
+    Then Added data <validFreeT4> is successfully displaying in table
+    Then Added data <validT3> is successfully displaying in table
+    Then Added data <validCortisol> is successfully displaying in table
+    Then Added data <validACTH> is successfully displaying in table
+    Then Added data <comment> is successfully displaying in table
+
+    Examples:
+      | validTSH | invalidTSH | validT4 | invalidT4 | validFreeT4 | invalidFreeT4 | validT3 | invalidT3 | validCortisol | invalidCortisol | validACTH | invalidACTH | comment                  | uploadImage |
+      |       05 |         10 |      12 |        28 |          03 |            50 |     199 |       300 |            47 |              57 |        42 |          55 | This is the final report | Picture(1)  |
+
+  Scenario Outline: Verify the "Managing Provider" is able to update "New Laboratory Endocrine Results" with valid and invalid data , also verify search and delete functionality
+    When I hover over the "Results" tab
+    When Hover over link Laboratory
+    When I click on the link text Laboratory Endocrine
+    When I click On "Edit" icon
+    When I clear date filed of report
+    When I click on the button with text Update
+    Then validation message Please enter date & time appears
+    When I click on the link text Back
+    When I hover over the "Results" tab
+    When Hover over link Laboratory
+    When I click on the link text Laboratory Endocrine
+    When I click On "Edit" icon
+    When I fill value in TSH <invalidTSH> field
+    When I fill value in T4 <invalidT4> field
+    When I fill value in Free T4 <invalidFreeT4> field
+    When I fill value in T3 <invalidT3> field
+    When I fill value in Cortisol <invalidCortisol> field
+    When I click on the button with text Update
+    Then validation message Please enter a value less than or equal to 6. appears
+    Then validation message Please enter a value less than or equal to 15. appears
+    Then validation message Please enter a value less than or equal to 3. appears
+    Then validation message Please enter a value less than or equal to 250. appears
+    Then validation message Please enter a value less than or equal to 50. appears
+    When I fill value in TSH <validTSH> field
+    When I fill value in T4 <validT4> field
+    When I fill value in Free T4 <validFreeT4> field
+    When I fill value in T3 <validT3> field
+    When I fill value in Cortisol <validCortisol> field
+    When I fill value in ACTH <invalidACTH> field
+    When I click on the button with text Update
+    Then validation message Please enter a value less than or equal to 50. appears
+    When I fill value in ACTH <validACTH> field
+    When User should be able to upload file <uploadImage>
+    When I fill <comment> data in comments field
+    When I click on the button with text Update
+    Then Success message Laboratory Endocrine Updated Succesfully ! appears
+    Then Added data <validTSH> is successfully displaying in table
+    Then Added data <validT4> is successfully displaying in table
+    Then Added data <validFreeT4> is successfully displaying in table
+    Then Added data <validT3> is successfully displaying in table
+    Then Added data <validCortisol> is successfully displaying in table
+    Then Added data <validACTH> is successfully displaying in table
+    Then Added data <comment> is successfully displaying in table
+    When I click On "Delete" icon
+    Then Results are not displayed after delete
+
+    Examples:
+      | validTSH | invalidTSH | validT4 | invalidT4 | validFreeT4 | invalidFreeT4 | validT3 | invalidT3 | validCortisol | invalidCortisol | validACTH | invalidACTH | comment                  | uploadImage |
+      |       03 |         11 |      13 |        29 |          01 |            55 |     198 |       300 |            46 |              57 |        41 |          55 | This is the final report | Picture(1)  |
+
+  Scenario Outline: Crated new Laboratory Endocrine using valid data
+    When I hover over the "Results" tab
+    When Hover over link Laboratory
+    When I click on the link text Laboratory Endocrine
+    Then laboratory_endocrine page displays
+    Then Button text New Endocrine Result is displayed on screen
+    When I click on the button with text New Endocrine Result
+    When I fill value in TSH <validTSH> field
+    When I fill value in T4 <validT4> field
+    When I fill value in Free T4 <validFreeT4> field
+    When I fill value in T3 <validT3> field
+    When I fill value in Cortisol <validCortisol> field
+    When I fill value in ACTH <validACTH> field
+    When User should be able to upload file <uploadImage>
+    When I fill <comment> data in comments field
+    When I click on the button with text Create
+    Then Success message Laboratory Endocrine Added Succesfully ! appears
+    Then Added data <validTSH> is successfully displaying in table
+    Then Added data <validT4> is successfully displaying in table
+    Then Added data <validFreeT4> is successfully displaying in table
+    Then Added data <validT3> is successfully displaying in table
+    Then Added data <validCortisol> is successfully displaying in table
+    Then Added data <validACTH> is successfully displaying in table
+    Then Added data <comment> is successfully displaying in table
+
+    Examples:
+      | validTSH | validT4 | validFreeT4 | validT3 | validCortisol | validACTH | comment                  | uploadImage |
+      |       05 |      12 |          03 |     199 |            47 |        42 | This is the final report | Picture(1)  |
+
+  Scenario Outline: Verify the "Managing Provider" is able to Create "New Laboratory Coagulation Results" using valid and invalid data also verify the validations
+    When I hover over the "Results" tab
+    When Hover over link Laboratory
+    When I click on the link text Laboratory Coagulation
+    Then laboratory_coagulation page displays
+    Then Button text New Coagulation Result is displayed on screen
+    When I click on the button with text New Coagulation Result
+    When I clear date filed of report
+    When I click on the button with text Create
+    Then validation message Please enter date & time appears
+    When I click on the button with text Close
+    When I hover over the "Results" tab
+    When Hover over link Laboratory
+    When I click on the link text Laboratory Coagulation
+    When I click on the button with text New Coagulation Result
+    When I fill value in PT <invalidPT> field
+    When I click on the button with text Create
+    Then validation message Please enter a value less than or equal to 15. appears
+    When I fill value in PT <validPT> field
+    When I fill value in aPTT <invalidaPTT> field
+    When I click on the button with text Create
+    Then validation message Please enter a value less than or equal to 15. appears
+    When I fill value in aPTT <validaPTT> field
+    When I fill value in TT <invalidTT> field
+    When I fill value in Fibrinogen <invalidFibrinogen> field
+    When I click on the button with text Create
+    Then validation message Please enter a value less than or equal to 25. appears
+    Then validation message Please enter a value less than or equal to 250. appears
+    When I fill value in TT <validTT> field
+    When I fill value in Fibrinogen <validFibrinogen> field
+    When I click on the button with text Create
+    Then Success message Laboratory Coagulation Added Succesfully ! appears
+    Then Added data <validPT> is successfully displaying in table
+    Then Added data <validaPTT> is successfully displaying in table
+    Then Added data <validTT> is successfully displaying in table
+    Then Added data <validFibrinogen> is successfully displaying in table
+    Then Added data <comment> is successfully displaying in table
+
+    Examples:
+      | validPT | invalidPT | validaPTT | invalidaPTT | validaTT | validTT | invalidTT | validFibrinogen | invalidFibrinogen | comment                  | uploadImage |
+      |      14 |        25 |        13 |          28 |       19 |      19 |        50 |             198 |               800 | This is the final report | Picture(1)  |
+
+  Scenario Outline: Verify the "Managing Provider" is able to update "New Laboratory Coagulation Results" with valid and invalid data , also verify search and delete functionality
+    When I hover over the "Results" tab
+    When Hover over link Laboratory
+    When I click on the link text Laboratory Coagulation
+    When I click On "Edit" icon
+    When I clear date filed of report
+    When I click on the button with text Update
+    Then validation message Please enter date & time appears
+    When I click on the link text Back
+    When I hover over the "Results" tab
+    When Hover over link Laboratory
+    When I click on the link text Laboratory Coagulation
+    When I click On "Edit" icon
+    When I fill value in PT <invalidPT> field
+    When I click on the button with text Update
+    Then validation message Please enter a value less than or equal to 15. appears
+    When I fill value in PT <validPT> field
+    When I fill value in aPTT <invalidaPTT> field
+    When I click on the button with text Update
+    Then validation message Please enter a value less than or equal to 15. appears
+    When I fill value in aPTT <validaPTT> field
+    When I fill value in TT <invalidTT> field
+    When I fill value in Fibrinogen <invalidFibrinogen> field
+    When I click on the button with text Update
+    Then validation message Please enter a value less than or equal to 25. appears
+    Then validation message Please enter a value less than or equal to 250. appears
+    When I fill value in TT <validTT> field
+    When I fill value in Fibrinogen <validFibrinogen> field
+    When I click on the button with text Update
+    Then Success message Laboratory Coagulation Updated Succesfully ! appears
+    Then Added data <validPT> is successfully displaying in table
+    Then Added data <validaPTT> is successfully displaying in table
+    Then Added data <validTT> is successfully displaying in table
+    Then Added data <validFibrinogen> is successfully displaying in table
+    Then Added data <comment> is successfully displaying in table
+    When I click On "Delete" icon
+    Then Results are not displayed after delete
+
+    Examples:
+      | validPT | invalidPT | validaPTT | invalidaPTT | validTT | invalidTT | validFibrinogen | invalidFibrinogen | comment                  | uploadImage |
+      |      12 |        25 |        11 |          29 |      19 |        50 |             197 |               800 | This is the final report | Picture(1)  |
+
+  Scenario Outline: Crated new Laboratory Coagulation using valid data
+    When I hover over the "Results" tab
+    When Hover over link Laboratory
+    When I click on the link text Laboratory Coagulation
+    Then laboratory_coagulation page displays
+    Then Button text New Coagulation Result is displayed on screen
+    When I click on the button with text New Coagulation Result
+    When I fill value in PT <validPT> field
+    When I fill value in aPTT <validaPTT> field
+    When I fill value in TT <validTT> field
+    When I fill value in Fibrinogen <validFibrinogen> field
+    When User should be able to upload file <uploadImage>
+    When I fill <comment> data in comments field
+    When I click on the button with text Create
+    Then Success message Laboratory Coagulation Added Succesfully ! appears
+    Then Added data <validPT> is successfully displaying in table
+    Then Added data <validaPTT> is successfully displaying in table
+    Then Added data <validTT> is successfully displaying in table
+    Then Added data <validFibrinogen> is successfully displaying in table
+    Then Added data <comment> is successfully displaying in table
+
+    Examples:
+      | validPT | validaPTT | validTT | validFibrinogen | comment                  | uploadImage |
+      |      12 |        11 |      19 |             197 | This is the final report | Picture(1)  |
+
+  Scenario Outline: Verify the "Managing Provider" is able to Create "New Laboratory Other Results" using valid and invalid data also verify the validations
+    When I hover over the "Results" tab
+    When Hover over link Laboratory
+    When I click on the link text Laboratory Others
+    Then laboratory_others page displays
+    Then Button text New Other Result is displayed on screen
+    When I click on the button with text New Other Result
+    When I clear date filed of report
+    When I click on the button with text Create
+    Then validation message Please enter date & time appears
+    When I click on the button with text Close
+    When I hover over the "Results" tab
+    When Hover over link Laboratory
+    When I click on the link text Laboratory Others
+    When I click on the button with text New Other Result
+    When I click on the button with text Add More
+    When User should be able to upload file <uploadImage>
+    When I fill <comment> data in comments field
+    When I fill title <title> in title field field
+    When I click on the button with text Create
+    Then Success message Laboratory Other Added Succesfully ! appears
+    Then Added data <comment> is successfully displaying in table
+
+    Examples:
+      | comment                  | uploadImage | title             |
+      | This is the final report | Picture(1)  | this is new title |
+
+  Scenario Outline: Verify the "Managing Provider" is able to update "New Laboratory Other Results" with valid and invalid data , also verify search and delete functionality
+    When I hover over the "Results" tab
+    When Hover over link Laboratory
+    When I click on the link text Laboratory Others
+    When I click On "Edit" icon
+    # When I clear date filed of report
+    # When I click on the button with text Update
+    # Then validation message Please enter date & time appears
+    # When I click on the link text Back
+    # When I hover over the "Results" tab
+    # When Hover over link Laboratory
+    # When I click on the link text Laboratory Others
+    # When I click On "Edit" icon
+    When I fill <comment> data in comments field
+    When I click on the button with text Update
+    Then Success message Others Result Updated Succesfully ! appears
+    Then Added data <comment> is successfully displaying in table
+    When I click On "Delete" icon
+    Then Results are not displayed after delete
+
+    Examples:
+      | comment                    | uploadImage |
+      | This is the updated report | Picture(1)  |
+
+  Scenario Outline: Crated new Laboratory Others using valid data
+    When I hover over the "Results" tab
+    When Hover over link Laboratory
+    When I click on the link text Laboratory Others
+    Then laboratory_others page displays
+    Then Button text New Other Result is displayed on screen
+    When I click on the button with text New Other Result
+    When I click on the button with text Add More
+    When User should be able to upload file <uploadImage>
+    When I fill <comment> data in comments field
+    When I fill title <title> in title field field
+    When I click on the button with text Create
+    Then Success message Laboratory Other Added Succesfully ! appears
+    Then Added data <comment> is successfully displaying in table
+
+    Examples:
+      | title     | comment                  | uploadImage |
+      | new title | This is the final report | Picture(1)  |
+
+  Scenario Outline: Verify the "Managing provider" is not able to create new Appointment wheb mandatory fields are empty or when added invalid data
+    When I click on the link text Appointment
+    Then appointment page displays
+    Then Table is displaying on screen
+    When I click on the button with text New Appointment
+    When I clear date filed of report
+    When I click on the button with text Create
+    Then validation message Please select provider. appears
+    Then validation message Please enter start date. appears
+    When I click on the button with text Close
+    When I click on the link text Appointment
+    When I click on the button with text New Appointment
+    When Click on select provider dropdown
+    Then Click on option <otherProvider> from list
+    When User fill <description> data in description field
+
+    Examples:
+      | otherProvider                         | description                 |
+      | Test_Auto_Other_Provider_For_Provider | Description for appointment |
+ # //------------------------Vikas code--------------------------//
 
   Scenario Outline: Verify the "Managing Provider" is not able to create "New XRAY Result" when the mandatory fields are not populated and Verify the "Managing Provider" is able to Create "New XRAY Result" when only the mandatory fields are populated with valid data and Verify the "Managing Provider" is able to delete "XRAY Result"
     When I click on the link text Medical Record
@@ -1489,6 +1820,7 @@ Feature: Test cases for the 'Patient' page
       | Ultrasound |
       | Other      |
     When I click on the link text XRAY
+    When I drag chat container banner
     Then It redirects on the Patient_Auto_Test Ben's Imaging XRAY Results screen
     Then Search and delete duplicate data <type>
     When I click on the button with text New XRAY Result
@@ -1910,7 +2242,6 @@ Feature: Test cases for the 'Patient' page
       | methodOption | flowRate | oxygen | managingProvider       |
       | Bottle       |        5 |     90 | managing_auto_provider |
 
- 
   Scenario Outline: Verify the functionality of "Assign other provider"
     When I hover on the "Dashboard-All Patient" tab
     When I click the <dashboard-ManagePatientsOption> option
@@ -1977,7 +2308,7 @@ Feature: Test cases for the 'Patient' page
       | medicationName  | currentDose | measurement | frequency | additionalInformation                         | interval | status |
       | Auto_Medication |           1 | Teaspoon    | Twice     | Consult the doctor before using this medicine | Day      | Active |
 
-  Scenario Outline: Verify the Medication under other provider
+  Scenario Outline: Verify the Vaccination under other provider
     When I click on the second index link Medical Record
     When I click on the second index link Vaccinations
     Then medical-records/vaccinations page displays
@@ -2054,235 +2385,400 @@ Feature: Test cases for the 'Patient' page
     Examples:
       | validTrig | validCholesterol | validHDL | validLDL | comment                  | uploadImage |
       |        55 |               60 |       25 |       25 | This is the final report | Picture(1)  |
-    Scenario Outline: Verify the "Managing Provider" is not able to add "Growth" tracking and validation displays if any mandatory field is not populated and Verify the "Managing Provider" is able to create "Growth" tracking for patient's Medical Record and Verify the "Managing provider" is able to search the "Growth Results"
-        When I click on the link text Medical Record
-        When Hover over link Tracker
-        Then Tracker options should be visible under dropdown
-            | Growth    |
-            | Nutrition |
-            | Diapering |
-            | Sleep     |
-        When I click on the link text Growth
-        Then It redirects on the Patient_Auto_Test Ben's Growth Chart screen
-        When I drag chat container banner
-        When I click on the button with text Growth Results
-        Then Search and delete duplicate data <heightInches>
-        When Hover over link Tracker
-        When I click on the link text Growth
-        When I click on the button with text New Growth Result
-        Then It redirects on the New Growth Result screen
-        When I click on the button with text Create
-        Then validation message Please enter Hight / Weight / Head Circumference value appears
-        Then Verify multiple same validation messages on popup with text Please enter Hight / Weight / Head Circumference value
-        When I select date in start Date field
-        When I fill <heightInches> data in "Height" field
-        When I fill <weightPounds> data in "Weight" field
-        When I fill <weightPounds> data in "Weight Ounce" field
-        When I fill <headCircumference_inches> data in "Head Circumference" field
-        When I click on the button with text Create
-        Then Success message Growth Result Added Succesfully ! appears
-        When I click on the button with text Growth Results
-        When I populate data <heightInches> in the "Search" field
-        Then Growth details should be visible in the list with <heightcm> and <heightInches> and <weightPounds> and <weightPounds> and <weightkg> and <headCircumference_cm> and <headCircumference_inches>
-        When I populate data <specialCharactors> in the "Search" field
-        Then No matching records found should be displayed
-        Examples:
-            | heightInches | weightPounds | headCircumference_inches | heightcm | weightkg | headCircumference_cm | specialCharactors |
-            | 24           | 8            | 14                       | 60.96    | 3.86     | 35.56                | !@#$%%$#@!        |
 
-    Scenario Outline: Verify the "Managing Provider" is able to see "Graph" of added "Growth result" on "Growth" page
-        When Hover over link Tracker
-        When I click on the link text Growth
-        Then It redirects on the Patient_Auto_Test Ben's Growth Chart screen
-        Then I navigate to the "Growth" page and the Graph or Chart of added "Growth Results" displays
+  Scenario Outline: Verify the image>>XRay Function Tests results under other provider
+    When I click on the second index link Results
+    When I click on the second index link Imaging
+    When I click on the second index link XRAY
+    Then results/imaging_xray page displays
+    When I populate data <type> in the "Search" field
+    Then Added data <type> is successfully displaying in table
+    Then Added discription <result> is displaying in table
 
-    Scenario Outline: Verify the "Managing Provider" is able to "View and update" the added "Growth" Result and Verify the "Managing provider" is able to delete the "Growth Results"
-        When I populate data <heightInches> in the "Search" field
-        When I click on the "View or Update" option under the "Action" section
-        Then It redirects on the Patient_Auto_Test Ben's Update Growth Result screen
-        When I remove data from required fields on updation form
-        When I click on the button with text Update
-        Then validation message Please enter Hight / Weight / Head Circumference value appears
-        When I fill <updatedHeightInch> data in "Height" field
-        When I fill <updatedWeight> data in "Weight" field
-        When I fill <updatedWeight> data in "Weight Ounce" field
-        When I fill <updatedHeadCircumference_inches> data in "Head Circumference" field
-        When I click on the button with text Update
-        Then Success message Updated Succesfully ! appears
-        When I populate data <updatedHeightInch> in the "Search" field
-        Then Growth details should be visible in the list with <updatedHeightcm> and <updatedHeightInch> and <updatedWeight> and <updatedWeight> and <updatedWeightkg> and <updatedHeadCircumference_cm> and <updatedHeadCircumference_inches>
-        When I click On "Delete" icon
-        Then Deleted record should not be visible in the list
-        Examples:
-            | heightInches | updatedHeightInch | updatedWeight | updatedHeadCircumference_inches | updatedHeightcm | updatedWeightkg | updatedHeadCircumference_cm |
-            | 24           | 22                | 7             | 12                              | 55.88           | 3.37            | 30.48                       |
+    Examples:
+      | imagingOption | type          | result                                                  |
+      | XRAY          | Digital X-ray | No evidence of disease or injury, Everything is normal. |
 
+  Scenario Outline: Verify the image>>CT Function Tests results under other provider
+    When I click on the second index link Results
+    When I click on the second index link Imaging
+    When I click on the second index link CT
+    Then /imaging_ct page displays
+    When I populate data <type> in the "Search" field
+    Then Added data <type> is successfully displaying in table
+    Then Added discription <result> is displaying in table
 
-    Scenario Outline: Verify the "Managing Provider" is able to create "Growth" tracking for patient's Medical Record and verify this created record in mobile app
-        When Hover over link Tracker
-        Then Tracker options should be visible under dropdown
-            | Growth    |
-            | Nutrition |
-            | Diapering |
-            | Sleep     |
-        When I click on the link text Growth
-        Then It redirects on the Patient_Auto_Test Ben's Growth Chart screen
-        When I drag chat container banner
-        When I click on the button with text Growth Results
-        Then Search and delete duplicate data <heightInches>
-        When Hover over link Tracker
-        When I click on the link text Growth
-        When I click on the button with text New Growth Result
-        Then It redirects on the New Growth Result screen
-        When I select date in start Date field
-        When I fill <heightInches> data in "Height" field
-        When I fill <weightPounds> data in "Weight" field
-        When I fill <weightPounds> data in "Weight Ounce" field
-        When I fill <headCircumference_inches> data in "Head Circumference" field
-        When I click on the button with text Create
-        Then Success message Growth Result Added Succesfully ! appears
-        When I click on the button with text Growth Results
-        When I populate data <heightInches> in the "Search" field
-        Then Growth details should be visible in the list with <heightcm> and <heightInches> and <weightPounds> and <weightPounds> and <weightkg> and <headCircumference_cm> and <headCircumference_inches>
-        Examples:
-            | heightInches | weightPounds | headCircumference_inches | heightcm | weightkg | headCircumference_cm |
-            | 24           | 8            | 14                       | 60.96    | 3.86     | 35.56                |
+    Examples:
+      | imagingOption | type       | result                                                  |
+      | CT            | Digital CT | No evidence of disease or injury, Everything is normal. |
 
-    # # Scenario Outline: Verify the "Managing Provider" is not able to add "Nutrition order" and validation displays if any mandatory field is not populated
-    # #     When I click on the link text Medical Record
-    # #     When Hover over link Tracker
-    # #     Then Tracker options should be visible under dropdown
-    # #         | Growth    |
-    # #         | Nutrition |
-    # #         | Diapering |
-    # #         | Sleep     |
-    # #     When I click on the link text Nutrition
-    # #     Then It redirects on the Patient_Auto_Test Ben's Nutrition screen
-    # #     When I drag chat container banner
-    # #     When I click on the button with text Manage Nutrition Orders
-    # #     Then It redirects on the Patient_Auto_Test Ben's Nutrition Orders screen
-    # #     Then Search and delete duplicate data <createdNutritionRecord>
-    # #     When I click on the button with text New Nutrition Order
-    # #     Then It redirects on the New Nutrition Order screen
-    # #     When I click on the button with text Create
-    # #     Then validation message This field is required. appears
-    # #     Then validation message Please enter frequency. appears
-    # #     When I fill <nutritionType> data in "Nutrition Type" field
-    # #     When I fill <nutritionFrequency> data in "Nutrition Frequency" field
-    # #     When I click on the button with text Create
-    # #     Then Success message Nutrition Order Added Succesfully ! appears
-    # #     When I populate data <createdNutritionRecord> in the "Search" field
-    # #     Then Nutrition order "Breast Feed" details should be visile in the list with <createdNutritionRecord> and <nutritionFrequency>
-    # #     When I populate data <specialCharactors> in the "Search" field
-    # #     Then No matching records found should be displayed
+  Scenario Outline: Verify the image>>MRI Function Tests results under other provider
+    When I click on the second index link Results
+    When I click on the second index link Imaging
+    When I click on the second index link MRI
+    Then imaging_mri page displays
+    When I populate data <type> in the "Search" field
+    Then Added data <type> is successfully displaying in table
+    Then Added discription <result> is displaying in table
 
+    Examples:
+      | imagingOption | type        | result                                                  |
+      | MRI           | Digital MRI | No evidence of disease or injury, Everything is normal. |
 
-    # #     Examples:
-    # #         | nutritionType | nutritionFrequency | createdNutritionRecord | specialCharactors |
-    # #         | Breast Feed   | On Demand          | Breast Feeding         | !@#$%%$#@!        |
+  Scenario Outline: Verify the image>>Ultrasound Function Tests results under other provider
+    When I click on the second index link Results
+    When I click on the second index link Imaging
+    When I click on the second index link Ultrasound
+    Then imaging_ultrasound page displays
+    When I populate data <type> in the "Search" field
+    Then Added data <type> is successfully displaying in table
+    Then Added discription <result> is displaying in table
 
-    # # Scenario Outline: Verify the "Managing Provider" is able to "View and update" the added "Nutrition order"
-    # #     When I populate data <createdNutritionRecord> in the "Search" field
-    # #     When I click on the "View or Update" option under the "Action" section
-    # #     Then It redirects on the Patient_Auto_Test Ben's Nutrition Orders screen
-    # #     When I fill <updatedNutritionType> data in "Nutrition Type" field
-    # #     When I fill <updatedNutritionFrequency> data in "Nutrition Frequency" field
-    # #     When I fill <nutritionMilk> data in "Nutrition Milk" field
-    # #     When I fill <calories> data in "Calories" field
-    # #     When I fill <nutritionfortification> data in "Nutrition fortification" field
-    # #     When I fill <fortificationName> data in "Name" field
-    # #     When I fill <volumeMLs> data in "Volume MLs" field
-    # #     When I click on the button with text Update
-    # #     Then Success message Order Updated Succesfully ! appears
-    # #     When I populate data <updatedNutritionRecord> in the "Search" field
-    # #     Then Nutrition order "Bottle" details should be visile in the list with <updatedNutritionRecord> and <updatedNutritionFrequency> and <nutritionMilk> and <fortificationName> and <calories> and <volumeMLs>
-    # #     Examples:
-    # #         | createdNutritionRecord | updatedNutritionType | updatedNutritionFrequency | nutritionMilk | calories | nutritionfortification | fortificationName | volumeMLs | updatedNutritionRecord |
-    # #         | Breast Feeding         | Bottle               | Every 2 hours             | Mother Milk   | 25       | Other                  | Vitamins          | 50        | Bottle Feeding         |
+    Examples:
+      | imagingOption | type               | result                                                  |
+      | Ultrasound    | Digital Ultrasound | No evidence of disease or injury, Everything is normal. |
 
-    Scenario Outline: Verify the "Managing Provider" is not able to add "Nutrition order" and validation displays if any mandatory field is not populated and Verify that if the 'Managing Provider' selects the 'Yes' radio button only, the nutrition order should be created.
-        When Hover over "Orders" tab
-        When I click on the link text Nutrition
-        Then patient/nutrition page displays
-        Then Link text New Nutrition Order is displaying
-        When I click on the link text New Nutrition Order
-        Then Verify user is redirected to <firstOption> and Baby breastfeeding consistently? is displayed
-        When I click on the button with text Next
-        Then validation message Please select if the baby is breastfeeding consistently. appears
-        When I click on the breast feeding "Yes" radio button
-        When I click on the button with text Next
-        Then Verify user is redirected to <secondOption> and Do you want baby to supplement after breastfeeding? is displayed
-        When User click on the Multiple index "Next" Button
-        Then validation message Please select if you want baby to supplement after breastfeeding. appears
-        When I click on the supplement "Yes" radio button
-        When User click on the Multiple index "Next" Button
-        Then validation message Please enter the minimum mL/kg/day supplemental goal. appears
-        Then validation message Please select if the infant is feeding ad lib. appears
-        When I fill <invalidSupplementalGoal> data in "SupplementalGoal" field
-        Then validation message Supplemental goal must be at least 1. appears
-        When I fill <invalidMaxSupplementalGoal> data in "SupplementalGoal" field
-        Then validation message Supplemental goal cannot be greater than 1000. appears
-        When I fill <supplementalGoal> data in "SupplementalGoal" field
-        When I click on the ad lib "Yes" radio button
-        When User click on the Multiple index "Next" Button
-        Then Verify user is redirected to <fifthOption> and Doctor wants you to breastfeed on demand and supplement ad lib by bottle with minimum: is displayed
-        Examples:
-            | firstOption   | secondOption | invalidSupplementalGoal | supplementalGoal | invalidMaxSupplementalGoal | fifthOption |
-            | Breastfeeding | Feeding Goal | 0                       | 25               | 5000                       | Summary     |
+  Scenario Outline: Verify the image>>Other Function Tests results under other provider
+    When I click on the second index link Results
+    When I click on the second index link Imaging
+    When I click on the results>>other button
+    Then imaging_other page displays
+    When I populate data <type> in the "Search" field
+    Then Added data <type> is successfully displaying in table
+    Then Added discription <result> is displaying in table
 
-    Scenario Outline: Verify that if the 'Managing Provider' selects the 'No' radio button only, the nutrition order should be created.
-        When Hover over "Orders" tab
-        When I click on the link text Nutrition
-        Then patient/nutrition page displays
-        Then Link text New Nutrition Order is displaying
-        When I click on the link text New Nutrition Order
-        Then Verify user is redirected to <firstOption> and Baby breastfeeding consistently? is displayed
-        When I click on the breast feeding "No" radio button
-        When I click on the button with text Next
-        Then Verify user is redirected to <secondOption> and Desired total mL/kg/day feeding goal is displayed
-        When I fill <feedingGoal> data in "Feeding goal" field
-        When I click on the feeding ad lib "No" radio button
-        When User click on the third index "Next" Button
-        Then Verify user is redirected to <thirdOption> and Add Nutrition Entry is displayed
-        When I click on the button with text Add Nutrition Entry
-        Then It redirects on the New Nutrition Order screen
-        When I fill <milkField> data in "Nutrition Milk" field
-        When I fill <fortificationField> data in "Nutrition fortification" field
-        When I fill <fortificationName> data in "Name" field
-        When I fill <calories> data in "Calories" field
-        When I click on the button with text Add
-        Then Added data <milkField> is successfully displaying in table
-        Then Added data <formula> is successfully displaying in table
-        Then Added data <fortificationName> is successfully displaying in table
-        Then Added data <calories> is successfully displaying in table
-        When I click on the button with text Add Nutrition Entry
-        When I fill <secondMilkType> data in "Nutrition Milk" field
-        When I fill <fortificationField> data in "Nutrition fortification" field
-        When I fill <fortificationName> data in "Name" field
-        When I fill <calories> data in "Calories" field
-        When I click on the button with text Add
-        Then Added data <secondMilkType> is successfully displaying in table
-        Then Added data <formula> is successfully displaying in table
-        Then Added data <fortificationName> is successfully displaying in table
-        Then Added data <calories> is successfully displaying in table
-        When I click on the button with text Add Nutrition Entry
-        When I fill <thirdMilkType> data in "Nutrition Milk" field
-        When I fill <formula> data in "Formula" field
-        When I fill <calories> data in "Calories" field
-        When I click on the button with text Add
-        Then Added data <thirdMilkType> is successfully displaying in table
-        Then Added data <formula> is successfully displaying in table
-        Then Added data <calories> is successfully displaying in table
-        When User click on the fourth index "Next" Button
-        Then Verify user is redirected to <fourthOption> and What percent of feedings will be by bottle and gavage? is displayed
-        When I fill <invalidBottlePercentage> data in "Bottle percentage" field
-        When User click on the fifth index "Next" Button
-        Then validation message Please select a gavage duration. appears
-        When I fill <validBottlePercentage> data in "Bottle percentage" field
-        When I fill <gavageDuration> data in "Gavage Duration" field
-        When User click on the fifth index "Next" Button
-        Then Verify user is redirected to <fifthOption> and Doctor wants you to feed your infant with is displayed
-        Examples:
-            | firstOption   | secondOption | feedingGoal | thirdOption | milkField   | fortificationField | fortificationName | calories | formula   | secondMilkType | thirdMilkType | fourthOption  | invalidBottlePercentage | validBottlePercentage | fifthOption | gavageDuration |
-            | Breastfeeding | Feeding Goal | 40          | Composition | Mother Milk | Other              | Auto test         | 30       | Auto test | Donor Milk     | Formula       | Bottle/Gavage | 0                       | 90                    | Summary     | 30 minutes     |
+    Examples:
+      | type         | result                                                  |
+      | Other result | No evidence of disease or injury, Everything is normal. |
 
+  Scenario Outline: Verify the tracker>>Growth Function Tests results under other provider
+    When I click on the second index link Tracker
+    When I click on the second index link Growth
+    Then growth page displays
+
+  Scenario Outline: Verify the tracker>>Nutrition Function Tests results under other provider
+    When I click on the second index link Tracker
+    When I click on the second index link Nutrition
+    Then nutrition page displays
+
+  Scenario Outline: Verify the tracker>>Sleep Function Tests results under other provider
+    When I click on the second index link Tracker
+    When I click on the second index link Sleep
+    Then sleep page displays
+    Then Chart is displayed on screen
+
+  Scenario Outline: Verify the tracker>>Diapering Function Tests results under other provider
+    When I click on the second index link Tracker
+    When I click on the second index link Diapering
+    Then diapering page displays
+    Then Chart is displayed on screen
+
+  Scenario Outline: Verify the Documents>>Media record under other provider
+    When I click on the second index link Documents
+    When I click on the second index link Media
+    Then media page displays
+    When I populate data <image> in the "Search" field
+    Then Added data <image> is successfully displaying in table
+    Then Added data <fileType> is successfully displaying in table
+
+    Examples:
+      | image      | fileType |
+      | Picture(2) | jpg      |
+
+  Scenario Outline: Verify the Documents>>Hospital record under other provider
+    When I click on the second index link Documents
+    When I click on the second index link Hospital Records
+    Then hospitalrecords page displays
+    When I populate data <hospital> in the "Search" field
+    Then Added data <hospital> is successfully displaying in table
+    Then Added data <hospitalNote> is successfully displaying in table
+    Then Added discription <description> is displaying in table
+
+    Examples:
+      | hospital           | image      | description           | hospitalNote |
+      | Auto_test_hospital | Picture(2) | Auto Test description | New note     |
+
+  Scenario Outline: Verify the Documents>>Other providers record under other provider
+    When I click on the second index link Documents
+    When I click on the second index link Other Providers Records
+    Then otherproviders page displays
+    When I populate data <otherProvider> in the "Search" field
+    Then Added data <otherProvider> is successfully displaying in table
+    Then Added discription <description> is displaying in table
+
+    Examples:
+      | otherProvider                         | image      | description                          |
+      | Test_Auto_Other_Provider_For_Provider | Picture(1) | Auto Test other provider description |
+
+  Scenario Outline: Verify the Appointment record under other provider
+    When I click on the second index link Appointment
+    Then appointments page displays
+    When I populate data <otherProvider> in the "Search" field
+    Then Added data <otherProvider> is successfully displaying in table
+    Then Added discription <description> is displaying in table
+
+    Examples:
+      | otherProvider                         | description |
+      | Test_Auto_Other_Provider_For_Provider | test        |
+
+  Scenario Outline: Verify the "Managing Provider" is not able to add "Growth" tracking and validation displays if any mandatory field is not populated and Verify the "Managing Provider" is able to create "Growth" tracking for patient's Medical Record and Verify the "Managing provider" is able to search the "Growth Results"
+    When I click on the link text Medical Record
+    When Hover over link Tracker
+    Then Tracker options should be visible under dropdown
+      | Growth    |
+      | Nutrition |
+      | Diapering |
+      | Sleep     |
+    When I click on the link text Growth
+    Then It redirects on the Patient_Auto_Test Ben's Growth Chart screen
+    When I drag chat container banner
+    When I click on the button with text Growth Results
+    Then Search and delete duplicate data <heightInches>
+    When Hover over link Tracker
+    When I click on the link text Growth
+    When I click on the button with text New Growth Result
+    Then It redirects on the New Growth Result screen
+    When I click on the button with text Create
+    Then validation message Please enter Hight / Weight / Head Circumference value appears
+    Then Verify multiple same validation messages on popup with text Please enter Hight / Weight / Head Circumference value
+    When I select date in start Date field
+    When I fill <heightInches> data in "Height" field
+    When I fill <weightPounds> data in "Weight" field
+    When I fill <weightPounds> data in "Weight Ounce" field
+    When I fill <headCircumference_inches> data in "Head Circumference" field
+    When I click on the button with text Create
+    Then Success message Growth Result Added Succesfully ! appears
+    When I click on the button with text Growth Results
+    When I populate data <heightInches> in the "Search" field
+    Then Growth details should be visible in the list with <heightcm> and <heightInches> and <weightPounds> and <weightPounds> and <weightkg> and <headCircumference_cm> and <headCircumference_inches>
+    When I populate data <specialCharactors> in the "Search" field
+    Then No matching records found should be displayed
+
+    Examples:
+      | heightInches | weightPounds | headCircumference_inches | heightcm | weightkg | headCircumference_cm | specialCharactors |
+      |           24 |            8 |                       14 |    60.96 |     3.86 |                35.56 | !@#$%%$#@!        |
+
+  Scenario Outline: Verify the "Managing Provider" is able to see "Graph" of added "Growth result" on "Growth" page
+    When Hover over link Tracker
+    When I click on the link text Growth
+    Then It redirects on the Patient_Auto_Test Ben's Growth Chart screen
+    Then I navigate to the "Growth" page and the Graph or Chart of added "Growth Results" displays
+
+  Scenario Outline: Verify the "Managing Provider" is able to "View and update" the added "Growth" Result and Verify the "Managing provider" is able to delete the "Growth Results"
+    When I populate data <heightInches> in the "Search" field
+    When I click on the "View or Update" option under the "Action" section
+    Then It redirects on the Patient_Auto_Test Ben's Update Growth Result screen
+    When I remove data from required fields on updation form
+    When I click on the button with text Update
+    Then validation message Please enter Hight / Weight / Head Circumference value appears
+    When I fill <updatedHeightInch> data in "Height" field
+    When I fill <updatedWeight> data in "Weight" field
+    When I fill <updatedWeight> data in "Weight Ounce" field
+    When I fill <updatedHeadCircumference_inches> data in "Head Circumference" field
+    When I click on the button with text Update
+    Then Success message Updated Succesfully ! appears
+    When I populate data <updatedHeightInch> in the "Search" field
+    Then Growth details should be visible in the list with <updatedHeightcm> and <updatedHeightInch> and <updatedWeight> and <updatedWeight> and <updatedWeightkg> and <updatedHeadCircumference_cm> and <updatedHeadCircumference_inches>
+    When I click On "Delete" icon
+    Then Deleted record should not be visible in the list
+
+    Examples:
+      | heightInches | updatedHeightInch | updatedWeight | updatedHeadCircumference_inches | updatedHeightcm | updatedWeightkg | updatedHeadCircumference_cm |
+      |           24 |                22 |             7 |                              12 |           55.88 |            3.37 |                       30.48 |
+
+  Scenario Outline: Verify the "Managing Provider" is able to create "Growth" tracking for patient's Medical Record and verify this created record in mobile app
+    When Hover over link Tracker
+    Then Tracker options should be visible under dropdown
+      | Growth    |
+      | Nutrition |
+      | Diapering |
+      | Sleep     |
+    When I click on the link text Growth
+    Then It redirects on the Patient_Auto_Test Ben's Growth Chart screen
+    When I drag chat container banner
+    When I click on the button with text Growth Results
+    Then Search and delete duplicate data <heightInches>
+    When Hover over link Tracker
+    When I click on the link text Growth
+    When I click on the button with text New Growth Result
+    Then It redirects on the New Growth Result screen
+    When I select date in start Date field
+    When I fill <heightInches> data in "Height" field
+    When I fill <weightPounds> data in "Weight" field
+    When I fill <weightPounds> data in "Weight Ounce" field
+    When I fill <headCircumference_inches> data in "Head Circumference" field
+    When I click on the button with text Create
+    Then Success message Growth Result Added Succesfully ! appears
+    When I click on the button with text Growth Results
+    When I populate data <heightInches> in the "Search" field
+    Then Growth details should be visible in the list with <heightcm> and <heightInches> and <weightPounds> and <weightPounds> and <weightkg> and <headCircumference_cm> and <headCircumference_inches>
+
+    Examples:
+      | heightInches | weightPounds | headCircumference_inches | heightcm | weightkg | headCircumference_cm |
+      |           24 |            8 |                       14 |    60.96 |     3.86 |                35.56 |
+    # Scenario Outline: Verify the "Managing Provider" is not able to add "Nutrition order" and validation displays if any mandatory field is not populated
+    #     When I click on the link text Medical Record
+    #     When Hover over link Tracker
+    #     Then Tracker options should be visible under dropdown
+    #         | Growth    |
+    #         | Nutrition |
+    #         | Diapering |
+    #         | Sleep     |
+    #     When I click on the link text Nutrition
+    #     Then It redirects on the Patient_Auto_Test Ben's Nutrition screen
+    #     When I drag chat container banner
+    #     When I click on the button with text Manage Nutrition Orders
+    #     Then It redirects on the Patient_Auto_Test Ben's Nutrition Orders screen
+    #     Then Search and delete duplicate data <createdNutritionRecord>
+    #     When I click on the button with text New Nutrition Order
+    #     Then It redirects on the New Nutrition Order screen
+    #     When I click on the button with text Create
+    #     Then validation message This field is required. appears
+    #     Then validation message Please enter frequency. appears
+    #     When I fill <nutritionType> data in "Nutrition Type" field
+    #     When I fill <nutritionFrequency> data in "Nutrition Frequency" field
+    #     When I click on the button with text Create
+    #     Then Success message Nutrition Order Added Succesfully ! appears
+    #     When I populate data <createdNutritionRecord> in the "Search" field
+    #     Then Nutrition order "Breast Feed" details should be visile in the list with <createdNutritionRecord> and <nutritionFrequency>
+    #     When I populate data <specialCharactors> in the "Search" field
+    #     Then No matching records found should be displayed
+    #     Examples:
+    #         | nutritionType | nutritionFrequency | createdNutritionRecord | specialCharactors |
+    #         | Breast Feed   | On Demand          | Breast Feeding         | !@#$%%$#@!        |
+    # Scenario Outline: Verify the "Managing Provider" is able to "View and update" the added "Nutrition order"
+    #     When I populate data <createdNutritionRecord> in the "Search" field
+    #     When I click on the "View or Update" option under the "Action" section
+    #     Then It redirects on the Patient_Auto_Test Ben's Nutrition Orders screen
+    #     When I fill <updatedNutritionType> data in "Nutrition Type" field
+    #     When I fill <updatedNutritionFrequency> data in "Nutrition Frequency" field
+    #     When I fill <nutritionMilk> data in "Nutrition Milk" field
+    #     When I fill <calories> data in "Calories" field
+    #     When I fill <nutritionfortification> data in "Nutrition fortification" field
+    #     When I fill <fortificationName> data in "Name" field
+    #     When I fill <volumeMLs> data in "Volume MLs" field
+    #     When I click on the button with text Update
+    #     Then Success message Order Updated Succesfully ! appears
+    #     When I populate data <updatedNutritionRecord> in the "Search" field
+    #     Then Nutrition order "Bottle" details should be visile in the list with <updatedNutritionRecord> and <updatedNutritionFrequency> and <nutritionMilk> and <fortificationName> and <calories> and <volumeMLs>
+    #     Examples:
+    #         | createdNutritionRecord | updatedNutritionType | updatedNutritionFrequency | nutritionMilk | calories | nutritionfortification | fortificationName | volumeMLs | updatedNutritionRecord |
+    #         | Breast Feeding         | Bottle               | Every 2 hours             | Mother Milk   | 25       | Other                  | Vitamins          | 50        | Bottle Feeding         |
+
+  Scenario Outline: Verify the "Managing Provider" is not able to add "Nutrition order" and validation displays if any mandatory field is not populated and Verify that if the 'Managing Provider' selects the 'Yes' radio button only, the nutrition order should be created.
+    When Hover over "Orders" tab
+    When I click on the link text Nutrition
+    Then patient/nutrition page displays
+    Then Link text New Nutrition Order is displaying
+    When I click on the link text New Nutrition Order
+    Then Verify user is redirected to <firstOption> and Baby breastfeeding consistently? is displayed
+    When I click on the button with text Next
+    Then validation message Please select if the baby is breastfeeding consistently. appears
+    When I click on the breast feeding "Yes" radio button
+    When I click on the button with text Next
+    Then Verify user is redirected to <secondOption> and Do you want baby to supplement after breastfeeding? is displayed
+    When User click on the Multiple index "Next" Button
+    Then validation message Please select if you want baby to supplement after breastfeeding. appears
+    When I click on the supplement "Yes" radio button
+    When User click on the Multiple index "Next" Button
+    Then validation message Please enter the minimum mL/kg/day supplemental goal. appears
+    Then validation message Please select if the infant is feeding ad lib. appears
+    When I fill <invalidSupplementalGoal> data in "SupplementalGoal" field
+    Then validation message Supplemental goal must be at least 1. appears
+    When I fill <invalidMaxSupplementalGoal> data in "SupplementalGoal" field
+    Then validation message Supplemental goal cannot be greater than 1000. appears
+    When I fill <supplementalGoal> data in "SupplementalGoal" field
+    When I click on the ad lib "Yes" radio button
+    When User click on the Multiple index "Next" Button
+    Then Verify user is redirected to <fifthOption> and Doctor wants you to breastfeed on demand and supplement ad lib by bottle with minimum: is displayed
+
+    Examples:
+      | firstOption   | secondOption | invalidSupplementalGoal | supplementalGoal | invalidMaxSupplementalGoal | fifthOption |
+      | Breastfeeding | Feeding Goal |                       0 |               25 |                       5000 | Summary     |
+
+  Scenario Outline: Verify that if the 'Managing Provider' selects the 'No' radio button only, the nutrition order should be created.
+    When Hover over "Orders" tab
+    When I click on the link text Nutrition
+    Then patient/nutrition page displays
+    Then Link text New Nutrition Order is displaying
+    When I click on the link text New Nutrition Order
+    Then Verify user is redirected to <firstOption> and Baby breastfeeding consistently? is displayed
+    When I click on the breast feeding "No" radio button
+    When I click on the button with text Next
+    Then Verify user is redirected to <secondOption> and Desired total mL/kg/day feeding goal is displayed
+    When I fill <feedingGoal> data in "Feeding goal" field
+    When I click on the feeding ad lib "No" radio button
+    When User click on the third index "Next" Button
+    Then Verify user is redirected to <thirdOption> and Add Nutrition Entry is displayed
+    When I click on the button with text Add Nutrition Entry
+    Then It redirects on the New Nutrition Order screen
+    When I fill <milkField> data in "Nutrition Milk" field
+    When I fill <fortificationField> data in "Nutrition fortification" field
+    When I fill <fortificationName> data in "Name" field
+    When I fill <calories> data in "Calories" field
+    When I click on the button with text Add
+    Then Added data <milkField> is successfully displaying in table
+    Then Added data <formula> is successfully displaying in table
+    Then Added data <fortificationName> is successfully displaying in table
+    Then Added data <calories> is successfully displaying in table
+    When I click on the button with text Add Nutrition Entry
+    When I fill <secondMilkType> data in "Nutrition Milk" field
+    When I fill <fortificationField> data in "Nutrition fortification" field
+    When I fill <fortificationName> data in "Name" field
+    When I fill <calories> data in "Calories" field
+    When I click on the button with text Add
+    Then Added data <secondMilkType> is successfully displaying in table
+    Then Added data <formula> is successfully displaying in table
+    Then Added data <fortificationName> is successfully displaying in table
+    Then Added data <calories> is successfully displaying in table
+    When I click on the button with text Add Nutrition Entry
+    When I fill <thirdMilkType> data in "Nutrition Milk" field
+    When I fill <formula> data in "Formula" field
+    When I fill <calories> data in "Calories" field
+    When I click on the button with text Add
+    Then Added data <thirdMilkType> is successfully displaying in table
+    Then Added data <formula> is successfully displaying in table
+    Then Added data <calories> is successfully displaying in table
+    When User click on the fourth index "Next" Button
+    Then Verify user is redirected to <fourthOption> and What percent of feedings will be by bottle and gavage? is displayed
+    When I fill <invalidBottlePercentage> data in "Bottle percentage" field
+    When User click on the fifth index "Next" Button
+    Then validation message Please select a gavage duration. appears
+    When I fill <validBottlePercentage> data in "Bottle percentage" field
+    When I fill <gavageDuration> data in "Gavage Duration" field
+    When User click on the fifth index "Next" Button
+    Then Verify user is redirected to <fifthOption> and Doctor wants you to feed your infant with is displayed
+
+    Examples:
+      | firstOption   | secondOption | feedingGoal | thirdOption | milkField   | fortificationField | fortificationName | calories | formula   | secondMilkType | thirdMilkType | fourthOption  | invalidBottlePercentage | validBottlePercentage | fifthOption | gavageDuration |
+      | Breastfeeding | Feeding Goal |          40 | Composition | Mother Milk | Other              | Auto test         |       30 | Auto test | Donor Milk     | Formula       | Bottle/Gavage |                       0 |                    90 | Summary     |     30 minutes |
+
+  Scenario Outline: Verify that 'Add Respiratory Settings' button is visible when the Respiratory Settings table is empty and Verify that when user does not populate the mandatory fields on 'Add Respiratory Settings' form the validation displays with the fields andVerify that when user populates the mandatory fields on 'Add Respiratory Settings' form with valid data then "Respiratory Settings" gets created and 	Verify that search bar is displaying to search for specific records when user populates the search field then the result displays according to the keyword
+    When I click on the second index link Dashboard - All Patients
+    When I populate data <patientName> in the "Search" field
+    When I click on the link text <patientName>
+    When Hover over "Orders" tab
+    When I click on the link text Monitoring
+    Then monitoring-orders page displays
+    When I click on the button with text Add Monitoring Order
+    Then It redirects on the Monitoring Order screen
+    When I click on the button with text Save
+    Then Please fill both device and duration for at least one section (ECG, O2 Saturation, or Temperature). should be displayed
+    When I click on ECG device dropdown and select option <device>
+    When I click on ECG duration dropdown and select option <ECGduration>
+    When I click on O2 saturation device dropdown and select option <device>
+    When I click on O2 saturation duration dropdown and select option <O2SaturationDuration>
+    When I click on Temperature device dropdown and select option <device>
+    When I click on Temperature devduration dropdown and select option <temperatureDuration>
+    When I click on the button with text Save
+    Then validation message Please enter Temperature duration details. appears
+    When Fill temperature duration field using data <temperatureText>
+    When I click on the button with text Save
+    When I populate data <ECGduration> in the "Search" field
+    Then Added data <device> and <ECGduration> is successfully displaying in table after save
+    Then Added data <device> and <O2SaturationDuration> is successfully displaying in table after save
+    Then Added data <device> and <temperatureDuration> is successfully displaying in table after save
+
+    Examples:
+      | patientName       | device            | ECGduration       | O2SaturationDuration | temperatureDuration | temperatureText            |
+      | Patient_Auto_Test | Auto_Company_test | Continuous (24/7) | Overnight            | Custom Duration     | Temperature duration is 10 |
