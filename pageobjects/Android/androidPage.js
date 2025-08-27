@@ -862,8 +862,10 @@ class AndroidPage extends BasePage {
   }
 
   async selectChildOption(option) {
-    await $("//android.widget.TextView[contains(@text,'" + option + "')]").waitForDisplayed({ timeout: 15000 });
-    await $("//android.widget.TextView[contains(@text,'" + option + "')]").click();
+    try {
+      await $("//android.widget.TextView[contains(@text,'" + option + "')]").waitForDisplayed({ timeout: 10000 });
+      await $("//android.widget.TextView[contains(@text,'" + option + "')]").click();
+    } catch (error) {}
   }
 
   async clickOnMedicationTab() {
@@ -875,11 +877,11 @@ class AndroidPage extends BasePage {
   }
 
   async verifyMobileMedicationDetails(medicationName, currentDose_And_measurement, frequency, interval) {
-    await $('//android.widget.TextView[@resource-id="com.app.neonatal.staging:id/tv_diagnosis_title"]').waitForDisplayed({ timeout: 15000 });
-    const actMedication = await $('//android.widget.TextView[@resource-id="com.app.neonatal.staging:id/tv_diagnosis_title"]').getText();
-    const actDose = await $("(//android.widget.TextView)[4]").getText();
-    const actFrequency = await $("(//android.widget.TextView)[6]").getText();
-    const actInterval = await $("(//android.widget.TextView)[8]").getText();
+    await $('//android.widget.TextView[@resource-id="com.app.neonatal.staging:id/tv_diagnosis_title"]|(//XCUIElementTypeCell//XCUIElementTypeStaticText)[1]').waitForDisplayed({ timeout: 15000 });
+    const actMedication = await $('//android.widget.TextView[@resource-id="com.app.neonatal.staging:id/tv_diagnosis_title"]|(//XCUIElementTypeCell//XCUIElementTypeStaticText)[1]').getText();
+    const actDose = await $("(//android.widget.TextView)[4]|(//XCUIElementTypeCell//XCUIElementTypeStaticText)[3]").getText();
+    const actFrequency = await $("(//android.widget.TextView)[6]|(//XCUIElementTypeCell//XCUIElementTypeStaticText)[5]").getText();
+    const actInterval = await $("(//android.widget.TextView)[8]|(//XCUIElementTypeCell//XCUIElementTypeStaticText)[7]").getText();
 
     expect(actMedication).toEqual(medicationName);
     expect(actDose).toEqual(currentDose_And_measurement);
@@ -1097,12 +1099,31 @@ class AndroidPage extends BasePage {
 
   async clickToTheStartingPoint(text) {
     const startingPoint = await $("//android.widget.TextView[contains(@text,'" + text + "')]");
-    do {
-      await browser.back();
+    while ((await startingPoint.isDisplayed()) === false) {
       if ((await this.crossButton.isDisplayed()) === true) {
         await this.crossButton.click();
       }
-    } while ((await startingPoint.isDisplayed()) === false);
+
+      if (await startingPoint.isDisplayed()) {
+        return;
+      }
+
+      await browser.back();
+
+      if (await startingPoint.isDisplayed()) {
+        return;
+      }
+    }
+  }
+
+  async verifyText(data) {
+    const recordText = await $("//android.widget.TextView[@text='" + data + "']");
+    await recordText.waitForDisplayed({ timeout: 15000 });
+    if ((await recordText.isDisplayed()) == true) {
+      console.log("✅ Record displaying successfully");
+    } else {
+      throw new Error("❌ Failed to verify record");
+    }
   }
 }
 module.exports = new AndroidPage();

@@ -1070,3 +1070,4 @@ When(/^Delete the mobile record using "Delete" button$/, async () => {
 When(/^Press the 'Back' button repeatedly until the user reaches the starting module (.*)$/, async (startingModule) => {
   await androidPage.clickToTheStartingPoint(startingModule);
 });
+

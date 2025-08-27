@@ -26,6 +26,7 @@ exports.config = {
   suites: {
     androidLoginPage: ["./features/Android/FHDC/loginApp.feature"],
     androidTrackerModule: ["./features/Android/FHDC/trackerModule.feature"],
+    androidMedicalRecordsModule: ["./features/Android/FHDC/medicalRecords.feature"],
   },
   // Patterns to exclude.
   exclude: [

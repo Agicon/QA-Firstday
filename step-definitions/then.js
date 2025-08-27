@@ -665,3 +665,8 @@ Then(/^Deleted mobile record should not be visible in the list$/, async () => {
 Then(/^Use "Back command" to close the popup$/, async () => {
   await browser.back();
 });
+
+Then(/^Added record data (.*) text is displaying on mobile screen$/, async (data) => {
+  await androidPage.verifyText(data);
+});
+
