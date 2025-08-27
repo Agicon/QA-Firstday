@@ -1,7 +1,6 @@
 const { Then } = require("@wdio/cucumber-framework");
-const { expect, $, browser } = require("@wdio/globals");
 const LoginWebPage = require("../pageobjects/Web/loginPage");
-const androidPage = require("../pageobjects/Android/androidPage");
+const mobileLoginPage = require("../pageobjects/Mobile/loginPage");
 const superAdminPage = require("../pageobjects/Web/superAdminPage");
 const customerAccountPage = require("../pageobjects/Web/customerAccountPage");
 const managingProviderAccountPage = require("../pageobjects/Web/managingProviderAccountPage");
@@ -458,7 +457,7 @@ Then(/^Growth details should be visible in the list with (.*) and (.*) and (.*) 
 Then(/^Verify searched data (.*) is dipslying in result laboratory table$/, async (text) => {
   await managingProviderAccountPage.verifySearchedLaboratoryResult(text);
 
-  });
+});
 Then(/^I navigate to the "Growth" page and the Graph or Chart of added "Growth Results" displays$/, async () => {
   await managingProviderAccountPage.verifyGrowthGraph();
 });
@@ -497,83 +496,105 @@ Then(/^I should see a flash message saying (.*)$/, async (message) => {
 });
 
 Then(/^Verify that user is on homepage$/, async () => {
-  await androidPage.denySavePasswordPopup();
+  await mobileLoginPage.denySavePasswordPopup();
   try {
-    await androidPage.videoAndPicPermissionPopup.click();
-    await androidPage.clickOnRecordAudioPopup();
-    await androidPage.deviceLocationPopup.click();
-    await androidPage.notificationAlertPermission.click();
-  } catch (error) {}
-  await androidPage.clickOnOkButton();
-  await androidPage.clickonbackbutton.click();
-  await androidPage.verifyDashboard();
+    await mobileLoginPage.videoAndPicPermissionPopup.click();
+    await mobileLoginPage.clickOnRecordAudioPopup();
+    await mobileLoginPage.deviceLocationPopup.click();
+    await mobileLoginPage.notificationAlertPermission.click();
+  } catch (error) { }
+  await mobileLoginPage.clickOnOkButton();
+  await mobileLoginPage.clickonbackbutton.click();
+  await mobileLoginPage.verifyDashboard();
 });
 
 Then(/^Verify all the features inside vital signs$/, async () => {
-  await androidPage.heartRateIsDisplayed();
-  await androidPage.o2SaturationIsDisplayed();
-  await androidPage.respiratoryRateDisplayed();
-  await androidPage.TemperatureIsDisplayed();
-  await androidPage.deviceStatusIsDisplayed();
+  await mobileLoginPage.heartRateIsDisplayed();
+  await mobileLoginPage.o2SaturationIsDisplayed();
+  await mobileLoginPage.respiratoryRateDisplayed();
+  await mobileLoginPage.TemperatureIsDisplayed();
+  await mobileLoginPage.deviceStatusIsDisplayed();
 });
 
 Then(/^Verify all the features inside medical report$/, async () => {
-  await androidPage.diagnosisIsDisplayed();
-  await androidPage.medicationIsDisplayed();
-  await androidPage.resultsIsDisplayed();
-  await androidPage.trackerIsDisplayed();
-  await androidPage.vaccinationsIsDisplayed();
-  await androidPage.mediaIsDisplayed();
-  await androidPage.documentsIsDisplayed();
-  await androidPage.sendUsresultIsDisplayed();
+  await mobileLoginPage.diagnosisIsDisplayed();
+  await mobileLoginPage.medicationIsDisplayed();
+  await mobileLoginPage.resultsIsDisplayed();
+  await mobileLoginPage.trackerIsDisplayed();
+  await mobileLoginPage.vaccinationsIsDisplayed();
+  await mobileLoginPage.iOSClickHoldScrollDownMethod();
+  await mobileLoginPage.mediaIsDisplayed();
+  await mobileLoginPage.documentsIsDisplayed();
+  await mobileLoginPage.sendUsresultIsDisplayed();
+  await mobileLoginPage.iOSClickHoldScrollUpMethod();
 });
 
+
 Then(/^For android device, verify all the features inside medical report$/, async () => {
-  await androidPage.diagnosisIsDisplayed();
-  await androidPage.medicationIsDisplayed();
-  await androidPage.resultsIsDisplayed();
-  await androidPage.trackerIsDisplayed();
-  await androidPage.vaccinationsIsDisplayed();
-  await androidPage.mediaIsDisplayed();
-  await androidPage.documentsIsDisplayed();
-  await androidPage.sendUsresultIsDisplayed();
+  await mobileLoginPage.diagnosisIsDisplayed();
+  await mobileLoginPage.medicationIsDisplayed();
+  await mobileLoginPage.resultsIsDisplayed();
+  await mobileLoginPage.trackerIsDisplayed();
+  await mobileLoginPage.vaccinationsIsDisplayed();
+  await mobileLoginPage.mediaIsDisplayed();
+  await mobileLoginPage.documentsIsDisplayed();
+  await mobileLoginPage.sendUsresultIsDisplayed();
 });
 
 Then(/^Verify all the tabs inside providers module$/, async () => {
-  await androidPage.providerTabIsDisplayed();
-  await androidPage.appointmentsTabIsDisplayed();
+  await mobileLoginPage.providerTabIsDisplayed();
+  await mobileLoginPage.appointmentsTabIsDisplayed();
 });
 
 Then(/^Verify all the tabs inside settings module$/, async () => {
-  await androidPage.myContactInformationIsDisplayed();
-  await androidPage.myAccountIsDisplayed();
-  await androidPage.myBabysInformationIsDisplayed();
-  await androidPage.changeChildIsDisplayed();
-  await androidPage.changePasswordIsDisplayed();
+  await mobileLoginPage.myContactInformationIsDisplayed();
+  await mobileLoginPage.myAccountIsDisplayed();
+  await mobileLoginPage.myBabysInformationIsDisplayed();
+  await mobileLoginPage.changeChildIsDisplayed();
+  await mobileLoginPage.changePasswordIsDisplayed();
 });
 
 Then(/^Validation message appears (.*)$/, async (message) => {
-  await androidPage.verifyMobileValidationMessage(message);
+  await mobileLoginPage.verifyMobileValidationMessage(message);
 });
 
 Then(/^User is not able to login$/, async () => {
-  await androidPage.signInButton.waitForDisplayed({ timeout: 5000 });
-  if ((await androidPage.signInButton.isDisplayed()) === true) {
+  await mobileLoginPage.signInButton.waitForDisplayed({ timeout: 5000 });
+  if ((await mobileLoginPage.signInButton.isDisplayed()) === true) {
     console.log("User is still on login page");
   } else {
     throw new Error("Login page is not displayed");
   }
 });
 
+Then(
+  /^For iOS, verify that user is on FHDA moblie provider homepage$/,
+  async () => {
+    await mobileLoginPage.clickOnNotificationButton();
+    if ((await mobileLoginPage.iOShomepageIsDisplayed()) === true) {
+      console.log("User successfully redirected to homepage");
+    } else {
+      throw new Error("Homepage is not displayed");
+    }
+  }
+);
+
+Then(/^User use "Back command" to back the screen$/, async () => {
+  await driver.execute("mobile: swipe", {
+    direction: "right",
+  });
+});
+
+
 Then(/^Verify that user is on FHDA moblie provider homepage$/, async () => {
-  await androidPage.notificationAlertPermission.click();
-  await androidPage.clickOnOkButton();
-  await androidPage.clickonbackbutton.click();
-  await androidPage.verifyFHDAMobileProviderDashboradIsDisplayed();
+  await mobileLoginPage.notificationAlertPermission.click();
+  await mobileLoginPage.clickOnOkButton();
+  await mobileLoginPage.clickonbackbutton.click();
+  await mobileLoginPage.verifyFHDAMobileProviderDashboradIsDisplayed();
 });
 
 Then(/^A logout confirmation popup displays$/, async () => {
-  if ((await androidPage.noButtonIsDisplayed()) === true) {
+  if ((await mobileLoginPage.noButtonIsDisplayed()) === true) {
     console.log("✅ logout confirmation popup is visible");
   } else {
     throw new Error("❌ Failed to verify logout confirmation popup");
@@ -581,7 +602,7 @@ Then(/^A logout confirmation popup displays$/, async () => {
 });
 
 Then(/^The logout confirmation popup closes and the provider remains logged in$/, async () => {
-  if ((await androidPage.logoutOptionIsDisplayed()) === true) {
+  if ((await mobileLoginPage.logoutOptionIsDisplayed()) === true) {
     console.log("✅ User is still login in the app");
   } else {
     throw new Error("❌ User has log out even after clicks 'No' button");
@@ -589,16 +610,32 @@ Then(/^The logout confirmation popup closes and the provider remains logged in$/
 });
 
 Then(/^User get logged out from my account and gets navigated to login page$/, async () => {
-  await androidPage.signInButton.waitForDisplayed({ timeout: 15000 });
-  if ((await androidPage.signInButton.isDisplayed()) === true) {
+  await mobileLoginPage.signInButton.waitForDisplayed({ timeout: 15000 });
+  if ((await mobileLoginPage.signInButton.isDisplayed()) === true) {
     console.log("✅ User has successfully logout");
   } else {
     throw new Error("❌User is not able to log out");
   }
 });
 
+Then(/^For iOS, verify the homepage$/, async () => {
+  if ((await mobileLoginPage.iOShomepageIsDisplayed()) === true) {
+    console.log("User successfully redirected to homepage");
+  } else {
+    throw new Error("Homepage is not displayed");
+  }
+});
+
+
+Then(
+  /^User click on the module back button to exit from the module$/,
+  async () => {
+    await mobileLoginPage.clickOnModuleBackButton();
+  }
+);
+
 Then(/^The logout confirmation popup closes and provider remains logged in$/, async () => {
-  if ((await androidPage.dashboardIsDisplayed()) === true) {
+  if ((await mobileLoginPage.dashboardIsDisplayed()) === true) {
     console.log("✅ User is still login in the app");
   } else {
     throw new Error("❌ User has log out even after clicks 'No' button");
@@ -606,60 +643,60 @@ Then(/^The logout confirmation popup closes and provider remains logged in$/, as
 });
 
 Then(/^Download app from link$/, async () => {
-  await androidPage.downloadApp();
+  await mobileLoginPage.downloadApp();
 });
 
 Then(/^I get navigated to (.*) screen$/, async (text) => {
-  await androidPage.verifyScreenIsDisplayed(text);
+  await mobileLoginPage.verifyScreenIsDisplayed(text);
 });
 
 Then(/^I click on the back button$/, async () => {
-  await androidPage.clickOnModuleBackButton();
+  await mobileLoginPage.clickOnBackButton();
 });
 
 Then(/^The selected image (.*) should get updated and displays on "Caregiver's" main screen of the app$/, async (pic) => {
-  await androidPage.uploadFileImage(pic);
+  await mobileLoginPage.uploadFileImage(pic);
 });
 
 Then(/^Select child (.*) from the child list$/, async (data) => {
-  await androidPage.selectChildOption(data);
+  await mobileLoginPage.selectChildOption(data);
 });
 
 Then(/^User click on the medication tab$/, async () => {
-  await androidPage.clickOnMedicationTab();
+  await mobileLoginPage.clickOnMedicationTab();
 });
 
 Then(/^Details of medication should be visible in the list with (.*) and (.*) and (.*) and (.*)$/, async (medicationName, currentDose_And_measurement, frequency, interval) => {
-  await androidPage.verifyMobileMedicationDetails(medicationName, currentDose_And_measurement, frequency, interval);
+  await mobileLoginPage.verifyMobileMedicationDetails(medicationName, currentDose_And_measurement, frequency, interval);
 });
 
 Then(/^User click on the back button under permission screen$/, async () => {
-  await androidPage.clickonbackbutton.waitForDisplayed({ timeout: 15000 });
-  await androidPage.clickonbackbutton.click();
+  await mobileLoginPage.clickonbackbutton.waitForDisplayed({ timeout: 15000 });
+  await mobileLoginPage.clickonbackbutton.click();
 });
 
 Then(/^Verfiy all the modules on provider dashboard$/, async () => {
-  await androidPage.verifyProviderDashboard();
+  await mobileLoginPage.verifyProviderDashboard();
 });
 
 Then(/^Verify all the feautres under settings module for provider app$/, async () => {
-  await androidPage.verifyProviderSettingsModule();
+  await mobileLoginPage.verifyProviderSettingsModule();
 });
 
 Then(/^Verify that added minutes (.*) is displaying on the screen$/, async (minutes) => {
-  await androidPage.verifyAddedMinutes(minutes);
+  await mobileLoginPage.verifyAddedMinutes(minutes);
 });
 
 Then(/^User click on the cross button$/, async () => {
-  await androidPage.clickOnCrossButton();
+  await mobileLoginPage.clickOnCrossButton();
 });
 
 Then(/^Added mobile growth details should be visible with Height inch (.*) and Weight Pound (.*) and Weight Ounce (.*) and Head Circumference (.*)$/, async (heightInch, weightPound, weightOunce, headCircumference) => {
-  await androidPage.verifyMobileGrowthDetails(heightInch, weightPound, weightOunce, headCircumference);
+  await mobileLoginPage.verifyMobileGrowthDetails(heightInch, weightPound, weightOunce, headCircumference);
 });
 
 Then(/^Deleted mobile record should not be visible in the list$/, async () => {
-  await androidPage.verifyDeletedMobileRecord();
+  await mobileLoginPage.verifyDeletedMobileRecord();
 });
 
 Then(/^Use "Back command" to close the popup$/, async () => {
