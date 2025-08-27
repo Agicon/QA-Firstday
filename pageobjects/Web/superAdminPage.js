@@ -68,7 +68,7 @@ class SuperAdminPage extends BasePage {
   }
 
   get searchField() {
-    return $("//div[@id='example_filter']//input[@type='search']|(//label//input[@type='search'])[2]");
+    return $("//div[@id='example_filter']//input[@type='search']|(//label//input[@type='search'])[2]|//*[@id='device-brand-table_filter']/label/input");
   }
 
   get newCustomerForm() {
@@ -112,6 +112,14 @@ class SuperAdminPage extends BasePage {
 
   get form() {
     return $("//form[@class='form-horizontal']|//form[@method='post']");
+  }
+
+  get vitalTypeDropdown() {
+    return $("#vital_type");
+  }
+
+  get companyNameField() {
+    return $("#company_name");
   }
 
   /**
@@ -445,7 +453,15 @@ class SuperAdminPage extends BasePage {
     }
   }
 
+  async verifyDeletedResult() {
+    if ((await this.emptyReport.isDisplayed()) == true) {
+      console.log("record deleted successfully");
+    } else {
+      throw new Error("failed to delete record");
+    }
+  }
   async verifySuccessMessage(text) {
+    await browser.pause(3000);
     try {
       await this.validationMessage.waitForDisplayed({ timeout: 20000 });
       var actMessage = await this.validationMessage.getText();
@@ -511,13 +527,32 @@ class SuperAdminPage extends BasePage {
     }
   }
 
-  async verifyDeletedResult() {
-    await browser.pause(2000);
-    if ((await this.emptyReport.isDisplayed()) === true) {
-      console.log("successfully deleted record");
+  async fillCompanyNameField(data) {
+    if ((await this.companyNameField.isDisplayed()) === true) {
+      console.log("filling company name field");
+      await this.companyNameField.click();
+      await this.companyNameField.clearValue();
+      await this.companyNameField.setValue(data);
     } else {
-      throw new Error("Failed to delete results");
+      throw new Error("Company name field is not displaying in form");
     }
+  }
+
+  async clickOnVitralDropdown() {
+    if ((await this.vitalTypeDropdown.isDisplayed()) === true) {
+      console.log("Clicking on vitral dropdown");
+      await this.vitalTypeDropdown.click();
+    } else {
+      throw new Error("Vitral dropdown is not displaying in form");
+    }
+  }
+
+  async verifyAddedDevice(vitral, company) {
+    await $("(//tr[@role='row']//td)[2]").waitForDisplayed({ timeout: 5000 });
+    var actVitral = await $("(//tr[@role='row']//td)[2]").getText();
+    var actCompany = await $("(//tr[@role='row']//td)[3]").getText();
+    await expect(actVitral).toEqual(vitral);
+    await expect(actCompany).toEqual(company);
   }
 }
 
