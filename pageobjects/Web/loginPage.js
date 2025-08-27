@@ -1,4 +1,4 @@
-const { $, browser } = require("@wdio/globals");
+
 const BasePage = require("./testBase");
 import TestUtils from "../testUtils";
 const { remote } = require("webdriverio");
@@ -44,23 +44,23 @@ class LoginPage extends BasePage {
     await this.signInButton.click();
     try {
       await this.signInButton.waitForDisplayed({ reverse: true, timeout: 10000 });
-    } catch (error) {}
+    } catch (error) { }
   }
 
-async open(url) {
-    var data = TestUtils.getUserCredetials(url); 
+  async open(url) {
+    var data = TestUtils.getUserCredetials(url);
     await browser.pause(1000);
     var url = data[0];
     //  const loginUrl = process.env.WEB_PROVIDER_URL
     console.log("LOGIN PAGE URL:" + url);
     await browser.url(url);
-  } 
-  
+  }
+
   async managingProviderIsDisplayed() {
     await this.managingProviderLink.waitForDisplayed({ timeut: 25000 });
     return await this.managingProviderLink.isDisplayed();
   }
-async loginWithInvalidData(userName, password) {
+  async loginWithInvalidData(userName, password) {
     await browser.maximizeWindow();
     await this.emailField.waitForDisplayed({ timeout: 20000 });
     await this.emailField.click();

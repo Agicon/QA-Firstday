@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "8A2A3CEE-5DD6-462F-A772-90BEEC58E678",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:FirstdayHC_Alert.xcodeproj",
+        "identifier" : "18B67F512D538AEA005B6245",
+        "name" : "FirstdayHC_AlertTests"
+      }
+    }
+  ],
+  "version" : 1
+}

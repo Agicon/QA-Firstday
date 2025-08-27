@@ -1,4 +1,4 @@
-const { $, browser } = require("@wdio/globals");
+
 const BasePage = require("./testBase");
 const { remote } = require("webdriverio");
 const customerPage = require("../Web/customerAccountPage");
@@ -214,7 +214,7 @@ class CustomerAccountPage extends BasePage {
     return $("(//span[@class='select2-selection select2-selection--multiple'])[1]");
   }
 
-    get alertsIcon() {
+  get alertsIcon() {
     return $("(//div[@id='MENU']//a[contains(text(),'Alerts')])[1]");
   }
 
@@ -449,7 +449,7 @@ class CustomerAccountPage extends BasePage {
     await browser.pause(3000);
     try {
       await this.clickOnLink("Inactive");
-    } catch (error) {}
+    } catch (error) { }
   }
 
   // ===============================Master_Menu=============================
@@ -721,13 +721,13 @@ class CustomerAccountPage extends BasePage {
     await listOption.click();
   }
 
-   async hoverOverAlertsIcon() {
- await this.alertsIcon.moveTo();
+  async hoverOverAlertsIcon() {
+    await this.alertsIcon.moveTo();
   }
 
-   async secondIndexLinkTextIsDisplayed(text) {
-    const linkText=await $("(//a[contains(text(),'"+text+"')])[2]");
- if ((await linkText.isDisplayed()) === true) {
+  async secondIndexLinkTextIsDisplayed(text) {
+    const linkText = await $("(//a[contains(text(),'" + text + "')])[2]");
+    if ((await linkText.isDisplayed()) === true) {
       console.log("Second index link text is displaying");
     } else {
       throw new Error("Second index link text is not displaying");

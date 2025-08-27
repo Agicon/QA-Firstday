@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "C90E7551-022F-4F5B-9296-7B81B37F8DC2",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:FirstdayHC_Alert.xcodeproj",
+      "identifier" : "CC27155A2CBF9AF000923007",
+      "name" : "FirstdayHC_Alert_Dev"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:FirstdayHC_Alert.xcodeproj",
+        "identifier" : "18B67F512D538AEA005B6245",
+        "name" : "FirstdayHC_AlertTests"
+      }
+    }
+  ],
+  "version" : 1
+}

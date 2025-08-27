@@ -1,4 +1,4 @@
-const { $, browser } = require("@wdio/globals");
+
 const BasePage = require("./testBase");
 const { remote } = require("webdriverio");
 const superAdminPage = require("./superAdminPage");
@@ -890,7 +890,7 @@ class ManagingProviderAccountPage extends BasePage {
     await expect(actualLocation).toEqual(location);
     try {
       await expect(actualHospitalLocation).toEqual(hospitalLocation);
-    } catch (error) {}
+    } catch (error) { }
     await expect(actualStatus).toEqual(status);
   }
 
@@ -952,7 +952,7 @@ class ManagingProviderAccountPage extends BasePage {
         await this.deletePatientMessage.waitForDisplayed({ timeout: 20000 });
         await this.deletePatientMessage.waitForDisplayed({ reverse: true, timeout: 20000 });
       }
-    } catch (error) {}
+    } catch (error) { }
   }
 
   async clickOnUpdateButton() {
@@ -1104,7 +1104,7 @@ class ManagingProviderAccountPage extends BasePage {
     const actStatus = await $("(//tr[@class='odd']//td)[6]").getText();
     try {
       expect(actSpecialty).toEqual(specialty);
-    } catch (error) {}
+    } catch (error) { }
     expect(actName).toEqual(name);
     expect(actStatus).toEqual(status);
   }
@@ -1155,7 +1155,7 @@ class ManagingProviderAccountPage extends BasePage {
     await this.startDateField.click();
     try {
       await $("//button[contains(text(),'Apply')]").click();
-    } catch (error) {}
+    } catch (error) { }
     await browser.keys("Enter");
   }
 
@@ -1347,7 +1347,7 @@ class ManagingProviderAccountPage extends BasePage {
     expect(actHospitalNote).toEqual(hospitalNote);
     try {
       expect(actDescription).toEqual(description);
-    } catch (error) {}
+    } catch (error) { }
   }
 
   async verifyDiagnosisDetails(diagnosisType, description, status) {

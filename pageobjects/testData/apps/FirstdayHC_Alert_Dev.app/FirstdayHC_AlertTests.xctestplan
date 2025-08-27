@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "5D8BDFFB-5717-4683-848F-46BFFA3B95AC",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:FirstdayHC_Alert.xcodeproj",
+        "identifier" : "18B67F512D538AEA005B6245",
+        "name" : "FirstdayHC_AlertTests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -1,7 +1,6 @@
 const { When } = require("@wdio/cucumber-framework");
-const { expect, $, browser } = require("@wdio/globals");
 const LoginWebPage = require("../pageobjects/Web/loginPage");
-const androidPage = require("../pageobjects/Android/androidPage");
+const mobileLoginPage = require("../pageobjects/Mobile/loginPage");
 import TestUtils from "../pageobjects/testUtils";
 const superAdminPage = require("../pageobjects/Web/superAdminPage");
 
@@ -1004,146 +1003,204 @@ When(/^Fill temperature duration field using data (.*)$/, async (data) => {
 // =================================Android======================================//
 
 When(/^login to app using (.*)$/, async (username) => {
-  await androidPage.login(username);
+  await mobileLoginPage.login(username);
 });
 
 When(/^Verfiy all modules of Firstday-HC app on homepage$/, async () => {
-  await androidPage.patientVitalSigns();
-  await androidPage.patientsMedicalRecord();
-  await androidPage.patientsProviders();
-  await androidPage.needHelp();
-  await androidPage.patientsVideoCamera();
-  await androidPage.settings();
+  await mobileLoginPage.patientVitalSigns();
+  await mobileLoginPage.patientsMedicalRecord();
+  await mobileLoginPage.patientsProviders();
+  await mobileLoginPage.needHelp();
+  await mobileLoginPage.patientsVideoCamera();
+  await mobileLoginPage.settings();
 });
 
 When(/^User clicks on vital signs module$/, async () => {
-  await androidPage.clickOnPatientsVitalSigns();
+  await mobileLoginPage.clickOnPatientsVitalSigns();
 });
 
 When(/^User clicks on medical report module$/, async () => {
-  await androidPage.clickOnMedicalReport();
+  await mobileLoginPage.clickOnMedicalReport();
 });
 
 When(/^User clicks on providers module on homepage$/, async () => {
-  await androidPage.clickOnProvider();
+  await mobileLoginPage.clickOnProvider();
 });
 
 When(/^User clicks on settings module on homepage$/, async () => {
-  await androidPage.clickOnSettingsModule();
+  await mobileLoginPage.clickOnSettingsModule();
 });
 
 When(/^User leave the "Email  field" empty And populate the (.*) "Password field" And click on "Login" button$/, async (password) => {
-  await androidPage.fillPasswordField(password);
-  await androidPage.signInButton.click();
+  try {
+    await browser.dismissAlert();
+    await browser.dismissAlert();
+  } catch (error) { }
+  await mobileLoginPage.emailField.click();
+  await mobileLoginPage.emailField.clearValue();
+  await mobileLoginPage.fillPasswordField(password);
+  await mobileLoginPage.signInButton.click();
+
 });
 
 When(/^User leave the "Password field" empty And populate the (.*) "Email field" And click on "Login" button$/, async (email) => {
-  await androidPage.paswordField.click();
-  await androidPage.paswordField.clearValue();
-  await androidPage.fillEmailField(email);
-  await androidPage.signInButton.click();
+  await mobileLoginPage.paswordField.click();
+  await mobileLoginPage.paswordField.clearValue();
+  await mobileLoginPage.fillEmailField(email);
+  await mobileLoginPage.signInButton.click();
 });
 
 When(/^User enter invalid (.*) and (.*) in their respective fields And click on "Login" button$/, async (email, password) => {
-  await androidPage.fillEmailField(email);
-  await androidPage.fillPasswordField(password);
-  await androidPage.signInButton.click();
+  await mobileLoginPage.fillEmailField(email);
+  await mobileLoginPage.fillPasswordField(password);
+  await mobileLoginPage.signInButton.click();
 });
 
 When(/^User enter valid (.*) and (.*) in their respective fields And click on "Login" button$/, async (userName, invalidPassword) => {
   var data = TestUtils.getUserCredetials(userName);
   await browser.pause(2000);
   var username = data[0];
-  await androidPage.fillEmailField(username);
-  await androidPage.fillPasswordField(invalidPassword);
-  await androidPage.signInButton.click();
+  await mobileLoginPage.fillEmailField(username);
+  await mobileLoginPage.fillPasswordField(invalidPassword);
+  await mobileLoginPage.signInButton.click();
+});
+
+When(/^iOS login to app using (.*)$/, async (username) => {
+  await mobileLoginPage.login(username);
 });
 
 When(/^User navigate to the "Settings" tab$/, async () => {
-  await androidPage.clickOnSettingsTAb();
+  await mobileLoginPage.clickOnSettingsTAb();
 });
 
 When(/^User click on the "Logout" option$/, async () => {
-  await androidPage.clickOnLogoutOption();
+  await mobileLoginPage.clickOnLogoutOption();
 });
 
 When(/^User click on the button with text (.*)$/, async (Button) => {
-  await androidPage.clickOnMobileButtonWithText(Button);
+  await mobileLoginPage.clickOnMobileButtonWithText(Button);
 });
 
 When(/^User click on "Hamburger" icon displaying in the top left corner$/, async () => {
-  await androidPage.clickOnFHDCHamburgerButton();
+  await mobileLoginPage.clickOnFHDCHamburgerButton();
 });
 
 When(/^I click on (.*) option$/, async (text) => {
-  await androidPage.clickOnOption(text);
+  await mobileLoginPage.clickOnOption(text);
 });
 
 When(/^I click on "Edit" icon from "Profile Picture" section$/, async () => {
-  await androidPage.clickOnEditProfileIcon();
-  await androidPage.clickOnOkButton();
+  await mobileLoginPage.clickOnEditProfileIcon();
+  await mobileLoginPage.clickOnOkButton();
 });
 
 When(/^I fill (.*) data in "Minutes" field$/, async (data) => {
-  await androidPage.fillMinutesField(data);
+  await mobileLoginPage.fillMinutesField(data);
 });
+
 
 When(/^I fill (.*) data in "Select Milk" field$/, async (data) => {
-  await androidPage.fillSelectMilkField(data);
+  await mobileLoginPage.fillSelectMilkField(data);
 });
 
+
+
 When(/^I fill (.*) data in "Bottle Volumn" field$/, async (data) => {
-  await androidPage.fillBottleVolumnField(data);
+  await mobileLoginPage.fillBottleVolumnField(data);
 });
 
 When(/^I fill (.*) data in "Select Fortification" field$/, async (data) => {
-  await androidPage.fillSelectFortificationField(data);
+  await mobileLoginPage.fillSelectFortificationField(data);
 });
 
 When(/^I fill (.*) data in mobile "Calories" field$/, async (data) => {
-  await androidPage.fillCaloriesField(data);
+  await mobileLoginPage.fillCaloriesField(data);
 });
 
 When(/^I fill (.*) data in "Note" field$/, async (data) => {
-  await androidPage.fillNoteField(data);
+  await mobileLoginPage.fillNoteField(data);
 });
 
 When(/^User click on the right arrow button$/, async () => {
-  await androidPage.clickOnRightArrowButton();
+  await mobileLoginPage.clickOnRightArrowButton();
 });
 
 When(/^I fill (.*) data in "Diaper Weight" field$/, async (data) => {
-  await androidPage.fillDiaperWeightField(data);
+  await mobileLoginPage.fillDiaperWeightField(data);
 });
 
 When(/^User selects date in "Date" field$/, async () => {
-  await androidPage.selectDate();
+  await mobileLoginPage.selectDate();
 });
 
 When(/^User click on the form "OK" button$/, async () => {
-  await androidPage.clickOnFormOKButton();
+  await mobileLoginPage.clickOnFormOKButton();
 });
 
 When(/^I fill (.*) data in mobile "Height Inch" field$/, async (data) => {
-  await androidPage.fillHeightInchField(data);
+  await mobileLoginPage.fillHeightInchField(data);
 });
 
 When(/^I fill (.*) data in mobile "Weight Pound" field$/, async (data) => {
-  await androidPage.fillWeightPoundField(data);
+  await mobileLoginPage.fillWeightPoundField(data);
 });
 
 When(/^I fill (.*) data in mobile "Weight Ounce" field$/, async (data) => {
-  await androidPage.fillWeightOunceField(data);
+  await mobileLoginPage.fillWeightOunceField(data);
 });
 
 When(/^I fill (.*) data in mobile "Head Circumference" field$/, async (data) => {
-  await androidPage.fillHeadCircumferenceField(data);
+  await mobileLoginPage.fillHeadCircumferenceField(data);
 });
 
 When(/^Delete the mobile record using "Delete" button$/, async () => {
-  await androidPage.deleteRecord();
+  await mobileLoginPage.deleteRecord();
 });
 
 When(/^Press the 'Back' button repeatedly until the user reaches the starting module (.*)$/, async (startingModule) => {
-  await androidPage.clickToTheStartingPoint(startingModule);
+  await mobileLoginPage.clickToTheStartingPoint(startingModule);
+});
+
+
+When(/^User click on the ios button with second index (.*)$/, async (text) => {
+  await mobileLoginPage.clickOnSecondIndexIosButton(text);
+});
+
+// ===================================================iOS========================================================
+
+When(/^For ios, user click on the button Temperature$/, async () => {
+  await mobileLoginPage.clickOnTemperatureModule();
+});
+
+
+When(/^For ios, user click on the "Media" module$/, async () => {
+  await mobileLoginPage.clickOnMediaTab();
+});
+
+When(/^For ios user click on the (.*) button$/, async (text) => {
+  await mobileLoginPage.clickOnIosOption(text);
+});
+
+When(/^I fill (.*) data in "Select Milk" field for ios$/, async (data) => {
+  await mobileLoginPage.fillIosSelectMilkField(data);
+});
+
+When(/^For ios I fill (.*) data in "Minutes" field$/, async (data) => {
+  await mobileLoginPage.fillIosMilkMinutesField(data);
+});
+
+When(/^For ios I fill (.*) data in "Select Milk" field$/, async (data) => {
+  await mobileLoginPage.fillIosSelectMilkField(data);
+});
+
+When(/^For ios I fill (.*) data in "Select Fortification" field$/, async (data) => {
+  await mobileLoginPage.fillIosSelectFortificationField(data);
+});
+
+When(/^I fill (.*) data in mobile "Calories" field for ios$/, async (data) => {
+  await mobileLoginPage.fillIosCaloriesField(data);
+});
+
+When(/^For ios, when user click on (.*) option$/, async (text) => {
+  await mobileLoginPage.clickOnIosOption(text);
 });
