@@ -975,11 +975,11 @@ class AndroidPage extends BasePage {
   }
 
   async verifyMobileMedicationDetails(medicationName, currentDose_And_measurement, frequency, interval) {
-    await $('//android.widget.TextView[@resource-id="com.app.neonatal.staging:id/tv_diagnosis_title"]').waitForDisplayed({ timeout: 15000 });
-    const actMedication = await $('//android.widget.TextView[@resource-id="com.app.neonatal.staging:id/tv_diagnosis_title"]').getText();
-    const actDose = await $("(//android.widget.TextView)[4]").getText();
-    const actFrequency = await $("(//android.widget.TextView)[6]").getText();
-    const actInterval = await $("(//android.widget.TextView)[8]").getText();
+    await $('//android.widget.TextView[@resource-id="com.app.neonatal.staging:id/tv_diagnosis_title"]|(//XCUIElementTypeCell//XCUIElementTypeStaticText)[1]').waitForDisplayed({ timeout: 15000 });
+    const actMedication = await $('//android.widget.TextView[@resource-id="com.app.neonatal.staging:id/tv_diagnosis_title"]|(//XCUIElementTypeCell//XCUIElementTypeStaticText)[1]').getText();
+    const actDose = await $("(//android.widget.TextView)[4]|(//XCUIElementTypeCell//XCUIElementTypeStaticText)[3]").getText();
+    const actFrequency = await $("(//android.widget.TextView)[6]|(//XCUIElementTypeCell//XCUIElementTypeStaticText)[5]").getText();
+    const actInterval = await $("(//android.widget.TextView)[8]|(//XCUIElementTypeCell//XCUIElementTypeStaticText)[7]").getText();
 
     expect(actMedication).toEqual(medicationName);
     expect(actDose).toEqual(currentDose_And_measurement);
