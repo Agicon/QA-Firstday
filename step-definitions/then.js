@@ -58,6 +58,11 @@ Then(/^Form is displaying on screen$/, async () => {
 Then(/^Results are not displayed after delete$/, async () => {
   await superAdminPage.verifyDeletedResult();
 });
+
+Then(/^Verify new device is added with vitral (.*) and company name (.*)$/, async (vitral, company) => {
+  await superAdminPage.verifyAddedDevice(vitral, company);
+});
+
 // ======================================Web-CustomerAccount=============================================//
 
 Then(/^Verify that user successfully redirected on homepage$/, async () => {
@@ -293,6 +298,10 @@ Then(/^Click on close download excel button$/, async () => {
   await managingProviderAccountPage.clickOnCloseDownloadExcelButton();
 });
 
+Then(/^Added data (.*) and (.*) is successfully displaying in table after save$/, async (device, data) => {
+  await managingProviderAccountPage.verifyAddedMonitoringData(device, data);
+});
+
 // -----------------Patient-medical-results----------------//
 Then("I should see the following options in the dropdown", async (dataTable) => {
   const expectedOptions = dataTable.rawTable.flat();
@@ -341,6 +350,11 @@ Then(/^Added data (.*) is successfully displaying in table$/, async (data) => {
 Then(/^Header (.*) is successfully displaying in table$/, async (data) => {
   await managingProviderAccountPage.verifyTableHeader(data);
 });
+
+Then(/^Added discription (.*) is displaying in table$/, async (data) => {
+  await managingProviderAccountPage.verifyPeragraphInTable(data);
+});
+
 Then(/^Other provider records should be visilbe in the list with (.*) and (.*)$/, async (otherProvider, description) => {
   await managingProviderAccountPage.verifyOtherProviderRecords(otherProvider, description);
 });
@@ -456,7 +470,6 @@ Then(/^Growth details should be visible in the list with (.*) and (.*) and (.*) 
 
 Then(/^Verify searched data (.*) is dipslying in result laboratory table$/, async (text) => {
   await managingProviderAccountPage.verifySearchedLaboratoryResult(text);
-
 });
 Then(/^I navigate to the "Growth" page and the Graph or Chart of added "Growth Results" displays$/, async () => {
   await managingProviderAccountPage.verifyGrowthGraph();
@@ -485,8 +498,6 @@ Then(/^Verify the (.*) graph on web with value (.*)$/, async (diaperingOption, g
 Then(/^Verify (.*) on the web with value (.*)$/, async (nutritionType, graphValue) => {
   await managingProviderAccountPage.verifyNutritionGraph(nutritionType, graphValue);
 });
-
-
 
 //---------------------------------Android-Cases------------------------------------//
 
@@ -702,3 +713,8 @@ Then(/^Deleted mobile record should not be visible in the list$/, async () => {
 Then(/^Use "Back command" to close the popup$/, async () => {
   await browser.back();
 });
+
+Then(/^Added record data (.*) text is displaying on mobile screen$/, async (data) => {
+  await androidPage.verifyText(data);
+});
+

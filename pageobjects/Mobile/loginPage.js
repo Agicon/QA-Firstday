@@ -1213,12 +1213,31 @@ class AndroidPage extends BasePage {
 
   async clickToTheStartingPoint(text) {
     const startingPoint = await $("//android.widget.TextView[contains(@text,'" + text + "')]");
-    do {
-      await browser.back();
+    while ((await startingPoint.isDisplayed()) === false) {
       if ((await this.crossButton.isDisplayed()) === true) {
         await this.crossButton.click();
       }
-    } while ((await startingPoint.isDisplayed()) === false);
+
+      if (await startingPoint.isDisplayed()) {
+        return;
+      }
+
+      await browser.back();
+
+      if (await startingPoint.isDisplayed()) {
+        return;
+      }
+    }
+  }
+
+  async verifyText(data) {
+    const recordText = await $("//android.widget.TextView[@text='" + data + "']");
+    await recordText.waitForDisplayed({ timeout: 15000 });
+    if ((await recordText.isDisplayed()) == true) {
+      console.log("✅ Record displaying successfully");
+    } else {
+      throw new Error("❌ Failed to verify record");
+    }
   }
 
   async iOSClickHoldScrollDownMethod() {
