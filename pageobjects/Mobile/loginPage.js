@@ -879,6 +879,8 @@ class AndroidPage extends BasePage {
     }
   }
 
+
+
   async clickOnIosOption(data) {
     const option = await $('//XCUIElementTypeButton[contains(@name,"' + data + '")]|//XCUIElementTypeStaticText[contains(@name,"' + data + '")]');
     await option.waitForDisplayed({ timeout: 15000 });
@@ -1231,7 +1233,7 @@ class AndroidPage extends BasePage {
   }
 
   async verifyText(data) {
-    const recordText = await $("//android.widget.TextView[@text='" + data + "']");
+    const recordText = await $("//android.widget.TextView[@text='" + data + "']|//XCUIElementTypeStaticText[@name='" + data + " ']|//XCUIElementTypeStaticText[@name='" + data + "']");
     await recordText.waitForDisplayed({ timeout: 15000 });
     if ((await recordText.isDisplayed()) == true) {
       console.log("✅ Record displaying successfully");
@@ -1296,6 +1298,15 @@ class AndroidPage extends BasePage {
     await this.iOSClickHoldScrollDownMethod();
     if (await this.mediaIsDisplayed() === true) {
       await this.media.click();
+    } else {
+      throw new Error("Media module is not displayed");
+    }
+  }
+
+  async clickOniOSResultsTab() {
+    await this.iOSClickHoldScrollDownMethod();
+    if (await this.mediaIsDisplayed() === true) {
+      await this.results.click();
     } else {
       throw new Error("Media module is not displayed");
     }
