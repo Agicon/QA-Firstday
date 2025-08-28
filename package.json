@@ -12,6 +12,7 @@
     "androidLoginPage-FHDC": "npm run remove-allure && wdio run ./wdio.confFHDC.js --suite androidLoginPage",
     "iOSloginPage-FHDA": "npm run remove-allure && wdio run ./wdio.confFHDAiOS.js --suite iOSLoginPageFHDA",
     "iOSloginPage-FHDC": "npm run remove-allure && wdio run ./wdio.confFHDCiOS.js --suite iOSLoginPageFHDC",
+    "iOSMedicalRecordsPage-FHDC": "npm run remove-allure && wdio run ./wdio.confFHDCiOS.js --suite iOSMedicalRecordsModule",
     "newCustomerPage": "wdio run ./wdio.confWeb.js --suite customerPage",
     "webProviderPage_Staging": "set WEB_PROVIDER_URL=https://portal.test.firstdayhc.com/login && wdio run ./wdio.confWeb.js --suite webProviderPage",
     "webProviderPage_Prod": "set WEB_PROVIDER_URL=https://portal.firstdayhc.com/login && wdio run ./wdio.confWeb.js --suite webProviderPage",

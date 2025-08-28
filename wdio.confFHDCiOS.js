@@ -28,7 +28,9 @@ exports.config = {
   ],
   suites: {
     iOSLoginPageFHDC: ["./features/iOS/FHDC/login_Redirections_Logout_App.feature"],
-    iOSTrackerModule: ["./features/iOS/FHDC/iOSTrackerModule.feature"]
+    iOSTrackerModule: ["./features/iOS/FHDC/iOSTrackerModule.feature"],
+    iOSMedicalRecordsModule: ["./features/iOS/FHDC/iOSMedicalRecordsModule.feature"]
+
   },
   // Patterns to exclude.
   exclude: [
