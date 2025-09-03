@@ -1204,3 +1204,8 @@ When(/^I fill (.*) data in mobile "Calories" field for ios$/, async (data) => {
 When(/^For ios, when user click on (.*) option$/, async (text) => {
   await mobileLoginPage.clickOnIosOption(text);
 });
+
+When(/^I click on drop down arrow and select option (.*)$/, async (data) => {
+  await mobileLoginPage.clickOnDropDownArrow();
+  await mobileLoginPage.selectDropDownOption(data);
+});

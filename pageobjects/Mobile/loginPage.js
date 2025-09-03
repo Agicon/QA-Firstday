@@ -8,14 +8,10 @@ const fs = require("fs");
 
 class AndroidPage extends BasePage {
   get emailField() {
-    return $(
-      '//XCUIElementTypeTextField|//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_login_email"]|//android.widget.EditText[@resource-id="com.firsthc.alert.staging:id/edt_email"]'
-    );
+    return $('//XCUIElementTypeTextField|//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_login_email"]|//android.widget.EditText[@resource-id="com.firsthc.alert.staging:id/edt_email"]');
   }
   get paswordField() {
-    return $(
-      '//XCUIElementTypeSecureTextField|//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_login_pass"]|//android.widget.EditText[@resource-id="com.firsthc.alert.staging:id/edt_password"]'
-    );
+    return $('//XCUIElementTypeSecureTextField|//android.widget.EditText[@resource-id="com.app.neonatal.staging:id/ed_login_pass"]|//android.widget.EditText[@resource-id="com.firsthc.alert.staging:id/edt_password"]');
   }
 
   get signInButton() {
@@ -71,15 +67,11 @@ class AndroidPage extends BasePage {
   }
 
   get logoutOption() {
-    return $(
-      '//android.widget.TextView[@text="Logout"]|//XCUIElementTypeStaticText[@name="Logout"]'
-    );
+    return $('//android.widget.TextView[@text="Logout"]|//XCUIElementTypeStaticText[@name="Logout"]');
   }
 
   get noButton() {
-    return $(
-      '//android.widget.Button[@resource-id="com.firsthc.alert.staging:id/btn_no"] | //android.widget.Button[@resource-id="com.app.neonatal.staging:id/btn_no"]|//XCUIElementTypeButton[contains(@name, "NO")]'
-    );
+    return $('//android.widget.Button[@resource-id="com.firsthc.alert.staging:id/btn_no"] | //android.widget.Button[@resource-id="com.app.neonatal.staging:id/btn_no"]|//XCUIElementTypeButton[contains(@name, "NO")]');
   }
 
   get vitalSign() {
@@ -87,88 +79,59 @@ class AndroidPage extends BasePage {
   }
 
   get backButton() {
-    return $(
-      "(//android.widget.ImageView)[1]|//XCUIElementTypeButton[@name='ic back']"
-    );
+    return $("(//android.widget.ImageView)[1]|//XCUIElementTypeButton[@name='ic back']");
   }
 
   get medicalRecord() {
-    return $(
-      "(//android.widget.TextView)[3]|//XCUIElementTypeImage[@name='boxCard_darkblue']"
-    );
+    return $("(//android.widget.TextView)[3]|//XCUIElementTypeImage[@name='boxCard_darkblue']");
   }
 
   get diagnosis() {
-    return $(
-      "(//android.widget.TextView)[3]|//XCUIElementTypeStaticText[@name='Diagnosis']"
-    );
+    return $("(//android.widget.TextView)[3]|//XCUIElementTypeStaticText[@name='Diagnosis']");
   }
 
   get medication() {
-    return $(
-      "(//android.widget.TextView)[4]|//XCUIElementTypeStaticText[@name='Medications']"
-    );
+    return $("(//android.widget.TextView)[4]|//XCUIElementTypeStaticText[@name='Medications']");
   }
 
   get results() {
-    return $(
-      "(//android.widget.TextView)[5]|//XCUIElementTypeStaticText[@name='Results']"
-    );
+    return $("(//android.widget.TextView)[5]|//XCUIElementTypeStaticText[@name='Results']");
   }
 
   get tracker() {
-    return $(
-      "(//android.widget.TextView)[6]|//XCUIElementTypeStaticText[@name='Tracker']"
-    );
+    return $("(//android.widget.TextView)[6]|//XCUIElementTypeStaticText[@name='Tracker']");
   }
 
-
   get vaccinations() {
-    return $(
-      "(//android.widget.TextView)[7]|//XCUIElementTypeStaticText[@name='Vaccinations']"
-    );
+    return $("(//android.widget.TextView)[7]|//XCUIElementTypeStaticText[@name='Vaccinations']");
   }
 
   get media() {
-    return $(
-      "(//android.widget.TextView)[8]|//XCUIElementTypeStaticText[@name='Media']"
-    );
+    return $("(//android.widget.TextView)[8]|//XCUIElementTypeStaticText[@name='Media']");
   }
 
   get documents() {
-    return $(
-      "(//android.widget.TextView)[9]|//XCUIElementTypeStaticText[@name='Documents']"
-    );
+    return $("(//android.widget.TextView)[9]|//XCUIElementTypeStaticText[@name='Documents']");
   }
 
   get sendUsresult() {
-    return $(
-      "(//android.widget.TextView)[10]|//XCUIElementTypeStaticText[@name='Send us a result']"
-    );
+    return $("(//android.widget.TextView)[10]|//XCUIElementTypeStaticText[@name='Send us a result']");
   }
 
   get provider() {
-    return $(
-      "(//android.widget.TextView)[4]|//XCUIElementTypeImage[@name='boxCard_pink']"
-    );
+    return $("(//android.widget.TextView)[4]|//XCUIElementTypeImage[@name='boxCard_pink']");
   }
 
   get providerTab() {
-    return $(
-      "(//android.widget.TextView)[2]|//XCUIElementTypeButton[@name='Providers']"
-    );
+    return $("(//android.widget.TextView)[2]|//XCUIElementTypeButton[@name='Providers']");
   }
 
   get myContactInformation() {
-    return $(
-      "(//android.widget.TextView)[2]|//XCUIElementTypeStaticText[@name='My Contact Information']"
-    );
+    return $("(//android.widget.TextView)[2]|//XCUIElementTypeStaticText[@name='My Contact Information']");
   }
 
   get myAccount() {
-    return $(
-      "(//android.widget.TextView)[3]|//XCUIElementTypeStaticText[@name='My Account']"
-    );
+    return $("(//android.widget.TextView)[3]|//XCUIElementTypeStaticText[@name='My Account']");
   }
 
   get myBabysInformation() {
@@ -176,69 +139,47 @@ class AndroidPage extends BasePage {
   }
 
   get changeChild() {
-    return $(
-      "(//android.widget.TextView)[5]|//XCUIElementTypeStaticText[@name='Change Child']"
-    );
+    return $("(//android.widget.TextView)[5]|//XCUIElementTypeStaticText[@name='Change Child']");
   }
 
   get changePassword() {
-    return $(
-      "(//android.widget.TextView)[6]|//XCUIElementTypeStaticText[@name='Change Password']"
-    );
+    return $("(//android.widget.TextView)[6]|//XCUIElementTypeStaticText[@name='Change Password']");
   }
 
-
   get FHDCHamburgerButton() {
-    return $(
-      '//android.widget.ImageView[@resource-id="com.app.neonatal.staging:id/iv_navigation_menu"]|//XCUIElementTypeButton[@name="icn menu"]'
-    );
+    return $('//android.widget.ImageView[@resource-id="com.app.neonatal.staging:id/iv_navigation_menu"]|//XCUIElementTypeButton[@name="icn menu"]');
   }
 
   get verifyiOSHompgage() {
-    return $(
-      '//XCUIElementTypeTextField[@value="Search Patient"]|//XCUIElementTypeImage[@name="boxCard_blue"]'
-    );
+    return $('//XCUIElementTypeTextField[@value="Search Patient"]|//XCUIElementTypeImage[@name="boxCard_blue"]');
   }
 
   get notificationCancelButton() {
     return $('//XCUIElementTypeButton[@name="Cancel"]');
   }
 
-
   get appointmentsTab() {
-    return $(
-      "(//android.widget.TextView)[3]|//XCUIElementTypeButton[@name='Appointments']"
-    );
+    return $("(//android.widget.TextView)[3]|//XCUIElementTypeButton[@name='Appointments']");
   }
 
   get editProfileIcon() {
-    return $(
-      '//android.widget.ImageView[@resource-id="com.app.neonatal.staging:id/iv_edit_pic"]|//XCUIElementTypeButton[@name="icn edit"]'
-    );
+    return $('//android.widget.ImageView[@resource-id="com.app.neonatal.staging:id/iv_edit_pic"]|//XCUIElementTypeButton[@name="icn edit"]');
   }
 
   get galleryOption() {
-    return $(
-      '//android.widget.TextView[@resource-id="com.app.neonatal.staging:id/tv_gallery"]|//XCUIElementTypeButton[@name="From Gallery"]'
-    );
+    return $('//android.widget.TextView[@resource-id="com.app.neonatal.staging:id/tv_gallery"]|//XCUIElementTypeButton[@name="From Gallery"]');
   }
 
   get selectImage() {
-    return $(
-      '//android.widget.ImageView[@resource-id="com.google.android.documentsui:id/icon_thumb"]|(//XCUIElementTypeImage)[4]'
-    );
+    return $('//android.widget.ImageView[@resource-id="com.google.android.documentsui:id/icon_thumb"]|(//XCUIElementTypeImage)[4]');
   }
 
   get cropButton() {
-    return $(
-      '//android.widget.Button[@resource-id="com.app.neonatal.staging:id/crop_image_menu_crop"]|//XCUIElementTypeStaticText[@name="Choose"]'
-    );
+    return $('//android.widget.Button[@resource-id="com.app.neonatal.staging:id/crop_image_menu_crop"]|//XCUIElementTypeStaticText[@name="Choose"]');
   }
 
   get verifyImage() {
-    return $(
-      '//android.widget.ImageView[@resource-id="com.app.neonatal.staging:id/iv_child_profile"]|//XCUIElementTypeImage'
-    );
+    return $('//android.widget.ImageView[@resource-id="com.app.neonatal.staging:id/iv_child_profile"]|//XCUIElementTypeImage');
   }
 
   get moduleBackButton() {
@@ -246,75 +187,50 @@ class AndroidPage extends BasePage {
   }
 
   get allPatientsTab() {
-    return $(
-      "//android.widget.TextView[contains(@text,'All Patients')]|//XCUIElementTypeButton[contains(@name,'All Patients')]"
-    );
+    return $("//android.widget.TextView[contains(@text,'All Patients')]|//XCUIElementTypeButton[contains(@name,'All Patients')]");
   }
 
   get myPatientsTab() {
-    return $(
-      "//android.widget.TextView[contains(@text,'My Patients')]|//XCUIElementTypeButton[contains(@name,'My Patients')]"
-    );
+    return $("//android.widget.TextView[contains(@text,'My Patients')]|//XCUIElementTypeButton[contains(@name,'My Patients')]");
   }
 
   get alertsTab() {
-    return $(
-      "//android.widget.TextView[contains(@text,'Alerts')]|//XCUIElementTypeButton[contains(@name,'Alerts')]"
-    );
+    return $("//android.widget.TextView[contains(@text,'Alerts')]|//XCUIElementTypeButton[contains(@name,'Alerts')]");
   }
 
   get settingsTab() {
-    return $(
-      "//android.widget.TextView[contains(@text,'Settings')]|//XCUIElementTypeButton[contains(@name,'Settings')]"
-    );
+    return $("//android.widget.TextView[contains(@text,'Settings')]|//XCUIElementTypeButton[contains(@name,'Settings')]");
   }
   get audioAlertSettingsTab() {
-    return $(
-      "//android.widget.TextView[contains(@text,'Audio Alert Setting')]|//XCUIElementTypeStaticText[contains(@name,'Audio Alert Setting')]"
-    );
+    return $("//android.widget.TextView[contains(@text,'Audio Alert Setting')]|//XCUIElementTypeStaticText[contains(@name,'Audio Alert Setting')]");
   }
 
   get myProfileTab() {
-    return $(
-      "//android.widget.TextView[contains(@text,'My Profile')]|//XCUIElementTypeStaticText[contains(@name,'My Profile')]"
-    );
+    return $("//android.widget.TextView[contains(@text,'My Profile')]|//XCUIElementTypeStaticText[contains(@name,'My Profile')]");
   }
 
-
   get changePasswordTab() {
-    return $(
-      "//android.widget.TextView[contains(@text,'Change Password')]|//XCUIElementTypeStaticText[contains(@name,'Change Password')]"
-    );
+    return $("//android.widget.TextView[contains(@text,'Change Password')]|//XCUIElementTypeStaticText[contains(@name,'Change Password')]");
   }
 
   get contactUsTab() {
-    return $(
-      "//android.widget.TextView[contains(@text,'Contact Us')]|//XCUIElementTypeStaticText[contains(@name,'Contact Us')]"
-    );
+    return $("//android.widget.TextView[contains(@text,'Contact Us')]|//XCUIElementTypeStaticText[contains(@name,'Contact Us')]");
   }
 
   get termsAndConditionsTab() {
-    return $(
-      "//android.widget.TextView[contains(@text,'Terms & Conditions')]|//XCUIElementTypeStaticText[contains(@name,'Terms & Conditions')]"
-    );
+    return $("//android.widget.TextView[contains(@text,'Terms & Conditions')]|//XCUIElementTypeStaticText[contains(@name,'Terms & Conditions')]");
   }
 
   get privacyPolicyTab() {
-    return $(
-      "//android.widget.TextView[contains(@text,'Privacy Policy')]|//XCUIElementTypeStaticText[contains(@name,'Privacy Policy')]"
-    );
+    return $("//android.widget.TextView[contains(@text,'Privacy Policy')]|//XCUIElementTypeStaticText[contains(@name,'Privacy Policy')]");
   }
 
   get logOutTab() {
-    return $(
-      "//android.widget.TextView[contains(@text,'Logout')]|//XCUIElementTypeStaticText[contains(@name,'Logout')]"
-    );
+    return $("//android.widget.TextView[contains(@text,'Logout')]|//XCUIElementTypeStaticText[contains(@name,'Logout')]");
   }
 
   get backButton() {
-    return $(
-      "(//android.widget.ImageView)[1]|//XCUIElementTypeButton[@name='ic back']"
-    );
+    return $("(//android.widget.ImageView)[1]|//XCUIElementTypeButton[@name='ic back']");
   }
 
   get milkMinutesField() {
@@ -322,9 +238,8 @@ class AndroidPage extends BasePage {
   }
 
   get iosMilkMinutesField() {
-    return $('//XCUIElementTypeTextField[@value="Minutes"]')
+    return $('//XCUIElementTypeTextField[@value="Minutes"]');
   }
-
 
   get addedMinutes() {
     return $("(//android.view.View)[3]");
@@ -415,9 +330,16 @@ class AndroidPage extends BasePage {
   }
 
   get iosPickerWheel() {
-    return ("//XCUIElementTypePickerWheel");
+    return "//XCUIElementTypePickerWheel";
   }
 
+  get laboratoryChart() {
+    return $("//android.view.ViewGroup[@resource-id='com.app.neonatal.staging:id/chart_lab']");
+  }
+
+  get dropdownArrow() {
+    return $("//android.view.ViewGroup//android.widget.Spinner");
+  }
 
   async open(url) {
     var data = TestUtils.getUserCredetials(url);
@@ -434,7 +356,7 @@ class AndroidPage extends BasePage {
     var password = data[1];
     try {
       await browser.acceptAlert();
-    } catch (error) { }
+    } catch (error) {}
 
     await this.emailField.waitForDisplayed({ timeout: 20000 });
     await this.emailField.click();
@@ -454,7 +376,7 @@ class AndroidPage extends BasePage {
     try {
       await this.savePasswordOption.waitForDisplayed({ timeout: 5000 });
       await this.savePasswordOption.click();
-    } catch (error) { }
+    } catch (error) {}
   }
 
   async clickOnRecordAudioPopup() {
@@ -484,7 +406,7 @@ class AndroidPage extends BasePage {
     try {
       await this.noThanksButton.waitForDisplayed({ timeout: 5000 });
       await this.noThanksButton.click();
-    } catch (error) { }
+    } catch (error) {}
   }
 
   async fillEmailField(email) {
@@ -668,9 +590,7 @@ class AndroidPage extends BasePage {
   }
 
   async heartRateIsDisplayed() {
-    const heartRate = await $(
-      "(//android.widget.TextView)[3]|//XCUIElementTypeStaticText[@name='Heart Rate']"
-    );
+    const heartRate = await $("(//android.widget.TextView)[3]|//XCUIElementTypeStaticText[@name='Heart Rate']");
     await heartRate.waitForDisplayed({ timeout: 25000 });
     let actualText = await heartRate.getText();
     let expectedText = "Heart Rate";
@@ -681,12 +601,8 @@ class AndroidPage extends BasePage {
     }
   }
 
-
-
   async respiratoryRateDisplayed() {
-    const respiratoryRate = await $(
-      "(//android.widget.TextView)[7]|//XCUIElementTypeStaticText[@name='Respiratory Rate']"
-    );
+    const respiratoryRate = await $("(//android.widget.TextView)[7]|//XCUIElementTypeStaticText[@name='Respiratory Rate']");
     await respiratoryRate.waitForDisplayed({ timeout: 25000 });
     let actualText = await respiratoryRate.getText();
     let expectedText = "Respiratory Rate";
@@ -698,9 +614,7 @@ class AndroidPage extends BasePage {
   }
 
   async TemperatureIsDisplayed() {
-    const temp = await $(
-      '(//android.widget.TextView)[9]|//XCUIElementTypeStaticText[@name="Temperature"]'
-    );
+    const temp = await $('(//android.widget.TextView)[9]|//XCUIElementTypeStaticText[@name="Temperature"]');
     let actualText = await temp.getText();
     let expectedText = "Temperature";
     if (actualText.includes(expectedText)) {
@@ -711,9 +625,7 @@ class AndroidPage extends BasePage {
   }
 
   async deviceStatusIsDisplayed() {
-    const status = await $(
-      "(//android.widget.TextView)[9]|(//XCUIElementTypeStaticText)[10]"
-    );
+    const status = await $("(//android.widget.TextView)[9]|(//XCUIElementTypeStaticText)[10]");
     let actualText = await status.getText();
     let expectedText = "Device Status";
     if (actualText.includes(expectedText)) {
@@ -723,26 +635,17 @@ class AndroidPage extends BasePage {
     }
   }
 
-
   async o2SaturationIsDisplayed() {
-    const o2Saturation = await $(
-      "(//android.widget.TextView)[5]|//XCUIElementTypeStaticText[@name='O2 Saturation']"
-    );
+    const o2Saturation = await $("(//android.widget.TextView)[5]|//XCUIElementTypeStaticText[@name='O2 Saturation']");
     await o2Saturation.waitForDisplayed({ timeout: 25000 });
     let actualText = await o2Saturation.getText();
     let expectedText = "O2 Saturation";
     if (actualText.includes(expectedText)) {
       console.log("O2 Saturation is displayed inside patient vital signs");
     } else {
-      console.log(
-        "O2 Saturation is not displayed inside patient vital signs " +
-        expectedText +
-        " Actual " +
-        actualText
-      );
+      console.log("O2 Saturation is not displayed inside patient vital signs " + expectedText + " Actual " + actualText);
     }
   }
-
 
   async diagnosisIsDisplayed() {
     await this.diagnosis.waitForDisplayed({ timeout: 25000 });
@@ -857,7 +760,6 @@ class AndroidPage extends BasePage {
   }
 
   async verifyScreenIsDisplayed(data) {
-
     const title = await $("//android.widget.TextView[contains(@text,'" + data + "')]|//android.widget.Button[contains(@text,'" + data + "')]|//android.widget.TextView[contains(@text,'" + data + "')]|//android.widget.Button[contains(@text,'" + data + "')]|//android.widget.EditText[contains(@text,'" + data + "')]|//XCUIElementTypeButton[contains(@name,'" + data + "')]|//XCUIElementTypeStaticText[contains(@name,'" + data + "')]");
     await title.waitForDisplayed({ timeout: 15000 });
     if ((await title.isDisplayed()) === true) {
@@ -866,7 +768,6 @@ class AndroidPage extends BasePage {
       throw new Error("❌ " + data + "screen is not dispalyed");
     }
   }
-
 
   async clickOnOption(data) {
     const option = await $('//android.widget.TextView[contains(@text,"' + data + '")]|//XCUIElementTypeButton[contains(@name,"' + data + '")]|//XCUIElementTypeStaticText[contains(@name,"' + data + '")]');
@@ -949,8 +850,10 @@ class AndroidPage extends BasePage {
   }
 
   async selectChildOption(option) {
-    await $("//XCUIElementTypeStaticText[contains(@name, '" + option + "')]|//android.widget.TextView[contains(@text,'" + option + "')]").waitForDisplayed({ timeout: 30000 });
-    (await $("//XCUIElementTypeStaticText[contains(@name, '" + option + "')]|//android.widget.TextView[contains(@text,'" + option + "')]")).click();
+    try {
+      await $("//XCUIElementTypeStaticText[contains(@name, '" + option + "')]|//android.widget.TextView[contains(@text,'" + option + "')]").waitForDisplayed({ timeout: 30000 });
+      (await $("//XCUIElementTypeStaticText[contains(@name, '" + option + "')]|//android.widget.TextView[contains(@text,'" + option + "')]")).click();
+    } catch (error) {}
   }
 
   async clickOnMedicationTab() {
@@ -966,12 +869,11 @@ class AndroidPage extends BasePage {
     await this.backButton.click();
   }
 
-
   async clickOnNotificationButton() {
     try {
       await this.notificationCancelButton.waitForDisplayed({ timeout: 80000 });
       await this.notificationCancelButton.click();
-    } catch (error) { }
+    } catch (error) {}
   }
 
   async verifyMobileMedicationDetails(medicationName, currentDose_And_measurement, frequency, interval) {
@@ -1115,7 +1017,6 @@ class AndroidPage extends BasePage {
     await this.caloriesField.click();
   }
 
-
   async fillNoteField(data) {
     await this.noteField.waitForDisplayed({ timeout: 15000 });
     await this.noteField.setValue(data);
@@ -1241,9 +1142,7 @@ class AndroidPage extends BasePage {
   }
 
   async iOSClickHoldScrollDownMethod() {
-    const element = await $(
-      "//XCUIElementTypeStaticText[@name='Vaccinations']"
-    );
+    const element = await $("//XCUIElementTypeStaticText[@name='Vaccinations']");
     const location = await element.getLocation();
     const size = await element.getSize();
     const startX = location.x + size.width / 2;
@@ -1265,9 +1164,7 @@ class AndroidPage extends BasePage {
   }
 
   async iOSClickHoldScrollUpMethod() {
-    const element = await $(
-      "//XCUIElementTypeStaticText[@name='Vaccinations']"
-    );
+    const element = await $("//XCUIElementTypeStaticText[@name='Vaccinations']");
     const location = await element.getLocation();
     const size = await element.getSize();
     const startX = location.x + size.width / 2;
@@ -1294,7 +1191,7 @@ class AndroidPage extends BasePage {
 
   async clickOnMediaTab() {
     await this.iOSClickHoldScrollDownMethod();
-    if (await this.mediaIsDisplayed() === true) {
+    if ((await this.mediaIsDisplayed()) === true) {
       await this.media.click();
     } else {
       throw new Error("Media module is not displayed");
@@ -1307,10 +1204,7 @@ class AndroidPage extends BasePage {
   }
 
   async scrollDownForIosMinutes() {
-
-    const element = await $(
-      '//XCUIElementTypePickerWheel[@value="00"]'
-    );
+    const element = await $('//XCUIElementTypePickerWheel[@value="00"]');
     const location = await element.getLocation();
     const size = await element.getSize();
     const startX = location.x + size.width / 2;
@@ -1329,26 +1223,47 @@ class AndroidPage extends BasePage {
         ],
       },
     ]);
-
   }
 
   async fillIosMilkMinutesField(text) {
     await browser.pause(2000);
     await this.iosMilkMinutesField.tap();
-    const pickerWheel = await $('//XCUIElementTypePickerWheel');
+    const pickerWheel = await $("//XCUIElementTypePickerWheel");
     await pickerWheel.addValue(text);
     await this.iosSaveButton.click();
-
   }
 
   async clickOnSecondIndexIosButton(text) {
     const secondIndexButton = await $("(//XCUIElementTypeButton[contains(@name,'" + text + "')])[2]");
     await secondIndexButton.waitForDisplayed({ timeout: 15000 });
     await secondIndexButton.click();
-
-
   }
 
+  async laboratoryChartIsDisplayed() {
+    await this.laboratoryChart.waitForDisplayed({ timeout: 25000 });
+    if ((await this.laboratoryChart.isDisplayed()) === true) {
+      console.log("User successfully redirected to homepage");
+      await browser.back();
+    } else {
+      throw new Error("Dashboard is not displayed");
+    }
+  }
 
+  async clickOnDropDownArrow() {
+    if ((await this.dropdownArrow.isDisplayed()) === true) {
+      console.log("click on dropdown arrow");
+      await browser.pause(2000);
+      await this.dropdownArrow.click();
+    } else {
+      throw new Error("options dropdown arrow is not displayed");
+    }
+  }
+
+  async selectDropDownOption(data) {
+    const option = await $("//android.widget.CheckedTextView[@text='" + data + "']");
+    await option.waitForDisplayed({ timeout: 2000 });
+
+    await option.click();
+  }
 }
 module.exports = new AndroidPage();

@@ -715,6 +715,12 @@ Then(/^Use "Back command" to close the popup$/, async () => {
 });
 
 Then(/^Added record data (.*) text is displaying on mobile screen$/, async (data) => {
-  await androidPage.verifyText(data);
+  await mobileLoginPage.verifyText(data);
 });
+
+Then(/^Result chart shuld display on screen$/, async () => {
+  await mobileLoginPage.laboratoryChartIsDisplayed();
+});
+
+
 
