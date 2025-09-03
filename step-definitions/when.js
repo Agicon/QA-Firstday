@@ -1177,6 +1177,10 @@ When(/^For ios, user click on the "Media" module$/, async () => {
   await mobileLoginPage.clickOnMediaTab();
 });
 
+When(/^For ios, user click on the Results module$/, async () => {
+  await mobileLoginPage.clickOniOSResultsTab();
+});
+
 When(/^For ios user click on the (.*) button$/, async (text) => {
   await mobileLoginPage.clickOnIosOption(text);
 });
